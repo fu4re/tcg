@@ -17,6 +17,12 @@ proof content — it canonicalizes, enforces form discipline (explicit all-path
 attribute, label integrity), content-addresses, and round-trips. Generation of
 claim bodies is a later, untrusted, non-acceptance-path stage.
 
+Attribute position is fixed empirically against the pinned prover: attributes
+live in the claim's **trailing** attribute list, `[label(<l>), all-path]` —
+the `claim [x]:` head position accepts only a bare label and rejects a comma.
+Authored bodies must not carry `trusted`; `tcg prove` injects it when supplying
+children, so an assumption can never be smuggled in as an authored claim.
+
 ## D2 — Root granularity: one root per external function, linear assembly only
 
 Each external function of the subject contributes exactly one root claim.

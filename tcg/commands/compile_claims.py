@@ -22,7 +22,11 @@ from tcg.workspace import (
     sha256_text, transition, write_json,
 )
 
-_CLAIM_HEAD = re.compile(r"^\s*claim\s*\[([^\]]*)\]\s*:", re.MULTILINE)
+_CLAIM_KW = re.compile(r"^\s*claim\b", re.MULTILINE)
+# Trailing attribute list of the claim, e.g. `[label(deposit-main), all-path]`.
+# This position (after requires/ensures) is what the pinned prover parses; a
+# bracket group in the `claim [x]:` head position does not accept attributes.
+_ATTR_TAIL = re.compile(r"\[([^\[\]]*)\]\s*$")
 
 
 def canonicalize(text: str) -> str:
@@ -36,16 +40,21 @@ def canonicalize(text: str) -> str:
 def check_claim_body(body: str, label: str) -> list[str]:
     """Form discipline on one claim body. Returns error strings."""
     errors = []
-    heads = _CLAIM_HEAD.findall(body)
-    if len(heads) != 1:
-        errors.append(f"expected exactly one claim, found {len(heads)}")
+    if len(_CLAIM_KW.findall(body)) != 1:
+        errors.append("expected exactly one claim")
         return errors
-    attrs = [a.strip() for a in heads[0].split(",")]
-    if label not in attrs:
-        errors.append(f"claim label {attrs[0]!r} does not match declared {label!r}")
+    tail = _ATTR_TAIL.search(body.rstrip())
+    attrs = [a.strip() for a in tail.group(1).split(",")] if tail else []
+    if f"label({label})" not in attrs:
+        errors.append(f"trailing attributes must carry label({label})")
     if "all-path" not in attrs:
         errors.append("missing explicit all-path attribute "
-                      f"(write `claim [{label}, all-path]:`)")
+                      f"(end the claim with `[label({label}), all-path]`)")
+    if "trusted" in attrs:
+        errors.append("authored claims must not be marked trusted; "
+                      "`tcg prove` injects trusted children itself")
+    if "one-path" in attrs:
+        errors.append("one-path claims are outside the canonical form")
     if re.search(r"^\s*(module|endmodule|requires\s+\")", body, re.MULTILINE):
         errors.append("body must contain only the claim; the module wrapper is emitted")
     return errors
@@ -110,9 +119,7 @@ def run(args) -> int:
 
         # Round-trip: the artifact on disk must re-canonicalize to itself.
         back = canonicalize(out.read_text(encoding="utf-8"))
-        if sha256_text(back) != h or check_claim_body(
-            _strip_module(back), label
-        ):
+        if sha256_text(back) != h or check_claim_body(extract_body(back), label):
             print(f"tcg: {label}: round-trip check failed", file=sys.stderr)
             return int(Exit.REFUSED)
         compiled[label] = h
@@ -139,11 +146,13 @@ def run(args) -> int:
     return int(Exit.OK)
 
 
-def _strip_module(text: str) -> str:
-    """Drop the module wrapper so the body checks can re-run on emitted text."""
+def extract_body(text: str) -> str:
+    """Inverse of emit_module: recover the claim body from a canonical module."""
     lines = [
         line for line in text.split("\n")
         if not line.startswith(("requires \"", "module ", "endmodule"))
         and not line.strip().startswith("imports ")
     ]
-    return "\n".join(lines)
+    return canonicalize(
+        "\n".join(line[2:] if line.startswith("  ") else line for line in lines)
+    )

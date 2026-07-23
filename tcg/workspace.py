@@ -18,9 +18,9 @@ TRANSITIONS: dict[str, set[str]] = {
     "Draft": {"Compiled"},
     "Compiled": {"Proving", "Stale"},
     "Proving": {"Accepted", "Refuted", "Unknown"},
-    "Accepted": {"Stale"},
-    "Refuted": {"Draft", "Stale"},
-    "Unknown": {"Draft", "Stale"},
+    "Accepted": {"Proving", "Stale"},
+    "Refuted": {"Proving", "Draft", "Stale"},
+    "Unknown": {"Proving", "Draft", "Stale"},
     "Stale": {"Compiled"},
 }
 
