@@ -52,6 +52,10 @@ def build_parser() -> argparse.ArgumentParser:
         "prove", help="run the prover on a loop or junction; Accept/Refute/Unknown"
     )
     pv.add_argument("target", help="loop or junction name")
+    pv.add_argument("--definition", default=None,
+                    help="kompiled definition dir (or set in toolchain.lock)")
+    pv.add_argument("-I", "--include", action="append", default=None,
+                    help="include dir for the prover (repeatable)")
 
     jn = sub.add_parser("junction", help="consequence claim: Post_i implies Pre_j")
     jn.add_argument("i")
