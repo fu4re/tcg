@@ -11,30 +11,17 @@ children injected as trusted lemmas, runs kprove, and classifies the verdict:
 """
 from __future__ import annotations
 
-import re
 import subprocess
 import sys
 import time
-from pathlib import Path
 
-from tcg.commands.compile_claims import canonicalize, extract_body, module_name
+from tcg.claims import assemble_prove_module, extract_body, module_name
 from tcg.outcome import Exit
 from tcg.workspace import (
     WORKSPACE_DIR, WorkspaceError, drop_edges_from, find_root, load_graph,
     load_loop, loop_dir, read_json, save_graph, save_loop, transition,
     upsert_edge, write_json,
 )
-
-_ATTR_TAIL = re.compile(r"\[([^\[\]]*)\](\s*)$")
-
-
-def mark_trusted(body: str) -> str:
-    """Append `trusted` to the claim's trailing attribute list."""
-    text = body.rstrip()
-    m = _ATTR_TAIL.search(text)
-    if not m:
-        raise WorkspaceError("claim body has no trailing attribute list")
-    return canonicalize(text[: m.start()] + f"[{m.group(1)}, trusted]")
 
 
 def classify(returncode: int, log: str, timed_out: bool) -> tuple[str, str | None]:
@@ -97,19 +84,16 @@ def run(args) -> int:
             print(f"tcg: trusted ref not compiled: {ref}", file=sys.stderr)
             return int(Exit.USAGE)
         trusted_hashes.append(h)
-        trusted_bodies.append(mark_trusted(body_of(h)))
+        trusted_bodies.append(body_of(h))
 
     goal_hashes = entry["claims"]  # label -> hash
     goal_bodies = [body_of(h) for h in goal_hashes.values()]
 
     mod = module_name(args.target, "prove")[: -len("-SPEC")]  # <TARGET>-PROVE
-    head = "".join(f'requires "{r}"\n' for r in iface.get("requires", ["evm.md"]))
-    imp = "".join(f"  imports {m}\n" for m in iface.get("imports", ["EVM"]))
-    parts = "\n".join(
-        "\n".join("  " + line if line else "" for line in b.strip("\n").split("\n"))
-        for b in (*trusted_bodies, *goal_bodies)
+    module_text = assemble_prove_module(
+        mod, iface.get("requires", ["evm.md"]), iface.get("imports", ["EVM"]),
+        trusted_bodies, goal_bodies,
     )
-    module_text = canonicalize(f"{head}\nmodule {mod}\n{imp}\n{parts}\nendmodule\n")
 
     build_dir = root / WORKSPACE_DIR / "build"
     build_dir.mkdir(exist_ok=True)

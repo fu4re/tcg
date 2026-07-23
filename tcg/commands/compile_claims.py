@@ -8,72 +8,21 @@ Its job is form discipline and addressing:
 - enforce the explicit all-path attribute on every claim;
 - canonicalize text (whitespace normal form) and address by SHA-256;
 - round-trip: re-read the emitted file, re-canonicalize, require the same hash;
-- record loop -> claim hashes in spec/interfaces.json.
+- record loop -> claim hashes in spec/interfaces.json and nodes in graph.json.
 """
 from __future__ import annotations
 
-import re
 import sys
 from pathlib import Path
 
+from tcg.claims import (
+    canonicalize, check_claim_body, emit_module, extract_body, sha256_text,
+)
 from tcg.outcome import Exit
 from tcg.workspace import (
     WorkspaceError, find_root, load_graph, load_loop, loop_dir, read_json,
-    save_graph, save_loop, sha256_text, transition, upsert_node, write_json,
+    save_graph, save_loop, transition, upsert_node, write_json,
 )
-
-_CLAIM_KW = re.compile(r"^\s*claim\b", re.MULTILINE)
-# Trailing attribute list of the claim, e.g. `[label(deposit-main), all-path]`.
-# This position (after requires/ensures) is what the pinned prover parses; a
-# bracket group in the `claim [x]:` head position does not accept attributes.
-_ATTR_TAIL = re.compile(r"\[([^\[\]]*)\]\s*$")
-
-
-def canonicalize(text: str) -> str:
-    """Whitespace normal form: no trailing spaces, LF endings, one final newline."""
-    lines = [line.rstrip() for line in text.replace("\r\n", "\n").split("\n")]
-    while lines and not lines[-1]:
-        lines.pop()
-    return "\n".join(lines) + "\n"
-
-
-def check_claim_body(body: str, label: str) -> list[str]:
-    """Form discipline on one claim body. Returns error strings."""
-    errors = []
-    if len(_CLAIM_KW.findall(body)) != 1:
-        errors.append("expected exactly one claim")
-        return errors
-    tail = _ATTR_TAIL.search(body.rstrip())
-    attrs = [a.strip() for a in tail.group(1).split(",")] if tail else []
-    if f"label({label})" not in attrs:
-        errors.append(f"trailing attributes must carry label({label})")
-    if "all-path" not in attrs:
-        errors.append("missing explicit all-path attribute "
-                      f"(end the claim with `[label({label}), all-path]`)")
-    if "trusted" in attrs:
-        errors.append("authored claims must not be marked trusted; "
-                      "`tcg prove` injects trusted children itself")
-    if "one-path" in attrs:
-        errors.append("one-path claims are outside the canonical form")
-    if re.search(r"^\s*(module|endmodule|requires\s+\")", body, re.MULTILINE):
-        errors.append("body must contain only the claim; the module wrapper is emitted")
-    return errors
-
-
-def module_name(loop: str, label: str) -> str:
-    return f"{loop}-{label}-SPEC".upper().replace("_", "-")
-
-
-def emit_module(loop: str, label: str, requires: list[str],
-                imports: list[str], body: str) -> str:
-    head = "".join(f'requires "{r}"\n' for r in requires)
-    imp = "".join(f"  imports {m}\n" for m in imports)
-    indented = "\n".join(
-        ("  " + line if line else "") for line in body.strip("\n").split("\n")
-    )
-    return canonicalize(
-        f"{head}\nmodule {module_name(loop, label)}\n{imp}\n{indented}\nendmodule\n"
-    )
 
 
 def run(args) -> int:
@@ -143,6 +92,7 @@ def run(args) -> int:
     interfaces[args.loop] = {
         "pre": iface["pre"], "post": iface["post"], "exit": iface["exit"],
         "footprint": iface["footprint"], "rely": iface["rely"], "guar": iface["guar"],
+        "requires": requires, "imports": imports,
         "claims": compiled,
     }
     write_json(interfaces_path, interfaces)
@@ -157,15 +107,3 @@ def run(args) -> int:
 
     print(f"compiled {len(compiled)} claim(s); {args.loop} is Compiled")
     return int(Exit.OK)
-
-
-def extract_body(text: str) -> str:
-    """Inverse of emit_module: recover the claim body from a canonical module."""
-    lines = [
-        line for line in text.split("\n")
-        if not line.startswith(("requires \"", "module ", "endmodule"))
-        and not line.strip().startswith("imports ")
-    ]
-    return canonicalize(
-        "\n".join(line[2:] if line.startswith("  ") else line for line in lines)
-    )
