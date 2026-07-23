@@ -18,8 +18,8 @@ from pathlib import Path
 
 from tcg.outcome import Exit
 from tcg.workspace import (
-    WorkspaceError, find_root, load_loop, loop_dir, read_json, save_loop,
-    sha256_text, transition, write_json,
+    WorkspaceError, find_root, load_graph, load_loop, loop_dir, read_json,
+    save_graph, save_loop, sha256_text, transition, upsert_node, write_json,
 )
 
 _CLAIM_KW = re.compile(r"^\s*claim\b", re.MULTILINE)
@@ -124,6 +124,19 @@ def run(args) -> int:
             return int(Exit.REFUSED)
         compiled[label] = h
         print(f"{label} -> spec/claims/{h}.k")
+
+    # Graph nodes: role comes from the workspace (loop/junction/compat) unless a
+    # claim entry overrides it (e.g. guar, env). Only role-loop claims are roots.
+    ws_role = loop.get("role", "loop")
+    graph = load_graph(root)
+    for entry in claims:
+        role = entry.get("role", ws_role)
+        node = {"role": role, "loop": args.loop, "label": entry["label"],
+                "root": bool(entry.get("root", role == "loop"))}
+        if "from" in loop:
+            node["from"], node["to"] = loop["from"], loop["to"]
+        upsert_node(graph, compiled[entry["label"]], **node)
+    save_graph(root, graph)
 
     interfaces_path = root / "spec" / "interfaces.json"
     interfaces = read_json(interfaces_path) if interfaces_path.is_file() else {}

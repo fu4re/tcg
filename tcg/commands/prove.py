@@ -20,8 +20,9 @@ from pathlib import Path
 from tcg.commands.compile_claims import canonicalize, extract_body, module_name
 from tcg.outcome import Exit
 from tcg.workspace import (
-    WORKSPACE_DIR, WorkspaceError, find_root, load_loop, loop_dir, read_json,
-    save_loop, transition, write_json,
+    WORKSPACE_DIR, WorkspaceError, drop_edges_from, find_root, load_graph,
+    load_loop, loop_dir, read_json, save_graph, save_loop, transition,
+    upsert_edge, write_json,
 )
 
 _ATTR_TAIL = re.compile(r"\[([^\[\]]*)\](\s*)$")
@@ -150,6 +151,16 @@ def run(args) -> int:
     transition(loop, {"Accept": "Accepted", "Refute": "Refuted",
                       "Unknown": "Unknown"}[verdict])
     save_loop(root, args.target, loop)
+
+    # The proof structure is part of the record: trusted-lemma edges exist
+    # exactly for claims whose current verdict is Accept.
+    graph = load_graph(root)
+    drop_edges_from(graph, set(goal_hashes.values()))
+    if verdict == "Accept":
+        for h in goal_hashes.values():
+            for child in trusted_hashes:
+                upsert_edge(graph, h, child, "trusted-lemma")
+    save_graph(root, graph)
 
     if verdict == "Accept":
         # Accept-only evidence: the exact replayable invocation per goal claim.

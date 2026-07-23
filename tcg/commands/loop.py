@@ -43,7 +43,7 @@ def run(args) -> int:
         print(f"tcg: loop already exists: {args.name}", file=sys.stderr)
         return int(Exit.USAGE)
 
-    save_loop(root, args.name, {"name": args.name, "state": "Draft"})
+    save_loop(root, args.name, {"name": args.name, "state": "Draft", "role": "loop"})
     write_json(d / "iface.json", IFACE_TEMPLATE)
     (d / "claims").mkdir()
 

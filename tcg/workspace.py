@@ -72,6 +72,34 @@ def transition(loop: dict, new_state: str) -> None:
     loop["state"] = new_state
 
 
+EDGE_TYPES = ("trusted-lemma", "consequence", "compat")
+
+
+def load_graph(root: Path) -> dict:
+    path = root / "spec" / "graph.json"
+    if path.is_file():
+        return read_json(path)
+    return {"nodes": {}, "edges": []}
+
+
+def save_graph(root: Path, graph: dict) -> None:
+    write_json(root / "spec" / "graph.json", graph)
+
+
+def upsert_node(graph: dict, claim_hash: str, **fields) -> None:
+    graph["nodes"][claim_hash] = fields
+
+
+def upsert_edge(graph: dict, frm: str, to: str, edge_type: str) -> None:
+    edge = {"from": frm, "to": to, "type": edge_type}
+    if edge not in graph["edges"]:
+        graph["edges"].append(edge)
+
+
+def drop_edges_from(graph: dict, sources: set[str]) -> None:
+    graph["edges"] = [e for e in graph["edges"] if e["from"] not in sources]
+
+
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
