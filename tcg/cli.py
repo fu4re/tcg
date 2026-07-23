@@ -44,9 +44,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     cc.add_argument("loop")
 
-    sub.add_parser(
+    apv = sub.add_parser(
         "approve", help="record human sign-off over the current root hashes"
     )
+    apv.add_argument("--reviewer", required=True,
+                     help="the human attesting the roots")
+    apv.add_argument("--statement", default=None,
+                     help="attestation text (a default is provided)")
 
     pv = sub.add_parser(
         "prove", help="run the prover on a loop or junction; Accept/Refute/Unknown"
@@ -75,6 +79,10 @@ def build_parser() -> argparse.ArgumentParser:
         "verify", help="run the verifier protocol on a bundle (bundle-only input)"
     )
     vf.add_argument("bundle", help="path to a bundle directory")
+    vf.add_argument("--definition", default=None,
+                    help="kompiled definition dir for replay")
+    vf.add_argument("-I", "--include", action="append", default=None,
+                    help="include dir for the prover (repeatable)")
 
     rt = sub.add_parser("roots", help="render a bundle's root claims for reading")
     rt.add_argument("bundle", help="path to a bundle directory")
