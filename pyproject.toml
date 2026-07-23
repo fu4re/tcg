@@ -1,0 +1,16 @@
+[project]
+name = "tcg"
+version = "0.0.1"
+description = "Build and verify proof-carrying bundles for EVM contracts"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+
+[project.scripts]
+tcg = "tcg.cli:entry"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["tcg*"]
