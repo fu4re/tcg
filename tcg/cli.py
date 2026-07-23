@@ -36,6 +36,7 @@ def build_parser() -> argparse.ArgumentParser:
         "set", help="set (Pre, Post, Exit, footprint, rely, guar) for a loop"
     )
     ifc_set.add_argument("loop")
+    ifc_set.add_argument("--file", required=True, help="interface JSON to install")
 
     cc = sub.add_parser(
         "compile-claims",
