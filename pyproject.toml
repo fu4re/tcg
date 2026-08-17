@@ -14,3 +14,9 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["tcg*"]
+
+[tool.setuptools.package-data]
+# theory/patches/ghost.diff, vendored into the package so a non-editable
+# `pip install` (no theory/ tree on disk) can still self-populate a fresh
+# workspace's theory/patches/ — see tcg/commands/init.py.
+"tcg._data" = ["*.diff"]

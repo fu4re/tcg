@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import sys
+from importlib import resources
 from pathlib import Path
 
 from tcg.outcome import Exit
@@ -25,6 +26,21 @@ TOOLCHAIN = {
 }
 
 
+def _read_ghost_diff() -> bytes | None:
+    """The ghost-instrumentation patch, packaged as tcg._data.
+
+    Resolved via importlib.resources rather than a path relative to this
+    file's location on disk: a non-editable `pip install` unpacks into
+    site-packages with no theory/ tree present at all, so
+    `Path(__file__).resolve().parents[2] / "theory" / ...` never resolves
+    for an installed tcg — only for a checkout run in place.
+    """
+    try:
+        return resources.files("tcg._data").joinpath("ghost.diff").read_bytes()
+    except (FileNotFoundError, ModuleNotFoundError, NotADirectoryError):
+        return None
+
+
 def run(args) -> int:
     root = Path.cwd()
     ws = root / WORKSPACE_DIR
@@ -39,10 +55,10 @@ def run(args) -> int:
     # Vendor the ghost instrumentation patch shipped with the tool and pin
     # its hash: the workspace must not depend on the installation staying put.
     patches = {}
-    src = Path(__file__).resolve().parents[2] / "theory" / "patches" / "ghost.diff"
     dst = root / "theory" / "patches" / "ghost.diff"
-    if src.is_file():
-        dst.write_bytes(src.read_bytes())
+    data = _read_ghost_diff()
+    if data is not None:
+        dst.write_bytes(data)
         patches["theory/patches/ghost.diff"] = sha256_file(dst)
     else:
         print("tcg: warning: ghost.diff not found in installation; "
