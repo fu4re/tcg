@@ -193,6 +193,26 @@ echo
 cd "$workdir" || exit 1
 
 require_step "init"      "$EXIT_OK" "$TCG" init
+
+# `init` must fully self-populate the vendored ghost.diff patch: no "not
+# found in installation" warning, and toolchain.lock's "patches" non-empty.
+# This is a packaging regression check — a non-editable `pip install` that
+# forgot to ship theory/patches/ghost.diff as package data would still exit
+# 0 here while silently violating init's "vendored patch + pinned hash"
+# contract, so the exit-code check alone can't catch it.
+if grep -qF "ghost.diff not found" "$scratch/step.err"; then
+    printf 'FAIL  %-20s init warned ghost.diff not found in this installation\n' "init:ghost-diff"
+    fail_count=$((fail_count + 1))
+else
+    printf 'PASS  %-20s no ghost.diff warning\n' "init:ghost-diff"
+fi
+if python3 -c 'import json, sys; sys.exit(0 if json.load(open(".tcg/toolchain.lock")).get("patches") else 1)'; then
+    printf 'PASS  %-20s toolchain.lock patches non-empty\n' "init:patches"
+else
+    printf 'FAIL  %-20s toolchain.lock "patches" is empty or missing\n' "init:patches"
+    fail_count=$((fail_count + 1))
+fi
+
 require_step "loop new"  "$EXIT_OK" "$TCG" loop new demo
 
 # Derive the interface fixture from what `tcg loop new` actually generated
