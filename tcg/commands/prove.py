@@ -25,15 +25,43 @@ from tcg.workspace import (
 
 
 def classify(returncode: int, log: str, timed_out: bool) -> tuple[str, str | None]:
-    """(verdict, unknown_class). Only exit 0 is Accept."""
+    """(verdict, unknown_class). Only exit 0 is Accept.
+
+    Validated against real Haskell-backend kprove output (see
+    tests/control/logs/ and docs/substrate.md, "classify() validation").
+    """
     if timed_out:
         return "Unknown", "b"
     if returncode == 0:
         return "Accept", None
     low = log.lower()
+    # A claim whose reached configuration *unifies* with the destination
+    # pattern, but whose remaining boolean implication could not be
+    # discharged, is a solver-decidability gap on a residual side condition
+    # -- not a structural counterexample. kore-exec reports this as
+    # "WarnStuckClaimState" ahead of the same generic "cannot be rewritten
+    # further" trailer used for genuine non-unifying refutation, so it must
+    # be checked first: on real output the two are otherwise indistinguishable
+    # by the checks below, and a semantically-TRUE-but-under-specified claim
+    # (unification succeeds, implication is merely undischarged) has been
+    # observed to hit the plain "cannot be rewritten further" branch and get
+    # reported as Refute, which is a false defect report on a valid claim.
+    # (tests/control/logs -- compare an under-specified predecessor of
+    # provable.log, which shows this preamble and is TRUE, against
+    # refutable.log, which shows no such preamble and is actually FALSE.)
+    if "warnstuckclaimstate" in low or "unifies with the destination" in low:
+        return "Unknown", "c"
     if "cannot be\nrewritten further" in low or "cannot be rewritten further" in low \
             or "implication check failed" in low or "#not" in low:
         return "Refute", None
+    # NOTE: unreachable today (this module never passes --depth /
+    # --branching-allowed to kprove) and, if it ever becomes reachable, not
+    # reliable: real kprove (Haskell backend) has been observed to emit the
+    # exact same "cannot be rewritten further" trailer -- caught by the
+    # Refute branch above, before reaching this one -- when a genuinely-true
+    # claim is merely cut short by --depth. There is no known textual signal
+    # that distinguishes a depth-bounded TRUE claim from a genuine
+    # refutation; see tests/control/undecided.md and docs/substrate.md.
     if "depth bound" in low or "iteration bound" in low or "max iterations" in low:
         return "Unknown", "a"
     if "unknown" in low:
