@@ -2,9 +2,12 @@
 # smoke.sh — end-to-end acceptance check for the installed `tcg` command.
 #
 # Exercises the full happy-then-honest-refusal path: init a workspace, wire up
-# a loop with a trivial claim pair, compile, and walk graph check / approve /
-# prove / freeze / verify / roots — asserting the *exact* exit code, and for
-# refusal steps the *exact reason*, at each one. tcg's exit codes are
+# a loop with a trivial claim pair, compile, and walk status / graph check /
+# approve / prove / subject set / freeze / verify / roots — asserting the
+# *exact* exit code, and for refusal steps the *exact reason*, at each one.
+# `status` is checked twice (right after `loop new`, then again after
+# `compile-claims`) to confirm its state and "next:" hint track the loop
+# rather than reporting a stale snapshot. tcg's exit codes are
 # load-bearing (tcg/outcome.py: OK=0, USAGE=1, UNKNOWN=2, REFUSED=3), so
 # "exited 3" alone is not proof of the *right* refusal — an unrelated
 # violation, or (for `prove`/`verify`/`roots`, which all exit 1 on both a
@@ -46,10 +49,14 @@ EXIT_REFUSED=3
 fail_count=0
 run_complete=0   # flips to 1 only after every step below has run
 
-# step NAME EXPECTED_CODE EXPECTED_STDERR_SUBSTRING -- cmd args...
-# EXPECTED_STDERR_SUBSTRING may be "" to skip the content check (fixed-string
+# step NAME EXPECTED_CODE EXPECTED_OUTPUT_SUBSTRING -- cmd args...
+# EXPECTED_OUTPUT_SUBSTRING may be "" to skip the content check (fixed-string
 # match via `grep -F`, so paths like "subject/runtime.bin" aren't treated as
-# a regex). Captures go to $scratch, a sibling of the tcg workspace under
+# a regex). Checked against stdout OR stderr: refusal steps document their
+# reason on stderr, but `status` (exit 0, nothing wrong to report) documents
+# its "next:" hint on stdout, so a single check across both streams covers
+# either kind of step without the caller having to know which stream a given
+# command uses. Captures go to $scratch, a sibling of the tcg workspace under
 # test, never into it.
 step() {
     name="$1"
@@ -60,14 +67,14 @@ step() {
     "$@" >"$scratch/step.out" 2>"$scratch/step.err" || actual=$?
     ok=1
     [ "$actual" -eq "$expected" ] || ok=0
-    if [ -n "$substr" ] && ! grep -qF "$substr" "$scratch/step.err"; then
+    if [ -n "$substr" ] && ! grep -qF "$substr" "$scratch/step.out" "$scratch/step.err"; then
         ok=0
     fi
     if [ "$ok" -eq 1 ]; then
         printf 'PASS  %-20s exit=%s\n' "$name" "$actual"
     else
         if [ -n "$substr" ]; then
-            printf 'FAIL  %-20s expected exit=%s and stderr containing %s, got exit=%s\n' \
+            printf 'FAIL  %-20s expected exit=%s and output containing %s, got exit=%s\n' \
                 "$name" "$expected" "\"$substr\"" "$actual"
         else
             printf 'FAIL  %-20s expected exit=%s got exit=%s\n' "$name" "$expected" "$actual"
@@ -222,6 +229,12 @@ fi
 
 require_step "loop new"  "$EXIT_OK" "$TCG" loop new demo
 
+# `status` must be usable at any point in the pipeline: right after `loop
+# new`, demo is Draft, and the per-loop "next:" hint must say so concretely
+# (not just print a state) — this is the exact command a blind agent would
+# run next.
+step "status (draft)"   "$EXIT_OK"      "tcg iface set demo --file"  "$TCG" status
+
 # Derive the interface fixture from what `tcg loop new` actually generated
 # (.tcg/loops/demo/iface.json = IFACE_TEMPLATE, which carries "requires":
 # ["evm.md"] and "imports": ["EVM"]) instead of hand-rolling a parallel JSON
@@ -256,6 +269,11 @@ done
 
 step "iface set"        "$EXIT_OK"      ""                            "$TCG" iface set demo --file "$scratch/iface.json"
 step "compile-claims"   "$EXIT_OK"      ""                            "$TCG" compile-claims demo
+
+# Same command as above, different point in the pipeline: demo is Compiled
+# now, and `status` must reflect that — not a stale Draft snapshot.
+step "status (compiled)" "$EXIT_OK"     "state=Compiled"              "$TCG" status
+
 step "graph check"      "$EXIT_REFUSED" "is Compiled, not Accepted"   "$TCG" graph check
 step "approve"          "$EXIT_OK"      ""                            "$TCG" approve --reviewer smoke
 # Expected reason is "no kompiled definition": `tcg init` above ran with
@@ -267,7 +285,21 @@ step "approve"          "$EXIT_OK"      ""                            "$TCG" app
 # PATH" once prove tries to actually run it) while still exiting 1 — so the
 # isolation above is load-bearing for this assertion, not just tidiness.
 step "prove"            "$EXIT_USAGE"   "no kompiled definition"      "$TCG" prove demo
-step "freeze"           "$EXIT_REFUSED" "missing subject/runtime.bin" "$TCG" freeze
+
+# A tiny 0x-prefixed hex fixture, exercising subject set's hex-decode path
+# (as opposed to installing raw bytes directly) — this is the form an agent
+# without a bytecode file handy, only a hex string from e.g. `solc`, would
+# actually have on disk.
+printf '0x600160015500' >"$scratch/runtime-hex.txt"
+step "subject set"      "$EXIT_OK"      "decoded from hex text"       "$TCG" subject set --runtime "$scratch/runtime-hex.txt"
+
+# subject/{runtime.bin,environment.json} now both exist, so freeze's refusal
+# reason shifts: it no longer complains about a missing subject/runtime.bin
+# (that check is gone from the errors list entirely), and the *first*
+# violation it and `graph check` still share is demo being Compiled, not
+# Accepted — the exact string graph.py's closure check and freeze.py's own
+# per-node check both emit (see tcg/commands/graph.py, tcg/commands/freeze.py).
+step "freeze"           "$EXIT_REFUSED" "is Compiled, not Accepted"   "$TCG" freeze
 
 # Exercise the bundle-only commands too, so a packaging omission (module not
 # shipped / not importable — dispatched as "tcg: '<cmd>' is not implemented
