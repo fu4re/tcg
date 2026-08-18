@@ -232,12 +232,24 @@ Strictly ordered; failure of any step is **refusal of the certificate**.
 | 1 | Integrity | recompute the hash tree from `MANIFEST.json` | seconds |
 | 2 | Identity | `keccak(runtime.bin)` equals the on-chain code hash; constructor args / immutables per `environment.json` | seconds |
 | 3 | Theory | build the vendored semantics (with patches); re-check every re-checkable `annotations.json` fact against `runtime.bin` | minutes |
-| 4 | Graph | see below | minutes |
+| 4 | Graph | see below (includes root **program binding**) | minutes |
 | 5 | Replay (v1) | topological order over the trusted-lemma subgraph; for each node, run the pinned invocation with children as trusted; expect Accept. **Unknown = refusal** (retry per `toolchain.lock`) | CPU hours |
+| 5v | Vacuity | for each root, re-derive and re-prove the **falsified** form (post → `false`); if it still Accepts the root is vacuous — refusal | CPU (one run/root) |
 | 6 | Semantic step | read the roots. The only step needing formal literacy — bounded to the roots, not the graph, the code, or the session | human |
 
 **Step 4 checks in full:**
 
+- **Program binding (roots).** Every root claim's `<program>` cell bytes must
+  equal `subject/runtime.bin`. A root that proves a property of a different
+  program than the installed subject transfers nothing about the subject — it
+  is refused here. This is re-derived bundle-only (text extraction of the
+  `<program>` cell — `#parseByteStack("…")` or bare hex — compared byte-for-byte
+  to the subject), so a self-consistent hash tree does not launder it. **Only
+  roots are bound**: a `frame`/`guar` lemma may legitimately carry a
+  sub-program (or none), and `junction`/`compat`/`env`/`subsumption` nodes carry
+  no `<program>` cell at all — the bundle's guarantee is exactly the roots (a
+  verifier reads the roots), so binding the roots is what ties the certificate
+  to the deployed bytecode.
 - hash links resolve; every trusted claim used in a node's evidence is a
   proved node with a corresponding edge (closure);
 - edge typing: trusted-lemma targets are proved, progress-carrying nodes;
@@ -256,6 +268,23 @@ Strictly ordered; failure of any step is **refusal of the certificate**.
 - the oracle record's signature covers the current root hashes (freeze binds
   the record to the roots; drift between approval and freeze invalidates it).
 
+**Step 5v (vacuity re-derivation).** A prover Accept can be *empty*: if a root's
+antecedent (its `requires` + initial cells) is infeasible — no reachable state
+satisfies it — then every property of that state proves for an empty reason.
+For each root the verifier re-derives the **falsified** claim (postcondition →
+`false`, antecedent kept) directly from the bundled root claim text and
+re-proves it with the pinned prover. If the falsified claim *still* proves
+Accept, the antecedent is infeasible and the root's proof is **vacuous** — the
+certificate is refused. If it does not prove (Refute / Unknown), the antecedent
+is feasible enough that an impossible postcondition is not vacuously provable.
+The verifier does **not** trust the bundled `evidence/vacuity/<h>.json` record
+(it is carried for auditability); it re-runs the probe itself. One extra prover
+run per root; single attempt (only Accept flags vacuity). This ports the
+sheaf project's Finding 0005 vacuity discipline (`assert(false)`-proves ⇒
+unreachable ⇒ vacuous) into the reachability setting; it catches
+antecedent-failure vacuity, **not** a live-but-weak postcondition (that needs a
+component/family mutation probe, out of scope for v1).
+
 **What the bundle transfers and what it does not.** It transfers the entire
 mechanical part — that the bytecode satisfies the root claims, with the stated
 composition — without trust in author, model, or session. It does not transfer
@@ -272,4 +301,17 @@ controls, and must pass the last one:
 3. injection of a false trusted lemma → refusal at step 5 (replay of children);
 4. unknown on replay → refusal (conservative), retried per `toolchain.lock`;
 5. deleting `nav/` entirely → `verify` passes unchanged, and no link into
-   `nav/` is reachable from the trust root.
+   `nav/` is reachable from the trust root;
+6. **program binding** — a root whose `<program>` cell does not equal
+   `subject/runtime.bin` (even in an otherwise fully hash-consistent bundle:
+   change the subject bytes and re-hash them in `MANIFEST.json`) → refusal at
+   step 4 (graph, program binding). Closes gate G3's Hole 1;
+7. **vacuous root** — a root whose antecedent is infeasible, so its falsified
+   form (post → `false`) still proves → refusal at step 5v (vacuity). Closes
+   gate G3's Hole 1 (the deeper, antecedent-failure case).
+
+Controls 1–6 are exercised by `scripts/conformance.sh` against copies of the
+reference bundle. Control 7 is exercised by `scripts/false-green.sh`, which
+builds a purpose-made vacuous root end-to-end (a tamper of the reference bundle
+cannot manufacture an infeasible antecedent without re-proving), and shows both
+Hole-1 false greens reproduced (prove Accept) and then refused.

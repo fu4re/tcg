@@ -25,6 +25,7 @@ workflow, in order ("(as needed)" steps are conditional):
   tcg iface set <loop> --file <iface.json>   set the loop's interface (Pre, Post, Exit, footprint, rely, guar)
   tcg compile-claims <loop>                  canonicalize the loop's claims + content-address them
   tcg prove <loop>                           run the prover: Accept / Refute / Unknown
+  tcg vacuity <loop>                         antecedent-reachability probe: refuse empty (vacuous) proofs
   tcg junction <i> <j>                       (as needed) consequence claim Post_i -> Pre_j
   tcg compat <i> <j>                         (as needed) interference obligation Guar_j -> Rely_i
   tcg graph check                            structural checks on the claim DAG
@@ -143,6 +144,22 @@ def build_parser() -> argparse.ArgumentParser:
     pv.add_argument("-I", "--include", action="append", default=None,
                     help="include dir for the prover (repeatable)")
 
+    vac = sub.add_parser(
+        "vacuity",
+        help="antecedent-reachability probe: refuse vacuous (empty) proofs",
+        epilog="Falsifies each proved claim's postcondition (ensures false) and "
+               "re-proves; if the falsified claim STILL proves, the antecedent "
+               "is infeasible and the original proof was vacuous — a refusal. "
+               "One extra prover run per claim. Records .tcg/vacuity/<h>.json "
+               "that freeze requires for every root and verify re-derives.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    vac.add_argument("loop", help="loop whose proved claims to probe")
+    vac.add_argument("--definition", default=None,
+                     help="kompiled definition dir (or set in toolchain.lock)")
+    vac.add_argument("-I", "--include", action="append", default=None,
+                     help="include dir for the prover (repeatable)")
+
     jn = sub.add_parser("junction", help="consequence claim: Post_i implies Pre_j")
     jn.add_argument("i")
     jn.add_argument("j")
@@ -194,6 +211,7 @@ _DISPATCH: dict[str, str] = {
     "compile-claims": "compile_claims",
     "approve": "approve",
     "prove": "prove",
+    "vacuity": "vacuity",
     "junction": "junction",
     "compat": "compat",
     "graph": "graph",

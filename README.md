@@ -34,6 +34,7 @@ tcg iface set <loop>      # set the loop interface (Pre, Post, Exit, footprint, 
 tcg compile-claims <loop> # compile the interface into canonical claims (+ round-trip check)
 tcg approve               # human sign-off: oracle record over current root hashes
 tcg prove <loop|junction> # run the prover; verdict is Accept / Refute / Unknown
+tcg vacuity <loop>        # antecedent-reachability probe: refuse vacuous (empty) proofs
 tcg junction <i> <j>      # consequence claim: Post_i implies Pre_j
 tcg compat <i> <j>        # interference obligation: Guar_j implies Rely_i
 tcg graph check           # structural checks on the claim DAG

@@ -4,6 +4,8 @@ Freeze refuses unless the workspace is fully coherent:
 
 - `tcg graph check` passes;
 - every graph node belongs to an Accepted workspace and has Accept evidence;
+- every ROOT's <program> cell binds to subject/runtime.bin (P0-A, Hole 1);
+- every ROOT has passed a non-vacuous vacuity probe (P0-B, Hole 1);
 - the oracle record exists and covers exactly the current roots (drift check);
 - subject/runtime.bin and subject/environment.json exist.
 
@@ -16,6 +18,7 @@ import shutil
 import sys
 from pathlib import Path
 
+from tcg.claims import program_binding_error
 from tcg.commands.graph import check_graph
 from tcg.outcome import Exit
 from tcg.workspace import (
@@ -50,8 +53,37 @@ def run(args) -> int:
                           f"evidence — re-run `tcg prove {n['loop']}` "
                           "(evidence is written on Accept)")
 
-    # Oracle record must cover exactly the current roots (no drift since H).
     roots = {h for h, n in nodes.items() if n.get("root")}
+
+    # P0-A program binding + P0-B vacuity, per ROOT. Non-root nodes (guar /
+    # frame / junction / compat / env) are deliberately NOT subject-bound: a
+    # frame lemma legitimately proves a sub-program (the reference `base`
+    # proves the bare STOP), and consequence nodes carry no <program> cell at
+    # all. The bundle's guarantee is exactly the roots (a verifier reads the
+    # roots — bundle-spec §4), so binding + non-vacuity of the roots is what
+    # closes Hole 1. See docs/bundle-spec.md §9 and docs/findings/0002.
+    subject_bin = root / "subject" / "runtime.bin"
+    subject_bytes = subject_bin.read_bytes() if subject_bin.is_file() else None
+    vac_dir = root / WORKSPACE_DIR / "vacuity"
+    for h in sorted(roots):
+        n = nodes[h]
+        claim_path = root / "spec" / "claims" / f"{h}.k"
+        if subject_bytes is not None and claim_path.is_file():
+            reason = program_binding_error(claim_path.read_text(encoding="utf-8"),
+                                           subject_bytes)
+            if reason:
+                errors.append(f"root {n['loop']}/{n['label']}: {reason}")
+        vac_rec = vac_dir / f"{h}.json"
+        if not vac_rec.is_file():
+            errors.append(f"root {n['loop']}/{n['label']} has no vacuity probe — "
+                          f"run `tcg vacuity {n['loop']}` (a root must pass the "
+                          "antecedent-reachability probe before it can be frozen)")
+        elif read_json(vac_rec).get("vacuous"):
+            errors.append(f"root {n['loop']}/{n['label']} was flagged VACUOUS by "
+                          "the vacuity probe (its antecedent is infeasible — the "
+                          "proof is empty); fix the claim and re-prove")
+
+    # Oracle record must cover exactly the current roots (no drift since H).
     record_path = root / "assumptions" / "oracle-record.json"
     if not record_path.is_file():
         errors.append("no oracle record; run `tcg approve --reviewer <name>`")
@@ -92,6 +124,13 @@ def run(args) -> int:
     for h in nodes:
         put(f"spec/claims/{h}.k", root / "spec" / "claims" / f"{h}.k")
         put(f"evidence/replay/{h}.json", root / "evidence" / "replay" / f"{h}.json")
+    # Vacuity records travel with the roots (in the hash tree): they record the
+    # probe that was run, and verify re-derives the probe itself — it does not
+    # trust the record — but the record makes the check auditable and pins the
+    # verdict the freeze gate saw. (Roots only; non-roots are not subject-bound
+    # and carry no vacuity requirement.)
+    for h in sorted(roots):
+        put(f"evidence/vacuity/{h}.json", vac_dir / f"{h}.json")
     put("spec/interfaces.json", root / "spec" / "interfaces.json")
     put("spec/graph.json", root / "spec" / "graph.json")
     put("theory/toolchain.lock", root / WORKSPACE_DIR / "toolchain.lock")

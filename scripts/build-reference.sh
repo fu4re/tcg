@@ -71,6 +71,12 @@ tcg "$WORKDIR" compile-claims withdraw
 echo "-- proving ledger (base) --";    tcg "$WORKDIR" prove ledger
 echo "-- proving withdraw (main,guar) --"; tcg "$WORKDIR" prove withdraw
 
+# ---- 1b. vacuity probe: the root must not be an empty (vacuous) proof --------
+# Falsifies each proved claim's postcondition and re-proves; a NON-vacuous
+# claim's falsified form does not prove. freeze refuses a root without a
+# non-vacuous vacuity record (P0-B, Hole 1). withdraw carries the root (main).
+echo "-- vacuity probe withdraw (root main + guar) --"; tcg "$WORKDIR" vacuity withdraw
+
 # ---- 2. subject + approve + graph + freeze -----------------------------------
 tcg "$WORKDIR" subject set --runtime "$REF/subject/runtime.hex" \
                            --environment "$REF/subject/environment.json"

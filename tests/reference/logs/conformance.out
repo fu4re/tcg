@@ -1,5 +1,5 @@
-reference bundle (pristine, never mutated): /private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/reprofix/bundle
-scratch copies + verify logs:               /var/folders/_f/8npvqpdd47x5mgvsr1ddd_vh0000gn/T/tcg-conf.kwZW3OS54P
+reference bundle (pristine, never mutated): /private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/refws/bundle
+scratch copies + verify logs:               /var/folders/_f/8npvqpdd47x5mgvsr1ddd_vh0000gn/T/tcg-conf.BQ4728wsm1
 
 control 1: flip one byte in subject/runtime.bin
   1 flipped-runtime-byte       expect=3 actual=3  PASS
@@ -11,6 +11,8 @@ control 4: cut replay.timeout_seconds to 1 (real proof needs ~16s)
   4 timeout-1s                 expect=2 actual=2  PASS
 control 5: delete bundle/nav/ entirely (must NOT change the verdict)
   5 deleted-nav                expect=0 actual=0  PASS
+control 6: change subject bytes so root <program> no longer binds (rehashed)
+  6 program-binding            expect=3 actual=3  PASS
 
 == conformance summary ==
   1 flipped-runtime-byte       expect=3 actual=3  PASS
@@ -18,5 +20,6 @@ control 5: delete bundle/nav/ entirely (must NOT change the verdict)
   3 false-trusted-lemma        expect=3 actual=3  PASS
   4 timeout-1s                 expect=2 actual=2  PASS
   5 deleted-nav                expect=0 actual=0  PASS
+  6 program-binding            expect=3 actual=3  PASS
 
-conformance: OK (5/5 controls behaved exactly as required)
+conformance: OK (6/6 controls behaved exactly as required)

@@ -16,6 +16,14 @@
 #   4  cut replay.timeout_seconds to 1 (rehashed
 #      in MANIFEST)                                  -> exit 2, step 5-replay UNKNOWN
 #   5  delete bundle/nav/ entirely                   -> exit 0, still passes
+#   6  program binding (P0-A): change subject bytes
+#      so the root's <program> no longer matches,
+#      rehashed in MANIFEST so step 1 still passes   -> exit 3, step 4-graph
+#
+# Control 6 is the bundle-only re-check that closes gate G3's Hole 1: a bundle
+# whose hash tree is fully self-consistent is STILL refused if its root proves a
+# property of a different program than the installed subject. See docs/
+# bundle-spec.md Section 9 and docs/findings/0002.
 #
 # Overall exit is non-zero if ANY control's actual (exit, step) disagrees with
 # what it must be -- a verifier that fails to refuse when it must is the whole
@@ -166,12 +174,31 @@ echo "control 5: delete bundle/nav/ entirely (must NOT change the verdict)"
 A5="$(verify_exit "$C5")"
 record "5 deleted-nav" 0 "$A5" "certificate holds" "$C5.log"
 
+# ---- control 6: program binding -- subject != root <program> -> step 4 -------
+C6="$WORK/c6-program-binding"; cp -R "$BUNDLE" "$C6"
+"$TCG_PYTHON" - "$C6" <<'PY'
+import sys, json, hashlib, pathlib
+C = pathlib.Path(sys.argv[1])
+# Change the installed subject bytes (a self-consistent tamper: rehash it in
+# the MANIFEST so step 1 integrity still passes). The root's <program> cell is
+# left untouched, so it no longer binds to subject/runtime.bin -- step 4 must
+# refuse even though every hash in the bundle matches.
+p = C / "subject" / "runtime.bin"
+b = bytearray(p.read_bytes()); b[0] ^= 0x01; p.write_bytes(b)
+man = json.loads((C / "MANIFEST.json").read_text())
+man["files"]["subject/runtime.bin"] = hashlib.sha256(p.read_bytes()).hexdigest()
+(C / "MANIFEST.json").write_text(json.dumps(man, indent=2, sort_keys=True) + "\n")
+PY
+echo "control 6: change subject bytes so root <program> no longer binds (rehashed)"
+A6="$(verify_exit "$C6")"
+record "6 program-binding" 3 "$A6" "does not match subject/runtime.bin" "$C6.log"
+
 echo
 echo "== conformance summary =="
 for r in "${ROWS[@]}"; do echo "  $r"; done
 echo
 if [ "$FAILURES" -eq 0 ]; then
-  echo "conformance: OK (5/5 controls behaved exactly as required)"
+  echo "conformance: OK (6/6 controls behaved exactly as required)"
   exit 0
 fi
 echo "conformance: FAILED ($FAILURES control(s) did not refuse/pass as required)" >&2

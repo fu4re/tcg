@@ -7,7 +7,11 @@ are strictly ordered; the first failing step refuses the certificate.
 2. Identity   — subject identity is machine-checkable but needs chain access;
                 printed as a verifier action, per the trust manifest.
 3. Theory     — re-hash vendored patches against toolchain.lock.
-4. Graph      — structural discipline over bundle content only.
+4. Graph      — structural discipline over bundle content only, PLUS program
+                binding (P0-A): every root's <program> cell must equal
+                subject/runtime.bin, re-derived bundle-only (text + byte
+                compare, no prover). A root about a different program than the
+                installed subject is refused here.
 5. Replay     — topological re-proof of every node, children as trusted,
                 judged by the SAME classifier `prove` uses (tcg.verdict) --
                 same judge, same discipline, on both sides. Accept closes the
@@ -17,6 +21,11 @@ are strictly ordered; the first failing step refuses the certificate.
                 to toolchain.lock's retries and, if still Unknown, refuses
                 conservatively at exit UNKNOWN (2) -- distinct from Refute,
                 because "could not re-verify" is not "replay refuted".
+   Step 5v   — vacuity re-derivation (P0-B): for each root, falsify its
+                postcondition (ensures false) and re-prove; if the falsified
+                form STILL proves Accept, the antecedent is infeasible and the
+                proof is vacuous — REFUSED at step 5-vacuity. Re-derived
+                bundle-only; the bundled evidence/vacuity record is not trusted.
 
 Step 6 (reading the roots) is `tcg roots`.
 """
@@ -29,7 +38,10 @@ import tempfile
 from graphlib import CycleError, TopologicalSorter
 from pathlib import Path
 
-from tcg.claims import assemble_prove_module, extract_body, module_header, sha256_text
+from tcg.claims import (
+    assemble_prove_module, extract_body, falsify_body, module_header,
+    program_binding_error, sha256_text,
+)
 from tcg.outcome import Exit
 from tcg.verdict import classify, to_text
 
@@ -141,9 +153,30 @@ def run(args) -> int:
         errors.append("oracle record does not cover the MANIFEST roots")
     if not roots:
         errors.append("bundle has no roots")
+
+    # P0-A program binding, re-derived bundle-only: every ROOT's <program> cell
+    # must equal subject/runtime.bin. A root proving a property of a DIFFERENT
+    # program than the installed subject is worthless (Hole 1). Non-roots are
+    # not subject-bound (see freeze.py / bundle-spec §9). Cheap: text + a byte
+    # compare, no prover.
+    subject_bin = bundle / "subject" / "runtime.bin"
+    if not subject_bin.is_file():
+        errors.append("subject/runtime.bin missing — cannot check root program binding")
+    else:
+        subject_bytes = subject_bin.read_bytes()
+        for h in sorted(roots):
+            claim_path = bundle / "spec" / "claims" / f"{h}.k"
+            if not claim_path.is_file():
+                continue  # already reported as missing above
+            reason = program_binding_error(claim_path.read_text(encoding="utf-8"),
+                                           subject_bytes)
+            if reason:
+                n = nodes.get(h, {})
+                errors.append(f"root {n.get('loop')}/{n.get('label')}: {reason}")
     if errors:
         return _fail("4-graph", errors)
-    print(f"step 4 graph: OK ({len(nodes)} node(s), {len(roots)} root(s))")
+    print(f"step 4 graph: OK ({len(nodes)} node(s), {len(roots)} root(s); "
+          "root <program> cells bind to subject/runtime.bin)")
 
     # --- Step 5: replay ----------------------------------------------------
     definition = args.definition or lock.get("definition")
@@ -235,5 +268,48 @@ def run(args) -> int:
                       "unify with the claimed destination)"])
 
     print(f"step 5 replay: OK ({len(order)} node(s) re-proved)")
+
+    # --- Step 5v: vacuity re-derivation over roots -------------------------
+    # P0-B, bundle-only: for each ROOT, falsify its postcondition (ensures
+    # false) and re-prove the mutant. If the falsified claim STILL proves
+    # Accept, the root's antecedent is infeasible ⇒ the proof is vacuous ⇒
+    # REFUSE. verify does NOT trust the bundled evidence/vacuity record; it
+    # re-derives the mutant from the root claim text and re-runs the prover.
+    # Single attempt, no retry: Accept is the only outcome that flags vacuity;
+    # Refute/Unknown both mean "not vacuously provable" (the safe direction).
+    for h in sorted(roots):
+        goal = claim_text(h)
+        reqs, imps = module_header(goal)
+        mutant = assemble_prove_module(
+            "REPLAY-VACUITY", reqs, imps, [], [falsify_body(extract_body(goal))])
+        spec = scratch / f"vacuity-{h[:12]}.k"
+        spec.write_text(mutant, encoding="utf-8")
+        argv = ["kprove", str(spec), "--definition", str(definition),
+                "--spec-module", "REPLAY-VACUITY"]
+        for inc in includes:
+            argv += ["-I", str(inc)]
+        timed_out = False
+        try:
+            proc = subprocess.run(argv, capture_output=True, text=True, timeout=timeout)
+            returncode, log = proc.returncode, proc.stdout + proc.stderr
+        except subprocess.TimeoutExpired as e:
+            returncode, log, timed_out = -1, to_text(e.stdout) + to_text(e.stderr), True
+        except FileNotFoundError:
+            print("verify: kprove not found on PATH; install/activate the "
+                  "pinned K toolchain (see theory/toolchain.lock in the "
+                  "bundle)", file=sys.stderr)
+            return int(Exit.USAGE)
+        spec.unlink(missing_ok=True)
+        verdict, _, _ = classify(returncode, log, timed_out)
+        n = nodes[h]
+        if verdict == "Accept":
+            return _fail("5-vacuity",
+                         [f"root {n['loop']}/{n['label']} is VACUOUS — its "
+                          "falsified form (ensures false) still proves Accept, "
+                          "so the antecedent is infeasible and the proof is "
+                          "empty; a vacuous proof is a refusal, never a pass"])
+        print(f"step 5v vacuity [{n['loop']}/{n['label']}]: OK "
+              f"(falsified form does not prove: {verdict})")
+
     print("certificate holds; step 6 is yours: `tcg roots <bundle>`")
     return int(Exit.OK)
