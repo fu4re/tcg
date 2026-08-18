@@ -1,0 +1,10 @@
+step 1 integrity: OK (15 file(s))
+step 2 identity: verifier action — compare keccak(subject/runtime.bin) with the on-chain code hash (see assumptions/trust-manifest.json)
+step 3 theory: semantics not vendored — replay uses the local definition; the trust manifest records this as assumed
+step 3 theory: OK (patch hashes match toolchain.lock)
+step 4 graph: OK (3 node(s), 1 root(s))
+step 5 replay [1/3]: ledger/base Accept
+step 5 replay [2/3]: withdraw/guar Accept
+step 5 replay [3/3]: withdraw/main Accept
+step 5 replay: OK (3 node(s) re-proved)
+certificate holds; step 6 is yours: `tcg roots <bundle>`

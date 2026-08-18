@@ -1,0 +1,34 @@
+{
+  "edges": [
+    {
+      "from": "927c4d49b70718f4ad6c10a2392155cfed9378ac7a25ebe1ac055b5e0cd78d0c",
+      "to": "eb999885a37277494eeed5f26f8b3c7014412ddea189763b0b4d27856a7e3823",
+      "type": "trusted-lemma"
+    },
+    {
+      "from": "19fed8e204d390133f6f16558ad438f0402f09da846dcd3e6df8c0b878403e5a",
+      "to": "eb999885a37277494eeed5f26f8b3c7014412ddea189763b0b4d27856a7e3823",
+      "type": "trusted-lemma"
+    }
+  ],
+  "nodes": {
+    "19fed8e204d390133f6f16558ad438f0402f09da846dcd3e6df8c0b878403e5a": {
+      "label": "main",
+      "loop": "withdraw",
+      "role": "loop",
+      "root": true
+    },
+    "927c4d49b70718f4ad6c10a2392155cfed9378ac7a25ebe1ac055b5e0cd78d0c": {
+      "label": "guar",
+      "loop": "withdraw",
+      "role": "guar",
+      "root": false
+    },
+    "eb999885a37277494eeed5f26f8b3c7014412ddea189763b0b4d27856a7e3823": {
+      "label": "base",
+      "loop": "ledger",
+      "role": "frame",
+      "root": false
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "reading_discipline": [
+    "a prover Accept is read as a derivation in the prover's proof system",
+    "a checker Accept on an implication is read as validity of that implication"
+  ],
+  "roots_semantics": "verifier-action-required: read the root claims; the bundle does not transfer that they express the property you care about",
+  "semantics": "assumed: semantics not vendored in this bundle",
+  "subject_identity": "machine-checkable: compare keccak(subject/runtime.bin) with the on-chain code hash"
+}

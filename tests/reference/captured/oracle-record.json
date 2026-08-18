@@ -1,0 +1,11 @@
+{
+  "date": "2026-08-18T12:43:38+00:00",
+  "reviewer": "track-d",
+  "roots": {
+    "19fed8e204d390133f6f16558ad438f0402f09da846dcd3e6df8c0b878403e5a": {
+      "label": "main",
+      "loop": "withdraw"
+    }
+  },
+  "statement": "I have read the root claims listed by hash below and attest that they express the intended property."
+}

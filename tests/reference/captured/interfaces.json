@@ -1,0 +1,47 @@
+{
+  "ledger": {
+    "claims": {
+      "base": "eb999885a37277494eeed5f26f8b3c7014412ddea189763b0b4d27856a7e3823"
+    },
+    "exit": "EVMC_SUCCESS",
+    "footprint": {
+      "reads": [],
+      "writes": []
+    },
+    "guar": "no storage is written",
+    "imports": [
+      "EVM"
+    ],
+    "post": "execution halts with statusCode EVMC_SUCCESS and empty output",
+    "pre": "STOP program (bytecode 00) at pc 0, gas 100000, empty word stack, DEFAULT schedule, useGas off",
+    "rely": "",
+    "requires": [
+      "evm.md"
+    ]
+  },
+  "withdraw": {
+    "claims": {
+      "guar": "927c4d49b70718f4ad6c10a2392155cfed9378ac7a25ebe1ac055b5e0cd78d0c",
+      "main": "19fed8e204d390133f6f16558ad438f0402f09da846dcd3e6df8c0b878403e5a"
+    },
+    "exit": "EVMC_SUCCESS",
+    "footprint": {
+      "reads": [
+        "storage[0]"
+      ],
+      "writes": [
+        "storage[0]"
+      ]
+    },
+    "guar": "storage slot 0 is set to 70; slot 1 (when present) is left unchanged (the guar claim)",
+    "imports": [
+      "EVM"
+    ],
+    "post": "execution halts EVMC_SUCCESS at pc 5 with storage slot 0 debited to 70 (0x46)",
+    "pre": "runtime 604660005500 (PUSH1 0x46; PUSH1 0x00; SSTORE; STOP) at pc 0, gas 100000, storage slot 0 = 100, DEFAULT schedule, useGas off",
+    "rely": "the external environment does not write storage slot 0 during this segment",
+    "requires": [
+      "evm.md"
+    ]
+  }
+}

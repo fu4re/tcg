@@ -1,0 +1,26 @@
+{
+  "cert_version": "1",
+  "files": {
+    "assumptions/annotations.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "assumptions/oracle-record.json": "a9d1bdd23879f4be619e6505015812d2d678c7563b83362dde4a264619debafe",
+    "assumptions/trust-manifest.json": "a70a5c0386bb1da73930bbeb9dea244f3cd7e875fe30abb390ec6c1ec0176bd1",
+    "evidence/replay/19fed8e204d390133f6f16558ad438f0402f09da846dcd3e6df8c0b878403e5a.json": "5b0e29b8d223ebbab6b3c69e889b545bf72604b84a536e90d686501bc590dccf",
+    "evidence/replay/927c4d49b70718f4ad6c10a2392155cfed9378ac7a25ebe1ac055b5e0cd78d0c.json": "3b5d05506639e585443f7d08447f90e9299610bf6e56cc5d9ad707ec0fd8c0de",
+    "evidence/replay/eb999885a37277494eeed5f26f8b3c7014412ddea189763b0b4d27856a7e3823.json": "b090952e1fc83f6ea45d801950518418d606762e058d9eccf93ac55af289a8c6",
+    "spec/claims/19fed8e204d390133f6f16558ad438f0402f09da846dcd3e6df8c0b878403e5a.k": "19fed8e204d390133f6f16558ad438f0402f09da846dcd3e6df8c0b878403e5a",
+    "spec/claims/927c4d49b70718f4ad6c10a2392155cfed9378ac7a25ebe1ac055b5e0cd78d0c.k": "927c4d49b70718f4ad6c10a2392155cfed9378ac7a25ebe1ac055b5e0cd78d0c",
+    "spec/claims/eb999885a37277494eeed5f26f8b3c7014412ddea189763b0b4d27856a7e3823.k": "eb999885a37277494eeed5f26f8b3c7014412ddea189763b0b4d27856a7e3823",
+    "spec/graph.json": "7ce28072b6cebcedddc575e198507b81c47a40f3f39f26539390bb37664d04ad",
+    "spec/interfaces.json": "d29306ee183810522ff0badab3676779a0d0fad50e9790dee1f20461fb59726e",
+    "subject/environment.json": "16c35d31c6ca8d611798fe4eefae27adf49caffcb7285b664c89ce2a0ce7f0e2",
+    "subject/runtime.bin": "7265ba827fe3c6656b5ab6b503ff2c29e01e6fc2eb127e0865651e3adbb7560f",
+    "theory/patches/ghost.diff": "e300f622c9c68ef07db2914ef87e0dfff64f520af004770db5c80744b6ca68d1",
+    "theory/toolchain.lock": "75b53dac0d04930716290fc7cfdcc2f879bbde4da77a5aa3b1e61b8b70207679"
+  },
+  "roots": {
+    "19fed8e204d390133f6f16558ad438f0402f09da846dcd3e6df8c0b878403e5a": {
+      "label": "main",
+      "loop": "withdraw"
+    }
+  }
+}
