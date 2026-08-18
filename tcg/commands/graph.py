@@ -37,7 +37,7 @@ def check_graph(root) -> list[str]:
     errors: list[str] = []
 
     if not nodes:
-        return ["graph is empty (compile claims first)"]
+        return ["graph is empty; run `tcg compile-claims <loop>` first"]
 
     # Integrity + form of every node's claim artifact.
     for h, node in nodes.items():
@@ -82,7 +82,9 @@ def check_graph(root) -> list[str]:
     loops = {n["loop"] for n in nodes.values() if n["role"] == "loop"}
     guars = {n["loop"] for n in nodes.values() if n["role"] == "guar"}
     for lp in sorted(loops - guars):
-        errors.append(f"loop {lp} has no guar node")
+        errors.append(f"loop {lp} has no guar node; add a claims[] entry "
+                      f"with \"role\": \"guar\" to {lp}'s interface and "
+                      f"`tcg compile-claims {lp}`")
 
     # Compat coverage over observed footprint intersections + env presence.
     interfaces = read_json(root / "spec" / "interfaces.json")
@@ -105,13 +107,18 @@ def check_graph(root) -> list[str]:
                         f"loops ({i}, {j}) share footprint {sorted(observed)} "
                         f"but have no compat node")
     if needs_env and not has_env:
-        errors.append("compat coverage required but no env node exists")
+        errors.append("compat coverage required but no env node exists; add "
+                      "a claims[] entry with \"role\": \"env\" to some "
+                      "interface and compile it")
 
     # Closure: roots exist; roots and their trusted-lemma reachability are
     # Accepted. "Couldn't check a state" is a violation, not a pass.
     roots = [h for h, n in nodes.items() if n.get("root")]
     if not roots:
-        errors.append("graph has no roots")
+        errors.append("graph has no roots; a compiled claims[] entry with "
+                      "\"role\": \"loop\" (the default) defaults to root: "
+                      "true — check that at least one exists and isn't "
+                      "overridden to root: false")
     children = {h: [] for h in nodes}
     for e in edges:
         if e["type"] == "trusted-lemma" and e["from"] in children:
@@ -131,7 +138,7 @@ def check_graph(root) -> list[str]:
         if state != "Accepted":
             kind = "root" if h in roots else "trusted child"
             errors.append(f"{kind} {nodes[h]['label']} ({lp}) is {state}, "
-                          f"not Accepted")
+                          f"not Accepted — run `tcg prove {lp}`")
         stack.extend(children[h])
 
     return errors
@@ -151,7 +158,8 @@ def run(args) -> int:
     if errors:
         for msg in errors:
             print(f"graph check: {msg}", file=sys.stderr)
-        print(f"graph check: REFUSED ({len(errors)} violation(s))", file=sys.stderr)
+        print(f"graph check: REFUSED ({len(errors)} violation(s)); "
+              "`tcg status` shows what's next per loop", file=sys.stderr)
         return int(Exit.REFUSED)
 
     graph = load_graph(root)

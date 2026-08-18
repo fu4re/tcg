@@ -43,34 +43,43 @@ def run(args) -> int:
         except WorkspaceError:
             state = "missing"
         if state != "Accepted":
-            errors.append(f"node {n['loop']}/{n['label']} is {state}, not Accepted")
+            errors.append(f"node {n['loop']}/{n['label']} is {state}, "
+                          f"not Accepted — run `tcg prove {n['loop']}`")
         if not (root / "evidence" / "replay" / f"{h}.json").is_file():
-            errors.append(f"node {n['loop']}/{n['label']} has no replay evidence")
+            errors.append(f"node {n['loop']}/{n['label']} has no replay "
+                          f"evidence — re-run `tcg prove {n['loop']}` "
+                          "(evidence is written on Accept)")
 
     # Oracle record must cover exactly the current roots (no drift since H).
     roots = {h for h, n in nodes.items() if n.get("root")}
     record_path = root / "assumptions" / "oracle-record.json"
     if not record_path.is_file():
-        errors.append("no oracle record (run `tcg approve`)")
+        errors.append("no oracle record; run `tcg approve --reviewer <name>`")
     else:
         approved = set(read_json(record_path).get("roots", {}))
         if approved != roots:
-            errors.append("oracle record does not match current roots "
-                          "(re-run `tcg approve`)")
+            errors.append("oracle record does not match current roots; "
+                          "re-run `tcg approve --reviewer <name>`")
 
-    for rel in ("subject/runtime.bin", "subject/environment.json"):
-        if not (root / rel).is_file():
-            errors.append(f"missing {rel}")
+    if not (root / "subject" / "runtime.bin").is_file():
+        errors.append("missing subject/runtime.bin; run "
+                      "`tcg subject set --runtime <path>`")
+    if not (root / "subject" / "environment.json").is_file():
+        errors.append("missing subject/environment.json; run "
+                      "`tcg subject set --runtime <path> --environment <path>` "
+                      "(--runtime alone writes a default if none exists)")
 
     if errors:
         for msg in errors:
             print(f"freeze: {msg}", file=sys.stderr)
-        print(f"freeze: REFUSED ({len(errors)} violation(s))", file=sys.stderr)
+        print(f"freeze: REFUSED ({len(errors)} violation(s)); "
+              "`tcg status` shows what's next per loop", file=sys.stderr)
         return int(Exit.REFUSED)
 
     bundle = root / "bundle"
     if bundle.exists():
-        print("freeze: bundle/ already exists; remove it first", file=sys.stderr)
+        print("freeze: bundle/ already exists; `rm -rf bundle/` and re-run, "
+              "or inspect it with `tcg roots bundle`", file=sys.stderr)
         return int(Exit.USAGE)
 
     def put(rel: str, src: Path) -> None:

@@ -37,7 +37,9 @@ def run(args) -> int:
     iface = read_json(d / "iface.json")
     claims = iface.get("claims", [])
     if not claims:
-        print("tcg: interface declares no claims", file=sys.stderr)
+        print(f"tcg: interface declares no claims; add entries to the "
+              f"\"claims\" list and `tcg iface set {args.loop} --file <iface.json>` "
+              "again", file=sys.stderr)
         return int(Exit.USAGE)
 
     requires = iface.get("requires", ["evm.md"])
@@ -52,7 +54,9 @@ def run(args) -> int:
         try:
             body = body_path.read_text(encoding="utf-8")
         except OSError as e:
-            print(f"tcg: {label}: cannot read body: {e}", file=sys.stderr)
+            print(f"tcg: {label}: cannot read body: {e} (check the claims[] "
+                  f"\"file\" entry in {args.loop}'s interface — relative "
+                  "paths resolve against the loop's own directory)", file=sys.stderr)
             return int(Exit.USAGE)
 
         errors = check_claim_body(body, label)
@@ -69,7 +73,9 @@ def run(args) -> int:
         # Round-trip: the artifact on disk must re-canonicalize to itself.
         back = canonicalize(out.read_text(encoding="utf-8"))
         if sha256_text(back) != h or check_claim_body(extract_body(back), label):
-            print(f"tcg: {label}: round-trip check failed", file=sys.stderr)
+            print(f"tcg: {label}: round-trip check failed — the emitted "
+                  f"module at {out} did not re-canonicalize to its own hash; "
+                  "this points at a tcg bug, not the claim body", file=sys.stderr)
             return int(Exit.REFUSED)
         compiled[label] = h
         print(f"{label} -> spec/claims/{h}.k")

@@ -46,7 +46,8 @@ def run(args) -> int:
     root = Path.cwd()
     ws = root / WORKSPACE_DIR
     if ws.exists():
-        print(f"tcg: workspace already exists at {ws}", file=sys.stderr)
+        print(f"tcg: workspace already exists at {ws}; run `tcg status` to "
+              "see it, or remove it to start over", file=sys.stderr)
         return int(Exit.USAGE)
 
     (ws / "loops").mkdir(parents=True)

@@ -42,7 +42,9 @@ def _sha256_file(path: Path) -> str:
 def _fail(step: str, msgs: list[str]) -> int:
     for m in msgs:
         print(f"verify[{step}]: {m}", file=sys.stderr)
-    print(f"verify: certificate REFUSED at step {step}", file=sys.stderr)
+    print(f"verify: certificate REFUSED at step {step} — do not rely on this "
+          "bundle; if you produced it, fix the workspace and re-run "
+          "`tcg freeze`", file=sys.stderr)
     return int(Exit.REFUSED)
 
 
@@ -50,7 +52,8 @@ def run(args) -> int:
     bundle = Path(args.bundle)
     manifest_path = bundle / "MANIFEST.json"
     if not manifest_path.is_file():
-        print(f"tcg: no MANIFEST.json in {bundle}", file=sys.stderr)
+        print(f"tcg: no MANIFEST.json in {bundle}; pass a directory produced "
+              "by `tcg freeze`", file=sys.stderr)
         return int(Exit.USAGE)
     manifest = _read_json(manifest_path)
 
@@ -137,8 +140,9 @@ def run(args) -> int:
     # --- Step 5: replay ----------------------------------------------------
     definition = args.definition or lock.get("definition")
     if not definition:
-        print("verify: no kompiled definition for replay; pass --definition",
-              file=sys.stderr)
+        print("verify: no kompiled definition for replay; pass "
+              "--definition PATH, or add \"definition\" to the bundle's "
+              "theory/toolchain.lock", file=sys.stderr)
         return int(Exit.USAGE)
     includes = list(args.include or []) + list(lock.get("includes", []))
     retries = int(lock.get("replay", {}).get("retries", 0))
@@ -184,7 +188,9 @@ def run(args) -> int:
                 verdict = "unknown"
                 continue
             except FileNotFoundError:
-                print("verify: kprove not found on PATH", file=sys.stderr)
+                print("verify: kprove not found on PATH; install/activate the "
+                      "pinned K toolchain (see theory/toolchain.lock in the "
+                      "bundle)", file=sys.stderr)
                 return int(Exit.USAGE)
             verdict = "accept" if proc.returncode == 0 else "failed"
             break

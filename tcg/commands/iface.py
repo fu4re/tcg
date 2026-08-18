@@ -44,13 +44,17 @@ def run(args) -> int:
     try:
         iface = read_json(args.file)
     except (OSError, ValueError) as e:
-        print(f"tcg: cannot read interface: {e}", file=sys.stderr)
+        print(f"tcg: cannot read interface {args.file!r}: {e} (pass a JSON file "
+              "with the keys pre, post, exit, footprint, rely, guar, claims — "
+              "see `tcg loop new` for a template)", file=sys.stderr)
         return int(Exit.USAGE)
 
     errors = validate(iface)
     if errors:
         for e in errors:
             print(f"tcg: interface invalid: {e}", file=sys.stderr)
+        print(f"tcg: fix {args.file!r} and re-run "
+              f"`tcg iface set {args.loop} --file {args.file}`", file=sys.stderr)
         return int(Exit.USAGE)
 
     write_json(loop_dir(root, args.loop) / "iface.json", iface)

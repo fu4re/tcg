@@ -28,7 +28,8 @@ def scaffold(role: str, i: str, j: str) -> int:
     name = f"{role}-{i}-{j}"
     d = loop_dir(root, name)
     if d.exists():
-        print(f"tcg: {name} already exists", file=sys.stderr)
+        print(f"tcg: {name} already exists (see its state with `tcg status`, "
+              "or `tcg iface set` to redefine it)", file=sys.stderr)
         return int(Exit.USAGE)
 
     save_loop(root, name, {

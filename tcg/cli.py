@@ -13,17 +13,87 @@ import argparse
 import sys
 from collections.abc import Sequence
 
-from tcg.outcome import Exit
+from tcg.outcome import EXIT_MEANING, Exit
+
+# Shown by `tcg --help`. Built once here so a blind agent — one that knows
+# only `tcg --help` and the tool's own messages — never needs a doc it can't
+# reach: the whole pipeline, in order, plus the exit-code table.
+_WORKFLOW = """\
+workflow, in order ("(as needed)" steps are conditional):
+  tcg init                                   scaffold a workspace + pinned toolchain.lock
+  tcg loop new <name>                        create a loop workspace
+  tcg iface set <loop> --file <iface.json>   set the loop's interface (Pre, Post, Exit, footprint, rely, guar)
+  tcg compile-claims <loop>                  canonicalize the loop's claims + content-address them
+  tcg prove <loop>                           run the prover: Accept / Refute / Unknown
+  tcg junction <i> <j>                       (as needed) consequence claim Post_i -> Pre_j
+  tcg compat <i> <j>                         (as needed) interference obligation Guar_j -> Rely_i
+  tcg graph check                            structural checks on the claim DAG
+  tcg approve --reviewer <name>              human sign-off over the current root hashes
+  tcg subject set --runtime <path>           install subject/runtime.bin (+ environment.json)
+  tcg freeze                                 assemble the bundle: hash tree + MANIFEST
+  tcg verify <bundle>                        replay every proof from the bundle alone
+  tcg roots <bundle>                         render the root claims for human reading
+
+  tcg status                                 workspace overview + next-step hint, at any point above
+"""
+
+
+def _exit_code_table() -> str:
+    # Built from tcg.outcome.EXIT_MEANING so this help text can't drift from
+    # the actual exit-code table.
+    lines = ["exit codes (uniform across every command):"]
+    for code in Exit:
+        lines.append(f"  {int(code)}  {EXIT_MEANING[code]}")
+    lines.append("")
+    lines.append('"could not verify" (2) never shares a code with "found a defect" (3).')
+    return "\n".join(lines)
+
+
+_IFACE_HELP = """\
+iface JSON keys (see `tcg loop new <name>` for a starter template):
+  pre, post, exit      K predicates, as strings
+  footprint             {"reads": [...], "writes": [...]}
+  rely, guar             K predicates, as strings
+  requires, imports      K module requires/imports (default: ["evm.md"], ["EVM"])
+  claims                 [{"label": <l>, "file": <path>, "role": <opt>, "root": <opt bool>},
+                           ...] — file is relative to the loop's own directory;
+                           role defaults to the workspace's own role (loop/junction/
+                           compat/guar/env); root defaults to true only for role "loop"
+"""
+
+_CLAIM_BODY_HELP = """\
+claim body form (one K claim per file, referenced from a claims[].file entry):
+  a single `claim ...` ending in a trailing attribute list — not the
+  `claim [x]:` head — of the form [label(<l>), all-path], where <l> matches
+  the claims[] entry's "label". No `module`/`endmodule`/`requires "..."`
+  lines: the wrapper is emitted for you. `trusted` and `one-path` are refused.
+"""
+
+_SUBJECT_HELP = """\
+--runtime accepts either raw bytecode bytes, or a text file holding a
+0x-prefixed or plain hex string — both decode to the same installed bytes.
+--environment, if omitted and none is installed yet, is written as a
+skeleton with null fields: chainid, fork, constructor_args, immutables,
+external_code.
+"""
 
 
 def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(
         prog="tcg",
         description="Build and verify proof-carrying bundles for EVM contracts.",
+        epilog=_WORKFLOW + "\n" + _exit_code_table(),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     sub = ap.add_subparsers(dest="command", metavar="<command>")
 
-    it = sub.add_parser("init", help="scaffold a workspace + pinned toolchain.lock")
+    it = sub.add_parser(
+        "init", help="scaffold a workspace + pinned toolchain.lock",
+        epilog="--definition/$TCG_DEFINITION are read once, here, at init "
+               "time (flag wins); prove/verify never re-read the "
+               "environment, only the lock or their own --definition.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     it.add_argument("--definition", default=None,
                     help="kompiled definition dir to pin into toolchain.lock "
                          "(also honors $TCG_DEFINITION; flag wins)")
@@ -43,7 +113,8 @@ def build_parser() -> argparse.ArgumentParser:
     ifc = sub.add_parser("iface", help="manage loop interfaces")
     ifc_sub = ifc.add_subparsers(dest="iface_command", metavar="<subcommand>")
     ifc_set = ifc_sub.add_parser(
-        "set", help="set (Pre, Post, Exit, footprint, rely, guar) for a loop"
+        "set", help="set (Pre, Post, Exit, footprint, rely, guar) for a loop",
+        epilog=_IFACE_HELP, formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     ifc_set.add_argument("loop")
     ifc_set.add_argument("--file", required=True, help="interface JSON to install")
@@ -51,6 +122,7 @@ def build_parser() -> argparse.ArgumentParser:
     cc = sub.add_parser(
         "compile-claims",
         help="compile a loop interface into canonical claims (+ round-trip check)",
+        epilog=_CLAIM_BODY_HELP, formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     cc.add_argument("loop")
 
@@ -82,7 +154,8 @@ def build_parser() -> argparse.ArgumentParser:
     sj = sub.add_parser("subject", help="manage the subject bytecode and environment")
     sj_sub = sj.add_subparsers(dest="subject_command", metavar="<subcommand>")
     sj_set = sj_sub.add_parser(
-        "set", help="install subject/runtime.bin (+ subject/environment.json)"
+        "set", help="install subject/runtime.bin (+ subject/environment.json)",
+        epilog=_SUBJECT_HELP, formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     sj_set.add_argument("--runtime", required=True,
                         help="bytecode file: raw bytes, or 0x-prefixed/plain hex text")

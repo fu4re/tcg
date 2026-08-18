@@ -29,7 +29,9 @@ def run(args) -> int:
         print("usage: tcg loop new <name>", file=sys.stderr)
         return int(Exit.USAGE)
     if not _NAME.match(args.name):
-        print(f"tcg: invalid loop name: {args.name!r}", file=sys.stderr)
+        print(f"tcg: invalid loop name: {args.name!r} (must match "
+              f"{_NAME.pattern}: start with a letter or underscore, then "
+              "letters/digits/-/_)", file=sys.stderr)
         return int(Exit.USAGE)
 
     try:
@@ -40,7 +42,8 @@ def run(args) -> int:
 
     d = loop_dir(root, args.name)
     if d.exists():
-        print(f"tcg: loop already exists: {args.name}", file=sys.stderr)
+        print(f"tcg: loop already exists: {args.name} (see its state with "
+              "`tcg status`, or `tcg iface set` to redefine it)", file=sys.stderr)
         return int(Exit.USAGE)
 
     save_loop(root, args.name, {"name": args.name, "state": "Draft", "role": "loop"})

@@ -16,8 +16,8 @@ from tcg.workspace import WorkspaceError, find_root, load_graph, write_json
 
 def run(args) -> int:
     if not args.reviewer:
-        print("tcg: --reviewer is required: approval must be attributed",
-              file=sys.stderr)
+        print("tcg: --reviewer is required and must be non-empty: approval "
+              "must be attributed to a person", file=sys.stderr)
         return int(Exit.USAGE)
     try:
         root = find_root()
@@ -29,7 +29,8 @@ def run(args) -> int:
     roots = {h: {"loop": n["loop"], "label": n["label"]}
              for h, n in graph["nodes"].items() if n.get("root")}
     if not roots:
-        print("tcg: no root claims to approve (compile claims first)",
+        print("tcg: no root claims to approve; run "
+              "`tcg compile-claims <loop>` for at least one loop first",
               file=sys.stderr)
         return int(Exit.USAGE)
 

@@ -57,7 +57,10 @@ def write_json(path: Path, data: dict) -> None:
 def load_loop(root: Path, name: str) -> dict:
     path = loop_dir(root, name) / "loop.json"
     if not path.is_file():
-        raise WorkspaceError(f"no such loop: {name}")
+        raise WorkspaceError(
+            f"no such loop: {name} (run `tcg loop new {name}`, or check the "
+            "name with `tcg status`)"
+        )
     return read_json(path)
 
 
@@ -67,8 +70,12 @@ def save_loop(root: Path, name: str, state: dict) -> None:
 
 def transition(loop: dict, new_state: str) -> None:
     cur = loop.get("state", "Draft")
-    if new_state not in TRANSITIONS.get(cur, set()):
-        raise WorkspaceError(f"illegal state transition: {cur} -> {new_state}")
+    allowed = TRANSITIONS.get(cur, set())
+    if new_state not in allowed:
+        raise WorkspaceError(
+            f"illegal state transition: {cur} -> {new_state} "
+            f"(from {cur}, allowed: {sorted(allowed) or 'none'})"
+        )
     loop["state"] = new_state
 
 

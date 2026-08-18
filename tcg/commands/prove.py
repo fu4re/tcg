@@ -50,21 +50,23 @@ def run(args) -> int:
         return int(Exit.USAGE)
 
     if loop["state"] not in ("Compiled", "Accepted", "Refuted", "Unknown"):
-        print(f"tcg: loop {args.target} is {loop['state']}; compile it first",
-              file=sys.stderr)
+        print(f"tcg: loop {args.target} is {loop['state']}; run "
+              f"`tcg compile-claims {args.target}` first", file=sys.stderr)
         return int(Exit.USAGE)
 
     interfaces = read_json(root / "spec" / "interfaces.json")
     entry = interfaces.get(args.target)
     if not entry:
-        print(f"tcg: {args.target} has no compiled interface", file=sys.stderr)
+        print(f"tcg: {args.target} has no compiled interface; run "
+              f"`tcg compile-claims {args.target}`", file=sys.stderr)
         return int(Exit.USAGE)
 
     lock = read_json(root / WORKSPACE_DIR / "toolchain.lock")
     definition = args.definition or lock.get("definition")
     if not definition:
-        print("tcg: no kompiled definition; pass --definition or set it in "
-              "toolchain.lock", file=sys.stderr)
+        print("tcg: no kompiled definition; pass --definition, or set it at "
+              "init (`tcg init --definition PATH` or $TCG_DEFINITION) or "
+              "edit .tcg/toolchain.lock", file=sys.stderr)
         return int(Exit.USAGE)
     includes = list(args.include or []) + list(lock.get("includes", []))
 
@@ -81,7 +83,9 @@ def run(args) -> int:
         child = interfaces.get(ref.get("loop", ""), {})
         h = child.get("claims", {}).get(ref.get("label", ""))
         if not h:
-            print(f"tcg: trusted ref not compiled: {ref}", file=sys.stderr)
+            print(f"tcg: trusted ref not compiled: {ref}; run "
+                  f"`tcg compile-claims {ref.get('loop', '<loop>')}` first",
+                  file=sys.stderr)
             return int(Exit.USAGE)
         trusted_hashes.append(h)
         trusted_bodies.append(body_of(h))
@@ -124,7 +128,8 @@ def run(args) -> int:
                + (e.stderr or b"").decode(errors="replace"))
         timed_out = True
     except FileNotFoundError:
-        print("tcg: kprove not found on PATH", file=sys.stderr)
+        print("tcg: kprove not found on PATH; install/activate the pinned K "
+              "toolchain (versions are in .tcg/toolchain.lock)", file=sys.stderr)
         transition(loop, "Unknown")
         save_loop(root, args.target, loop)
         return int(Exit.USAGE)
@@ -173,9 +178,13 @@ def run(args) -> int:
 
     if verdict == "Refute":
         print(f"Refute: {args.target} — prover left a residual goal; "
-              f"witness log: {log_path}", file=sys.stderr)
+              f"witness log: {log_path}; revise the interface/claim body "
+              f"and re-run `tcg iface set` + `tcg compile-claims {args.target}`",
+              file=sys.stderr)
         return int(Exit.REFUSED)
 
-    print(f"Unknown({ucls}): {args.target} — refusal; log: {log_path}",
+    print(f"Unknown({ucls}): {args.target} — refusal; log: {log_path}; "
+          f"re-run `tcg prove {args.target}` (consider raising "
+          "replay.timeout_seconds in toolchain.lock), or revise the claim",
           file=sys.stderr)
     return int(Exit.UNKNOWN)

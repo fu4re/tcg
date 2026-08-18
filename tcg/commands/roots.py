@@ -17,14 +17,17 @@ def run(args) -> int:
     bundle = Path(args.bundle)
     manifest_path = bundle / "MANIFEST.json"
     if not manifest_path.is_file():
-        print(f"tcg: no MANIFEST.json in {bundle}", file=sys.stderr)
+        print(f"tcg: no MANIFEST.json in {bundle}; pass a directory produced "
+              "by `tcg freeze`", file=sys.stderr)
         return int(Exit.USAGE)
     with open(manifest_path, encoding="utf-8") as f:
         manifest = json.load(f)
 
     roots = manifest.get("roots", {})
     if not roots:
-        print("tcg: bundle declares no roots", file=sys.stderr)
+        print("tcg: bundle declares no roots; MANIFEST.json's \"roots\" is "
+              "empty — it was frozen from a workspace with no root claims",
+              file=sys.stderr)
         return int(Exit.REFUSED)
 
     print(f"{len(roots)} root claim(s). What is guaranteed is exactly what is "
