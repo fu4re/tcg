@@ -1,0 +1,13 @@
+{
+  "pre": "STOP program (bytecode 00) at pc 0, gas 100000, empty word stack, DEFAULT schedule, useGas off",
+  "post": "execution halts with statusCode EVMC_SUCCESS and empty output",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {"reads": [], "writes": []},
+  "rely": "",
+  "guar": "no storage is written",
+  "requires": ["evm.md"],
+  "imports": ["EVM"],
+  "claims": [
+    {"label": "base", "file": "base.k", "role": "frame", "root": false}
+  ]
+}

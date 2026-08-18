@@ -1,0 +1,13 @@
+{
+  "pre": "runtime 006046600055 (STOP; PUSH1 0x46; PUSH1 0x00; SSTORE) at pc 0, gas 100000, storage slot 0 = 100, DEFAULT schedule, useGas off",
+  "post": "CLAIMED (false): execution halts EVMC_SUCCESS with storage slot 0 debited to 70",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {"reads": ["storage[0]"], "writes": ["storage[0]"]},
+  "rely": "",
+  "guar": "storage slot 0 debited to 70 -- this guarantee is FALSE: the leading STOP halts the segment before the debit SSTORE ever executes, so the concrete post-storage stays 100 and cannot unify with the claimed 70 (structural refutation)",
+  "requires": ["evm.md"],
+  "imports": ["EVM"],
+  "claims": [
+    {"label": "drain", "file": "drain.k", "role": "loop", "root": true}
+  ]
+}

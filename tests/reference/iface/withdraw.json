@@ -1,0 +1,15 @@
+{
+  "pre": "runtime 604660005500 (PUSH1 0x46; PUSH1 0x00; SSTORE; STOP) at pc 0, gas 100000, storage slot 0 = 100, DEFAULT schedule, useGas off",
+  "post": "execution halts EVMC_SUCCESS at pc 5 with storage slot 0 debited to 70 (0x46)",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {"reads": ["storage[0]"], "writes": ["storage[0]"]},
+  "rely": "the external environment does not write storage slot 0 during this segment",
+  "guar": "storage slot 0 is set to 70; slot 1 (when present) is left unchanged (the guar claim)",
+  "requires": ["evm.md"],
+  "imports": ["EVM"],
+  "trusted": [{"loop": "ledger", "label": "base"}],
+  "claims": [
+    {"label": "main", "file": "main.k", "role": "loop", "root": true},
+    {"label": "guar", "file": "guar.k", "role": "guar", "root": false}
+  ]
+}

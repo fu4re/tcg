@@ -1,0 +1,9 @@
+{
+  "chainid": 1,
+  "fork": "Shanghai",
+  "fee_schedule": "SHANGHAI",
+  "constructor_args": [],
+  "immutables": {},
+  "external_code": {},
+  "note": "Intended deployment environment: Ethereum mainnet (chainid 1), Shanghai fork. The proved segment runs under KEVM's DEFAULT schedule with gas accounting disabled (<useGas> false), so it abstracts over the concrete fee schedule for this minimal storage-write property; binding keccak(runtime.bin) to on-chain code is the verifier's step-2 action."
+}
