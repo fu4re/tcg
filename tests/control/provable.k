@@ -4,15 +4,15 @@
 // reaches <k> #halt ... </k> with <output> b"" and <statusCode> EVMC_SUCCESS.
 // This is true, and this exact claim is what `tcg prove` iterated on against
 // the real Haskell-backend kprove parser to find the minimal form that
-// closes (see docs/substrate.md, "Iterating the provable claim").
+// closes (see docs/substrate.md §2).
 //
 // Every non-transitioning cell is given a *concrete* value (not left
 // symbolic) — leaving cells like <codeAddr> or <static> unconstrained was
 // found empirically to make the Haskell backend explore precompiled-contract
 // dispatch branches (ECRECOVER) during implication-checking, which crashes a
-// native Krypto builtin on symbolic/empty-Bytes input (see docs/substrate.md,
-// "Backend crash on underspecified state"). Fully concretizing the call
-// frame avoids that branch entirely for this claim.
+// native Krypto builtin on symbolic/empty-Bytes input (see docs/substrate.md
+// §5). Fully concretizing the call frame avoids that branch entirely for
+// this claim.
 //
 // Run directly:
 //   kprove tests/control/provable.k \

@@ -32,8 +32,8 @@ PY
 Result: `subprocess.TimeoutExpired` after 2.0s, `e.stdout`/`e.stderr` both
 empty (kprove had not flushed any output yet). See
 `logs/undecided-timeout.log`. In `tcg prove`, this sets `timed_out=True`,
-and `classify()` returns `("Unknown", "b")` unconditionally on that flag —
-confirmed end-to-end through the real CLI (see docs/substrate.md, "Task 5").
+and `classify()` returns `("Unknown", "b", None)` unconditionally on that
+flag — confirmed end-to-end through the real CLI (see docs/substrate.md §6).
 
 ## (c2) `--depth` bound — a secondary finding, NOT how tcg invokes kprove today
 
@@ -56,15 +56,19 @@ rewritten further. See output for more details.
 Real `kprove` (Haskell backend, this K version) does not emit a distinct
 "depth bound"/"iteration bound"/"max iterations" phrase when `--depth` is
 hit — from the backend's perspective, "ran out of steps" and "no more rules
-apply" both terminate the search the same way, with the same message. This
-means `classify()`'s `"depth bound" / "iteration bound" / "max iterations"`
-branch (`tcg/commands/prove.py`, the `Unknown, "a"` case) is currently dead
-code for the real backend: nothing it can observe would ever hit that
-branch, and if `--depth`/`--branching-allowed` were ever added to
-`prove.py`'s `kprove` invocation, a genuinely-inconclusive bounded run would
-be misclassified as `Refute` (a defect found) rather than `Unknown`. Today
-this is **not reachable** — `prove.py` never passes `--depth` — so no code
-fix is proposed for it; it is recorded here as a documented latent risk. See
-docs/substrate.md, "classify() validation" for the full discussion and
-`tests/test_classify.py::test_depth_bound_is_indistinguishable_from_refute`
+apply" both terminate the search the same way, with the same message, and
+critically with **no** `WarnStuckClaimState` preamble either (the search
+never got far enough to attempt an implication check). This means there is
+no known textual signal, anywhere in the log, that distinguishes a
+depth-bounded TRUE claim from a genuine refutation: `classify()`
+(`tcg/commands/prove.py`) no longer has a "depth bound"/"iteration
+bound"/"max iterations" branch at all (removed as dead code against the real
+backend — the class `"a"` name is retained in `tcg.outcome.UNKNOWN_CLASSES`
+as spec vocabulary only), and if `--depth`/`--branching-allowed` were ever
+added to `prove.py`'s `kprove` invocation, a genuinely-inconclusive bounded
+run would be misclassified as `Refute` (a defect found) rather than
+`Unknown`. Today this is **not reachable** — `prove.py` never passes
+`--depth` — so no code fix is proposed for it; it is recorded here as a
+documented latent risk. See docs/substrate.md §4b for the full discussion
+and `tests/test_classify.py`, class `TestKnownLimitationDepthBoundIsUnresolved`,
 for a regression pin.

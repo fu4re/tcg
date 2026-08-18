@@ -166,9 +166,14 @@ nondeterministic unknowns is pinned in `toolchain.lock`.
 
 On a failed replay the verifier records the unknown class:
 
-- `(a)` iteration bound exhausted — carries localization;
+- `(a)` iteration bound exhausted — carries localization; spec vocabulary
+  only against the real Haskell-backend prover (see `tcg/commands/prove.py`);
 - `(b)` timeout;
-- `(c)` solver returned unknown (nonlinear arithmetic / hashing theory).
+- `(c)` solver/proof-state returned unknown — nonlinear arithmetic / hashing
+  theory, or a residual boolean implication left undischarged after the
+  rewrite target was otherwise reached (an under-specified-but-possibly-true
+  claim looks identical, in the backend's own output, to a claim whose
+  postcondition is genuinely false; see `docs/substrate.md` §9).
 
 All three refuse the certificate. Refusal on unknown is conservative: it can
 reject a true claim, it can never accept a false one.

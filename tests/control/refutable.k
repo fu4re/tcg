@@ -30,11 +30,15 @@
 // Krypto builtin. This reproduces identically for *any* claim on this
 // definition whose destination does not unify trivially (confirmed with two
 // independently-false claims: wrong <statusCode> and wrong <pc>; see
-// docs/substrate.md, "Backend crash on any non-trivial residual goal").
-// classify() still lands on the correct verdict here because its match is a
-// plain substring search over the whole log and the terminal message survives
-// the crash noise — but this is a real infrastructure wall worth knowing
-// about, not an artifact of how this control spec was written.
+// docs/substrate.md §5). The crash aborts the search before kore-exec can
+// print a WarnStuckClaimState preamble at all -- this log has NEITHER
+// variant of that warning, just the crash followed by the generic trailer --
+// so it is kept as its own fixture, distinct from
+// tests/control/refutable-structural.k (same false-claim shape, but closed
+// so as to avoid the crash and show the actual "doesn't unify" warning
+// text). classify() lands on the correct verdict for both, for different
+// textual reasons; a crash is never itself a classification signal (see
+// tcg/commands/prove.py).
 
 requires "evm.md"
 
