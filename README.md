@@ -28,6 +28,7 @@ The format is specified in [docs/bundle-spec.md](docs/bundle-spec.md).
 
 ```
 tcg init                  # scaffold a workspace + pinned toolchain.lock
+tcg status                # workspace overview: loop states, graph, oracle, subject, next-step hints
 tcg loop new <name>       # create a loop workspace
 tcg iface set <loop>      # set the loop interface (Pre, Post, Exit, footprint, rely, guar)
 tcg compile-claims <loop> # compile the interface into canonical claims (+ round-trip check)
@@ -36,6 +37,7 @@ tcg prove <loop|junction> # run the prover; verdict is Accept / Refute / Unknown
 tcg junction <i> <j>      # consequence claim: Post_i implies Pre_j
 tcg compat <i> <j>        # interference obligation: Guar_j implies Rely_i
 tcg graph check           # structural checks on the claim DAG
+tcg subject set           # install subject/runtime.bin (+ subject/environment.json)
 tcg freeze                # assemble the bundle: hash tree + MANIFEST
 tcg verify <bundle>       # full verifier protocol on a bundle (bundle-only input)
 tcg roots <bundle>        # render the root claims for human reading
