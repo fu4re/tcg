@@ -70,6 +70,19 @@ force_rm() {
   rm -rf "$1"
 }
 
+# report_paths — the one place the lock-ready definition/includes JSON is
+# printed (used by both the fast-path exit and the end of a full run).
+report_paths() {
+  log "definition: $TOOLCHAIN_DIR/haskell"
+  log "includes:   $TOOLCHAIN_DIR/evm-semantics-source , $TOOLCHAIN_DIR/plugin"
+  cat <<EOF
+{
+  "definition": "$TOOLCHAIN_DIR/haskell",
+  "includes": ["$TOOLCHAIN_DIR/evm-semantics-source", "$TOOLCHAIN_DIR/plugin"]
+}
+EOF
+}
+
 # --- per-component completeness (item: a missing 12KB krypto.md must never
 # risk the intact 151MB definition) -- each takes the dir that should
 # DIRECTLY contain the named marker file. ---
@@ -129,14 +142,7 @@ if [[ "$FORCE" -eq 0 ]] \
     && source_ok "$TOOLCHAIN_DIR/evm-semantics-source" \
     && plugin_ok "$TOOLCHAIN_DIR/plugin/plugin"; then
   log "already present and complete: $TOOLCHAIN_DIR"
-  log "definition: $TOOLCHAIN_DIR/haskell"
-  log "includes:   $TOOLCHAIN_DIR/evm-semantics-source , $TOOLCHAIN_DIR/plugin"
-  cat <<EOF
-{
-  "definition": "$TOOLCHAIN_DIR/haskell",
-  "includes": ["$TOOLCHAIN_DIR/evm-semantics-source", "$TOOLCHAIN_DIR/plugin"]
-}
-EOF
+  report_paths
   exit 0
 fi
 
@@ -328,11 +334,4 @@ EOF
 log "provenance: $PROVENANCE"
 
 log "done."
-log "definition: $TOOLCHAIN_DIR/haskell"
-log "includes:   $TOOLCHAIN_DIR/evm-semantics-source , $TOOLCHAIN_DIR/plugin"
-cat <<EOF
-{
-  "definition": "$TOOLCHAIN_DIR/haskell",
-  "includes": ["$TOOLCHAIN_DIR/evm-semantics-source", "$TOOLCHAIN_DIR/plugin"]
-}
-EOF
+report_paths
