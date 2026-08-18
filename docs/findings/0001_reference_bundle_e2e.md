@@ -85,13 +85,14 @@ Overall: **5/5**, script exit 0, ~68s. Controls 2/3/4 re-key and re-hash the `MA
 
 ```
 # full workspace + bundle + self-verify + drain refutation control
+# build-reference.sh <WORKDIR> puts the bundle at <WORKDIR>/bundle
 scripts/build-reference.sh /tmp/refws
 #   -> 3 Accepts (#Top), graph check OK, freeze, verify exit 0, drain exit 3
 
 # the five bundle-spec §9 conformance controls, on copies of the bundle
-scripts/conformance.sh /tmp/refws/ws/bundle
+scripts/conformance.sh /tmp/refws/bundle
 #   -> 5/5 PASS: exits 3,3,3,2,0
 
 # a single verdict directly, matching the tables above
-PYTHONPATH=<repo> python3 -m tcg verify /tmp/refws/ws/bundle
+PYTHONPATH=<repo> python3 -m tcg verify /tmp/refws/bundle
 ```

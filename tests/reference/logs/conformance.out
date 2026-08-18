@@ -1,5 +1,5 @@
-reference bundle (pristine, never mutated): /private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/refbuild/ws/bundle
-scratch copies + verify logs:               /var/folders/_f/8npvqpdd47x5mgvsr1ddd_vh0000gn/T/tcg-conf.PrdwgNGYlP
+reference bundle (pristine, never mutated): /private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/reprofix/bundle
+scratch copies + verify logs:               /var/folders/_f/8npvqpdd47x5mgvsr1ddd_vh0000gn/T/tcg-conf.kwZW3OS54P
 
 control 1: flip one byte in subject/runtime.bin
   1 flipped-runtime-byte       expect=3 actual=3  PASS

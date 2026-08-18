@@ -35,9 +35,11 @@ BUNDLE="${1:-}"
 if [ -z "$BUNDLE" ]; then
   echo "no BUNDLE given; building a fresh reference bundle ..."
   BUILDROOT="$(mktemp -d -t tcg-conf-build)"
-  "$REPO/scripts/build-reference.sh" "$BUILDROOT/ws" >"$BUILDROOT/build.log" 2>&1 \
-    || { echo "build-reference.sh failed; see $BUILDROOT/build.log" >&2; exit 1; }
-  BUNDLE="$BUILDROOT/ws/bundle"
+  BUILDLOG="$(mktemp -t tcg-conf-build-log)"
+  "$REPO/scripts/build-reference.sh" "$BUILDROOT" >"$BUILDLOG" 2>&1 \
+    || { echo "build-reference.sh failed; see $BUILDLOG" >&2; exit 1; }
+  # build-reference.sh's single source of truth: the bundle is at <WORKDIR>/bundle
+  BUNDLE="$BUILDROOT/bundle"
 fi
 [ -f "$BUNDLE/MANIFEST.json" ] || { echo "no MANIFEST.json under $BUNDLE" >&2; exit 1; }
 BUNDLE="$(cd "$BUNDLE" && pwd)"
