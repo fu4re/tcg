@@ -272,6 +272,33 @@ goal claim, so each classify() call sees exactly one claim's log — the
 mixed-signal handling above is retained as a same-call, multi-branch
 safeguard, not a substitute for per-claim isolation.
 
+**Same judge on the verifier side, too** (decision D5 in `docs/decisions.md`).
+`classify()` (plus its `to_text()` str/bytes helper) now lives in
+`tcg/verdict.py` — no workspace or filesystem state, no import of
+`tcg.workspace` or `tcg.commands.*`, mechanically enforced by
+`scripts/repo-checks.sh`. Both `tcg prove` and `tcg verify`'s replay step
+(step 5) import it from there. Before this, `verify` judged replay by raw
+`kprove` exit code alone: any non-zero, non-timeout result was "failed" and
+refused the certificate at exit REFUSED (3), which conflated a genuine
+structural counterexample with a solver-undecided result — the exact
+Refute-vs-Unknown confusion this whole document is about, on the verifier
+side. `verify` now retries only while the shared classifier says Unknown
+(never Refute — retrying a deterministic prover hoping a genuine refutation
+goes away is not what retries are for) and exits UNKNOWN (2), not REFUSED
+(3), when still Unknown after retries. Validated live against real bundles,
+not just unit tests: a real `tcg init`→...→`tcg freeze`→`tcg verify` cycle
+(Accept, both nodes re-proved, exit 0); the same bundle re-verified with
+`replay.timeout_seconds` cut to 2s (genuine timeout, Unknown(b), exit 2
+after retries, not 3); and, since a claim that hits the "stuck-unifies"
+Unknown case at prove time can never reach Accepted and so can never be
+frozen into a bundle in the first place, the non-timeout Unknown path and
+the Refute path were each confirmed by pointing `verify` (via `$PATH`) at a
+stand-in `kprove` script that replays one of `tests/control/logs/`'s real
+captured logs verbatim — `underspecified-true.log` correctly produced
+Unknown(c)/exit 2 (this is the actual bug: the old code would have said
+Refute/exit 3 here), and `refutable-structural.log` correctly produced
+Refute/exit 3, on the first attempt, no retry.
+
 ### 4b. Documented, not fixed: `--depth` bound is indistinguishable from Refute
 
 Running `kprove tests/control/provable.k --depth 1 ...` (same true claim,

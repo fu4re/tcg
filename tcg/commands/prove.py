@@ -2,9 +2,9 @@
 
 Assembles one prove module per goal claim (the loop's declared children
 injected as trusted lemmas, plus that single claim), invokes kprove once per
-claim, and classifies each verdict independently -- classify() is validated
-against real Haskell-backend kprove output, not assumed text (see
-docs/substrate.md, "classify() validation").
+claim, and classifies each verdict independently via the shared judge in
+tcg.verdict (the same classifier `verify`'s bundle-only replay step uses --
+see docs/substrate.md, "classify() validation").
 
 - Accept  — exit 0 *and* a corroborated success marker; a replay record is
   written per accepted goal claim (Accept-only evidence: nothing is recorded
@@ -33,78 +33,18 @@ Refute -> Refuted, else any Unknown -> Unknown, else Accepted.
 """
 from __future__ import annotations
 
-import re
 import subprocess
 import sys
 import time
 
 from tcg.claims import assemble_prove_module, extract_body, module_name
 from tcg.outcome import Exit
+from tcg.verdict import classify, to_text
 from tcg.workspace import (
     WORKSPACE_DIR, WorkspaceError, drop_edges_from, find_root, load_graph,
     load_loop, loop_dir, read_json, save_graph, save_loop, transition,
     upsert_edge, write_json,
 )
-
-# kore-exec's own success marker for a fully-discharged all-path claim (the
-# pretty-printed \top formula). Pinned empirically: tests/control/logs/
-# provable.log is exactly "#Top\n" with nothing else on stdout.
-_ACCEPT_PATTERN = "#Top"
-
-_WS = re.compile(r"\s+")
-
-# "WarnStuckClaimState" covers two OPPOSITE outcomes -- "unifies... but the
-# implication check has failed" (Unknown: solver-decidability gap) vs.
-# "doesn't unify..." (Refute: genuine structural counterexample) -- so only
-# the first phrase is a valid Unknown signal; matching the bare tag name
-# swallows a found defect into a false "could not verify". Full argument,
-# real log evidence, and why "stuck" must win regardless of textual position
-# (not just whichever comes first) are in docs/substrate.md §4a and
-# tests/test_classify.py. One precompiled case-insensitive alternation,
-# matched against one whitespace-collapsed copy of the log -- not several
-# lowercased copies -- since real proof logs can reach tens of MB.
-_STUCK_OR_REFUTE = re.compile(
-    r"(?P<stuck>unifies with the destination)|(?P<refute>cannot be rewritten further)",
-    re.IGNORECASE,
-)
-
-
-def classify(returncode: int, log: str, timed_out: bool) -> tuple[str, str | None, str | None]:
-    """(verdict, unknown_class, hint). Only exit 0 *and* a corroborated
-    success marker is Accept. Validated against real Haskell-backend kprove
-    output -- see tests/control/logs/ and docs/substrate.md §4.
-    """
-    if timed_out:
-        return "Unknown", "b", None
-    if returncode == 0:
-        if _ACCEPT_PATTERN in log:
-            return "Accept", None, None
-        return "Unknown", "c", "prover exited 0 but no proof pattern found"
-    norm = _WS.sub(" ", log)
-    saw_refute = False
-    for m in _STUCK_OR_REFUTE.finditer(norm):
-        if m.group("stuck"):
-            return ("Unknown", "c",
-                    "residual implication undischarged — claim may need more "
-                    "concretized cells; see log")
-        saw_refute = True
-    if saw_refute:
-        return "Refute", None, None
-    # Anything unrecognized stays Unknown -- never Refute. The class "a"
-    # (iteration bound exhausted) this function used to detect via a
-    # "depth bound"/"iteration bound"/"max iterations" text match was
-    # removed: real kprove never emits that text (see docs/substrate.md §4b
-    # and tcg.outcome.UNKNOWN_CLASSES, where the name is kept as spec
-    # vocabulary only).
-    return "Unknown", "c", None
-
-
-def _text(x: str | bytes | None) -> str:
-    """subprocess.TimeoutExpired's e.stdout/e.stderr may be str (text-mode
-    Popen) or bytes, depending on how far communicate() got -- don't assume."""
-    if x is None:
-        return ""
-    return x.decode(errors="replace") if isinstance(x, bytes) else x
 
 
 def run(args) -> int:
@@ -197,7 +137,7 @@ def run(args) -> int:
                                    timeout=timeout, cwd=build_dir)
             returncode, log = proc.returncode, proc.stdout + proc.stderr
         except subprocess.TimeoutExpired as e:
-            returncode, log, timed_out = -1, _text(e.stdout) + _text(e.stderr), True
+            returncode, log, timed_out = -1, to_text(e.stdout) + to_text(e.stderr), True
         except FileNotFoundError:
             print("tcg: kprove not found on PATH; install/activate the pinned K "
                   "toolchain (versions are in .tcg/toolchain.lock)", file=sys.stderr)

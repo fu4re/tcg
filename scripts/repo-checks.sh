@@ -3,12 +3,22 @@
 # installed `tcg`; contrast with scripts/smoke.sh, which only ever talks to
 # the installed CLI).
 #
-# Currently one check: tcg/_data/ghost.diff (the package-data copy shipped
-# inside the tcg package, read by `tcg init` via importlib.resources — see
-# tcg/commands/init.py) must be byte-identical to theory/patches/ghost.diff
-# (the canonical, human-edited source). If they drift, a non-editable
-# `pip install` ships a stale patch while the repo's own theory/patches/
-# tree — and anything proved against it — has already moved on, silently.
+# Checks:
+#
+# 1. ghost-diff-parity: tcg/_data/ghost.diff (the package-data copy shipped
+#    inside the tcg package, read by `tcg init` via importlib.resources — see
+#    tcg/commands/init.py) must be byte-identical to theory/patches/ghost.diff
+#    (the canonical, human-edited source). If they drift, a non-editable
+#    `pip install` ships a stale patch while the repo's own theory/patches/
+#    tree — and anything proved against it — has already moved on, silently.
+#
+# 2. bundle-only-imports: tcg/commands/verify.py, tcg/commands/roots.py, and
+#    tcg/verdict.py (the prover-verdict judge shared with `prove`) must not
+#    import tcg.workspace or tcg.commands.* — the bundle-only contract:
+#    a verifier that can reach workspace state is no longer verifying just
+#    the bundle a stranger handed it. Mechanical (grep), not "someone will
+#    remember" — the contract erodes silently otherwise, one convenient
+#    import at a time.
 #
 # Usage:
 #   scripts/repo-checks.sh
@@ -25,6 +35,7 @@ repo_root=$(CDPATH= cd -- "$script_dir/.." && pwd -P)
 
 canonical="$repo_root/theory/patches/ghost.diff"
 packaged="$repo_root/tcg/_data/ghost.diff"
+bundle_only_files="tcg/commands/verify.py tcg/commands/roots.py tcg/verdict.py"
 
 fail_count=0
 
@@ -50,7 +61,29 @@ check_ghost_diff_parity() {
     fi
 }
 
+check_bundle_only_imports() {
+    for f in $bundle_only_files; do
+        path="$repo_root/$f"
+        if [ ! -f "$path" ]; then
+            echo "FAIL  bundle-only-imports   missing: $path" >&2
+            fail_count=$((fail_count + 1))
+            continue
+        fi
+        hit=$(grep -nE '^[[:space:]]*(import|from)[[:space:]]+tcg\.(workspace|commands)([.[:space:]]|$)' "$path")
+        if [ -n "$hit" ]; then
+            echo "FAIL  bundle-only-imports   $f imports tcg.workspace or tcg.commands.* --" \
+                "verify/roots/verdict must stay bundle-only (no workspace state); found:" >&2
+            echo "$hit" | sed 's/^/         /' >&2
+            fail_count=$((fail_count + 1))
+        else
+            printf 'PASS  %-20s %s has no tcg.workspace/tcg.commands.* import\n' \
+                "bundle-only-imports" "$f"
+        fi
+    done
+}
+
 check_ghost_diff_parity
+check_bundle_only_imports
 
 if [ "$fail_count" -eq 0 ]; then
     echo "repo-checks: ALL PASS"

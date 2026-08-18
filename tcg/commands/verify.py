@@ -8,8 +8,15 @@ are strictly ordered; the first failing step refuses the certificate.
                 printed as a verifier action, per the trust manifest.
 3. Theory     — re-hash vendored patches against toolchain.lock.
 4. Graph      — structural discipline over bundle content only.
-5. Replay     — topological re-proof of every node, children as trusted.
-                Unknown is refusal (retries per toolchain.lock).
+5. Replay     — topological re-proof of every node, children as trusted,
+                judged by the SAME classifier `prove` uses (tcg.verdict) --
+                same judge, same discipline, on both sides. Accept closes the
+                node; Refute is a genuine structural counterexample and is
+                never retried (exit REFUSED, 3); Unknown (timeout, an
+                undischarged implication, or unrecognized output) absorbs up
+                to toolchain.lock's retries and, if still Unknown, refuses
+                conservatively at exit UNKNOWN (2) -- distinct from Refute,
+                because "could not re-verify" is not "replay refuted".
 
 Step 6 (reading the roots) is `tcg roots`.
 """
@@ -24,6 +31,7 @@ from pathlib import Path
 
 from tcg.claims import assemble_prove_module, extract_body, module_header, sha256_text
 from tcg.outcome import Exit
+from tcg.verdict import classify, to_text
 
 _ZERO_STEP_ROLES = ("junction", "compat")
 
@@ -179,35 +187,52 @@ def run(args) -> int:
         for inc in includes:
             argv += ["-I", str(inc)]
 
-        verdict = None
+        # Retries absorb solver nondeterminism on an UNDECIDED result only --
+        # Accept and Refute are both final on the first attempt. Re-running a
+        # deterministic prover against the same fixed claim hoping a genuine
+        # structural refutation goes away on attempt 2 would not be a retry,
+        # it would be forum shopping.
+        verdict = ucls = hint = None
         for attempt in range(retries + 1):
+            timed_out = False
             try:
                 proc = subprocess.run(argv, capture_output=True, text=True,
                                       timeout=timeout)
-            except subprocess.TimeoutExpired:
-                verdict = "unknown"
-                continue
+                returncode, log = proc.returncode, proc.stdout + proc.stderr
+            except subprocess.TimeoutExpired as e:
+                returncode, log, timed_out = (
+                    -1, to_text(e.stdout) + to_text(e.stderr), True)
             except FileNotFoundError:
                 print("verify: kprove not found on PATH; install/activate the "
                       "pinned K toolchain (see theory/toolchain.lock in the "
                       "bundle)", file=sys.stderr)
                 return int(Exit.USAGE)
-            verdict = "accept" if proc.returncode == 0 else "failed"
-            break
+            verdict, ucls, hint = classify(returncode, log, timed_out)
+            if verdict != "Unknown":
+                break
         spec.unlink(missing_ok=True)
 
         n = nodes[h]
-        if verdict == "accept":
+        if verdict == "Accept":
             print(f"step 5 replay [{idx}/{len(order)}]: "
                   f"{n['loop']}/{n['label']} Accept")
             continue
-        if verdict == "unknown":
-            print(f"verify[5-replay]: {n['loop']}/{n['label']} Unknown after "
-                  f"{retries + 1} attempt(s) — conservative refusal", file=sys.stderr)
-            print("verify: certificate REFUSED at step 5-replay", file=sys.stderr)
+        if verdict == "Unknown":
+            hint_note = f" — {hint}" if hint else ""
+            print(f"verify[5-replay]: {n['loop']}/{n['label']} Unknown({ucls}) "
+                  f"after {retries + 1} attempt(s){hint_note} — conservative "
+                  "refusal", file=sys.stderr)
+            print("verify: certificate UNVERIFIED at step 5-replay — could "
+                  "not decide (this is not a refutation); raise "
+                  "replay.timeout_seconds/retries in toolchain.lock and "
+                  "re-run `tcg verify`, or investigate the claim",
+                  file=sys.stderr)
             return int(Exit.UNKNOWN)
+        # verdict == "Refute": a genuine structural counterexample.
         return _fail("5-replay",
-                     [f"{n['loop']}/{n['label']} did not replay to Accept"])
+                     [f"{n['loop']}/{n['label']} did not replay to Accept "
+                      "(Refute — prover reached a state that does not "
+                      "unify with the claimed destination)"])
 
     print(f"step 5 replay: OK ({len(order)} node(s) re-proved)")
     print("certificate holds; step 6 is yours: `tcg roots <bundle>`")

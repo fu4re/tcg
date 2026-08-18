@@ -53,3 +53,31 @@ attributable to a fixed, on-disk value rather than to whatever a shell
 happened to export that day. A prover run that "worked on my machine" because
 of an ambient `$TCG_DEFINITION` and fails on replay would be exactly the kind
 of untraceable drift the lock exists to rule out.
+
+## D5 — One verdict judge, shared: `tcg.verdict.classify()`
+
+Raw `kprove` output is classified into Accept/Refute/Unknown by exactly one
+function, `tcg.verdict.classify()`, called by both `tcg prove` (workspace
+path) and `tcg verify`'s replay step (bundle-only path). A claim is not
+"more Accepted" because it was judged by the workspace tool instead of the
+verifier that re-checks a stranger's bundle — before this, `verify` judged
+replay by raw exit code alone (any non-zero, non-timeout result was
+"failed", i.e. Refute), which silently conflated a genuine structural
+counterexample with an undecided solver result and, on replay, refused the
+certificate (exit REFUSED, 3) for cases that should have been a conservative
+"could not re-verify" (exit UNKNOWN, 2) instead.
+
+`tcg.verdict` carries no workspace or filesystem state and imports nothing
+from `tcg.workspace` or `tcg.commands.*` — the bundle-only contract `verify`
+and `roots` already had for their other dependencies (`tcg.claims`) extends
+to the judge itself. `scripts/repo-checks.sh` greps `tcg/commands/verify.py`,
+`tcg/commands/roots.py`, and `tcg/verdict.py` for exactly such an import and
+fails loudly if one appears, so the contract can't erode one convenient
+import at a time.
+
+Retries (`toolchain.lock`'s `replay.retries`) apply only while the classifier
+says Unknown — absorbing solver nondeterminism on an undecided result.
+Accept and Refute are both final on the first attempt: re-running a
+deterministic prover against the same fixed claim hoping a genuine
+refutation goes away on the next attempt would not be a retry, it would be
+forum shopping.

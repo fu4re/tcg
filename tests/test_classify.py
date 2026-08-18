@@ -1,5 +1,10 @@
-"""Validate `tcg.commands.prove.classify()` against real Haskell-backend
-kprove output.
+"""Validate `tcg.verdict.classify()` against real Haskell-backend kprove
+output.
+
+`classify()` lives in tcg/verdict.py, not tcg/commands/prove.py: it is the
+shared judge both `prove` (workspace path) and `verify` (bundle-only replay)
+use, so it must not import tcg.workspace or tcg.commands.* (see
+scripts/repo-checks.sh's bundle-only-import guard).
 
 Every log here is real, captured output (see tests/control/, docs/substrate.md
 "classify() validation") -- none of it is synthesized text, EXCEPT the one
@@ -19,7 +24,7 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-from tcg.commands.prove import classify
+from tcg.verdict import classify
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 LOGS = REPO_ROOT / "tests" / "control" / "logs"
