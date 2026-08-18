@@ -79,6 +79,18 @@ def build_parser() -> argparse.ArgumentParser:
     cp.add_argument("i")
     cp.add_argument("j")
 
+    sj = sub.add_parser("subject", help="manage the subject bytecode and environment")
+    sj_sub = sj.add_subparsers(dest="subject_command", metavar="<subcommand>")
+    sj_set = sj_sub.add_parser(
+        "set", help="install subject/runtime.bin (+ subject/environment.json)"
+    )
+    sj_set.add_argument("--runtime", required=True,
+                        help="bytecode file: raw bytes, or 0x-prefixed/plain hex text")
+    sj_set.add_argument("--environment", default=None,
+                        help="environment.json to install (must parse as JSON); "
+                             "omit to write a documented null-field skeleton if "
+                             "none exists yet")
+
     gr = sub.add_parser("graph", help="claim-graph operations")
     gr_sub = gr.add_subparsers(dest="graph_command", metavar="<subcommand>")
     gr_sub.add_parser("check", help="structural checks on the claim DAG")
@@ -112,6 +124,7 @@ _DISPATCH: dict[str, str] = {
     "junction": "junction",
     "compat": "compat",
     "graph": "graph",
+    "subject": "subject",
     "freeze": "freeze",
     "verify": "verify",
     "roots": "roots",
