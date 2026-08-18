@@ -25,6 +25,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("init", help="scaffold a workspace + pinned toolchain.lock")
 
+    sub.add_parser(
+        "status",
+        help="workspace overview: loop states, graph, oracle, subject, next-step hints",
+    )
+
     lp = sub.add_parser("loop", help="manage loop workspaces")
     lp_sub = lp.add_subparsers(dest="loop_command", metavar="<subcommand>")
     lp_new = lp_sub.add_parser("new", help="create a loop workspace")
@@ -93,6 +98,7 @@ def build_parser() -> argparse.ArgumentParser:
 # command name → module in tcg.commands
 _DISPATCH: dict[str, str] = {
     "init": "init",
+    "status": "status",
     "loop": "loop",
     "iface": "iface",
     "compile-claims": "compile_claims",
