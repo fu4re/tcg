@@ -112,6 +112,16 @@ def run(args) -> int:
     graph = load_graph(root)
     drop_edges_from(graph, set(goal_hashes.values()))
 
+    # A re-prove invalidates any prior vacuity probe of these claims (that probe
+    # ran against a possibly-different definition/state). Drop the records on the
+    # SAME event that refreshes replay evidence, so freeze's gate (which trusts
+    # the record) and verify's step 5v (which re-derives the probe against the
+    # pinned definition) can never disagree: every prove forces a fresh
+    # `tcg vacuity` before the loop can be frozen.
+    vac_dir = root / WORKSPACE_DIR / "vacuity"
+    for h in goal_hashes.values():
+        (vac_dir / f"{h}.json").unlink(missing_ok=True)
+
     # One kprove invocation per goal claim -- a single run-wide call would
     # let one stuck/refuted claim mask a sibling's genuine result, and
     # evidence/graph edges are per-claim data anyway (see module docstring).

@@ -2,9 +2,9 @@
 
 Freeze refuses unless the workspace is fully coherent:
 
-- `tcg graph check` passes;
+- `tcg graph check` passes (which now includes ROOT <program> binding to
+  subject/runtime.bin — P0-A, Hole 1);
 - every graph node belongs to an Accepted workspace and has Accept evidence;
-- every ROOT's <program> cell binds to subject/runtime.bin (P0-A, Hole 1);
 - every ROOT has passed a non-vacuous vacuity probe (P0-B, Hole 1);
 - the oracle record exists and covers exactly the current roots (drift check);
 - subject/runtime.bin and subject/environment.json exist.
@@ -18,7 +18,6 @@ import shutil
 import sys
 from pathlib import Path
 
-from tcg.claims import program_binding_error
 from tcg.commands.graph import check_graph
 from tcg.outcome import Exit
 from tcg.workspace import (
@@ -55,24 +54,14 @@ def run(args) -> int:
 
     roots = {h for h, n in nodes.items() if n.get("root")}
 
-    # P0-A program binding + P0-B vacuity, per ROOT. Non-root nodes (guar /
-    # frame / junction / compat / env) are deliberately NOT subject-bound: a
-    # frame lemma legitimately proves a sub-program (the reference `base`
-    # proves the bare STOP), and consequence nodes carry no <program> cell at
-    # all. The bundle's guarantee is exactly the roots (a verifier reads the
-    # roots — bundle-spec §4), so binding + non-vacuity of the roots is what
-    # closes Hole 1. See docs/bundle-spec.md §9 and docs/findings/0002.
-    subject_bin = root / "subject" / "runtime.bin"
-    subject_bytes = subject_bin.read_bytes() if subject_bin.is_file() else None
+    # P0-A program binding is enforced inside check_graph (above), so freeze and
+    # `tcg graph check` agree. Here we add the P0-B vacuity gate, per ROOT: every
+    # root must carry a non-vacuous probe record. Non-root nodes carry no vacuity
+    # requirement — vacuity is a root property (a vacuous lemma is useless, not
+    # unsound). See docs/bundle-spec.md §8-9 and docs/findings/0002.
     vac_dir = root / WORKSPACE_DIR / "vacuity"
     for h in sorted(roots):
         n = nodes[h]
-        claim_path = root / "spec" / "claims" / f"{h}.k"
-        if subject_bytes is not None and claim_path.is_file():
-            reason = program_binding_error(claim_path.read_text(encoding="utf-8"),
-                                           subject_bytes)
-            if reason:
-                errors.append(f"root {n['loop']}/{n['label']}: {reason}")
         vac_rec = vac_dir / f"{h}.json"
         if not vac_rec.is_file():
             errors.append(f"root {n['loop']}/{n['label']} has no vacuity probe — "

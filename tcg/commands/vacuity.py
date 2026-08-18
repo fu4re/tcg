@@ -6,7 +6,14 @@ vacuous) into this reachability CLI. A `proved` can be EMPTY: if a claim's
 initial state (its `requires` + LHS cells) is INFEASIBLE — no concrete state
 satisfies it — then every property of that state proves for an empty reason.
 
-The probe, per proved goal claim of the loop:
+Scope: ROOTS ONLY — exactly where freeze and verify gate vacuity. Vacuity is a
+root property: the bundle's guarantee is its root claims (a verifier reads the
+roots), and a vacuous root is the false green. A vacuously-true trusted lemma
+is useless, not unsound (a true statement, assumed, injects no falsehood), so
+non-root claims are reported informationally and NOT probed — spending a prover
+run whose verdict nothing downstream consumes is waste.
+
+The probe, per proved ROOT claim of the loop:
 
   1. FALSIFY the postcondition — mutate the claim to `ensures false` while
      keeping the antecedent intact (tcg.claims.falsify_body).
@@ -99,8 +106,26 @@ def run(args) -> int:
     vac_dir.mkdir(exist_ok=True)
     timeout = lock.get("replay", {}).get("timeout_seconds", 3600)
 
+    # Vacuity is a ROOT property, gated exactly where freeze and verify gate it
+    # (roots only). A vacuously-true trusted lemma is useless, not unsound (a
+    # true statement, assumed, injects no falsehood); a vacuous ROOT is the
+    # false green. So probe ONLY roots — spending a prover run on a non-root
+    # whose verdict nothing downstream consumes is waste — and report any
+    # non-root claims as informational, not probed, not gating.
+    roots = [(label, h) for label, h in entry["claims"].items()
+             if graph["nodes"].get(h, {}).get("root")]
+    non_roots = [label for label, h in entry["claims"].items()
+                 if not graph["nodes"].get(h, {}).get("root")]
+    if non_roots:
+        print(f"vacuity: not probing non-root claim(s) {sorted(non_roots)} "
+              "(vacuity gates roots only; a vacuous lemma is useless, not "
+              "unsound)")
+    if not roots:
+        print(f"vacuity: OK ({args.loop} has no root claims to probe)")
+        return int(Exit.OK)
+
     any_vacuous = False
-    for label, h in entry["claims"].items():
+    for label, h in roots:
         module_text = (claims_dir / f"{h}.k").read_text(encoding="utf-8")
         mod = module_name(args.loop, f"{label}-vacuity")[: -len("-SPEC")]
         mutant = assemble_prove_module(
@@ -142,14 +167,13 @@ def run(args) -> int:
         vacuous = verdict == "Accept"
         any_vacuous = any_vacuous or vacuous
 
-        is_root = bool(graph["nodes"].get(h, {}).get("root"))
         write_json(vac_dir / f"{h}.json", {
             "claim": h, "label": label, "loop": args.loop,
             "probe": "ensures-false",
             "mutant_verdict": verdict,
             "mutant_unknown_class": ucls,
             "vacuous": vacuous,
-            "root": is_root,
+            "root": True,
             "spec_module": mod,
             "definition": str(definition),
             "duration_seconds": duration,
@@ -167,8 +191,8 @@ def run(args) -> int:
                   f"feasible ({duration}s)")
 
     if any_vacuous:
-        print(f"vacuity: REFUSED — at least one claim of {args.loop} is vacuous; "
+        print(f"vacuity: REFUSED — at least one root of {args.loop} is vacuous; "
               "a vacuous proof is a refusal, never a pass", file=sys.stderr)
         return int(Exit.REFUSED)
-    print(f"vacuity: OK ({len(entry['claims'])} claim(s) probed, none vacuous)")
+    print(f"vacuity: OK ({len(roots)} root(s) probed, none vacuous)")
     return int(Exit.OK)

@@ -13,6 +13,11 @@ Checks:
 - every loop has a guar node;
 - compat coverage: every ordered loop pair with observed footprint
   intersection has a compat node, and an env node exists;
+- program binding (P0-A): every ROOT's <program> cell binds to
+  subject/runtime.bin — checked here so `tcg graph check` and freeze agree
+  (freeze calls check_graph); skipped only if no subject is installed yet
+  (subject set can follow graph check in the workflow). verify re-derives the
+  same check bundle-only, so it stays free of workspace imports;
 - closure: at least one root; every root and everything reachable from it
   over trusted-lemma edges belongs to an Accepted workspace.
 """
@@ -22,6 +27,7 @@ import re
 import sys
 from graphlib import CycleError, TopologicalSorter
 
+from tcg.claims import program_binding_error
 from tcg.outcome import Exit
 from tcg.workspace import (
     EDGE_TYPES, WorkspaceError, find_root, load_graph, load_loop, read_json,
@@ -140,6 +146,24 @@ def check_graph(root) -> list[str]:
             errors.append(f"{kind} {nodes[h]['label']} ({lp}) is {state}, "
                           f"not Accepted — run `tcg prove {lp}`")
         stack.extend(children[h])
+
+    # Program binding (P0-A): every ROOT's <program> cell must equal
+    # subject/runtime.bin. Only ROOTS are subject-bound (a frame/guar lemma may
+    # prove a sub-program; consequence nodes carry no <program> cell) — the
+    # guarantee is exactly the roots. Skipped when no subject is installed yet
+    # (subject set can follow graph check); freeze re-runs check_graph once the
+    # subject exists, and verify re-derives it bundle-only.
+    subject_bin = root / "subject" / "runtime.bin"
+    if subject_bin.is_file():
+        subject_bytes = subject_bin.read_bytes()
+        for h in roots:
+            claim_path = root / "spec" / "claims" / f"{h}.k"
+            if not claim_path.is_file():
+                continue  # already reported by the integrity check above
+            reason = program_binding_error(
+                claim_path.read_text(encoding="utf-8"), subject_bytes)
+            if reason:
+                errors.append(f"root {nodes[h]['loop']}/{nodes[h]['label']}: {reason}")
 
     return errors
 

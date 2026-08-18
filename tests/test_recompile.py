@@ -144,6 +144,34 @@ class TestRecompileInvalidates(RecompileBase):
         self.assertFalse((self.tmp / "evidence" / "replay" / f"{h1}.json").exists())
 
 
+class TestSharedHashIsolation(RecompileBase):
+    def test_recompiling_one_loop_does_not_drop_another_loops_evidence(self):
+        # Two independent, proved loops. Re-compiling `alpha` must invalidate
+        # only alpha's own evidence — never `beta`'s. (Claim hashes are
+        # loop-scoped: the label token appears in BOTH the module name and the
+        # body, so two distinct (loop,label) pairs cannot share a hash; the
+        # interfaces-based `shared` guard in compile-claims is the correct,
+        # non-dead form of this isolation regardless.)
+        self.new_loop("alpha", prog="00")
+        self.compile("alpha")
+        ha = self.claim_hash("alpha")
+        self.new_loop("beta", prog="6000")
+        self.compile("beta")
+        hb = self.claim_hash("beta")
+        self.assertNotEqual(ha, hb)
+        for name, h in (("alpha", ha), ("beta", hb)):
+            self.set_state(name, "Accepted")
+            self.write_evidence(h)
+
+        self.assertEqual(self.compile("alpha"), int(Exit.OK))
+
+        # alpha's own evidence invalidated; beta's left completely intact
+        self.assertFalse((self.tmp / "evidence" / "replay" / f"{ha}.json").exists())
+        self.assertTrue((self.tmp / "evidence" / "replay" / f"{hb}.json").exists())
+        self.assertTrue((self.tmp / ".tcg" / "vacuity" / f"{hb}.json").exists())
+        self.assertEqual(load_loop(self.tmp, "beta")["state"], "Accepted")
+
+
 class TestCascade(RecompileBase):
     def test_recompiling_child_marks_dependent_parent_stale(self):
         self.new_loop("child", prog="00", label="base", root=False, role="frame")

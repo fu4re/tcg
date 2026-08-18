@@ -109,27 +109,40 @@ def run(args) -> int:
         print(f"{label} -> spec/claims/{h}.k")
 
     graph = load_graph(root)
-    new_hashes = set(compiled.values())
-    old_hashes = {h for h, n in graph["nodes"].items()
-                  if n.get("loop") == args.loop}
-    used_by_others = {h for h, n in graph["nodes"].items()
-                      if n.get("loop") != args.loop}
+    nodes = graph["nodes"]
+    old_hashes = {h for h, n in nodes.items() if n.get("loop") == args.loop}
 
-    # Cascade set: OTHER loops whose node trusted one of this loop's (old)
-    # claims as a lemma. Recompiling a child un-proves it, so those parents no
-    # longer stand on a proved child and must be re-proved.
+    # `interfaces.json` — not the graph node's single `loop` owner — is
+    # authoritative for which loops reference which content hashes. A hash CAN
+    # be shared by two (loop,label) pairs whose module text canonicalizes
+    # identically (e.g. `module_name` collapses `a`/`b-c` and `a-b`/`c` to the
+    # same `A-B-C-SPEC`), and the graph keeps only one node per hash (last
+    # writer owns `loop`). So "still used by another loop" must be a scan of
+    # OTHER loops' compiled claim sets. A hash another loop still references is
+    # NOT invalidated here — dropping its node/edges/evidence would force that
+    # loop into a needless re-prove.
+    interfaces_path = root / "spec" / "interfaces.json"
+    interfaces = read_json(interfaces_path) if interfaces_path.is_file() else {}
+    shared = {h for name, data in interfaces.items() if name != args.loop
+              for h in data.get("claims", {}).values()}
+    invalidate = old_hashes - shared   # owned only by this loop -> safe to drop
+
+    # Cascade set: OTHER loops whose node trusted one of THIS loop's now-invalid
+    # claims as a lemma. Recompiling un-proves those claims, so the parents no
+    # longer stand on a proved child and must be re-proved. A lemma still proved
+    # via a shared hash in another loop is not invalidated, so it is excluded.
     parent_loops: set[str] = set()
     for e in graph["edges"]:
-        if (e["type"] == "trusted-lemma" and e["to"] in old_hashes
-                and e["from"] not in old_hashes):
-            pl = graph["nodes"].get(e["from"], {}).get("loop")
+        if (e["type"] == "trusted-lemma" and e["to"] in invalidate
+                and e["from"] not in invalidate):
+            pl = nodes.get(e["from"], {}).get("loop")
             if pl and pl != args.loop:
                 parent_loops.add(pl)
 
-    # Replace this loop's nodes; drop every edge touching its old claims.
-    for h in old_hashes:
-        graph["nodes"].pop(h, None)
-    drop_edges_touching(graph, old_hashes)
+    # Replace this loop's nodes; drop every edge touching its invalidated claims.
+    for h in invalidate:
+        nodes.pop(h, None)
+    drop_edges_touching(graph, invalidate)
     ws_role = loop.get("role", "loop")
     for entry in claims:
         role = entry.get("role", ws_role)
@@ -140,35 +153,35 @@ def run(args) -> int:
         upsert_node(graph, compiled[entry["label"]], **node)
     save_graph(root, graph)
 
-    # Drop this loop's now-stale Accept + vacuity evidence (per-hash; keep a
-    # hash still owned by another loop's node).
+    # Drop this loop's now-stale Accept + vacuity evidence (only hashes no other
+    # loop still references).
     ev_replay = root / "evidence" / "replay"
     ev_vac = root / WORKSPACE_DIR / "vacuity"
-    for h in old_hashes:
-        if h in used_by_others:
-            continue
+    for h in invalidate:
         (ev_replay / f"{h}.json").unlink(missing_ok=True)
         (ev_vac / f"{h}.json").unlink(missing_ok=True)
 
-    # Cascade: mark dependent parents Stale and drop their Accept evidence.
+    # Cascade: mark dependent parents Stale and drop their Accept evidence. Only
+    # print the note when a parent was actually Accepted and got transitioned —
+    # telling the user to re-prove a loop that was never proved is a false
+    # instruction.
     for pl in sorted(parent_loops):
         try:
             pl_loop = load_loop(root, pl)
         except WorkspaceError:
             continue
-        if pl_loop.get("state") == "Accepted":
-            transition(pl_loop, "Stale")
-            save_loop(root, pl, pl_loop)
-            for h, n in graph["nodes"].items():
-                if n.get("loop") == pl:
-                    (ev_replay / f"{h}.json").unlink(missing_ok=True)
-                    (ev_vac / f"{h}.json").unlink(missing_ok=True)
+        if pl_loop.get("state") != "Accepted":
+            continue
+        transition(pl_loop, "Stale")
+        save_loop(root, pl, pl_loop)
+        for h, n in nodes.items():
+            if n.get("loop") == pl:
+                (ev_replay / f"{h}.json").unlink(missing_ok=True)
+                (ev_vac / f"{h}.json").unlink(missing_ok=True)
         print(f"tcg: note: {pl} trusted a claim of {args.loop} as a lemma; "
               f"marked Stale — re-run `tcg compile-claims {pl}` then "
               f"`tcg prove {pl}`", file=sys.stderr)
 
-    interfaces_path = root / "spec" / "interfaces.json"
-    interfaces = read_json(interfaces_path) if interfaces_path.is_file() else {}
     interfaces[args.loop] = {
         "pre": iface["pre"], "post": iface["post"], "exit": iface["exit"],
         "footprint": iface["footprint"], "rely": iface["rely"], "guar": iface["guar"],

@@ -42,7 +42,7 @@ claim <k> #execute ~> _ </k>
 
 ## P0-A — program binding (the cheap mechanical guard)
 
-**What it checks.** A *root* claim (role `loop`, `root: true`) must carry an extractable `<program>` cell whose bytes equal `subject/runtime.bin`. Extraction is pure text: `#parseByteStack("<hex>")` (0x-prefixed or bare) or a bare hex literal; if the cell rewrites (`X => Y`) the *installed* (left) program binds. A root with **no** extractable `<program>` cell is refused with a message naming the fix. Enforced at `freeze` (workspace) **and** re-derived bundle-only at `verify` step 4 (text + byte compare — a self-consistent hash tree does not launder a mismatch).
+**What it checks.** A *root* claim (role `loop`, `root: true`) must carry an extractable `<program>` cell whose bytes equal `subject/runtime.bin`. Extraction is pure text: `#parseByteStack("<hex>")` (0x-prefixed or bare) or a bare hex literal; if the cell rewrites (`X => Y`) the *installed* (left) program binds. A root with **no** extractable `<program>` cell is refused with a message naming the fix. Enforced inside `check_graph` — so `tcg graph check` **and** `freeze` (which calls it) agree — **and** re-derived bundle-only at `verify` step 4 (text + byte compare — a self-consistent hash tree does not launder a mismatch; `verify` keeps its own copy so it imports no workspace state).
 
 **Non-roots are deliberately not bound**, and this is a soundness decision, not laziness: the bundle's guarantee *is* the set of roots (a verifier reads the roots — bundle-spec §4). A `frame`/`guar` lemma legitimately proves a *sub*-program (the reference `frame` proves the bare `STOP`, program `00`); `junction`/`compat`/`env`/`subsumption` nodes carry no `<program>` cell at all. Binding the roots ties the transferable guarantee to the deployed bytecode; binding the lemmas would reject honest ones and buys nothing (a lemma is re-proved on its own in replay).
 
@@ -52,7 +52,7 @@ claim <k> #execute ~> _ </k>
 
 ## P0-B — the vacuity probe (the deeper guard)
 
-**What it does.** For each proved goal claim, `falsify_body` replaces the postcondition with `false` (keeping the antecedent: `requires` + LHS cells), and the claim is re-proved standalone. The rule (ported from sheaf Finding 0005's Probe R): **falsified form proves Accept ⇒ antecedent infeasible ⇒ original proof vacuous ⇒ refuse**; anything else (Refute / Unknown) ⇒ the antecedent is feasible enough that an impossible postcondition is not vacuously provable ⇒ non-vacuous. `freeze` requires a non-vacuous record for every root; `verify` **re-derives** it bundle-only at step 5v (it does not trust the bundled `evidence/vacuity/<h>.json`).
+**What it does.** For each proved **root** claim (vacuity is gated on roots only — see "Review hardening"), `falsify_body` replaces the postcondition with `false` (keeping the antecedent: `requires` + LHS cells), and the claim is re-proved standalone. The rule (ported from sheaf Finding 0005's Probe R): **falsified form proves Accept ⇒ antecedent infeasible ⇒ original proof vacuous ⇒ refuse**; anything else (Refute / Unknown) ⇒ the antecedent is feasible enough that an impossible postcondition is not vacuously provable ⇒ non-vacuous. `freeze` requires a non-vacuous record for every root; `verify` **re-derives** it bundle-only at step 5v (it does not trust the bundled `evidence/vacuity/<h>.json`). `prove` drops each claim's vacuity record when it re-runs, so the record's lifecycle tracks replay evidence and freeze's gate cannot pass a record staler than the proof.
 
 **The discriminator is empirical, measured on the real backend** — the whole reason this is a solver judgement and not prose:
 
@@ -106,8 +106,9 @@ vacuity: REFUSED — at least one claim of vac is vacuous; a vacuous proof is a 
 
 ```
 -- vacuity probe withdraw (root main + guar) --
-non-vacuous: withdraw/guar — falsified mutant did not prove (Unknown(c)), antecedent feasible
+vacuity: not probing non-root claim(s) ['guar'] (vacuity gates roots only; a vacuous lemma is useless, not unsound)
 non-vacuous: withdraw/main — falsified mutant did not prove (Unknown(c)), antecedent feasible
+vacuity: OK (1 root(s) probed, none vacuous)
 …
 step 4 graph: OK (3 node(s), 1 root(s); root <program> cells bind to subject/runtime.bin)
 step 5v vacuity [withdraw/main]: OK (falsified form does not prove: Unknown)
@@ -132,6 +133,18 @@ Control 6 is the point: a bundle whose hash tree is *fully self-consistent* is s
 ## P1 — `compile-claims` atomicity + coherent re-compile (Hole 2)
 
 The transition legality is now checked, and every claim body validated + emitted **in memory**, *before* any file is written. An illegal compile (only `Proving → Compiled` remains illegal) writes nothing and exits USAGE — pinned by `tests/test_recompile.py::TestAtomicity` (a full workspace snapshot is byte-identical before/after). Re-compiling is now a legal, intended operation: it **invalidates** prior proof state — the loop returns to `Compiled`, its stale Accept/vacuity evidence and graph edges are dropped, its nodes are replaced, and any *other* loop that trusted one of its claims as a lemma is cascaded to `Stale` (pinned by `TestRecompileInvalidates`, `TestCascade`). Exit code and on-disk effect now always agree. (Content-addressing could skip re-proving an unchanged-hash claim; that optimization is deferred — re-compile conservatively returns to `Compiled`.)
+
+---
+
+## Review hardening (7 secondary issues — all fail-safe)
+
+A high-effort code review cleared the two central guards (no false-green defect; conservative; blind spots as declared above) and found seven secondary issues, **all in the safe direction** (they caused needless re-proves or fail-safe gate *disagreement*, never a false green). Fixed before merge; no guard's refusal semantics changed:
+
+- **Vacuity is now gated on ROOTS only, matching freeze/verify** (`tcg vacuity` previously refused on *any* vacuous claim, including a non-root lemma — which the certificate gate does not care about, and which spent a prover run whose verdict nothing consumes). A vacuously-true lemma is useless, not unsound; a vacuous *root* is the false green. `tcg vacuity` now probes roots only, reports non-roots informationally, and its REFUSAL condition matches the freeze/verify gate. (Pinned: `test_gate_lifecycle.py::TestVacuityScope`.)
+- **`prove` now drops each claim's vacuity record** when it re-runs, tying the record's lifecycle to replay evidence so freeze's gate (which trusts the record) and verify's step-5v re-derivation (against the pinned definition) cannot disagree on a stale record. (Pinned via a stub-`kprove` integration test: `TestProveDropsVacuity`.)
+- **Program binding moved into `check_graph`** so `tcg graph check` — not only `freeze` — catches a root whose `<program>` ≠ subject (the docstrings/bundle-spec attribute it to "step 4 Graph"). `verify` keeps its own bundle-only re-derivation and imports no workspace state (`repo-checks.sh` stays green). (Pinned: `TestGraphCheckProgramBinding`.)
+- **The `used_by_others` evidence-drop guard is now computed from `interfaces.json`** (all other loops' compiled claim sets), not the single graph node's `loop` owner (which made the guard dead). Honest note: cross-`(loop,label)` hash collision is in fact **impossible** — the label token appears in *both* the module name and the body, so two distinct pairs cannot produce the same hash — so the described clobber cannot manifest; the fix removes the dead guard and makes the isolation correct-by-construction (defensive). (Pinned: `TestSharedHashIsolation`.)
+- **Fold-ins:** the cascade "marked Stale — re-run…" note now prints only when a parent was actually Accepted and transitioned (never a false instruction); the dead `new_hashes` local was removed.
 
 ---
 
@@ -160,5 +173,5 @@ Program binding and the vacuity probe close the two *demonstrated* G3 holes. The
 scripts/false-green.sh   [WORKDIR]   # reproduce BOTH G3 false greens, then refuse each
 scripts/build-reference.sh [WORKDIR] # reference now passes program-binding + vacuity
 scripts/conformance.sh   [BUNDLE]    # 6/6 controls (control 6 = program binding)
-PYTHONPATH=<repo> python3 -m unittest discover -s tests   # 27 tests
+PYTHONPATH=<repo> python3 -m unittest discover -s tests   # 32 tests
 ```
