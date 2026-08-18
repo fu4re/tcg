@@ -73,8 +73,8 @@ _SUBJECT_HELP = """\
 --runtime accepts either raw bytecode bytes, or a text file holding a
 0x-prefixed or plain hex string — both decode to the same installed bytes.
 --environment, if omitted and none is installed yet, is written as a
-skeleton with null fields: chainid, fork, constructor_args, immutables,
-external_code.
+skeleton with null fields: chainid, fork, fee_schedule, constructor_args,
+immutables, external_code.
 """
 
 

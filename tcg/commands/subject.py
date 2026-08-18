@@ -25,10 +25,12 @@ from tcg.workspace import WorkspaceError, find_root, write_json
 _HEX = re.compile(r"[0-9a-fA-F]+")
 
 # The environment class documented in docs/bundle-spec.md §2: chainid, fork,
-# constructor args / immutables, external code the claims assume is present.
+# fee schedule, constructor args / immutables, external code the claims
+# assume is present.
 ENVIRONMENT_SKELETON = {
     "chainid": None,
     "fork": None,
+    "fee_schedule": None,
     "constructor_args": None,
     "immutables": None,
     "external_code": None,
@@ -112,7 +114,7 @@ def run(args) -> int:
     elif not env_path.is_file():
         write_json(env_path, ENVIRONMENT_SKELETON)
         print("installed subject/environment.json (skeleton — fill in chainid, "
-              "fork, constructor_args, immutables, external_code)")
+              "fork, fee_schedule, constructor_args, immutables, external_code)")
     else:
         print("subject/environment.json already present; left unchanged "
               "(pass --environment <path> to replace it)")
