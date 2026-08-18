@@ -38,3 +38,18 @@ demonstration variant zeroes the ledger entry after the external call
 reverts on reentrant drain and the refutation would be a discipline flag
 without an executable exploit. The refutation control must refute with a
 concrete counterexample, so the really drainable form is the honest choice.
+
+## D4 — Definition discovery: init-time only, never at prove/verify time
+
+The kompiled K/KEVM definition path is resolved exactly once, in `tcg init`:
+from `--definition PATH` if given, else from `$TCG_DEFINITION` at that moment
+(flag wins over env), else left unset. Whatever is resolved — including
+"unset" — is written into `.tcg/toolchain.lock` verbatim.
+
+`tcg prove` and `tcg verify` read only their own `--definition` flag or the
+lock; neither one re-reads the environment. The lock is the single pinned
+record a replay trusts, so init-time-only discovery keeps every proof run
+attributable to a fixed, on-disk value rather than to whatever a shell
+happened to export that day. A prover run that "worked on my machine" because
+of an ambient `$TCG_DEFINITION` and fails on replay would be exactly the kind
+of untraceable drift the lock exists to rule out.

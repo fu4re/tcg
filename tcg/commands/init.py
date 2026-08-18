@@ -1,6 +1,7 @@
 """`tcg init` — scaffold a workspace with a pinned toolchain.lock."""
 from __future__ import annotations
 
+import os
 import sys
 from importlib import resources
 from pathlib import Path
@@ -64,9 +65,23 @@ def run(args) -> int:
         print("tcg: warning: ghost.diff not found in installation; "
               "vendor it into theory/patches/ before proving", file=sys.stderr)
 
-    lock = dict(TOOLCHAIN, patches=patches)
+    # Definition discovery happens exactly once, here, at init time (decision
+    # D4 in docs/decisions.md): a flag beats the environment, and whatever is
+    # resolved is written into the lock verbatim. `prove`/`verify` never
+    # re-discover it themselves — every proof run is attributable to this one
+    # pinned record, not to whatever the shell happened to export that day.
+    definition = args.definition or os.environ.get("TCG_DEFINITION") or None
+    includes = list(args.include or [])
+
+    lock = dict(TOOLCHAIN, patches=patches, definition=definition, includes=includes)
     write_json(ws / "toolchain.lock", lock)
     write_json(root / "spec" / "interfaces.json", {})
 
     print(f"initialized tcg workspace at {root}")
+    if definition:
+        print(f"definition pinned: {definition}")
+    else:
+        print("no definition pinned; edit .tcg/toolchain.lock directly, or "
+              "pass --definition PATH (or set $TCG_DEFINITION) next time you "
+              "`tcg init` a fresh workspace")
     return int(Exit.OK)

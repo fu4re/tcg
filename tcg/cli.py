@@ -23,7 +23,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub = ap.add_subparsers(dest="command", metavar="<command>")
 
-    sub.add_parser("init", help="scaffold a workspace + pinned toolchain.lock")
+    it = sub.add_parser("init", help="scaffold a workspace + pinned toolchain.lock")
+    it.add_argument("--definition", default=None,
+                    help="kompiled definition dir to pin into toolchain.lock "
+                         "(also honors $TCG_DEFINITION; flag wins)")
+    it.add_argument("-I", "--include", action="append", default=None,
+                    help="include dir to pin into toolchain.lock (repeatable)")
 
     sub.add_parser(
         "status",

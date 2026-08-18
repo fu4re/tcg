@@ -30,6 +30,13 @@
 
 set -u
 
+# Neutralize ambient env vars that could change what a fresh `tcg init` pins,
+# which would in turn change what later steps (`prove`, in particular) are
+# expected to refuse with. `unset` on an already-unset var is a no-op even
+# under `set -u` (it doesn't dereference the variable), so this is safe
+# whether or not the caller's shell happens to export one.
+unset TCG_DEFINITION
+
 # tcg/outcome.py's exit-code table, named here so the step calls below read
 # as assertions about outcomes, not bare integers.
 EXIT_OK=0
@@ -251,11 +258,14 @@ step "iface set"        "$EXIT_OK"      ""                            "$TCG" ifa
 step "compile-claims"   "$EXIT_OK"      ""                            "$TCG" compile-claims demo
 step "graph check"      "$EXIT_REFUSED" "is Compiled, not Accepted"   "$TCG" graph check
 step "approve"          "$EXIT_OK"      ""                            "$TCG" approve --reviewer smoke
-# Expected reason is "no kompiled definition": a fresh `tcg init` writes no
-# "definition" into toolchain.lock, and nothing above passes --definition. If
-# a definition-discovery feature (env var / global config file) lands later,
-# this step must explicitly neutralize it (isolate $HOME, unset the var, ...)
-# so exit 1 here still means THIS reason and not something else entirely.
+# Expected reason is "no kompiled definition": `tcg init` above ran with
+# $TCG_DEFINITION unset (see the top of this script) and no --definition
+# flag, so it pinned no "definition" into toolchain.lock, and nothing below
+# passes --definition either. Without the `unset` up top, an ambient
+# $TCG_DEFINITION would make init pin THAT value instead, and this step would
+# fail for an entirely different reason (most likely "kprove not found on
+# PATH" once prove tries to actually run it) while still exiting 1 — so the
+# isolation above is load-bearing for this assertion, not just tidiness.
 step "prove"            "$EXIT_USAGE"   "no kompiled definition"      "$TCG" prove demo
 step "freeze"           "$EXIT_REFUSED" "missing subject/runtime.bin" "$TCG" freeze
 
