@@ -1,0 +1,14 @@
+{
+  "pre": "GemJoin ETH-A runtime (0x2F0b23f53734252Bda2277357e97e1517d6B042A, 3462 bytes), calldata = selector 0x36569e77 (vat()) only, callvalue 0, storage SYMBOLIC (STORAGE:Map, unconstrained except the added #rangeUInt(256, #lookup(STORAGE, 1)) fact -- true of every real EVM word ever written by SSTORE), id/caller symbolic over the full 160-bit range, SHANGHAI schedule, useGas off",
+  "post": "halts EVMC_SUCCESS; <storage> is the SAME Map STORAGE both before and after (no SSTORE on this path); <callStack> is .List both before and after (returned to the same top-level frame depth); <output> equals #buf(32, #lookup(STORAGE, 1) &Int maxUInt160) -- the FULL k-dss behaviour: vat() returns exactly the stored slot-1 value (160-bit masked, per the PUSH20 AND in the getter body and again in the ABI return-formatter), and changes no state. Strengthens Finding 0003a's side-effect-free half (which left <output> abstracted) now that the Track P0 simplification lemmas (Finding 0004) reduce the byte/memory algebra",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {"reads": ["storage[1]"], "writes": []},
+  "rely": "",
+  "guar": "vat() is the FULL k-dss accessor: succeeds, touches no storage, makes no external call (per bytecode inspection: pc 0x00ae-0x00b6 trampoline + pc 0x0322-0x0348 body, both straight-line, zero CALL/CALLCODE/DELEGATECALL/STATICCALL/CREATE/CREATE2 opcodes on the reachable path), and returns exactly #buf(32, #lookup(STORAGE, 1) &Int maxUInt160)",
+  "requires": ["edsl.md"],
+  "imports": ["EDSL"],
+  "claims": [
+    {"label": "vat", "file": "vat.k", "role": "loop", "root": true},
+    {"label": "vat_g", "file": "vat_g.k", "role": "guar", "root": false}
+  ]
+}
