@@ -3,7 +3,7 @@ requires "edsl.md"
 module WETH-TRANSFERFROM-WRONG-SPEC
   imports EDSL
 
-  claim [transferFrom_wrong]:
+  claim
   <kevm>
     <k> #execute => #halt </k>
     <mode> NORMAL </mode>

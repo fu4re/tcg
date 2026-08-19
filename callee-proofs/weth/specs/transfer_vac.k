@@ -3,7 +3,7 @@ requires "edsl.md"
 module WETH-TRANSFER-VAC-SPEC
   imports EDSL
 
-  claim [transfer_vac]:
+  claim
   <kevm>
     <k> #execute => #halt </k>
     <mode> NORMAL </mode>
