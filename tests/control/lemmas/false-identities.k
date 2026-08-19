@@ -85,3 +85,21 @@ module PROBE-B2W-SPEC
         <k> bool2Word ( bool2Word ( B ) ==Int 0 ) => bool2Word ( B ) </k>
      [label(b2w-eq-zero-wrong-direction), all-path]
 endmodule
+
+// P6 — map-simplification (lookup-over-update at a DISTINCT key). This guards
+//      the exact rule the WETH/GemJoin two-slot legs depend on:
+//        #lookup ( M [ K1 <- _ ] , K2 ) => #lookup ( M , K2 )  requires K1 =/=Int K2
+//      i.e. a write at key 7 must NOT leak into a read at the distinct key 9.
+//      Correct reduction of the LHS is `#lookup(STORAGE, 9)` (the pre-write map
+//      at key 9, symbolic), NOT the value 5 written at key 7. The FALSE target
+//      is `5` — what a rule that wrongly let the K1 update satisfy the K2 read
+//      would yield. Since STORAGE is unconstrained, `#lookup(STORAGE,9)` is not
+//      5, so a correct rule can never establish it. Must REFUSE. If this PROVES,
+//      the vendored lookup-over-update rule leaks writes across distinct keys (a
+//      false-green vector for the second balanceOf/gem read in transferFrom/join).
+module PROBE-MAP-SPEC
+    imports EDSL
+    claim [lookup-over-update-distinct-wrong]:
+        <k> #lookup ( STORAGE:Map [ 7 <- 5 ] , 9 ) => 5 </k>
+     [label(lookup-over-update-distinct-wrong), all-path]
+endmodule

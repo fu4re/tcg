@@ -1,4 +1,4 @@
-kore-exec: [3565740] Warning (WarnStuckClaimState):
+kore-exec: [5249951] Warning (WarnStuckClaimState):
     The configuration's term unifies with the destination's term, but the implication check between the conditions has failed. Location: /Users/akkedeline/sheaf/tcg/.claude/worktrees/p1-b-resume/tests/control/lemmas/false-identities.k:66:9-67:34
 Context:
     (InfoReachability) while checking the implication

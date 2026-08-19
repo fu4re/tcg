@@ -49,6 +49,7 @@ MODULES=(
   "PROBE-INT-SPEC:int-simplification: (A+B)-B => A, target A+1"
   "PROBE-BITWISE-SPEC:bitwise-simplification: X&X => X, target X+1"
   "PROBE-B2W-SPEC:bool2word-simplification: b2w-eq-zero direction: bool2Word(bool2Word(B)==Int 0) => WRONG bool2Word(B) (correct: bool2Word(notBool B))"
+  "PROBE-MAP-SPEC:map-simplification: lookup-over-update distinct key: #lookup(STORAGE[7<-5],9) => WRONG 5 (correct: #lookup(STORAGE,9), the write at 7 must not leak to 9)"
 )
 
 echo "== lemma consistency probe =="
