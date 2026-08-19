@@ -135,7 +135,14 @@ def run(args) -> int:
         write_json(bundle / "assumptions" / "annotations.json", {})
 
     # Trust manifest: named assumptions with statuses. Facts not discharged in
-    # this workspace are listed as assumed — never silently.
+    # this workspace are listed as assumed — never silently. The vendored,
+    # pinned prover patches (theory/patches/*.diff, travelling in the hash tree
+    # above) each add a named trusted input, enumerated here so no simplification
+    # lemma or ghost cell enters the trusted base unlisted (bundle-spec §7).
+    patch_files = sorted(
+        f"theory/patches/{p.name}"
+        for p in (root / "theory" / "patches").glob("*.diff")
+    ) if (root / "theory" / "patches").is_dir() else []
     write_json(bundle / "assumptions" / "trust-manifest.json", {
         "semantics": "vendored" if (bundle / "theory" / "semantics").is_dir()
                      else "assumed: semantics not vendored in this bundle",
@@ -148,6 +155,42 @@ def run(args) -> int:
         "roots_semantics": "verifier-action-required: read the root claims; the "
                            "bundle does not transfer that they express the "
                            "property you care about",
+        # Ghost instrumentation (theory/patches/ghost.diff). Additive [total]
+        # cells/helpers that never appear on a stock rule's LHS; the transparency
+        # obligation (does not alter non-ghost behavior) is listed, not silent.
+        "A_instrumentation": {
+            "status": "assumed: instrumentation transparency — the ghost-cell "
+                      "patch adds only additive [total] cells/helpers and does "
+                      "not alter non-ghost behavior; residual verification "
+                      "obligation, pending",
+            "patch": "theory/patches/ghost.diff",
+        },
+        # Simplification lemmas (theory/patches/lemmas.diff). The four vendored
+        # submodules are baked into the definition's main module so symbolic
+        # byte/word algebra reduces; each rule carries [simplification], so none
+        # is a semantic rewrite step. See docs/findings/0004.
+        "A_simp_lemmas": {
+            "status": "proven-upstream (KEVM's own byte/int/bitwise "
+                      "simplification lemmas, [simplification]-only; the "
+                      "#addrFromPrivateKey concrete rule is deliberately "
+                      "EXCLUDED) + assumed-consistent (bounded by "
+                      "scripts/lemma-consistency.sh: no false identity proves; "
+                      "the set is a large reusable core, NOT provably closed)",
+            "modules": [
+                "BITWISE-SIMPLIFICATION (lemmas/bitwise-simplification.k)",
+                "BYTES-SIMPLIFICATION (lemmas/bytes-simplification.k)",
+                "EVM-INT-SIMPLIFICATION (lemmas/evm-int-simplification.k)",
+                "INT-SIMPLIFICATION (lemmas/int-simplification.k)",
+            ],
+            "patch": "theory/patches/lemmas.diff",
+            "not_closed": "keccak stays an injectivity axiom (A_keccak); "
+                          "nonlinear arithmetic stays a wall — these lemmas do "
+                          "not discharge them",
+            "upstream_intent": "fold the four submodules into a KEVM-provided "
+                               "verification module and pin by KEVM version "
+                               "instead of vendoring this driver",
+        },
+        "vendored_patches": patch_files,
     })
 
     (bundle / "nav").mkdir()

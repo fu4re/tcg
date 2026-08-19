@@ -190,6 +190,9 @@ not change between v1 and v2.
   conformance validation against the official execution test suite;
 - `machine-checkable` — e.g. subject identity: instructions to compare
   `keccak(runtime.bin)` with the on-chain code hash;
+- `proven-upstream` — e.g. the simplification lemmas: KEVM's own byte/int/
+  bitwise lemmas, vendored as a pinned diff, with a bound on the trusted-base
+  growth (`scripts/lemma-consistency.sh`: no false identity proves);
 - `verifier-action-required` — the irreducible semantic step: *read the roots*
   (§8 step 6).
 
@@ -204,10 +207,19 @@ Named entries the v1 manifest must carry:
 - `A_adm` — no infinite internal stuttering of the semantics between
   observable steps;
 - weak well-definedness of the vendored semantics;
-- instrumentation transparency — the ghost-cell patches do not alter
-  non-ghost behavior; proved once, shipped with the patches in
+- instrumentation transparency (`A_instrumentation`) — the ghost-cell patches
+  do not alter non-ghost behavior; proved once, shipped with the patches in
   `theory/patches/`, with any residual verification obligations listed as
   `residual, pending`;
+- `A_simp_lemmas` — the vendored byte/int/bitwise simplification lemmas
+  (`theory/patches/lemmas.diff`, four `[simplification]`-only submodules baked
+  into the definition's main module; the `#addrFromPrivateKey` concrete rule
+  deliberately excluded). Status `proven-upstream` (KEVM's own lemmas) +
+  assumed-consistent, bounded by `scripts/lemma-consistency.sh` (no false
+  identity proves). The set is a large reusable core, **not** provably closed:
+  keccak stays `A_keccak`, nonlinear arithmetic stays a wall. Intent: upstream
+  the four submodules into a KEVM verification module and pin by version. See
+  docs/findings/0004;
 - two reading-discipline lines: a prover Accept is read as a derivation in the
   prover's proof system; a checker Accept on an implication is read as
   validity of that implication.
