@@ -1,0 +1,31 @@
+{
+  "pre": "caller CALLs symbolic 200, trusts BROKEN +6 summary",
+  "post": "A2.storage[0]==105",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [],
+    "writes": []
+  },
+  "rely": "",
+  "guar": "",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [
+    {
+      "loop": "summary_broken",
+      "label": "s"
+    }
+  ],
+  "claims": [
+    {
+      "label": "r2a",
+      "file": "r2a.k",
+      "role": "loop",
+      "root": true
+    }
+  ]
+}

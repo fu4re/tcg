@@ -1,0 +1,30 @@
+{
+  "pre": "callee at 200, storage[0]=100",
+  "post": "storage[0]=105, EVMC_SUCCESS",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [
+      "A2.storage[0]"
+    ],
+    "writes": [
+      "A2.storage[0]"
+    ]
+  },
+  "rely": "env does not write A2.storage[0] in the segment",
+  "guar": "A2.storage[0] += 5; other slots framed",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [],
+  "claims": [
+    {
+      "label": "d",
+      "file": "d.k",
+      "role": "guar",
+      "root": false
+    }
+  ]
+}

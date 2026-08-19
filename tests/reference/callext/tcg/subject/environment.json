@@ -1,0 +1,11 @@
+{
+  "chainid": 1,
+  "fork": "Shanghai",
+  "fee_schedule": "SHANGHAI",
+  "constructor_args": [],
+  "immutables": {},
+  "external_code": {
+    "0x00000000000000000000000000000000000000c8": "60005460050160005500"
+  },
+  "note": "external_code[200] = the concrete callee code P; keccak(P) binds the abstract summary S to the concrete proof D (the bridge S<==D)."
+}

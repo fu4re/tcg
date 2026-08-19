@@ -1,0 +1,509 @@
+kore-exec: [15293667] Warning (WarnStuckClaimState):
+    The configuration's term doesn't unify with the destination's term and the configuration cannot be rewritten further. Location: /private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/callext-run/caller-2a-nosummary.k:10:5-45:15
+Context:
+    (InfoReachability) while checking the implication
+kore-exec: [15309254] Warning (WarnUnexploredBranches):
+    10 branches were still unexplored when the action failed.
+  #Not ( #Exists N . {
+      #lookupOpCode ( CODE0 , 0 , DEFAULT )
+    #Equals
+      DUP ( N )
+    }
+  #And
+    {
+      true
+    #Equals
+      N <=Int 0
+    } )
+#And
+  #Not ( #Exists N . {
+    #lookupOpCode ( CODE0 , 0 , DEFAULT )
+  #Equals
+    PUSH ( N )
+  } )
+#And
+  #Not ( #Exists OP . {
+      #lookupOpCode ( CODE0 , 0 , DEFAULT )
+    #Equals
+      OP:OpCode
+    }
+  #And
+    {
+      false
+    #Equals
+      0 <Int #stackNeeded ( OP )
+    }
+  #And
+    {
+      false
+    #Equals
+      #stackAdded ( OP ) -Int #stackNeeded ( OP ) >Int 0 andBool 0 +Int ( #stackAdded ( OP ) -Int #stackNeeded ( OP ) ) >Int 1024
+    }
+  #And
+    {
+      false
+    #Equals
+      false andBool #changesState ( OP , .WordStack )
+    } )
+#And
+  #Not ( #Exists OP . {
+      #lookupOpCode ( CODE0 , 0 , DEFAULT )
+    #Equals
+      OP:OpCode
+    }
+  #And
+    {
+      true
+    #Equals
+      0 +Int ( #stackAdded ( OP ) -Int #stackNeeded ( OP ) ) >Int 1024
+    }
+  #And
+    {
+      true
+    #Equals
+      #stackAdded ( OP ) -Int #stackNeeded ( OP ) >Int 0
+    } )
+#And
+  #Not ( #Exists OP . {
+      #lookupOpCode ( CODE0 , 0 , DEFAULT )
+    #Equals
+      OP:OpCode
+    }
+  #And
+    {
+      true
+    #Equals
+      0 <Int #stackNeeded ( OP )
+    } )
+#And
+  #Not ( {
+    .NoOpCode
+  #Equals
+    #lookupOpCode ( CODE0 , 0 , DEFAULT )
+  } )
+#And
+  #Not ( {
+    PUSHZERO
+  #Equals
+    #lookupOpCode ( CODE0 , 0 , DEFAULT )
+  } )
+#And
+  <kevm>
+    <k>
+      #next [ #lookupOpCode ( CODE0 , 0 , DEFAULT ) ] ~> #execute ~> #return 0 0 ~> #pc [ CALL ] ~> #execute ~> .K
+    </k>
+    <exit-code>
+      _DotVar8
+    </exit-code>
+    <mode>
+      NORMAL
+    </mode>
+    <schedule>
+      DEFAULT
+    </schedule>
+    <useGas>
+      false
+    </useGas>
+    <ethereum>
+      <evm>
+        <output>
+          b""
+        </output>
+        <statusCode>
+          _Gen1
+        </statusCode>
+        <callStack>
+          ListItem ( <callState>
+            <program>
+              b"`\x00`\x00`\x00`\x00`\x00`\xc8`\x00\xf1\x00"
+            </program>
+            <jumpDests>
+              b"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            </jumpDests>
+            <id>
+              100
+            </id>
+            <caller>
+              999999999999
+            </caller>
+            <callData>
+              b""
+            </callData>
+            <callValue>
+              0
+            </callValue>
+            <wordStack>
+              .WordStack
+            </wordStack>
+            <localMem>
+              b""
+            </localMem>
+            <pc>
+              14
+            </pc>
+            <gas>
+              100000
+            </gas>
+            <memoryUsed>
+              0
+            </memoryUsed>
+            <callGas>
+              _Gen5
+            </callGas>
+            <static>
+              false
+            </static>
+            <callDepth>
+              0
+            </callDepth>
+            <codeAddr>
+              100
+            </codeAddr>
+          </callState> )
+          _Gen40
+        </callStack>
+        <interimStates>
+          ListItem ( { <accounts>
+            <account>
+              <acctID>
+                100
+              </acctID>
+              <balance>
+                0
+              </balance>
+              <code>
+                _Gen70
+              </code>
+              <storage>
+                .Map
+              </storage>
+              <origStorage>
+                _Gen71
+              </origStorage>
+              <transientStorage>
+                _Gen72
+              </transientStorage>
+              <nonce>
+                _Gen73
+              </nonce>
+            </account> <account>
+              <acctID>
+                200
+              </acctID>
+              <balance>
+                0
+              </balance>
+              <code>
+                CODE0:Bytes
+              </code>
+              <storage>
+                0 |-> 100
+              </storage>
+              <origStorage>
+                _Gen74
+              </origStorage>
+              <transientStorage>
+                _Gen75
+              </transientStorage>
+              <nonce>
+                _Gen76
+              </nonce>
+            </account> _DotVar7
+          </accounts> | <substate>
+            <selfDestruct>
+              _Gen35
+            </selfDestruct>
+            <log>
+              _Gen36
+            </log>
+            <refund>
+              _Gen37
+            </refund>
+            <accessedAccounts>
+              _Gen9 |Set SetItem ( 200 )
+            </accessedAccounts>
+            <accessedStorage>
+              _Gen38
+            </accessedStorage>
+            <createdAccounts>
+              _Gen39
+            </createdAccounts>
+          </substate> } )
+          _Gen41
+        </interimStates>
+        <touchedAccounts>
+          _Gen7 |Set SetItem ( 100 ) |Set SetItem ( 200 )
+        </touchedAccounts>
+        <callState>
+          <program>
+            CODE0
+          </program>
+          <jumpDests>
+            #computeValidJumpDests ( CODE0 , 0 , padRightBytes ( b"" , lengthBytes ( CODE0 ) , 0 ) , lengthBytes ( CODE0 ) )
+          </jumpDests>
+          <id>
+            200
+          </id>
+          <caller>
+            100
+          </caller>
+          <callData>
+            b""
+          </callData>
+          <callValue>
+            0
+          </callValue>
+          <wordStack>
+            .WordStack
+          </wordStack>
+          <localMem>
+            b""
+          </localMem>
+          <pc>
+            0
+          </pc>
+          <gas>
+            100000
+          </gas>
+          <memoryUsed>
+            0
+          </memoryUsed>
+          <callGas>
+            _Gen5
+          </callGas>
+          <static>
+            false
+          </static>
+          <callDepth>
+            1
+          </callDepth>
+          <codeAddr>
+            200
+          </codeAddr>
+        </callState>
+        <versionedHashes>
+          _Gen42
+        </versionedHashes>
+        <substate>
+          <selfDestruct>
+            _Gen35
+          </selfDestruct>
+          <log>
+            _Gen36
+          </log>
+          <refund>
+            _Gen37
+          </refund>
+          <accessedAccounts>
+            _Gen9 |Set SetItem ( 200 ) |Set SetItem ( 100 ) |Set SetItem ( 200 )
+          </accessedAccounts>
+          <accessedStorage>
+            _Gen38
+          </accessedStorage>
+          <createdAccounts>
+            _Gen39
+          </createdAccounts>
+        </substate>
+        <gasPrice>
+          _Gen43
+        </gasPrice>
+        <origin>
+          _Gen44
+        </origin>
+        <blockhashes>
+          _Gen45
+        </blockhashes>
+        <previousExcessBlobGas>
+          _Gen46
+        </previousExcessBlobGas>
+        <previousBlobGasUsed>
+          _Gen47
+        </previousBlobGasUsed>
+        <block>
+          <previousHash>
+            _Gen48
+          </previousHash>
+          <ommersHash>
+            _Gen49
+          </ommersHash>
+          <coinbase>
+            _Gen50
+          </coinbase>
+          <stateRoot>
+            _Gen51
+          </stateRoot>
+          <transactionsRoot>
+            _Gen52
+          </transactionsRoot>
+          <receiptsRoot>
+            _Gen53
+          </receiptsRoot>
+          <logsBloom>
+            _Gen54
+          </logsBloom>
+          <difficulty>
+            _Gen55
+          </difficulty>
+          <number>
+            _Gen56
+          </number>
+          <gasLimit>
+            _Gen57
+          </gasLimit>
+          <gasUsed>
+            _Gen58
+          </gasUsed>
+          <timestamp>
+            _Gen59
+          </timestamp>
+          <extraData>
+            _Gen60
+          </extraData>
+          <mixHash>
+            _Gen61
+          </mixHash>
+          <blockNonce>
+            _Gen62
+          </blockNonce>
+          <baseFee>
+            _Gen63
+          </baseFee>
+          <withdrawalsRoot>
+            _Gen64
+          </withdrawalsRoot>
+          <blobGasUsed>
+            _Gen65
+          </blobGasUsed>
+          <excessBlobGas>
+            _Gen66
+          </excessBlobGas>
+          <beaconRoot>
+            _Gen67
+          </beaconRoot>
+          <requestsRoot>
+            _Gen68
+          </requestsRoot>
+          <ommerBlockHeaders>
+            _Gen69
+          </ommerBlockHeaders>
+        </block>
+      </evm>
+      <network>
+        <chainID>
+          _Gen77
+        </chainID>
+        <accounts>
+          <account>
+            <acctID>
+              100
+            </acctID>
+            <balance>
+              0
+            </balance>
+            <code>
+              _Gen70
+            </code>
+            <storage>
+              .Map
+            </storage>
+            <origStorage>
+              _Gen71
+            </origStorage>
+            <transientStorage>
+              _Gen72
+            </transientStorage>
+            <nonce>
+              _Gen73
+            </nonce>
+          </account> <account>
+            <acctID>
+              200
+            </acctID>
+            <balance>
+              0
+            </balance>
+            <code>
+              CODE0:Bytes
+            </code>
+            <storage>
+              0 |-> 100
+            </storage>
+            <origStorage>
+              _Gen74
+            </origStorage>
+            <transientStorage>
+              _Gen75
+            </transientStorage>
+            <nonce>
+              _Gen76
+            </nonce>
+          </account> _DotVar7
+        </accounts>
+        <txOrder>
+          _Gen78
+        </txOrder>
+        <txPending>
+          _Gen79
+        </txPending>
+        <messages>
+          _Gen80
+        </messages>
+        <withdrawalsPending>
+          _Gen81
+        </withdrawalsPending>
+        <withdrawalsOrder>
+          _Gen82
+        </withdrawalsOrder>
+        <withdrawals>
+          _Gen83
+        </withdrawals>
+        <requests>
+          <depositRequests>
+            _Gen84
+          </depositRequests>
+          <withdrawalRequests>
+            _Gen85
+          </withdrawalRequests>
+          <consolidationRequests>
+            _Gen86
+          </consolidationRequests>
+        </requests>
+      </network>
+    </ethereum>
+  </kevm>
+#And
+  {
+    CODE
+  #Equals
+    CODE0:Bytes
+  }
+#And
+  {
+    false
+  #Equals
+    <acctID>
+      100
+    </acctID> in_keys ( _DotVar7 )
+  }
+#And
+  {
+    false
+  #Equals
+    <acctID>
+      200
+    </acctID> in_keys ( _DotVar7 )
+  }
+#And
+  {
+    true
+  #Equals
+    0 <=Int lengthBytes ( CODE0 )
+  }
+[Warning] Compiler: Variable 'CODE' defined but not used. Prefix variable name
+with underscore if this is intentional.
+	Source(/private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/callext-run/caller-2a-nosummary.k)
+	Location(42,14,42,18)
+	42 |	      <code> CODE </code>
+	   .	             ^~~~
+[Error] Prover: backend terminated because the configuration cannot be
+rewritten further. See output for more details.

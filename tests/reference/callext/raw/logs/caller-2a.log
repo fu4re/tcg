@@ -1,0 +1,7 @@
+#Top
+[Warning] Compiler: Variable 'CODE' defined but not used. Prefix variable name
+with underscore if this is intentional.
+	Source(/private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/callext-run/caller-2a.k)
+	Location(72,14,72,18)
+	72 |	      <code> CODE </code>
+	   .	             ^~~~

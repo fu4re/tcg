@@ -1,0 +1,26 @@
+{
+  "pre": "",
+  "post": "",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [],
+    "writes": []
+  },
+  "rely": "",
+  "guar": "BROKEN: claims +6 (106) instead of +5",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [],
+  "claims": [
+    {
+      "label": "s",
+      "file": "s6.k",
+      "role": "guar",
+      "root": false
+    }
+  ]
+}
