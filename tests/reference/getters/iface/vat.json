@@ -1,0 +1,14 @@
+{
+  "pre": "GemJoin ETH-A runtime (0x2F0b23f53734252Bda2277357e97e1517d6B042A, 3462 bytes), calldata = selector 0x36569e77 (vat()) only, callvalue 0, storage SYMBOLIC (STORAGE:Map, unconstrained), id/caller symbolic over the full 160-bit range, SHANGHAI schedule, useGas off",
+  "post": "halts EVMC_SUCCESS; <storage> is the SAME Map STORAGE both before and after (no SSTORE on this path); <callStack> is .List both before and after (returned to the same top-level frame depth); <output> is left ABSTRACTED (?OUT:Bytes, unconstrained) -- this claim does NOT assert vat() returns the slot-1 value, only that the call is side-effect-free. That correctness half needs the byte/memory simplification lemmas the current kompiled EDSL build lacks (Finding 0003; tracked separately as Track P0)",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {"reads": ["storage[1]"], "writes": []},
+  "rely": "",
+  "guar": "vat() is side-effect-free: succeeds, touches no storage, and (per bytecode inspection: pc 0x00ae-0x00b6 trampoline + pc 0x0322-0x0348 body, both straight-line, zero CALL/CALLCODE/DELEGATECALL/STATICCALL/CREATE/CREATE2 opcodes on the reachable path) makes no external call",
+  "requires": ["edsl.md"],
+  "imports": ["EDSL"],
+  "claims": [
+    {"label": "vat", "file": "vat.k", "role": "loop", "root": true},
+    {"label": "vat_g", "file": "vat_g.k", "role": "guar", "root": false}
+  ]
+}
