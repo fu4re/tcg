@@ -1,0 +1,22 @@
+Bytecode-identity anchor for MCD_VAT 0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B (chainid 1)
+=========================================================================================
+
+Address source: chainlog2.json "MCD_VAT" (MakerDAO on-chain changelog).
+
+Method 1 -- on-chain EXTCODEHASH, three independent public RPC endpoints:
+  cast codehash 0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B --rpc-url https://ethereum-rpc.publicnode.com
+    -> 0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59
+  cast codehash 0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B --rpc-url https://1rpc.io/eth
+    -> 0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59
+  cast codehash 0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B --rpc-url https://eth.drpc.org
+    -> 0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59
+
+Method 2 -- independent keccak256 of the fetched runtime bytecode (bytecode/runtime.hex):
+  cast keccak "$(cat runtime.hex)"
+    -> 0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59
+
+RESULT: MATCH across all three RPCs and the independent keccak.
+  0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59
+
+runtime.hex is exactly the bytecode live at MCD_VAT on mainnet. Runtime length: 13493 bytes.
+The proof <program> cell embeds this exact hex, so the summary is program-bound to the real Vat.
