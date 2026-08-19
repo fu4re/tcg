@@ -3,10 +3,15 @@
 Deliverable D of the callee-proof problem (Finding 0005): the Vat.slip value-conservation
 summary that GemJoin.join/exit will later consume. Callee-side only; NO join/exit composition.
 
-Judge = kprove on the KEVM Haskell backend, lemma-equipped def at
-`~/toolchains/kevm-1.0.678-lemmas`, driven through `tcg prove` (tcg.commands.prove.classify:
-exit 0 => Accept; residual => Refute; else Unknown(a/b/c)). Every verdict below is an actual
-kprove run; the log path is given.
+Judge = kprove on the KEVM Haskell backend. The bool2Word wall (§5) is fixed on a NEW
+lemma-equipped def `~/toolchains/kevm-1.0.678-lemmas2` (base + ghost.diff + the EXTENDED
+`theory/patches/lemmas.diff` that vendors a fifth [simplification]-only submodule
+BOOL2WORD-SIMPLIFICATION; the older `~/toolchains/kevm-1.0.678-lemmas` is kept intact for
+existing bundles). Verdicts classified by `tcg.verdict.classify` (exit 0 + `#Top` => Accept;
+residual => Refute; else Unknown(a/b/c)) — the same judge `tcg prove` uses. Slip specs run
+with `requires "edsl.md"` / `imports EDSL` and NO `b2w.k` (the bool2Word rules now live in the
+def; importing b2w.k too would duplicate the [b2w-eq-zero]/[b2w-eq-one] labels). Every verdict
+below is an actual kprove run; the command is in each log header, the log path is given.
 
 ## 1. Subject bytecode — program-bound to the real Vat (SOUND ANCHOR)
 - MCD_VAT = 0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B (chainlog2.json).
@@ -49,37 +54,81 @@ range uint256.
 - WRONG-DELTA (`slip_wrong.k`): identical claim but post delta `+ WAD + 1`. MUST NOT Accept.
 - VACUITY (`slip_vac.k`): identical claim but `ensures false`. MUST NOT Accept.
 
-## 5. WALL (the precise next-cycle lemma target) — signed-add bool2Word
-The frozen `lemmas-driver` (theory/patches/lemmas.diff) imports only the four PURE submodules
-BITWISE / BYTES / EVM-INT / INT-SIMPLIFICATION. It OMITS module `LEMMAS-WITHOUT-SLOT-UPDATES`
-(evm-semantics lemmas/lemmas.k), whose `bool2Word` reasoning rules — notably
-`[b2w-eq-zero]: bool2Word(B) ==Int 0 => notBool B` (lemmas.k:71) — are themselves `[simplification]`
-and thus WITHIN the driver's own stated "[simplification]-only" intent. The four submodules do
-not transitively import that module, so the rules are absent from the compiled judge.
+## 5. WALL — bool2Word REVERT wall FIXED; residual blocker is the §9 impl-check ceiling
+### 5a. The bool2Word wall is REMOVED (this cycle's fix, verified)
+Signed `_add`'s `require(y >= 0 || z <= x)` compiles to a revert branch guarded by
+`0 #Equals bool2Word(bool2Word(WAD <Int 0) ==Int 0)`. On the OLD `-lemmas` def that nested
+bool2Word never reduced, leaving an unprunable `EVMC_REVERT` leaf → Refute (residual, not a
+defect; `logs/slip_d-refute-frozen.log`). The new `-lemmas2` def carries the bool2Word
+`[simplification]` rules (`lemmas/bool2word-simplification.k`, verbatim from
+lemmas.k:58-111, incl. `[b2w-eq-zero]: bool2Word(B) ==Int 0 => notBool B` at lemmas.k:71).
+Effect, verified in EVERY new-def slip log: `bool2Word` count is 0 and the only reached leaf is
+`EVMC_SUCCESS` — the infeasible revert branch is pruned and the success path reaches the target.
 
-Consequence: signed `_add`'s `require(y >= 0 || z <= x)` compiles to a revert branch guarded by
-`0 #Equals bool2Word(bool2Word(WAD <Int 0) ==Int 0)`. Under `0 <=Int WAD` this branch is
-INFEASIBLE, but without `[b2w-eq-zero]` the nested bool2Word never reduces, so kprove is left with
-an unprunable `EVMC_REVERT` leaf and returns Refute (residual, not a real defect).
+### 5b. NEW residual blocker (a DIFFERENT term — diagnosed, not forced)
+slip_d now reaches the EXACT target config over the real Vat bytecode: `#halt`, `EVMC_SUCCESS`,
+and `<storage> = STORAGE [ GEMSLOT <- #lookup(STORAGE, GEMSLOT) +Int WAD ]` (identical to the
+destination — see `logs/slip_d-lemmas2.log:227`). kore-exec reports the configuration term
+UNIFIES with the destination, but the implication check between the branch conditions is left
+undischarged on the signed-`_add` sign split (`WAD <=Int 0`; and on the strictly-positive
+variant `0 <Int WAD`). Verdict: Unknown(c).
 
-EXACT opaque term: `bool2Word ( bool2Word ( WAD <Int 0 ) ==Int 0 )`  (residual log, pc 13143).
-FIX (next cycle): add the bool2Word `[simplification]` rules of `LEMMAS-WITHOUT-SLOT-UPDATES` to
-the lemmas-driver (matches its stated intent). `specs/b2w.k` supplies the two rules verbatim for
-the with-lemma variant below.
+This is the documented substrate limit (tcg/commands/prove.py §9 / docs/substrate.md §9): a
+reached-but-under-closed TRUE target is indistinguishable, in kore-exec's own output, from a
+false one — both surface as the `WarnStuckClaimState` "unifies ... implication check has failed"
+variant → Unknown(c), never Refute. Lifting it needs kore-rpc `implies`/`get-model` or a pyk
+APRProof, explicitly out of scope for this tool.
+
+Isolation (it is NOT the lemma set and NOT the claim shape):
+- NOT the lemmas: the config matches the destination exactly; `bool2Word` is fully gone.
+- NOT the claim shape: three structures all Unknown(c) —
+  `slip_d.k` (cell-rewrite, `0<=WAD`), `slip_dpos.k` (`0<WAD`, sign branch collapsed),
+  `slip_de.k` (getters-style `<storage> STORAGE => ?FINAL:Map` + `ensures ?FINAL ==K ...`).
+- Contrast: the getters roots (Findings 0003a/0003b) Accept to `#Top` because their path has NO
+  signed arithmetic / branch split and leaves storage unchanged. slip's signed-add sign split is
+  the structural difference kore-exec cannot close here.
+
+Next lever (out of scope; substrate-fitting): kore-rpc/APRProof replay per §9, or concretize the
+account/sign cells to collapse the branch (also visible: an `ACCTID in_keys(...)` set-membership
+residual). Not attempted — a conservative-but-incomplete result beats over-fitting the claim.
 
 ## 6. VERDICTS (actual kprove runs)
-| loop        | spec         | judge                        | verdict | log |
-|-------------|--------------|------------------------------|---------|-----|
-| slip_d      | slip_d.k     | frozen def (driver as-is)    | Refute (bool2Word wall §5) | logs/slip_d-refute-frozen.log |
-| slip_d_b2w  | slip_d.k     | def + b2w.k (2 canonical lemmas) | PENDING | logs/… |
-| slip_wrong  | slip_wrong.k | def + b2w.k                  | PENDING (must NOT Accept) | |
-| slip_vac    | slip_vac.k   | def + b2w.k                  | PENDING (must NOT Accept) | |
+Judge for the new rows: kprove on `~/toolchains/kevm-1.0.678-lemmas2/haskell`,
+`requires "edsl.md"` / `imports EDSL`, classified by `tcg.verdict.classify`. Command in each
+log header.
+
+| loop        | spec           | judge                              | verdict | log |
+|-------------|----------------|------------------------------------|---------|-----|
+| slip_d      | slip_d.k       | OLD `-lemmas` (no bool2Word)       | Refute — bool2Word REVERT wall §5a | logs/slip_d-refute-frozen.log |
+| slip_d      | slip_d.k       | NEW `-lemmas2` (+ BOOL2WORD-SIMPL) | **Unknown(c)** — wall GONE (bool2Word=0, only EVMC_SUCCESS), reaches EXACT +WAD target; §9 impl-check ceiling on sign split | logs/slip_d-lemmas2.log |
+| slip_dpos   | slip_dpos.k (`0<WAD`) | NEW `-lemmas2`              | Unknown(c) — `WAD<=0` branch collapsed, single `0<WAD` branch still §9 | logs/slip_dpos-lemmas2.log |
+| slip_de     | slip_de.k (existential `?FINAL`) | NEW `-lemmas2`  | Unknown(c) — getters-shape restructure, still §9 | logs/slip_de-lemmas2.log |
+| slip_wrong  | slip_wrong.k (`+WAD+1`) | NEW `-lemmas2`            | Unknown(c) — **NOT Accept** ✓ (storage unify ⇒ false `WAD==WAD+1`) | logs/slip_wrong-lemmas2.log |
+| slip_vac    | slip_vac.k (`ensures false`) | NEW `-lemmas2`      | Unknown(c) — **NOT Accept** ✓ (41s, `ensures false`) | logs/slip_vac-lemmas2.log |
+
+HONEST BOTTOM LINE: slip_d does **NOT** reach Accept on this substrate. The bool2Word extension
+delivered its intended effect (Refute → reaches the exact +WAD target; the wall term is gone),
+but slip_d halts at the pre-existing §9 kore-exec implication-check ceiling. Because slip_d,
+slip_wrong, and slip_vac ALL surface as Unknown(c), the discriminators refuse (good) but give NO
+positive contrast — the slip value-conservation summary is **not positively discharged here**.
+This is the task's anticipated "walls on a different term" outcome, reported as data (§5b).
 
 ## 7. Discharged vs assumed
-- Discharged (over real Vat bytecode): the +wad delta at the gem slot, success, auth-gating,
-  callvalue-0 — for the concrete-pinned scope, with the two bool2Word lemmas.
+- Discharged this cycle (NOT a slip Accept): (a) the lemma-def extension is CONSERVATIVE and
+  CONSISTENT — consistency gate 5/5 on `-lemmas2` (the 4 prior false identities + the new
+  `PROBE-B2W-SPEC` bool2Word wrong-direction control all refuse), and the full prior-proof
+  regression is UNCHANGED (getters-full 6/6 Accept + self-verify; build-reference 3/3 +
+  drain-Refute; conformance 6/6) — see `logs/regression/SUMMARY.txt`; (b) the bool2Word REVERT
+  wall is removed — slip's success path now reaches the EXACT +WAD storage-delta config,
+  EVMC_SUCCESS, over the real Vat bytecode (keccak(runtime)==0x808b98f6…1a59).
+- NOT discharged: slip_d → Accept. Blocked at the §9 kore-exec implication-check ceiling on the
+  signed-add sign split (§5b), verified across three claim structures. Unknown(c), not Accept.
 - Assumed / ledgered: (a) storage-layout facts (gem = slot 4, wards = slot 0; keccak slots
-  re-checkable via slots.sh); (b) the two bool2Word `[simplification]` lemmas in b2w.k (verbatim
-  upstream KEVM, sound, but an addition beyond the frozen driver — trusted-base delta named);
-  (c) universal-usr / negative-wad are OUT of scope (walls §5 and exit-leg extension).
+  re-checkable via `slots.sh`); (b) the vendored bool2Word `[simplification]` lemmas — now in the
+  DEF (`lemmas/bool2word-simplification.k`, verbatim upstream lemmas.k:58-111, provenance
+  per-rule), NOT a spec-side `b2w.k`; a named trusted-base delta bounded by the 5/5 gate;
+  (c) universal-usr / negative-wad exit-leg remain OUT of scope.
 - Reentrancy frame: slip makes NO external call (one SSTORE) — the frame holds trivially.
+- Note: `specs/b2w.k` is now SUPERSEDED (its two rules are a subset of the def-side submodule);
+  kept only as the interim record. `specs/slip_dpos.k` and `specs/slip_de.k` are the §5b
+  diagnostic variants (not summaries).
