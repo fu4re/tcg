@@ -1,15 +1,15 @@
-kore-exec: [204301537] Warning (WarnStuckClaimState):
-    The configuration's term doesn't unify with the destination's term and the configuration cannot be rewritten further. Location: /Users/akkedeline/sheaf/tcg/.claude/worktrees/agent-a38b801b0f7796964/callee-proofs/weth/specs/transferFrom_d.k:7:3-54:31
+kore-exec: [199798678] Warning (WarnStuckClaimState):
+    The configuration's term doesn't unify with the destination's term and the configuration cannot be rewritten further. Location: /Users/akkedeline/sheaf/tcg/.claude/worktrees/agent-a38b801b0f7796964/callee-proofs/weth/specs/transferFrom_d.k:7:3-58:31
 Context:
     (InfoReachability) while checking the implication
-kore-exec: [204314199] Warning (WarnUnexploredBranches):
+kore-exec: [199811554] Warning (WarnUnexploredBranches):
     1 branches were still unexplored when the action failed.
   <kevm>
     <k>
       #halt ~> .K
     </k>
     <exit-code>
-      _Gen89
+      _Gen93
     </exit-code>
     <mode>
       NORMAL
@@ -21,13 +21,13 @@ kore-exec: [204314199] Warning (WarnUnexploredBranches):
       false
     </useGas>
     <callCounter>
-      _Gen90
+      _Gen94
     </callCounter>
     <inFunc>
-      _Gen91
+      _Gen95
     </inFunc>
     <monitoredAddr>
-      _Gen92
+      _Gen96
     </monitoredAddr>
     <ethereum>
       <evm>
@@ -41,10 +41,10 @@ kore-exec: [204314199] Warning (WarnUnexploredBranches):
           .List
         </callStack>
         <interimStates>
-          _Gen38
+          _Gen48
         </interimStates>
         <touchedAccounts>
-          _Gen39
+          _Gen49
         </touchedAccounts>
         <callState>
           <program>
@@ -75,134 +75,134 @@ kore-exec: [204314199] Warning (WarnUnexploredBranches):
             1755
           </pc>
           <gas>
-            _Gen34
+            _Gen39
           </gas>
           <memoryUsed>
             0
           </memoryUsed>
           <callGas>
-            _Gen35
+            _Gen40
           </callGas>
           <static>
             false
           </static>
           <callDepth>
-            _Gen36
+            _Gen41
           </callDepth>
           <codeAddr>
-            _Gen37
+            _Gen42
           </codeAddr>
         </callState>
         <versionedHashes>
-          _Gen40
+          _Gen50
         </versionedHashes>
         <substate>
           <selfDestruct>
-            _Gen41
+            _Gen43
           </selfDestruct>
           <log>
-            _Gen42
+            _Gen7
           </log>
           <refund>
-            _Gen43
+            _Gen44
           </refund>
           <accessedAccounts>
-            _Gen44
+            _Gen45
           </accessedAccounts>
           <accessedStorage>
-            _Gen45
+            _Gen46
           </accessedStorage>
           <createdAccounts>
-            _Gen46
+            _Gen47
           </createdAccounts>
         </substate>
         <gasPrice>
-          _Gen47
+          _Gen51
         </gasPrice>
         <origin>
-          _Gen48
+          _Gen52
         </origin>
         <blockhashes>
-          _Gen49
+          _Gen53
         </blockhashes>
         <previousExcessBlobGas>
-          _Gen50
+          _Gen54
         </previousExcessBlobGas>
         <previousBlobGasUsed>
-          _Gen51
+          _Gen55
         </previousBlobGasUsed>
         <block>
           <previousHash>
-            _Gen52
+            _Gen56
           </previousHash>
           <ommersHash>
-            _Gen53
+            _Gen57
           </ommersHash>
           <coinbase>
-            _Gen54
+            _Gen58
           </coinbase>
           <stateRoot>
-            _Gen55
+            _Gen59
           </stateRoot>
           <transactionsRoot>
-            _Gen56
+            _Gen60
           </transactionsRoot>
           <receiptsRoot>
-            _Gen57
+            _Gen61
           </receiptsRoot>
           <logsBloom>
-            _Gen58
+            _Gen62
           </logsBloom>
           <difficulty>
-            _Gen59
+            _Gen63
           </difficulty>
           <number>
-            _Gen60
+            _Gen64
           </number>
           <gasLimit>
-            _Gen61
+            _Gen65
           </gasLimit>
           <gasUsed>
-            _Gen62
+            _Gen66
           </gasUsed>
           <timestamp>
-            _Gen63
+            _Gen67
           </timestamp>
           <extraData>
-            _Gen64
+            _Gen68
           </extraData>
           <mixHash>
-            _Gen65
+            _Gen69
           </mixHash>
           <blockNonce>
-            _Gen66
+            _Gen70
           </blockNonce>
           <baseFee>
-            _Gen67
+            _Gen71
           </baseFee>
           <withdrawalsRoot>
-            _Gen68
+            _Gen72
           </withdrawalsRoot>
           <blobGasUsed>
-            _Gen69
+            _Gen73
           </blobGasUsed>
           <excessBlobGas>
-            _Gen70
+            _Gen74
           </excessBlobGas>
           <beaconRoot>
-            _Gen71
+            _Gen75
           </beaconRoot>
           <requestsRoot>
-            _Gen72
+            _Gen76
           </requestsRoot>
           <ommerBlockHeaders>
-            _Gen73
+            _Gen77
           </ommerBlockHeaders>
         </block>
       </evm>
       <network>
         <chainID>
-          _Gen79
+          _Gen83
         </chainID>
         <accounts>
           <account>
@@ -210,52 +210,52 @@ kore-exec: [204314199] Warning (WarnUnexploredBranches):
               ACCTID
             </acctID>
             <balance>
-              _Gen74
+              _Gen78
             </balance>
             <code>
-              _Gen75
+              _Gen79
             </code>
             <storage>
               STORAGE
             </storage>
             <origStorage>
-              _Gen76
+              _Gen80
             </origStorage>
             <transientStorage>
-              _Gen77
+              _Gen81
             </transientStorage>
             <nonce>
-              _Gen78
+              _Gen82
             </nonce>
-          </account> _DotVar6
+          </account> _DotVar7
         </accounts>
         <txOrder>
-          _Gen80
+          _Gen84
         </txOrder>
         <txPending>
-          _Gen81
+          _Gen85
         </txPending>
         <messages>
-          _Gen82
+          _Gen86
         </messages>
         <withdrawalsPending>
-          _Gen83
+          _Gen87
         </withdrawalsPending>
         <withdrawalsOrder>
-          _Gen84
+          _Gen88
         </withdrawalsOrder>
         <withdrawals>
-          _Gen85
+          _Gen89
         </withdrawals>
         <requests>
           <depositRequests>
-            _Gen86
+            _Gen90
           </depositRequests>
           <withdrawalRequests>
-            _Gen87
+            _Gen91
           </withdrawalRequests>
           <consolidationRequests>
-            _Gen88
+            _Gen92
           </consolidationRequests>
         </requests>
       </network>
@@ -273,7 +273,7 @@ kore-exec: [204314199] Warning (WarnUnexploredBranches):
   #Equals
     <acctID>
       ACCTID
-    </acctID> in_keys ( _DotVar6 )
+    </acctID> in_keys ( _DotVar7 )
   }
 #And
   {
@@ -304,6 +304,12 @@ kore-exec: [204314199] Warning (WarnUnexploredBranches):
     true
   #Equals
     0 <=Int WAD
+  }
+#And
+  {
+    true
+  #Equals
+    #lookup ( STORAGE , 41431057164256822248801209360271170196788370676688945170760125324470047752535 ) -Int WAD <Int pow256
   }
 #And
   {
