@@ -67,3 +67,21 @@ module PROBE-BITWISE-SPEC
       requires #rangeUInt(256, X)
      [label(band-idem-off-by-one), all-path]
 endmodule
+
+// P5 — bool2word-simplification (b2w-eq-zero DIRECTION). This is the probe that
+//      guards the exact rule the Vat.slip wall depends on:
+//        [b2w-eq-zero]: bool2Word(B) ==Int 0 => notBool B
+//      The correct reduction of `bool2Word(B) ==Int 0` is `notBool B`, so the
+//      LHS below reduces to `bool2Word(notBool B)`. The FALSE target is the
+//      WRONG-DIRECTION value `bool2Word(B)` — what a rule reducing the guard to
+//      `B` (instead of `notBool B`) would yield. bool2Word(notBool B) and
+//      bool2Word(B) are 1 and 0 in some order for every B, so their equality is
+//      false for all B; a correct b2w-eq-zero can never establish it. If this
+//      PROVES, the vendored bool2Word rule has the wrong direction (a false-green
+//      vector for the signed-add revert branch). Must REFUSE.
+module PROBE-B2W-SPEC
+    imports EDSL
+    claim [b2w-eq-zero-wrong-direction]:
+        <k> bool2Word ( bool2Word ( B ) ==Int 0 ) => bool2Word ( B ) </k>
+     [label(b2w-eq-zero-wrong-direction), all-path]
+endmodule

@@ -1,5 +1,5 @@
-kore-exec: [4083964] Warning (WarnStuckClaimState):
-    The configuration's term unifies with the destination's term, but the implication check between the conditions has failed. Location: /Users/akkedeline/sheaf/tcg/.claude/worktrees/agent-a991b0005ba7c777f/tests/control/lemmas/false-identities.k:66:9-67:34
+kore-exec: [3565740] Warning (WarnStuckClaimState):
+    The configuration's term unifies with the destination's term, but the implication check between the conditions has failed. Location: /Users/akkedeline/sheaf/tcg/.claude/worktrees/p1-b-resume/tests/control/lemmas/false-identities.k:66:9-67:34
 Context:
     (InfoReachability) while checking the implication
   #Not ( {
@@ -257,7 +257,7 @@ Context:
   }
 [Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name
 with underscore if this is intentional.
-	Source(/Users/akkedeline/toolchains/kevm-1.0.678-lemmas/evm-semantics-source/lemmas/bytes-simplification.k)
+	Source(/Users/akkedeline/toolchains/kevm-1.0.678-lemmas2/evm-semantics-source/lemmas/bytes-simplification.k)
 	Location(301,25,301,27)
 	301 |	      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B1 [ I ]
 	    .	                        ^~

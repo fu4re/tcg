@@ -48,6 +48,7 @@ MODULES=(
   "PROBE-RANGE-SPEC:bytes-simplification: decode 2nd arg (WAD), target 1st arg (USR)"
   "PROBE-INT-SPEC:int-simplification: (A+B)-B => A, target A+1"
   "PROBE-BITWISE-SPEC:bitwise-simplification: X&X => X, target X+1"
+  "PROBE-B2W-SPEC:bool2word-simplification: b2w-eq-zero direction: bool2Word(bool2Word(B)==Int 0) => WRONG bool2Word(B) (correct: bool2Word(notBool B))"
 )
 
 echo "== lemma consistency probe =="
