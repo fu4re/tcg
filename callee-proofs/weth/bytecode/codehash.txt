@@ -1,0 +1,45 @@
+Bytecode-identity anchor for WETH9  0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 (chainid 1)
+=========================================================================================
+
+Canonical mainnet Wrapped Ether (WETH9), the ETH-A gem token that GemJoin.join/exit move.
+
+Method 1 -- on-chain EXTCODEHASH, three independent public RPC endpoints:
+  cast codehash 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 --rpc-url https://ethereum-rpc.publicnode.com
+    -> 0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23
+  cast codehash 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 --rpc-url https://1rpc.io/eth
+    -> 0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23
+  cast codehash 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 --rpc-url https://eth.drpc.org
+    -> 0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23
+
+Method 2 -- independent keccak256 of the fetched runtime bytecode (bytecode/runtime.hex):
+  cast keccak "$(cat runtime.hex)"
+    -> 0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23
+
+Cross-check -- runtime.hex is byte-identical across all three RPC fetches (diff -q, IDENTICAL).
+
+RESULT: MATCH across all three RPCs AND the independent keccak.
+  0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23
+
+runtime.hex is exactly the bytecode live at WETH9 on mainnet. Runtime length: 3124 bytes
+(6248 hex chars + "0x"). The proof <program> cell embeds this exact hex, so both callee
+summaries are program-bound to the real WETH9. NO fabrication, NO approximation.
+
+Storage layout (verified):
+  balanceOf : mapping(address=>uint)                 -> slot 3   (EMPIRICALLY CONFIRMED, see below)
+  allowance : mapping(address=>mapping(address=>uint)) -> slot 4 (standard WETH9 layout;
+              implicitly re-checked by the infinite-allowance precondition gating the
+              correct branch in transferFrom_d -- a wrong slot would not prune that branch)
+
+Empirical slot-3 confirmation (balanceOf), holder = ETH-A GemJoin 0x2F0b23f5...042A:
+  getter  balanceOf(0x2F0b..042A)           = 269609485538954355051071
+  storage @ keccak(0x2F0b..042A padded . 3) = 269609485538954355051071   (EXACT MATCH)
+  => balanceOf lives at slot 3 on the real deployed WETH9.
+
+Selectors (cast sig):
+  transfer(address,uint256)                 = 0xa9059cbb   (dispatch -> 0x0370)
+  transferFrom(address,address,uint256)     = 0x23b872dd   (dispatch -> 0x01ca)
+  balanceOf(address)                        = 0x70a08231
+  allowance(address,address)                = 0xdd62ed3e
+
+Non-payable guard confirmed: transferFrom entry (0x01cb) is CALLVALUE ISZERO ... REVERT;
+the summaries pin <callValue> 0 so this guard is passed (not the property proved).
