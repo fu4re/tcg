@@ -28,6 +28,10 @@ module WETH-TRANSFER-D-SPEC
           <static> false </static>
           ...
         </callState>
+        <substate>
+          <log> _ => ?_ </log>
+          ...
+        </substate>
         ...
       </evm>
       <network>
@@ -48,7 +52,7 @@ module WETH-TRANSFER-D-SPEC
   requires 0 <=Int ACCTID andBool ACCTID <Int (2 ^Int 160)
    andBool 0 <=Int WAD andBool WAD <Int (2 ^Int 256)
    andBool #rangeUInt(256, #lookup(STORAGE, 90993025204828658263516517822964805591467048586811768672174480436738708449873))
-   andBool WAD <=Int #lookup(STORAGE, 90993025204828658263516517822964805591467048586811768672174480436738708449873)
+   andBool #rangeUInt(256, #lookup(STORAGE, 90993025204828658263516517822964805591467048586811768672174480436738708449873) -Int WAD)
    andBool #rangeUInt(256, #lookup(STORAGE, 41431057164256822248801209360271170196788370676688945170760125324470047752535) +Int WAD)
   ensures ?SC ==K EVMC_SUCCESS
   [label(transfer_d), all-path]
