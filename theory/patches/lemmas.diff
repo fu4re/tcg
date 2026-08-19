@@ -1,26 +1,36 @@
 --- /dev/null
 +++ b/lemmas-driver.k
-@@ -0,0 +1,37 @@
+@@ -0,0 +1,49 @@
 +// lemmas-driver.k — verification driver that equips the KEVM Haskell backend
-+// with KEVM's byte / int / bitwise SIMPLIFICATION LEMMAS.
++// with KEVM's byte / int / bitwise / bool2Word SIMPLIFICATION LEMMAS.
 +//
 +// Vendored, pinned addition (theory/patches/lemmas.diff), kompiled as the main
-+// module so symbolic byte/word algebra (ABI-decode, memory returns, masks)
-+// reduces during proof search — removing the Finding 0003 wall.
++// module so symbolic byte/word algebra (ABI-decode, memory returns, masks) and
++// bool2Word guards reduce during proof search — removing the Finding 0003 wall
++// (byte/word algebra) and the Vat.slip signed-add bool2Word wall.
 +//
 +// It imports EDSL (the KEVM verification substrate, which transitively pulls in
 +// the ghost-instrumented evm.md when theory/patches/ghost.diff is also applied)
-+// and exactly the four PURE-simplification submodules. Importing the submodules
-+// directly — rather than the aggregate `LEMMAS` module — deliberately EXCLUDES
-+// the one non-simplification rule in lemmas.k (`#addrFromPrivateKey`, a concrete
-+// rewrite) and everything that is not [simplification]. Every rule reachable
-+// from here carries the [simplification] attribute, so nothing added here is a
++// and exactly the five PURE-simplification submodules. Importing the submodules
++// directly — rather than the aggregate `LEMMAS` / `LEMMAS-WITHOUT-SLOT-UPDATES`
++// modules — deliberately EXCLUDES the one non-simplification rule in lemmas.k
++// (`#addrFromPrivateKey`, a `[priority(40), concrete]` rewrite, lemmas.k:137)
++// and everything else that is not [simplification]. Every rule reachable from
++// here carries the [simplification] attribute, so nothing added here is a
 +// semantic rewrite step: the lemmas rewrite only the constraint / normal-form
 +// representation the backend already reasons about, never which stock EVM rule
 +// applies. This bounds the trusted-base growth (see scripts/lemma-consistency.sh
 +// and Finding 0004).
 +//
-+// Upstream intent: fold these four submodules into a KEVM-provided verification
++// The fifth submodule, BOOL2WORD-SIMPLIFICATION, carries the "bool2Word
++// reasoning" rules of module LEMMAS-WITHOUT-SLOT-UPDATES, extracted VERBATIM
++// (lemmas/bool2word-simplification.k records the provenance). It is a separate
++// extracted file for exactly the reason the first four are imported piecewise:
++// LEMMAS-WITHOUT-SLOT-UPDATES is not [simplification]-only (it holds the
++// #addrFromPrivateKey concrete rewrite), so it cannot be imported wholesale
++// without re-admitting that non-simplification rule.
++//
++// Upstream intent: fold these submodules into a KEVM-provided verification
 +// module so `imports BYTES-SIMPLIFICATION` works from a spec without the K
 +// `#let`/`#in` productions being absent from EDSL's requires-closure, then pin
 +// by KEVM version instead of vendoring this driver.
@@ -30,6 +40,7 @@
 +requires "lemmas/bytes-simplification.k"
 +requires "lemmas/evm-int-simplification.k"
 +requires "lemmas/int-simplification.k"
++requires "lemmas/bool2word-simplification.k"
 +
 +module LEMMAS-DRIVER [symbolic]
 +    imports EDSL
@@ -37,4 +48,92 @@
 +    imports BYTES-SIMPLIFICATION
 +    imports EVM-INT-SIMPLIFICATION
 +    imports INT-SIMPLIFICATION
++    imports BOOL2WORD-SIMPLIFICATION
++endmodule
+--- /dev/null
++++ b/lemmas/bool2word-simplification.k
+@@ -0,0 +1,84 @@
++// bool2word-simplification.k -- the bool2Word [simplification] lemmas of KEVM,
++// extracted VERBATIM from evm-semantics lemmas/lemmas.k so the lemmas-driver
++// can carry them WITHOUT importing module LEMMAS-WITHOUT-SLOT-UPDATES wholesale.
++//
++// Why extract, not import: LEMMAS-WITHOUT-SLOT-UPDATES is NOT
++// [simplification]-only. It carries the concrete rewrite
++//   rule #addrFromPrivateKey("0x...0001") => 721457... [priority(40), concrete]
++// (lemmas.k:137) -- the exact non-simplification rule the P0 driver split was
++// created to exclude (Finding 0004). Importing that module would re-admit a
++// semantic rewrite step into the trusted base. This submodule instead lifts
++// ONLY the "bool2Word reasoning" section (all of it, unchanged), matching the
++// four pure-simplification submodules the driver already imports; every rule
++// here carries [simplification], so nothing added is a semantic rewrite step.
++//
++// PROVENANCE (verbatim): every rule below is copied character-for-character
++// from evm-semantics lemmas/lemmas.k, module LEMMAS-WITHOUT-SLOT-UPDATES, the
++// "bool2Word reasoning" section, lemmas.k lines 58-111. The upstream rule
++// labels are preserved so the origin of each is auditable.
++//
++// Imports mirror bitwise-simplification.k (which itself references bool2Word):
++// bool2Word is defined in evm-types.md (EVM-TYPES); #rangeBool in word.md
++// (WORD); the Int / bitwise operators in INT-SYMBOLIC.
++requires "word.md"
++
++module BOOL2WORD-SIMPLIFICATION [symbolic]
++    imports EVM-TYPES
++    imports INT-SYMBOLIC
++    imports WORD
++
++  // ########################
++  // bool2Word reasoning
++  // ########################
++
++    // Reduce when the path condition only implies the argument.
++    rule [b2w-true]:  bool2Word(B) => 1 requires         B [simplification]
++    rule [b2w-false]: bool2Word(B) => 0 requires notBool B [simplification]
++
++    // Range
++    rule [b2w-lb]: 0 <=Int bool2Word(_)         => true [simplification, smt-lemma]
++    rule [b2w-ub]:         bool2Word(_) <=Int 1 => true [simplification, smt-lemma]
++
++    // Relationship with equality
++    rule [b2w-eq-zero]: bool2Word(B) ==Int 0 => notBool B [simplification(30), comm]
++    rule [b2w-eq-one]:  bool2Word(B) ==Int 1 => B         [simplification(30), comm]
++
++    // Relationship with other comparators
++    rule [b2w-lt-one]:  bool2Word(B) <Int            1 => notBool B           [simplification(30)]
++    rule [b2w-gt-zero]:            0 <Int bool2Word(B) => B                   [simplification(30)]
++
++    rule [b2w-lt-true]:  bool2Word(_) <Int X:Int => true  requires 1  <Int X [simplification(30), concrete(X)]
++    rule [b2w-gt-false]: X:Int <Int bool2Word(_) => false requires 1 <=Int X [simplification(30), concrete(X)]
++
++    rule [b2w-lt-b2w]:  bool2Word(A)  <Int bool2Word(B) => notBool A andBool         B [simplification(30)]
++    rule [b2w-le-b2w]:  bool2Word(A) <=Int bool2Word(B) =>         A  orBool notBool B [simplification(30)]
++
++    // Relationship with `&Int`
++    rule [b2w-band-one]:           1  &Int bool2Word(B) => bool2Word(B)           [simplification]
++    rule [b2w-band]:     bool2Word(A) &Int bool2Word(B) => bool2Word(A andBool B) [simplification]
++
++    // Relationship with `|Int`
++    rule [b2w-bor-one]:           1  |Int bool2Word(_) => 1                     [simplification]
++    rule [b2w-bor]:     bool2Word(A) |Int bool2Word(B) => bool2Word(A orBool B) [simplification]
++
++    // Relationship with `xorInt`
++    rule [b2w-bxor-zero]:           0  xorInt bool2Word(Y) => bool2Word(Y)                                                     [simplification, comm]
++    rule [b2w-bxor-one]:            1  xorInt bool2Word(Y) => bool2Word(notBool Y)                                             [simplification, comm]
++    rule [b2w-bxor]:      bool2Word(X) xorInt bool2Word(Y) => bool2Word ( (X andBool notBool Y) orBool (notBool X andBool Y) ) [simplification]
++
++    // Relationship with `#rangeBool`
++    rule [b2w-rangeBool-eq-not-zero-l]: bool2Word (notBool (X ==Int 0)) => X requires #rangeBool(X) [simplification]
++    rule [b2w-rangeBool-eq-not-zero-r]: bool2Word (notBool (0 ==Int X)) => X requires #rangeBool(X) [simplification]
++
++    // As part of multiplication
++    rule [b2w-mul-lt-l]: bool2Word(B) *Int C  <Int A => (B andBool C  <Int A) orBool (notBool B andBool 0  <Int A) [simplification]
++    rule [b2w-mul-le-l]: bool2Word(B) *Int C <=Int A => (B andBool C <=Int A) orBool (notBool B andBool 0 <=Int A) [simplification]
++    rule [b2w-mul-eq-l]: bool2Word(B) *Int C ==Int A => (B andBool C ==Int A) orBool (notBool B andBool A ==Int 0) [simplification, comm]
++
++    rule [b2w-mul-lt-r]: C *Int bool2Word(B)  <Int A => (B andBool C  <Int A) orBool (notBool B andBool 0  <Int A) [simplification]
++    rule [b2w-mul-le-r]: C *Int bool2Word(B) <=Int A => (B andBool C <=Int A) orBool (notBool B andBool 0 <=Int A) [simplification]
++    rule [b2w-mul-eq-r]: C *Int bool2Word(B) ==Int A => (B andBool C ==Int A) orBool (notBool B andBool A ==Int 0) [simplification, comm]
++
++    // As part of how the compiler returns a bool from storage
++    rule [b2w-storage]: bool2Word(X ==Int 1) => X requires #rangeBool(X) [simplification]
 +endmodule
