@@ -1,17 +1,20 @@
 --- /dev/null
 +++ b/lemmas-driver.k
-@@ -0,0 +1,49 @@
+@@ -0,0 +1,56 @@
 +// lemmas-driver.k — verification driver that equips the KEVM Haskell backend
-+// with KEVM's byte / int / bitwise / bool2Word SIMPLIFICATION LEMMAS.
++// with KEVM's byte / int / bitwise / bool2Word / map-reasoning SIMPLIFICATION
++// LEMMAS.
 +//
 +// Vendored, pinned addition (theory/patches/lemmas.diff), kompiled as the main
-+// module so symbolic byte/word algebra (ABI-decode, memory returns, masks) and
-+// bool2Word guards reduce during proof search — removing the Finding 0003 wall
-+// (byte/word algebra) and the Vat.slip signed-add bool2Word wall.
++// module so symbolic byte/word algebra (ABI-decode, memory returns, masks),
++// bool2Word guards, and #lookup-over-updated-map reads reduce during proof
++// search — removing the Finding 0003 wall (byte/word algebra), the signed-add
++// bool2Word wall (Vat.slip / WETH require-guards), and the two-slot map-read
++// wall (WETH transferFrom / GemJoin join-exit legs).
 +//
 +// It imports EDSL (the KEVM verification substrate, which transitively pulls in
 +// the ghost-instrumented evm.md when theory/patches/ghost.diff is also applied)
-+// and exactly the five PURE-simplification submodules. Importing the submodules
++// and exactly the six PURE-simplification submodules. Importing the submodules
 +// directly — rather than the aggregate `LEMMAS` / `LEMMAS-WITHOUT-SLOT-UPDATES`
 +// modules — deliberately EXCLUDES the one non-simplification rule in lemmas.k
 +// (`#addrFromPrivateKey`, a `[priority(40), concrete]` rewrite, lemmas.k:137)
@@ -22,13 +25,15 @@
 +// applies. This bounds the trusted-base growth (see scripts/lemma-consistency.sh
 +// and Finding 0004).
 +//
-+// The fifth submodule, BOOL2WORD-SIMPLIFICATION, carries the "bool2Word
-+// reasoning" rules of module LEMMAS-WITHOUT-SLOT-UPDATES, extracted VERBATIM
-+// (lemmas/bool2word-simplification.k records the provenance). It is a separate
-+// extracted file for exactly the reason the first four are imported piecewise:
-+// LEMMAS-WITHOUT-SLOT-UPDATES is not [simplification]-only (it holds the
-+// #addrFromPrivateKey concrete rewrite), so it cannot be imported wholesale
-+// without re-admitting that non-simplification rule.
++// The fifth and sixth submodules carry families of module
++// LEMMAS-WITHOUT-SLOT-UPDATES, each extracted VERBATIM into its own file (the
++// per-file provenance headers cite the exact upstream lines):
++//   - BOOL2WORD-SIMPLIFICATION   — the "bool2Word reasoning" rules (lemmas.k:58-111)
++//   - MAP-REASONING-SIMPLIFICATION — the #lookup "Map Reasoning" rules (lemmas.k:125-130)
++// Both are separate extracted files for the same reason the first four are
++// imported piecewise: LEMMAS-WITHOUT-SLOT-UPDATES is not [simplification]-only
++// (it holds the #addrFromPrivateKey concrete rewrite), so it cannot be imported
++// wholesale without re-admitting that non-simplification rule.
 +//
 +// Upstream intent: fold these submodules into a KEVM-provided verification
 +// module so `imports BYTES-SIMPLIFICATION` works from a spec without the K
@@ -41,6 +46,7 @@
 +requires "lemmas/evm-int-simplification.k"
 +requires "lemmas/int-simplification.k"
 +requires "lemmas/bool2word-simplification.k"
++requires "lemmas/map-simplification.k"
 +
 +module LEMMAS-DRIVER [symbolic]
 +    imports EDSL
@@ -49,6 +55,7 @@
 +    imports EVM-INT-SIMPLIFICATION
 +    imports INT-SIMPLIFICATION
 +    imports BOOL2WORD-SIMPLIFICATION
++    imports MAP-REASONING-SIMPLIFICATION
 +endmodule
 --- /dev/null
 +++ b/lemmas/bool2word-simplification.k
@@ -136,4 +143,45 @@
 +
 +    // As part of how the compiler returns a bool from storage
 +    rule [b2w-storage]: bool2Word(X ==Int 1) => X requires #rangeBool(X) [simplification]
++endmodule
+--- /dev/null
++++ b/lemmas/map-simplification.k
+@@ -0,0 +1,38 @@
++// map-simplification.k -- the #lookup MAP-REASONING [simplification] lemmas of
++// KEVM, extracted VERBATIM from evm-semantics lemmas/lemmas.k so the
++// lemmas-driver can carry them WITHOUT importing module
++// LEMMAS-WITHOUT-SLOT-UPDATES wholesale (see bool2word-simplification.k for why:
++// that module also holds the non-simplification #addrFromPrivateKey concrete
++// rewrite, lemmas.k:137).
++//
++// Needed by the two-slot token legs (WETH transferFrom/transfer, GemJoin
++// join/exit): they write TWO balanceOf/gem slots, and the second balanceOf read
++// `#lookup(STORAGE[K_src <- _], K_dst)` (distinct concrete keys) must reduce via
++// the lookup-over-update rule to `#lookup(STORAGE, K_dst)` so the outer
++// `chop(_ +Int wad)` can strip against the no-overflow precondition. Vat.slip's
++// single SSTORE never exercised this; it is new to the multi-slot legs.
++//
++// PROVENANCE (verbatim): every rule below is copied character-for-character from
++// evm-semantics lemmas/lemmas.k, module LEMMAS-WITHOUT-SLOT-UPDATES, the "Map
++// Reasoning" section, lemmas.k lines 125-130. Cross-checked byte-identical
++// against the WETH callee-proof agent's independently-extracted lemmas_min.k
++// (family B). #lookup / pow256 are defined in evm-types.md (EVM-TYPES); imports
++// mirror bool2word-simplification.k.
++requires "word.md"
++
++module MAP-REASONING-SIMPLIFICATION [symbolic]
++    imports EVM-TYPES
++    imports INT-SYMBOLIC
++    imports WORD
++
++  // ########################
++  // Map Reasoning
++  // ########################
++
++    rule 0 <=Int #lookup( _M:Map , _ )             => true [simplification, smt-lemma]
++    rule         #lookup( _M:Map , _ ) <Int pow256 => true [simplification, smt-lemma]
++
++    rule #lookup ( _M:Map [ K1 <- V1 ] , K2 )    => #lookup ( K1 |-> V1 , K1 ) requires K1 ==Int  K2 [simplification]
++    rule #lookup (  M:Map [ K1 <- _  ] , K2 )    => #lookup ( M         , K2 ) requires notBool ( K1 ==Int K2 ) [simplification]
++    rule #lookup ( (K1:Int |-> _) M:Map, K2:Int) => #lookup ( M         , K2 ) requires notBool ( K1 ==Int K2 ) [simplification]
 +endmodule
