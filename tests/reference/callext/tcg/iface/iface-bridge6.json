@@ -1,0 +1,30 @@
+{
+  "pre": "callee frame at 200 (CONCRETE program P), storage[0]=100",
+  "post": "BROKEN bridge: claims storage[0]=106 over P — bridge-s-at-p for the +6 summary; MUST REFUTE (P computes 105)",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [
+      "A2.storage[0]"
+    ],
+    "writes": [
+      "A2.storage[0]"
+    ]
+  },
+  "rely": "",
+  "guar": "BROKEN: asserts +6 (106) over P; the real bytecode delivers +5",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [],
+  "claims": [
+    {
+      "label": "sbridge",
+      "file": "sbridge6.k",
+      "role": "guar",
+      "root": false
+    }
+  ]
+}

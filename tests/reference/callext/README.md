@@ -68,11 +68,29 @@ production `keccak(P)` vs the on-chain hash — pure text, no prover). `bridge-s
 discharges the execution half: `S` with `_PGM := P` proves by running the real
 bytecode.
 
+## The residual, now CLOSED — the bridge in the verifier
+
+The graph/verify closure now DISCHARGES the abstract summary node `S` via the
+bridge `S⟸D` (the P1 native work): `D` (concrete callee proof), code-identity
+(`keccak256(external_code[200])` == declared hash, COMPUTED by the verifier),
+and `B` (`bridge/sbridge` — `S` re-proved by execution over `P`), plus the
+anti-proxy binding `S⟺B`. So `caller_2a` now closes graph-check, freezes, and
+`tcg verify` replays it bundle-only INCLUDING the bridge → certificate holds.
+The abstract summary is the one node not replayed directly; it is pinned tighter
+than a normal trusted lemma, not looser. See `docs/bundle-spec.md` §8 and the
+trust-manifest `bridge_S_from_D` entry.
+
 ## Reproduce
 
 ```
 tests/reference/callext/run.sh        # raw kprove, all 10 specs, verdict-checked
-tests/reference/callext/run-tcg.sh    # the toy through tcg's real pipeline (prove.py)
+tests/reference/callext/run-tcg.sh    # the toy through tcg's real pipeline (the
+                                      #   Finding-0005 "before": graph check refuses)
+tests/reference/callext/run-tcg-bridge.sh               # the "after": bridge
+                                      #   discharged -> graph check OK, freeze,
+                                      #   verify holds bundle-only
+tests/reference/callext/run-tcg-bridge-discriminators.sh # all 5 anti-proxy
+                                      #   controls refused; good bundle still holds
 ```
 
 `run-tcg.sh` shows tcg's own `prove` step already applies the summary

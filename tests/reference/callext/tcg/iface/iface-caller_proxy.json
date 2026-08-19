@@ -1,0 +1,35 @@
+{
+  "pre": "caller at 100 CALLs 200 (SYMBOLIC code); trusts the PROXY no-op summary",
+  "post": "A2.storage[0]==100, EVMC_SUCCESS (the caller happily proves 'unchanged' GIVEN the false summary)",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [
+      "A2.storage[0]"
+    ],
+    "writes": [
+      "A2.storage[0]"
+    ]
+  },
+  "rely": "",
+  "guar": "",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [
+    {
+      "loop": "summary_proxy",
+      "label": "s"
+    }
+  ],
+  "claims": [
+    {
+      "label": "rproxy",
+      "file": "rproxy.k",
+      "role": "guar",
+      "root": true
+    }
+  ]
+}

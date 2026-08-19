@@ -1,0 +1,30 @@
+{
+  "pre": "callee frame at 200 (CONCRETE program P), storage[0]=100",
+  "post": "PROXY bridge: claims storage[0] UNCHANGED (100) over P — the plausible 'this CALL is a no-op' summary; MUST REFUTE (P computes 105)",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [
+      "A2.storage[0]"
+    ],
+    "writes": [
+      "A2.storage[0]"
+    ]
+  },
+  "rely": "",
+  "guar": "PROXY: asserts +0 (no change) over P; the real bytecode delivers +5",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [],
+  "claims": [
+    {
+      "label": "sbridge",
+      "file": "sbridge_proxy.k",
+      "role": "guar",
+      "root": false
+    }
+  ]
+}

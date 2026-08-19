@@ -1,0 +1,30 @@
+{
+  "pre": "callee (200) executes; A1 (100) storage[1]=42",
+  "post": "BROKEN Rely: claims A1.storage[1] 42=>999, which the callee never writes; MUST REFUTE (structural, with counterexample)",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [
+      "A1.storage[1]"
+    ],
+    "writes": [
+      "A2.storage[0]"
+    ]
+  },
+  "rely": "",
+  "guar": "BROKEN interference: the callee's Guar frames A1, so a Rely that A1.storage[1] becomes 999 cannot be delivered",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [],
+  "claims": [
+    {
+      "label": "compat",
+      "file": "compat_broken.k",
+      "role": "guar",
+      "root": false
+    }
+  ]
+}

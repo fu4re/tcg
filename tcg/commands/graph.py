@@ -27,6 +27,7 @@ import re
 import sys
 from graphlib import CycleError, TopologicalSorter
 
+from tcg.bridge import is_bridge_node, structural_errors as bridge_structural_errors
 from tcg.claims import program_binding_error
 from tcg.outcome import Exit
 from tcg.workspace import (
@@ -118,7 +119,14 @@ def check_graph(root) -> list[str]:
                       "interface and compile it")
 
     # Closure: roots exist; roots and their trusted-lemma reachability are
-    # Accepted. "Couldn't check a state" is a violation, not a pass.
+    # discharged. A NORMAL node is discharged by being Accepted. An
+    # ABSTRACT-SUMMARY node (free <program>, carries a bridge block) can NEVER
+    # be Accepted — a symbolic program stalls (docs/findings/0005). It is
+    # discharged instead by the bridge S<==D: its concrete proof D and its
+    # bridge-at-P proof B are both Accepted (pushed here, checked as normal
+    # nodes), code-identity (keccak) holds, and the anti-proxy binding S<=>B
+    # holds — all re-derived bundle-only by tcg.bridge, so graph check, freeze,
+    # and verify agree. "Couldn't check a state" is a violation, not a pass.
     roots = [h for h, n in nodes.items() if n.get("root")]
     if not roots:
         errors.append("graph has no roots; a compiled claims[] entry with "
@@ -129,6 +137,18 @@ def check_graph(root) -> list[str]:
     for e in edges:
         if e["type"] == "trusted-lemma" and e["from"] in children:
             children[e["from"]].append(e["to"])
+
+    environment = {}
+    env_path = root / "subject" / "environment.json"
+    if env_path.is_file():
+        try:
+            environment = read_json(env_path)
+        except ValueError:
+            environment = {}
+
+    def claim_text_of(h: str) -> str:
+        return (root / "spec" / "claims" / f"{h}.k").read_text(encoding="utf-8")
+
     seen: set[str] = set()
     stack = list(roots)
     while stack:
@@ -136,15 +156,28 @@ def check_graph(root) -> list[str]:
         if h in seen or h not in nodes:
             continue
         seen.add(h)
-        lp = nodes[h]["loop"]
-        try:
-            state = load_loop(root, lp)["state"]
-        except WorkspaceError:
-            state = "missing"
-        if state != "Accepted":
-            kind = "root" if h in roots else "trusted child"
-            errors.append(f"{kind} {nodes[h]['label']} ({lp}) is {state}, "
-                          f"not Accepted — run `tcg prove {lp}`")
+        node = nodes[h]
+        if is_bridge_node(node):
+            berrs, refs = bridge_structural_errors(
+                h, nodes, claim_text_of, environment)
+            errors.extend(berrs)
+            # Require the resolved bridge proofs (D, B) Accepted by traversing
+            # into them as ordinary nodes; the summary S itself is NOT required
+            # Accepted (its discharge IS the bridge just checked).
+            for key in ("concrete", "at_program"):
+                dh = refs.get(key)
+                if dh is not None:
+                    stack.append(dh)
+        else:
+            try:
+                state = load_loop(root, node["loop"])["state"]
+            except WorkspaceError:
+                state = "missing"
+            if state != "Accepted":
+                kind = "root" if h in roots else "trusted child"
+                errors.append(f"{kind} {node['label']} ({node['loop']}) is "
+                              f"{state}, not Accepted — run `tcg prove "
+                              f"{node['loop']}`")
         stack.extend(children[h])
 
     # Program binding (P0-A): every ROOT's <program> cell must equal

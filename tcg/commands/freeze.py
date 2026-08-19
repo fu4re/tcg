@@ -18,6 +18,7 @@ import shutil
 import sys
 from pathlib import Path
 
+from tcg.bridge import is_bridge_node, structural_errors as bridge_structural_errors
 from tcg.commands.graph import check_graph
 from tcg.outcome import Exit
 from tcg.workspace import (
@@ -37,9 +38,30 @@ def run(args) -> int:
     graph = load_graph(root)
     nodes = graph["nodes"]
 
+    environment = {}
+    env_path = root / "subject" / "environment.json"
+    if env_path.is_file():
+        try:
+            environment = read_json(env_path)
+        except ValueError:
+            environment = {}
+
+    def claim_text_of(h: str) -> str:
+        return (root / "spec" / "claims" / f"{h}.k").read_text(encoding="utf-8")
+
     # Every node — not only the root-reachable ones — must be Accepted with
-    # evidence: the bundle carries Accept material only.
+    # evidence: the bundle carries Accept material only. The one exception is an
+    # abstract-summary node (free <program>): it can never be Accepted, so it is
+    # discharged by its bridge S<==D instead (its concrete proof D and bridge-at-P
+    # proof B are ordinary nodes in this same loop, so they still get the
+    # Accept+evidence gate below). The bridge structural check is re-run here so
+    # freeze and `tcg graph check` agree.
     for h, n in nodes.items():
+        if is_bridge_node(n):
+            berrs, _ = bridge_structural_errors(
+                h, nodes, claim_text_of, environment)
+            errors.extend(berrs)
+            continue
         try:
             state = load_loop(root, n["loop"])["state"]
         except WorkspaceError:
@@ -110,9 +132,14 @@ def run(args) -> int:
 
     put("subject/runtime.bin", root / "subject" / "runtime.bin")
     put("subject/environment.json", root / "subject" / "environment.json")
-    for h in nodes:
+    for h, n in nodes.items():
         put(f"spec/claims/{h}.k", root / "spec" / "claims" / f"{h}.k")
-        put(f"evidence/replay/{h}.json", root / "evidence" / "replay" / f"{h}.json")
+        # An abstract-summary node has no replay evidence (it is bridge-
+        # discharged, never directly proved); its claim text still travels so
+        # verify can re-derive the bridge and inject S into its caller's replay.
+        if not is_bridge_node(n):
+            put(f"evidence/replay/{h}.json",
+                root / "evidence" / "replay" / f"{h}.json")
     # Vacuity records travel with the roots (in the hash tree): they record the
     # probe that was run, and verify re-derives the probe itself — it does not
     # trust the record — but the record makes the check auditable and pins the
@@ -143,7 +170,7 @@ def run(args) -> int:
         f"theory/patches/{p.name}"
         for p in (root / "theory" / "patches").glob("*.diff")
     ) if (root / "theory" / "patches").is_dir() else []
-    write_json(bundle / "assumptions" / "trust-manifest.json", {
+    manifest_data = {
         "semantics": "vendored" if (bundle / "theory" / "semantics").is_dir()
                      else "assumed: semantics not vendored in this bundle",
         "subject_identity": "machine-checkable: compare keccak(subject/runtime.bin) "
@@ -191,7 +218,37 @@ def run(args) -> int:
                                "instead of vendoring this driver",
         },
         "vendored_patches": patch_files,
-    })
+    }
+
+    # Bridge S<==D (docs/findings/0005). Listed ONLY when an abstract-summary
+    # node is present, so non-bridge bundles' manifests are unchanged. Explicit
+    # about what the bridge DISCHARGES (performed here) vs what stays ASSUMED.
+    if any(is_bridge_node(n) for n in nodes.values()):
+        manifest_data["bridge_S_from_D"] = {
+            "status": "machine-checkable (structural + keccak, PERFORMED) + "
+                      "verifier-action-required (on-chain code hash)",
+            "what": "an abstract callee-summary node S (free <program>, cannot "
+                    "itself Accept — a symbolic program stalls) is DISCHARGED by "
+                    "the bridge S<==D: (1) a concrete callee proof D over code P, "
+                    "(2) code-identity, and (3) a bridge-at-P proof B re-proving "
+                    "S over P by execution.",
+            "discharged": [
+                "D and B both Accept over byte-identical <program> == "
+                "external_code[callee] (replayed like any node)",
+                "the anti-proxy binding S<=>B: B agrees with S cell-for-cell on "
+                "every entry/effect the summary pins, carries S's exact storage "
+                "delta, and is at least as general as S at entry — so a false or "
+                "swapped summary cannot ride through (its B fails over P)",
+                "code-identity: keccak256(external_code[callee]) == the declared "
+                "code_hash, COMPUTED by the verifier (tcg/keccak.py), not assumed",
+            ],
+            "assumed": [
+                "declared code_hash == the on-chain EXTCODEHASH at the callee "
+                "address — a chain read, exactly the residual subject_identity "
+                "leaves for the primary subject (verifier action)",
+            ],
+        }
+    write_json(bundle / "assumptions" / "trust-manifest.json", manifest_data)
 
     (bundle / "nav").mkdir()
     (bundle / "nav" / "report.md").write_text(

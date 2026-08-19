@@ -220,6 +220,16 @@ Named entries the v1 manifest must carry:
   keccak stays `A_keccak`, nonlinear arithmetic stays a wall. Intent: upstream
   the four submodules into a KEVM verification module and pin by version. See
   docs/findings/0004;
+- `bridge_S_from_D` — present ONLY when the graph contains an abstract-summary
+  node (docs/findings/0005). Status *machine-checkable (structural + keccak,
+  PERFORMED) + verifier-action-required (on-chain code hash)*. **Discharged**
+  (performed by the verifier): `D` and `B` Accept over byte-identical
+  `<program> == external_code[callee]`; the anti-proxy binding `S⟺B`;
+  `keccak256(external_code[callee]) == code_hash`, computed in-tool (not
+  assumed). **Assumed** (named, not silent): that the declared `code_hash`
+  equals the on-chain `EXTCODEHASH` at the callee address — a chain read,
+  exactly the residual `subject_identity` already leaves for the primary
+  subject. Nothing else new is assumed.
 - two reading-discipline lines: a prover Accept is read as a derivation in the
   prover's proof system; a checker Accept on an implication is read as
   validity of that implication.
@@ -245,7 +255,7 @@ Strictly ordered; failure of any step is **refusal of the certificate**.
 | 2 | Identity | `keccak(runtime.bin)` equals the on-chain code hash; constructor args / immutables per `environment.json` | seconds |
 | 3 | Theory | build the vendored semantics (with patches); re-check every re-checkable `annotations.json` fact against `runtime.bin` | minutes |
 | 4 | Graph | see below (includes root **program binding**) | minutes |
-| 5 | Replay (v1) | topological order over the trusted-lemma subgraph; for each node, run the pinned invocation with children as trusted; expect Accept. **Unknown = refusal** (retry per `toolchain.lock`) | CPU hours |
+| 5 | Replay (v1) | topological order over the trusted-lemma subgraph; for each node, run the pinned invocation with children as trusted; expect Accept. An abstract-summary node is **skipped** here (it is bridge-discharged in step 4, and a symbolic program cannot Accept) yet is still injected as a trusted child into its caller's replay. **Unknown = refusal** (retry per `toolchain.lock`) | CPU hours |
 | 5v | Vacuity | for each root, re-derive and re-prove the **falsified** form (post → `false`); if it still Accepts the root is vacuous — refusal | CPU (one run/root) |
 | 6 | Semantic step | read the roots. The only step needing formal literacy — bounded to the roots, not the graph, the code, or the session | human |
 
@@ -262,8 +272,25 @@ Strictly ordered; failure of any step is **refusal of the certificate**.
   no `<program>` cell at all — the bundle's guarantee is exactly the roots (a
   verifier reads the roots), so binding the roots is what ties the certificate
   to the deployed bytecode.
+- **Bridge discharge (abstract-summary nodes).** A node whose `<program>` cell
+  is a free variable — an **abstract callee-summary** `S`, injected at an
+  external `CALL` into symbolic code (docs/findings/0005) — can NEVER be
+  Accepted (a symbolic program stalls), so closure does **not** demand it. It
+  carries a `bridge` block instead and is discharged by the **bridge S⟸D**,
+  re-derived here bundle-only (text + keccak, no prover): (1) a concrete callee
+  proof `D` of the delta over code `P` (Accepted, replayed like any node); (2)
+  **code-identity** — `keccak256(external_code[callee])` equals the declared
+  `code_hash` (COMPUTED here) and `external_code[callee]` equals `D`'s and
+  `B`'s `<program>` byte-for-byte; (3) `B`, the summary re-proved with
+  `<program> := P` by execution (Accepted). Plus the anti-proxy binding
+  `S⟺B`: `B` agrees with `S` cell-for-cell on every entry/effect `S` pins,
+  carries `S`'s exact storage delta, and is at least as general as `S` at
+  entry. A false, swapped, or plausible-but-false summary cannot ride through —
+  its `B` fails over `P`, or the binding rejects it. The one node not replayed
+  is pinned tighter than a normal trusted lemma, not looser.
 - hash links resolve; every trusted claim used in a node's evidence is a
-  proved node with a corresponding edge (closure);
+  proved node with a corresponding edge — OR, for an abstract-summary node, is
+  discharged by its bridge as above (closure);
 - edge typing: trusted-lemma targets are proved, progress-carrying nodes;
   zero-step nodes are never trusted-lemma targets;
 - acyclicity on the trusted-lemma subgraph;
@@ -321,9 +348,17 @@ controls, and must pass the last one:
 7. **vacuous root** — a root whose antecedent is infeasible, so its falsified
    form (post → `false`) still proves → refusal at step 5v (vacuity). Closes
    gate G3's Hole 1 (the deeper, antecedent-failure case).
+8. **bridge S⟸D controls** — for an abstract-summary node: a summary whose
+   at-`P` proof `B` refutes over the real code (broken +6, or a plausible no-op
+   proxy) → refused; a tampered `external_code[callee]` (keccak mismatch) →
+   refused at step 4; an abstract summary with no bridge → still refused (never
+   a false green). Each must refuse.
 
 Controls 1–6 are exercised by `scripts/conformance.sh` against copies of the
 reference bundle. Control 7 is exercised by `scripts/false-green.sh`, which
 builds a purpose-made vacuous root end-to-end (a tamper of the reference bundle
 cannot manufacture an infeasible antecedent without re-proving), and shows both
-Hole-1 false greens reproduced (prove Accept) and then refused.
+Hole-1 false greens reproduced (prove Accept) and then refused. Control 8 is
+exercised by `tests/reference/callext/run-tcg-bridge-discriminators.sh` (all
+five anti-proxy controls refused, the honest composition still verifying),
+alongside the pure structural coverage in `tests/test_bridge.py`.

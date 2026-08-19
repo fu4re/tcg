@@ -1,0 +1,41 @@
+{
+  "pre": "caller at 100 CALLs 200 (SYMBOLIC code), A2.storage[0]=100",
+  "post": "A2.storage[0]==105, EVMC_SUCCESS — a fact the caller never computes, closable only by consuming the summary S at the CALL",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [
+      "A2.storage[0]"
+    ],
+    "writes": [
+      "A2.storage[0]"
+    ]
+  },
+  "rely": "",
+  "guar": "the caller's own frame (A1 storage) is left untouched across the external CALL",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [
+    {
+      "loop": "summary",
+      "label": "s"
+    }
+  ],
+  "claims": [
+    {
+      "label": "r2a",
+      "file": "r2a.k",
+      "role": "loop",
+      "root": true
+    },
+    {
+      "label": "guar",
+      "file": "guar2a.k",
+      "role": "guar",
+      "root": false
+    }
+  ]
+}

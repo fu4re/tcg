@@ -1,0 +1,30 @@
+{
+  "pre": "callee frame at 200 (CONCRETE program P), storage[0]=100",
+  "post": "storage[0]=105, EVMC_SUCCESS — the summary S re-proved by execution over the real bytecode P (bridge-s-at-p)",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [
+      "A2.storage[0]"
+    ],
+    "writes": [
+      "A2.storage[0]"
+    ]
+  },
+  "rely": "",
+  "guar": "A2.storage[0] += 5, proved by EXECUTION over the concrete callee bytecode P (the bridge's execution half)",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [],
+  "claims": [
+    {
+      "label": "sbridge",
+      "file": "sbridge.k",
+      "role": "guar",
+      "root": false
+    }
+  ]
+}

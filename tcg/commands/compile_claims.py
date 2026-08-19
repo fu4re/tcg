@@ -150,6 +150,13 @@ def run(args) -> int:
                 "root": bool(entry.get("root", role == "loop"))}
         if "from" in loop:
             node["from"], node["to"] = loop["from"], loop["to"]
+        # An abstract-summary claim carries a bridge block (its S<==D discharge:
+        # callee_address, code_hash, and the {loop,label} refs to its concrete
+        # proof D and bridge-at-P proof B). Refs resolve to content hashes at
+        # graph check / freeze / verify (tcg.bridge), the same {loop,label}
+        # indirection `prove` uses for trusted children. See docs/findings/0005.
+        if isinstance(entry.get("bridge"), dict):
+            node["bridge"] = entry["bridge"]
         upsert_node(graph, compiled[entry["label"]], **node)
     save_graph(root, graph)
 

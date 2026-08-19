@@ -1,0 +1,42 @@
+{
+  "pre": "callee frame at 200 (ABSTRACT program _PGM), storage[0]=100",
+  "post": "PROXY +0: storage[0] unchanged (100), EVMC_SUCCESS",
+  "exit": "EVMC_SUCCESS",
+  "footprint": {
+    "reads": [
+      "A2.storage[0]"
+    ],
+    "writes": [
+      "A2.storage[0]"
+    ]
+  },
+  "rely": "",
+  "guar": "PROXY: plausibly claims the CALL is a no-op (+0); its bridge B (bridge_proxy/sbridge) must REFUTE over P",
+  "requires": [
+    "evm.md"
+  ],
+  "imports": [
+    "EVM"
+  ],
+  "trusted": [],
+  "claims": [
+    {
+      "label": "s",
+      "file": "s_proxy.k",
+      "role": "guar",
+      "root": false,
+      "bridge": {
+        "callee_address": "0x00000000000000000000000000000000000000c8",
+        "code_hash": "a7d0eaef07694abd7dcad44e621c06a9dc7be164317d98d005a14caa63ecf512",
+        "concrete_proof": {
+          "loop": "callee",
+          "label": "d"
+        },
+        "at_program_proof": {
+          "loop": "bridge_proxy",
+          "label": "sbridge"
+        }
+      }
+    }
+  ]
+}

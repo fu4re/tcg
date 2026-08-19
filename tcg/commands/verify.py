@@ -38,6 +38,7 @@ import tempfile
 from graphlib import CycleError, TopologicalSorter
 from pathlib import Path
 
+from tcg.bridge import is_bridge_node, structural_errors as bridge_structural_errors
 from tcg.claims import (
     assemble_prove_module, extract_body, falsify_body, module_header,
     program_binding_error, sha256_text,
@@ -122,7 +123,10 @@ def run(args) -> int:
             errors.append(f"{h[:12]}: content does not match its hash")
         if not re.search(r"\[[^\[\]]*all-path[^\[\]]*\]", text):
             errors.append(f"{h[:12]}: missing all-path attribute")
-        if not (bundle / "evidence" / "replay" / f"{h}.json").is_file():
+        # An abstract-summary node carries no replay evidence — it is bridge-
+        # discharged, never directly proved (checked below + in step 5).
+        if (not is_bridge_node(n)
+                and not (bundle / "evidence" / "replay" / f"{h}.json").is_file()):
             errors.append(f"{h[:12]}: no replay evidence")
     for e in edges:
         if e["from"] not in nodes or e["to"] not in nodes:
@@ -173,10 +177,32 @@ def run(args) -> int:
             if reason:
                 n = nodes.get(h, {})
                 errors.append(f"root {n.get('loop')}/{n.get('label')}: {reason}")
+
+    # Bridge S<==D, re-derived bundle-only (structural + keccak; no prover): for
+    # each abstract-summary node, re-check that its bridge discharges it — S
+    # abstracts only its <program>, the anti-proxy binding S<=>B holds, and
+    # code-identity keccak256(external_code[callee]) == the declared code_hash.
+    # D and B are replayed in step 5 like any node; this is the structural half
+    # that a self-consistent hash tree does not launder (cf. root program
+    # binding). Same tcg.bridge verdict freeze and `graph check` computed.
+    env_path = bundle / "subject" / "environment.json"
+    environment = _read_json(env_path) if env_path.is_file() else {}
+
+    def _bridge_claim_text(h: str) -> str:
+        return (bundle / "spec" / "claims" / f"{h}.k").read_text(encoding="utf-8")
+
+    for h, n in nodes.items():
+        if is_bridge_node(n):
+            berrs, _ = bridge_structural_errors(
+                h, nodes, _bridge_claim_text, environment)
+            errors.extend(berrs)
     if errors:
         return _fail("4-graph", errors)
+    bridge_count = sum(1 for n in nodes.values() if is_bridge_node(n))
+    bridge_note = (f"; {bridge_count} abstract-summary node(s) bridge-discharged "
+                   "S<==D") if bridge_count else ""
     print(f"step 4 graph: OK ({len(nodes)} node(s), {len(roots)} root(s); "
-          "root <program> cells bind to subject/runtime.bin)")
+          f"root <program> cells bind to subject/runtime.bin{bridge_note})")
 
     # --- Step 5: replay ----------------------------------------------------
     definition = args.definition or lock.get("definition")
@@ -201,6 +227,16 @@ def run(args) -> int:
     scratch = Path(tempfile.mkdtemp(prefix="tcg-replay-"))
 
     for idx, h in enumerate(order, 1):
+        # An abstract-summary node is discharged by its bridge S<==D (step 4),
+        # never by direct replay — its symbolic <program> cannot Accept. It is
+        # still injected as a trusted child into its caller's replay below
+        # (children[caller] includes it), exactly as at prove time; its
+        # soundness rides on the bridge, which D and B (replayed here) close.
+        if is_bridge_node(nodes[h]):
+            print(f"step 5 replay [{idx}/{len(order)}]: "
+                  f"{nodes[h]['loop']}/{nodes[h]['label']} bridge-discharged "
+                  "(S<==D; not replayed directly)")
+            continue
         goal = claim_text(h)
         reqs, imps = module_header(goal)
         trusted_bodies = []
