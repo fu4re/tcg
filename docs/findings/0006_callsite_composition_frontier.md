@@ -128,3 +128,18 @@ Folding map-reasoning (§3B) into the def — orthogonal to `slip`, and non-subs
 ## Conclusion
 
 The composition machinery works and the token leg proves over live code, but the value leg — signed `_add` in `Vat.slip` — sits in the substrate's implication-check blind spot, which no lemma removes. The tool did the honest thing: it removed the lemma wall it could remove, refused every false green (five bridge discriminators; a gated lemma extension; `slip` surfacing as `Unknown`, never a spurious Accept), and stopped exactly at the substrate frontier rather than manufacturing a verdict the engine cannot support. #4/#5 positive accounting is blocked on `slip`, and the precise, costed levers to reopen it are recorded above.
+
+---
+
+## Addendum (2026-08-19) — the map-reasoning family was folded into the def after all; the frontier is unchanged
+
+§3 above described the map-reasoning family (B) as supplied to the WETH proofs *spec-time* and its fold into the shared def as a not-yet-done residual. After this Finding's initial write, the lemma agent (resumed by an orchestrator coordination message carrying the WETH agent's family-B requirement) **folded map-reasoning into the same `-lemmas2` def**, producing one authoritative two-family def. This orchestrator independently confirmed the built result — not the agent's report — and it holds; the §4 conclusion does **not** change.
+
+**Verified (solver, on the canonical `~/toolchains/kevm-1.0.678-lemmas2`):**
+- **Both families are compiled in.** bool2Word is present (`b2w-eq-zero` × 4 in `definition.kore`). The map lookup-over-update rule is present by a **decisive positive/negative probe pair**: a true distinct-key identity `#lookup(STORAGE[7<-5],9) => #lookup(STORAGE,9)` **Accepts (`#Top`) on `-lemmas2`** but is **stuck ("cannot be rewritten further") on the old `-lemmas`** that lacks the rule — so the Accept is *because of* the rule, not incidental. (Note: the consistency gate's false-map identity refuses whether or not the rule is present, so the gate alone does not establish presence — the positive probe does.)
+- **Consistency gate 6/6.** The four Finding-0004 false identities, plus a false bool2Word probe, plus a new false distinct-key map probe (`#lookup(STORAGE[7<-5],9) => 5`, a write at 7 must not leak to a read at 9) — all refuse.
+- **Regression unchanged; slip still §9-blocked.** `slip_d` on the two-family def is again `Unknown(c)` (229s): the map family is provably **inert for slip** (slip reads `#lookup(STORAGE, GEMSLOT)` on the *original* map; the lookup-over-update rules fire only on *updated*-map reads, which the two-slot token legs have and the one-SSTORE slip does not). The §4 substrate frontier is exactly as stated.
+
+**Consequence:** §3's residual is closed — the WETH `transferFrom`/`transfer` summaries now prove **def-only** against `-lemmas2` (their `lemmas_min.k` spec-time import is redundant, being the same verbatim upstream rules). This makes `-lemmas2` the authoritative lemma def for the token legs. It does **not** move the frontier: `slip` is unaffected, and #4/#5 positive accounting remains substrate-blocked on the signed-add Vat leg.
+
+**Build note (backlog):** `scripts/build-kevm.sh --lemmas` with `--force` mis-nested the freshly kompiled def one directory deep when `haskell/` already existed; the agent salvaged the complete def into place (which preserved the original `definition.kore` mtime — briefly misleading an mtime-based freshness check here, resolved by the solver probe above). The build script should place the kompiled def atomically at the canonical path.
