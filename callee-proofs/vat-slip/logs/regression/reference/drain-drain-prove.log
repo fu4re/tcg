@@ -263,8 +263,8 @@
       1234567890
     </acctID> in_keys ( _DotVar6 )
   }
-kore-exec: [3974145] Warning (WarnStuckClaimState):
-    The configuration's term doesn't unify with the destination's term and the configuration cannot be rewritten further. Location: /private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/reg-reference-drain/.tcg/build/drain-drain-prove.k:7:7-32:17
+kore-exec: [4238810] Warning (WarnStuckClaimState):
+    The configuration's term doesn't unify with the destination's term and the configuration cannot be rewritten further. Location: /private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/reg2-reference-drain/.tcg/build/drain-drain-prove.k:7:7-32:17
 Context:
     (InfoReachability) while checking the implication
 [Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name

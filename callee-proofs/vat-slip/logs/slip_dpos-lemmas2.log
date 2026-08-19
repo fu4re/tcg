@@ -287,12 +287,6 @@
   {
     true
   #Equals
-    0 <=Int #lookup ( STORAGE , 109968117995108105786565572842071691871171164772949068926251789879993337596252 ) +Int WAD
-  }
-#And
-  {
-    true
-  #Equals
     0 <=Int ACCTID
   }
 #And
@@ -319,8 +313,8 @@
   #Equals
     WAD <Int minSInt256Word
   }
-kore-exec: [389913243] Warning (WarnStuckClaimState):
-    The configuration's term unifies with the destination's term, but the implication check between the conditions has failed. Location: /private/tmp/claude-501/-Users-akkedeline-sheaf-tcg/16ef61ed-65f6-4e96-ac76-de89f34758f3/scratchpad/slip-run/slip_dpos-verify.k:7:5-52:33
+kore-exec: [254285808] Warning (WarnStuckClaimState):
+    The configuration's term unifies with the destination's term, but the implication check between the conditions has failed. Location: /var/folders/_f/8npvqpdd47x5mgvsr1ddd_vh0000gn/T/tcg-slip-s67jcguk/slip_dpos-verify.k:7:5-52:33
 Context:
     (InfoReachability) while checking the implication
 [Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name

@@ -1,63 +1,60 @@
-BLAST-RADIUS REGRESSION — new lemma def ~/toolchains/kevm-1.0.678-lemmas2
-(base + ghost.diff + EXTENDED lemmas.diff with BOOL2WORD-SIMPLIFICATION)
+BLAST-RADIUS REGRESSION — authoritative def ~/toolchains/kevm-1.0.678-lemmas2
+(base + ghost.diff + EXTENDED lemmas.diff: TWO vendored [simplification]-only
+families — BOOL2WORD-SIMPLIFICATION + MAP-REASONING-SIMPLIFICATION)
 
-Purpose: the bool2Word extension changes the SHARED lemma def, re-opening every
+Purpose: the extended lemma set changes the SHARED lemma def, re-opening every
 prior lemma-def proof. The extension must be CONSERVATIVE — add reductions,
-change no prior verdict. Every check below re-ran the PRIOR proofs against the
-NEW def and got the SAME verdict as on the old ~/toolchains/kevm-1.0.678-lemmas.
+change no prior verdict. Every check below re-ran the PRIOR proofs against this
+def and got the SAME verdict as on the old ~/toolchains/kevm-1.0.678-lemmas.
+
+This def covers BOTH Vat.slip AND the WETH/GemJoin two-slot token legs
+(coordinated with the parallel WETH callee-proof agent — ONE authoritative def,
+no second rebuild). The map-reasoning family is byte-identical to the WETH
+agent's independently-extracted lemmas_min.k (family B) and to upstream
+lemmas.k:125-130.
 
 new def provenance: ~/toolchains/kevm-1.0.678-lemmas2/provenance.json
-  lemmas.diff sha256 3b53cf0f174b07dc4d27708f371762579005f0cbdd7e7883dab8e59c0357bb9f
-  definition.kore sha256 bff0f0f25bfc834a9141f4df322c0b3b2a226930fd751acfdc2e499870fba4e4
-differential: b2w-eq-zero occurs 4x in new definition.kore, 0x in old -lemmas.
+  lemmas.diff sha256      dcc8789dac6c3661635360ecc681388e0e68a93e34eb9dcd24001e767b469f2c
+  definition.kore sha256  fcbb7fee04230ea8c2436d70e99503486c44719750f7e4c56f34635050ab9cc3
+differential: b2w-eq-zero 4x + lookup-over-update rules present in new def; 0x in old -lemmas.
 
 -------------------------------------------------------------------------------
 1) CONSISTENCY GATE (scripts/lemma-consistency.sh, KEVM_LEMMAS=...-lemmas2)
-   5/5 false identities REFUSED (was 4/4; PROBE-B2W-SPEC added):
-     refused PROBE-ASWORD-SPEC   exit=1
-     refused PROBE-RANGE-SPEC    exit=1
-     refused PROBE-INT-SPEC      exit=1
-     refused PROBE-BITWISE-SPEC  exit=1
+   6/6 false identities REFUSED (one control per vendored family):
+     refused PROBE-ASWORD-SPEC   exit=1   (evm-int)
+     refused PROBE-RANGE-SPEC    exit=1   (bytes)
+     refused PROBE-INT-SPEC      exit=1   (int)
+     refused PROBE-BITWISE-SPEC  exit=1   (bitwise)
      refused PROBE-B2W-SPEC      exit=1   (bool2Word b2w-eq-zero direction)
-   b2w probe log: reduced via b2w-eq-zero to bool2Word(notBool B), then the
-   implication vs the wrong target bool2Word(B) failed (WarnStuckClaimState) —
-   a genuine control, not a parse failure.
+     refused PROBE-MAP-SPEC      exit=1   (map lookup-over-update DISTINCT key)
+   b2w probe log: reduced via b2w-eq-zero to bool2Word(notBool B), then stuck on
+     the wrong target bool2Word(B) — genuine, not a parse failure.
+   map probe log: reduced #lookup(STORAGE[7<-5],9) via the distinct-key rule to
+     #lookup(STORAGE,9) (write at 7 does NOT leak to read at 9), then stuck on the
+     wrong target 5 — genuine.
 
 -------------------------------------------------------------------------------
 2) GETTERS-FULL (KEVM=...-lemmas2 scripts/build-getters-full.sh)
    Findings 0003a/0003b — GemJoin vat()/ilk()/gem() FULL k-dss behaviour.
    PROVE: 6/6 Accept (3 roots + 3 guars); each prove log = "#Top".
-     (loop states vat/ilk/gem = Accepted; 6 evidence/replay/*.json expected=Accept)
    VACUITY: 3/3 non-vacuous.
-   SELF-VERIFY (tcg verify bundle), bundle id
-     4aa189e2ce5af1a036bd946130ed4b4421f691cd38a654ad0871a63f3d833dba:
-       step 1 integrity OK (25 files)
-       step 4 graph OK (6 nodes, 3 roots; root <program> binds subject/runtime.bin)
-       step 5 replay OK — 6/6 Accept (vat/vat, vat/vat_g, ilk/ilk, ilk/ilk_g,
-                                        gem/gem, gem/gem_g)
-       step 5v vacuity OK — 3/3 (ilk/ilk, gem/gem, vat/vat: falsified form Unknown)
-       certificate holds (exit 0)
+   SELF-VERIFY (tcg verify), bundle id
+     6391e81ea5910f4de83753d92887dba956d9188f77d7657aca79cda32b5725f1:
+       step 5 replay OK — 6/6 Accept; step 5v vacuity OK — 3/3; certificate holds (exit 0).
    getter-prove/*.log copied here (each shows #Top).
 
 -------------------------------------------------------------------------------
 3) BUILD-REFERENCE + CONFORMANCE (KEVM=...-lemmas2)
-   scripts/build-reference.sh — synthetic ledger/withdraw + drain control.
-   SELF-VERIFY, bundle id c5490a5d62ca3b1d179302a2b3048896dc1d4c3d3a900f4e603b60024db93712:
+   SELF-VERIFY, bundle id c21df992a2476ca9e566a86d25b4b06748dfb0a766c397942e2a688311b96d92:
      step 5 replay OK — 3/3 Accept (ledger/base, withdraw/guar, withdraw/main)
-     step 5v vacuity OK — 1/1 (withdraw/main)
-     certificate holds (exit 0)
+     step 5v vacuity OK — 1/1 (withdraw/main); certificate holds (exit 0)
    DRAIN refutation control: Refute, exit 3 (expected structural Refute) — UNCHANGED.
      witness: reference/drain-drain-prove.log
-   scripts/conformance.sh <bundle> — 6/6 controls behaved exactly as required:
-     1 flipped-runtime-byte  expect=3 actual=3 PASS
-     2 deleted-child-claim   expect=3 actual=3 PASS
-     3 false-trusted-lemma   expect=3 actual=3 PASS
-     4 timeout-1s            expect=2 actual=2 PASS
-     5 deleted-nav           expect=0 actual=0 PASS
-     6 program-binding       expect=3 actual=3 PASS
-     conformance: OK (6/6)
+   scripts/conformance.sh <bundle> — 6/6 controls behaved exactly as required.
 
 -------------------------------------------------------------------------------
-CONCLUSION: the bool2Word extension is CONSERVATIVE. No prior proof changed
-verdict on the new def. Consistency 5/5, getters 6/6 + verify, reference 3/3 +
-verify + drain-Refute, conformance 6/6. Cleared to complete slip on -lemmas2.
+CONCLUSION: the two-family extension (bool2Word + map-reasoning) is CONSERVATIVE.
+No prior proof changed verdict on the authoritative def. Consistency 6/6, getters
+6/6 + verify, reference 3/3 + verify + drain-Refute, conformance 6/6. The map
+rules fire only on updated-map lookups the getters/reference/slip proofs do not
+contain (verified: slip verdicts unchanged vs the bool2Word-only build).

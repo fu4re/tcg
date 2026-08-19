@@ -4,10 +4,14 @@ Deliverable D of the callee-proof problem (Finding 0005): the Vat.slip value-con
 summary that GemJoin.join/exit will later consume. Callee-side only; NO join/exit composition.
 
 Judge = kprove on the KEVM Haskell backend. The bool2Word wall (§5) is fixed on a NEW
-lemma-equipped def `~/toolchains/kevm-1.0.678-lemmas2` (base + ghost.diff + the EXTENDED
-`theory/patches/lemmas.diff` that vendors a fifth [simplification]-only submodule
-BOOL2WORD-SIMPLIFICATION; the older `~/toolchains/kevm-1.0.678-lemmas` is kept intact for
-existing bundles). Verdicts classified by `tcg.verdict.classify` (exit 0 + `#Top` => Accept;
+authoritative lemma-equipped def `~/toolchains/kevm-1.0.678-lemmas2` (base + ghost.diff + the
+EXTENDED `theory/patches/lemmas.diff` that vendors TWO [simplification]-only submodules —
+`BOOL2WORD-SIMPLIFICATION` (lemmas.k:58-111) and `MAP-REASONING-SIMPLIFICATION`
+(#lookup map reasoning, lemmas.k:125-130); the older `~/toolchains/kevm-1.0.678-lemmas` is kept
+intact for existing bundles). One authoritative def covers BOTH Vat.slip AND the WETH/GemJoin
+two-slot token legs (coordinated with the parallel WETH agent; the map family is byte-identical
+to that agent's independently-extracted subset). Verdicts classified by `tcg.verdict.classify`
+(exit 0 + `#Top` => Accept;
 residual => Refute; else Unknown(a/b/c)) — the same judge `tcg prove` uses. Slip specs run
 with `requires "edsl.md"` / `imports EDSL` and NO `b2w.k` (the bool2Word rules now live in the
 def; importing b2w.k too would duplicate the [b2w-eq-zero]/[b2w-eq-one] labels). Every verdict
@@ -124,10 +128,16 @@ This is the task's anticipated "walls on a different term" outcome, reported as 
 - NOT discharged: slip_d → Accept. Blocked at the §9 kore-exec implication-check ceiling on the
   signed-add sign split (§5b), verified across three claim structures. Unknown(c), not Accept.
 - Assumed / ledgered: (a) storage-layout facts (gem = slot 4, wards = slot 0; keccak slots
-  re-checkable via `slots.sh`); (b) the vendored bool2Word `[simplification]` lemmas — now in the
-  DEF (`lemmas/bool2word-simplification.k`, verbatim upstream lemmas.k:58-111, provenance
-  per-rule), NOT a spec-side `b2w.k`; a named trusted-base delta bounded by the 5/5 gate;
-  (c) universal-usr / negative-wad exit-leg remain OUT of scope.
+  re-checkable via `slots.sh`); (b) the vendored `[simplification]` lemmas — now in the DEF, two
+  submodules: `lemmas/bool2word-simplification.k` (verbatim lemmas.k:58-111) and
+  `lemmas/map-simplification.k` (verbatim lemmas.k:125-130, byte-identical to the WETH agent's
+  extract), provenance per-rule, NOT a spec-side `b2w.k`; a named trusted-base delta bounded by
+  the **6/6** consistency gate (a bool2Word AND a map false-identity control both refuse — see
+  `logs/regression/SUMMARY.txt`); (c) universal-usr / negative-wad exit-leg remain OUT of scope.
+- Map family is INERT for slip: its rules fire only on `#lookup(M[K<-V], K2)` (updated-map reads),
+  which slip's single SSTORE never produces (slip reads `#lookup(STORAGE, GEMSLOT)` on the
+  ORIGINAL map). Verified: all slip verdicts are UNCHANGED between the bool2Word-only build and
+  this two-family authoritative def. The map family is what the WETH/GemJoin two-slot legs need.
 - Reentrancy frame: slip makes NO external call (one SSTORE) — the frame holds trivially.
 - Note: `specs/b2w.k` is now SUPERSEDED (its two rules are a subset of the def-side submodule);
   kept only as the interim record. `specs/slip_dpos.k` and `specs/slip_de.k` are the §5b
