@@ -47,11 +47,17 @@
 set -euo pipefail
 
 TOOLCHAIN_DIR="${TOOLCHAIN_DIR:-$HOME/toolchains/kevm-1.0.678}"
+# The lemma-equipped definition (Finding 0004): base source + ghost.diff +
+# lemmas.diff, kompiled with main module LEMMAS-DRIVER so the byte/int/bitwise
+# simplification lemmas reduce symbolic word algebra during proof search.
+LEMMAS_DIR="${LEMMAS_DIR:-$HOME/toolchains/kevm-1.0.678-lemmas}"
 FORCE=0
+LEMMAS=0
 for arg in "$@"; do
   case "$arg" in
     --force) FORCE=1 ;;
-    *) echo "usage: $0 [--force]" >&2; exit 1 ;;
+    --lemmas) LEMMAS=1 ;;
+    *) echo "usage: $0 [--force] [--lemmas]" >&2; exit 1 ;;
   esac
 done
 
@@ -131,6 +137,110 @@ copy_component() {
   [[ -n "$old" ]] && force_rm "$old"
   log "$label: installed at $dst"
 }
+
+# ---------------------------------------------------------------------------
+# --lemmas: build the lemma-equipped definition (Finding 0004) reproducibly
+# from the *unpatched* base source + the two vendored, pinned repo patches
+# (theory/patches/ghost.diff, then lemmas.diff), kompiled with main module
+# LEMMAS-DRIVER. Requires the base definition's source + plugin already
+# installed by a normal `build-kevm.sh` run (this reuses that exact pinned
+# source instead of re-discovering /nix/store). Never touches the base install.
+build_lemmas() {
+  local base_src="$TOOLCHAIN_DIR/evm-semantics-source"
+  local base_plugin="$TOOLCHAIN_DIR/plugin/plugin"
+  source_ok "$base_src" || die "no base K sources at $base_src; run \`scripts/build-kevm.sh\` first (the lemma build reuses the pinned base source)"
+  plugin_ok "$base_plugin" || die "no base plugin at $base_plugin; run \`scripts/build-kevm.sh\` first"
+
+  local ghost="$REPO_ROOT/theory/patches/ghost.diff"
+  local lemmas="$REPO_ROOT/theory/patches/lemmas.diff"
+  [[ -f "$ghost" ]]  || die "missing patch: $ghost"
+  [[ -f "$lemmas" ]] || die "missing patch: $lemmas"
+
+  if [[ "$FORCE" -eq 0 ]] && haskell_ok "$LEMMAS_DIR/haskell" \
+      && source_ok "$LEMMAS_DIR/evm-semantics-source" && plugin_ok "$LEMMAS_DIR/plugin/plugin"; then
+    log "lemma-equipped definition already present and complete: $LEMMAS_DIR (pass --force to rebuild)"
+    log "definition: $LEMMAS_DIR/haskell"
+    log "includes:   $LEMMAS_DIR/evm-semantics-source , $LEMMAS_DIR/plugin"
+    return 0
+  fi
+
+  # Fresh patched source tree from the pinned base source (never from /nix).
+  local tmp_src="$LEMMAS_DIR/evm-semantics-source.tmp.$$"
+  force_rm "$tmp_src"
+  mkdir -p "$LEMMAS_DIR"
+  cp -Rc "$base_src" "$tmp_src" 2>/dev/null || { force_rm "$tmp_src"; cp -R "$base_src" "$tmp_src"; }
+  chmod -R u+w "$tmp_src"
+  # Dry-run BOTH patches before touching anything, then apply for real; a reject
+  # is a hard stop (a partially-patched source must never be kompiled).
+  patch -p1 -d "$tmp_src" --dry-run < "$ghost"  >/dev/null || { force_rm "$tmp_src"; die "ghost.diff does not apply cleanly to the base source"; }
+  patch -p1 -d "$tmp_src" < "$ghost"  >/dev/null || { force_rm "$tmp_src"; die "ghost.diff apply failed"; }
+  patch -p1 -d "$tmp_src" --dry-run < "$lemmas" >/dev/null || { force_rm "$tmp_src"; die "lemmas.diff does not apply cleanly on top of ghost.diff"; }
+  patch -p1 -d "$tmp_src" < "$lemmas" >/dev/null || { force_rm "$tmp_src"; die "lemmas.diff apply failed"; }
+  [[ -f "$tmp_src/lemmas-driver.k" ]] || { force_rm "$tmp_src"; die "lemmas.diff did not create lemmas-driver.k"; }
+  # swap source into place
+  local old_src=""
+  if [[ -e "$LEMMAS_DIR/evm-semantics-source" ]]; then old_src="$LEMMAS_DIR/evm-semantics-source.old.$$"; mv "$LEMMAS_DIR/evm-semantics-source" "$old_src"; fi
+  mv "$tmp_src" "$LEMMAS_DIR/evm-semantics-source"
+  [[ -n "$old_src" ]] && force_rm "$old_src"
+  local src="$LEMMAS_DIR/evm-semantics-source"
+
+  # Plugin: reuse the base plugin verbatim.
+  copy_component "$TOOLCHAIN_DIR/plugin/plugin" "$LEMMAS_DIR/plugin/plugin" plugin_ok "plugin (krypto.md)"
+
+  # Kompile the Haskell/proving target with LEMMAS-DRIVER as the main module.
+  log "kompiling lemma-equipped definition (main module LEMMAS-DRIVER); ~1-8 min"
+  local tmp_def="$LEMMAS_DIR/haskell.tmp.$$"
+  force_rm "$tmp_def"
+  if ! kompile --backend haskell "$src/lemmas-driver.k" \
+      --main-module LEMMAS-DRIVER --syntax-module LEMMAS-DRIVER \
+      -I "$src" -I "$LEMMAS_DIR/plugin" \
+      --md-selector "k & ! concrete" \
+      --hook-namespaces "JSON KRYPTO" \
+      --emit-json \
+      -o "$tmp_def"; then
+    force_rm "$tmp_def"; die "kompile failed; see output above"
+  fi
+  haskell_ok "$tmp_def" || { force_rm "$tmp_def"; die "kompile finished but output does not look complete"; }
+  local old_def=""
+  if [[ -e "$LEMMAS_DIR/haskell" ]]; then old_def="$LEMMAS_DIR/haskell.old.$$"; mv "$LEMMAS_DIR/haskell" "$old_def"; fi
+  mv "$tmp_def" "$LEMMAS_DIR/haskell"
+  [[ -n "$old_def" ]] && force_rm "$old_def"
+  chmod -R u+w "$LEMMAS_DIR" 2>/dev/null || true
+
+  # provenance.json: both pinned patch hashes + the definition's own hash, so a
+  # later drift between what's on disk and the committed patches is detectable.
+  local ghost_sha lemmas_sha def_sha
+  ghost_sha="$(shasum -a 256 "$ghost" | cut -d' ' -f1)"
+  lemmas_sha="$(shasum -a 256 "$lemmas" | cut -d' ' -f1)"
+  def_sha="$(shasum -a 256 "$LEMMAS_DIR/haskell/definition.kore" | cut -d' ' -f1)"
+  cat > "$LEMMAS_DIR/provenance.json" <<EOF
+{
+  "kevm_version_pinned": "$(cd "$REPO_ROOT" && PYTHONPATH="$REPO_ROOT" python3 -c 'from tcg.commands.init import TOOLCHAIN; print(TOOLCHAIN["kevm"])')",
+  "main_module": "LEMMAS-DRIVER",
+  "base_source": "$TOOLCHAIN_DIR/evm-semantics-source",
+  "patches_applied": [
+    {"path": "theory/patches/ghost.diff",  "sha256": "$ghost_sha"},
+    {"path": "theory/patches/lemmas.diff", "sha256": "$lemmas_sha"}
+  ],
+  "definition_kore_sha256": "$def_sha",
+  "generated_by": "scripts/build-kevm.sh --lemmas"
+}
+EOF
+  log "lemma-equipped definition installed: $LEMMAS_DIR/haskell"
+  log "provenance: $LEMMAS_DIR/provenance.json"
+  cat <<EOF
+{
+  "definition": "$LEMMAS_DIR/haskell",
+  "includes": ["$LEMMAS_DIR/evm-semantics-source", "$LEMMAS_DIR/plugin"]
+}
+EOF
+}
+
+if [[ "$LEMMAS" -eq 1 ]]; then
+  build_lemmas
+  log "done (lemmas)."
+  exit 0
+fi
 
 # ---------------------------------------------------------------------------
 # Fast path: everything already present and complete, --force not given.

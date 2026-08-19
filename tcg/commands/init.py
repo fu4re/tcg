@@ -27,8 +27,16 @@ TOOLCHAIN = {
 }
 
 
-def _read_ghost_diff() -> bytes | None:
-    """The ghost-instrumentation patch, packaged as tcg._data.
+# Vendored, pinned prover patches shipped inside the package as tcg._data/*.diff
+# and re-materialized into a fresh workspace's theory/patches/ at init. Order is
+# the apply order (ghost first, then lemmas): the lemma driver imports EDSL,
+# which pulls in the ghost-instrumented evm.md when ghost.diff is applied first.
+# See docs/findings/0003 (the wall) and 0004 (the lemma inclusion).
+VENDORED_PATCHES = ("ghost.diff", "lemmas.diff")
+
+
+def _read_patch(name: str) -> bytes | None:
+    """A vendored prover patch, packaged as tcg._data.
 
     Resolved via importlib.resources rather than a path relative to this
     file's location on disk: a non-editable `pip install` unpacks into
@@ -37,7 +45,7 @@ def _read_ghost_diff() -> bytes | None:
     for an installed tcg — only for a checkout run in place.
     """
     try:
-        return resources.files("tcg._data").joinpath("ghost.diff").read_bytes()
+        return resources.files("tcg._data").joinpath(name).read_bytes()
     except (FileNotFoundError, ModuleNotFoundError, NotADirectoryError):
         return None
 
@@ -54,17 +62,19 @@ def run(args) -> int:
     (root / "spec" / "claims").mkdir(parents=True, exist_ok=True)
     (root / "theory" / "patches").mkdir(parents=True, exist_ok=True)
 
-    # Vendor the ghost instrumentation patch shipped with the tool and pin
-    # its hash: the workspace must not depend on the installation staying put.
+    # Vendor every prover patch shipped with the tool and pin each hash: the
+    # workspace must not depend on the installation staying put, and no trusted
+    # input (ghost instrumentation, simplification lemmas) may enter silently.
     patches = {}
-    dst = root / "theory" / "patches" / "ghost.diff"
-    data = _read_ghost_diff()
-    if data is not None:
-        dst.write_bytes(data)
-        patches["theory/patches/ghost.diff"] = sha256_file(dst)
-    else:
-        print("tcg: warning: ghost.diff not found in installation; "
-              "vendor it into theory/patches/ before proving", file=sys.stderr)
+    for name in VENDORED_PATCHES:
+        dst = root / "theory" / "patches" / name
+        data = _read_patch(name)
+        if data is not None:
+            dst.write_bytes(data)
+            patches[f"theory/patches/{name}"] = sha256_file(dst)
+        else:
+            print(f"tcg: warning: {name} not found in installation; "
+                  "vendor it into theory/patches/ before proving", file=sys.stderr)
 
     # Definition discovery happens exactly once, here, at init time (decision
     # D4 in docs/decisions.md): a flag beats the environment, and whatever is

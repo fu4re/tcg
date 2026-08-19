@@ -1,0 +1,40 @@
+--- /dev/null
++++ b/lemmas-driver.k
+@@ -0,0 +1,37 @@
++// lemmas-driver.k — verification driver that equips the KEVM Haskell backend
++// with KEVM's byte / int / bitwise SIMPLIFICATION LEMMAS.
++//
++// Vendored, pinned addition (theory/patches/lemmas.diff), kompiled as the main
++// module so symbolic byte/word algebra (ABI-decode, memory returns, masks)
++// reduces during proof search — removing the Finding 0003 wall.
++//
++// It imports EDSL (the KEVM verification substrate, which transitively pulls in
++// the ghost-instrumented evm.md when theory/patches/ghost.diff is also applied)
++// and exactly the four PURE-simplification submodules. Importing the submodules
++// directly — rather than the aggregate `LEMMAS` module — deliberately EXCLUDES
++// the one non-simplification rule in lemmas.k (`#addrFromPrivateKey`, a concrete
++// rewrite) and everything that is not [simplification]. Every rule reachable
++// from here carries the [simplification] attribute, so nothing added here is a
++// semantic rewrite step: the lemmas rewrite only the constraint / normal-form
++// representation the backend already reasons about, never which stock EVM rule
++// applies. This bounds the trusted-base growth (see scripts/lemma-consistency.sh
++// and Finding 0004).
++//
++// Upstream intent: fold these four submodules into a KEVM-provided verification
++// module so `imports BYTES-SIMPLIFICATION` works from a spec without the K
++// `#let`/`#in` productions being absent from EDSL's requires-closure, then pin
++// by KEVM version instead of vendoring this driver.
++
++requires "edsl.md"
++requires "lemmas/bitwise-simplification.k"
++requires "lemmas/bytes-simplification.k"
++requires "lemmas/evm-int-simplification.k"
++requires "lemmas/int-simplification.k"
++
++module LEMMAS-DRIVER [symbolic]
++    imports EDSL
++    imports BITWISE-SIMPLIFICATION
++    imports BYTES-SIMPLIFICATION
++    imports EVM-INT-SIMPLIFICATION
++    imports INT-SIMPLIFICATION
++endmodule

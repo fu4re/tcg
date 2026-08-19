@@ -5,12 +5,13 @@
 #
 # Checks:
 #
-# 1. ghost-diff-parity: tcg/_data/ghost.diff (the package-data copy shipped
+# 1. patch-parity: every tcg/_data/*.diff (the package-data copies shipped
 #    inside the tcg package, read by `tcg init` via importlib.resources — see
-#    tcg/commands/init.py) must be byte-identical to theory/patches/ghost.diff
-#    (the canonical, human-edited source). If they drift, a non-editable
-#    `pip install` ships a stale patch while the repo's own theory/patches/
-#    tree — and anything proved against it — has already moved on, silently.
+#    tcg/commands/init.py) must be byte-identical to its theory/patches/ twin
+#    (the canonical, human-edited source): ghost.diff and lemmas.diff. If they
+#    drift, a non-editable `pip install` ships a stale patch while the repo's
+#    own theory/patches/ tree — and anything proved against it — has already
+#    moved on, silently.
 #
 # 2. bundle-only-imports: tcg/commands/verify.py, tcg/commands/roots.py, and
 #    tcg/verdict.py (the prover-verdict judge shared with `prove`) must not
@@ -33,32 +34,35 @@ set -u
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 repo_root=$(CDPATH= cd -- "$script_dir/.." && pwd -P)
 
-canonical="$repo_root/theory/patches/ghost.diff"
-packaged="$repo_root/tcg/_data/ghost.diff"
+vendored_patches="ghost.diff lemmas.diff"
 bundle_only_files="tcg/commands/verify.py tcg/commands/roots.py tcg/verdict.py"
 
 fail_count=0
 
-check_ghost_diff_parity() {
-    if [ ! -f "$canonical" ]; then
-        echo "FAIL  ghost-diff-parity   missing: $canonical" >&2
-        fail_count=$((fail_count + 1))
-        return
-    fi
-    if [ ! -f "$packaged" ]; then
-        echo "FAIL  ghost-diff-parity   missing: $packaged" >&2
-        fail_count=$((fail_count + 1))
-        return
-    fi
-    if cmp -s "$canonical" "$packaged"; then
-        printf 'PASS  %-20s %s == %s\n' "ghost-diff-parity" \
-            "tcg/_data/ghost.diff" "theory/patches/ghost.diff"
-    else
-        echo "FAIL  ghost-diff-parity   tcg/_data/ghost.diff has drifted from" \
-            "theory/patches/ghost.diff (the canonical source) — copy" \
-            "$canonical over $packaged and commit both" >&2
-        fail_count=$((fail_count + 1))
-    fi
+check_patch_parity() {
+    for name in $vendored_patches; do
+        canonical="$repo_root/theory/patches/$name"
+        packaged="$repo_root/tcg/_data/$name"
+        if [ ! -f "$canonical" ]; then
+            echo "FAIL  patch-parity        missing: $canonical" >&2
+            fail_count=$((fail_count + 1))
+            continue
+        fi
+        if [ ! -f "$packaged" ]; then
+            echo "FAIL  patch-parity        missing: $packaged" >&2
+            fail_count=$((fail_count + 1))
+            continue
+        fi
+        if cmp -s "$canonical" "$packaged"; then
+            printf 'PASS  %-20s %s == %s\n' "patch-parity" \
+                "tcg/_data/$name" "theory/patches/$name"
+        else
+            echo "FAIL  patch-parity        tcg/_data/$name has drifted from" \
+                "theory/patches/$name (the canonical source) — copy" \
+                "$canonical over $packaged and commit both" >&2
+            fail_count=$((fail_count + 1))
+        fi
+    done
 }
 
 check_bundle_only_imports() {
@@ -82,7 +86,7 @@ check_bundle_only_imports() {
     done
 }
 
-check_ghost_diff_parity
+check_patch_parity
 check_bundle_only_imports
 
 if [ "$fail_count" -eq 0 ]; then
