@@ -1,7 +1,7 @@
 # Finding 0006 — Call-site value-conservation, P1: the bridge lands and the token leg proves, but the signed-add Vat leg hits the substrate implication ceiling
 
 - **Date:** 2026-08-19 · **Type:** implementation + measurement (the P1 build-out following the Finding-0005 probe) · **Substrate:** kompiled KEVM Haskell backend `kevm-1.0.678`; bridge on the stock def, callee summaries on the lemma-equipped def (`-lemmas` and the new `-lemmas2`) · **Builds on:** Findings 0003 (the GemJoin wall), 0004 (simplification lemmas), 0005 (the call-site-summary probe + the `S ⟸ D` bridge obligation) · **Subjects:** the `callext` toy (bridge), live mainnet **WETH9** `0xC02aaA39…756Cc2` (token leg), live mainnet **Vat** `0x35D1b3F3…492B` (value leg).
-- **TL;DR:** The three pieces the value-conservation coverage needs were built and measured independently. **(1) The bridge `S ⟸ D` is implemented in `graph`/`freeze`/`verify` and merged** (`Track P1-A`): an abstract callee-summary node `S` (free `<program>`, which can never Accept) is discharged by a concrete proof `D` over code `P`, a verifier-computed code-identity `keccak256(P)=code_hash`, a bridge-at-`P` proof `B`, and an anti-proxy binding `S⟺B` — re-derived bundle-only; **all five anti-proxy discriminators refuse**, including two hash-tree-consistent tampers a self-consistent MANIFEST does not launder. **(2) Both WETH9 token-leg summaries prove over the real 3124-byte bytecode** (`transferFrom` for `join`, `transfer` for `exit`), non-vacuously, once the omitted bool2Word + map-reasoning `[simplification]` lemmas are supplied. **(3) The Vat `slip` summary does not.** After the bool2Word lemma wall (Finding 0004) is removed by a properly-vendored, consistency-gated def extension, `slip` reaches the exact `+wad` storage delta over the real Vat but the postcondition never Accepts — it hits the **§9 substrate implication ceiling** on the signed `_add` split: `slip_d`, `slip_wrong`, and `slip_vac` **all** surface as `Unknown(c)`, so the summary is neither positively discharged nor structurally refuted (the Finding-0001/D5 blind spot). This is the honest frontier: the lemma tail was necessary but not sufficient, and closing `slip` needs substrate work (kore-rpc `implies` / pyk `APRProof`) deliberately not undertaken here. **`join`/`exit` positive accounting (k-dss #4/#5) is therefore substrate-blocked on the Vat leg.**
+- **TL;DR:** The three pieces the value-conservation coverage needs were built and measured independently. **(1) The bridge `S ⟸ D` is implemented in `graph`/`freeze`/`verify` and merged** (`Track P1-A`): an abstract callee-summary node `S` (free `<program>`, which can never Accept) is discharged by a concrete proof `D` over code `P`, a verifier-computed code-identity `keccak256(P)=code_hash`, a bridge-at-`P` proof `B`, and an anti-proxy binding `S⟺B` — re-derived bundle-only; **all five anti-proxy discriminators refuse**, including two hash-tree-consistent tampers a self-consistent MANIFEST does not launder. **(2) Both WETH9 token-leg summaries prove over the real 3124-byte bytecode** (`transferFrom` for `join`, `transfer` for `exit`), non-vacuously, once the omitted bool2Word + map-reasoning `[simplification]` lemmas are supplied. **(3) The Vat `slip` summary does not** *(SUPERSEDED 2026-08-19 — misdiagnosis; `slip` proves on `kore-exec` once the `<log>` cell is abstracted; see the Correction at the end)*. After the bool2Word lemma wall (Finding 0004) is removed by a properly-vendored, consistency-gated def extension, `slip` reaches the exact `+wad` storage delta over the real Vat but the postcondition never Accepts — it hits the **§9 substrate implication ceiling** on the signed `_add` split: `slip_d`, `slip_wrong`, and `slip_vac` **all** surface as `Unknown(c)`, so the summary is neither positively discharged nor structurally refuted (the Finding-0001/D5 blind spot). This is the honest frontier: the lemma tail was necessary but not sufficient, and closing `slip` needs substrate work (kore-rpc `implies` / pyk `APRProof`) deliberately not undertaken here. **`join`/`exit` positive accounting (k-dss #4/#5) is therefore substrate-blocked on the Vat leg.**
 
 ---
 
@@ -74,7 +74,7 @@ The Finding-0004 driver imports four pure `[simplification]` submodules but omit
 
 ---
 
-## 4. The frontier — Vat `slip` hits the §9 substrate implication ceiling
+## 4. The frontier — Vat `slip` hits the §9 substrate implication ceiling  — [SUPERSEDED 2026-08-19: this was a MISDIAGNOSIS; `slip` proves on `kore-exec` once `<log>` is abstracted. See the Correction at the end.]
 
 `slip(bytes32 ilk, address usr, int256 wad)` sets `gem[ilk][usr] = _add(gem[ilk][usr], wad)` (signed `_add`), auth-gated. Proved in its own loop over the real 13493-byte Vat `<program>`, keccak-bound, keccak treated as an uninterpreted opaque slot (concrete-pinned `ilk`/`usr`; `wad` universal over non-negative int256 = `join`'s sign).
 
@@ -143,3 +143,35 @@ The composition machinery works and the token leg proves over live code, but the
 **Consequence:** §3's residual is closed — the WETH `transferFrom`/`transfer` summaries now prove **def-only** against `-lemmas2` (their `lemmas_min.k` spec-time import is redundant, being the same verbatim upstream rules). This makes `-lemmas2` the authoritative lemma def for the token legs. It does **not** move the frontier: `slip` is unaffected, and #4/#5 positive accounting remains substrate-blocked on the signed-add Vat leg.
 
 **Build note (backlog):** `scripts/build-kevm.sh --lemmas` with `--force` mis-nested the freshly kompiled def one directory deep when `haskell/` already existed; the agent salvaged the complete def into place (which preserved the original `definition.kore` mtime — briefly misleading an mtime-based freshness check here, resolved by the solver probe above). The build script should place the kompiled def atomically at the canonical path.
+
+---
+
+## Correction (2026-08-19) — §4 was a MISDIAGNOSIS: there is no signed-add substrate ceiling; `slip` proves on `kore-exec`
+
+**§4 above is superseded.** It attributed `slip`'s `Unknown(c)` to a "§9 substrate implication ceiling" on the signed-`_add` sign split. That was wrong, and it was wrong for the exact reason our own house rule guards against — I read an *obstruction* out of a residual by reasoning, instead of letting the solver tell me the obstruction. A `kore-rpc`-`implies` probe (launched to test whether the modern engine could "lift the ceiling") instead **disproved the ceiling**: it printed the residual's actual unsatisfiable conjunct, which was not the sign split.
+
+**The real cause is a one-line claim-shape bug.** `Vat.slip` is `note`-wrapped and emits a `LOG4` (`LogNote`; visible in the runtime as the `…61012085a4` tail). `slip_d.k` never mentions the `<log>` cell, so K completes it as an *unchanged* frame and the claim silently asserts the log is untouched — which `slip` violates. The residual's true blocker is `LOG == LOG ++ ListItem(entry)` (unsatisfiable). The signed-add predicates (`WAD <=Int 0`, `WAD <Int minSInt256`) that §4 quoted are **consistent leftover branch conditions**, not the obstruction — and they sit *before* the log check, so no engine ever fails *on* the sign split.
+
+**The fix is one line — `<log> _ => ?_`** — and it is sound: a value-conservation summary constrains `<storage>`, not `<log>`; abstracting the log drops a constraint we never intended to assert, and the `+WAD` gem-slot delta stays fully pinned. **Verified by this orchestrator on `kore-exec` (the trusted default, plain `kprove`, def `-lemmas2`):**
+
+| goal (`<log> _ => ?_` added; sole change) | kore-exec verdict |
+|---|---|
+| `slip_d_log` (delta `+WAD`) | **Accept (#Top, exit 0)** |
+| `slip_wrong_log` (delta `+WAD+1`) | **NOT Accept** (exit 1) |
+| `slip_vac_log` (`ensures false`) | **NOT Accept** (exit 1) |
+
+Non-vacuous: the true summary Accepts, both false twins refuse, on the same path. The diff against `slip_d.k` is **only** the `<substate><log> _ => ?_</substate>` block — the `+WAD` storage postcondition is byte-identical.
+
+**Corrected coverage vs k-dss (superseding §"Coverage" and the TL;DR item 3):**
+
+| k-dss behaviour | corrected status |
+|---|---|
+| 1–3 getters | FULL ✅ |
+| 4. `join` positive accounting | **all three callee/infra pieces now proved:** bridge ✅ + WETH `transferFrom` ✅ + `Vat.slip` ✅ — remaining work is the Stage-C caller composition, **on the trusted engine, no migration** |
+| 5. `exit` positive accounting | same, with `WETH.transfer` ✅ + `Vat.slip` ✅ (exit's negative-`wad` leg needs its own `slip` claim; join's non-negative leg is the one proved here) |
+
+**So #4/#5 are NOT substrate-blocked.** No engine change is warranted (`kore-rpc` go/no-go = **NO-GO** — the wall it would lift does not exist). The `kore-rpc` probe still earned its keep: it was the *diagnostic* that found the bug (its `implies` residual is strictly more informative on the negative side than `kore-exec`'s ambiguous `Unknown(c)` — a banked lever for the D5 blind spot, separate from any engine migration).
+
+**Generalization to check (not yet proven):** every `note`-wrapped DSS function emits `LogNote`, so any other callee/auth summary written without `<log> _ => ?_` shares this bug. The G4 auth claims (Finding 0003) and any future Vat/DSS callee claims should be audited for the omission.
+
+**Meta-lesson (the house rule, re-learned):** *judge = solver, never you.* A residual read by human reasoning is not the solver's actual obstruction; the sound move is to ask the engine (here, `kore-rpc implies`) for the explicit unsatisfiable conjunct, not to infer it.
