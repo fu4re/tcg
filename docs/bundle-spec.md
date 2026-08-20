@@ -71,6 +71,12 @@ bundle/
 │   │                        #   re-checkable or an explicit trusted input
 │   └── oracle-record.json   # human sign-off over the current root hashes
 │
+├── deps/                    # cross-bundle linker (REUSE, §5b): each
+│   └── <callee_root>/       #   subdirectory is a full, vendored callee bundle
+│                            #   (its MANIFEST.json sha256 == <callee_root>),
+│                            #   hash-linked from this MANIFEST like any file.
+│                            #   Absent when the bundle composes nothing.
+│
 └── nav/                     # NON-CERTIFIED: outside the MANIFEST hash tree
     ├── report.md            # human-readable narrative
     └── session/             # provenance: iterations, refutation history, prompts
@@ -156,6 +162,78 @@ weakening and suffix strengthening implications are ordinary junction nodes.
 v1 deliberately restricts assembly to linear chains; arbitrary graph-shaped
 assemblies are outside the format.
 
+## 5b. Cross-bundle composition — the linker (REUSE)
+
+The single-bundle bridge `S⟸D` (§8, `bridge_S_from_D`) discharges an abstract
+callee-summary `S` (free `<program>`, cannot itself Accept) by proving, *in the
+same bundle*, a concrete callee proof `D` over `P` and a bridge-at-`P` proof `B`
+re-proving `S` over `P`. The **linker** (REUSE) keeps the same anti-proxy
+binding but drops the caller-side re-execution: the caller references an
+**already-frozen, independently-verified callee bundle**, vendored under
+`deps/<callee_root>/`, whose declared root is itself a tight execution proof
+over `P`. That dep root plays the role of **both `D` and `B`**.
+
+**Vendoring, not pinning.** The dep is *copied* into the caller bundle, never
+referenced by a remote path: `tcg verify <caller>` needs nothing but the caller
+bundle. `<callee_root>` = `sha256(deps/<callee_root>/MANIFEST.json)`, so the
+directory is content-addressed — a bundle can never contain itself (the
+dependency DAG is acyclic *for free*) and a tampered dep MANIFEST no longer
+hashes to its own directory name. Every file under `deps/` is hash-linked from
+the caller `MANIFEST` (integrity step 1 already covers it). A dep may itself
+carry `deps/` (a DAG).
+
+**Bridge-block variant** (in `spec/graph.json`, the abstract-summary node). The
+in-graph `bridge.concrete_proof` / `bridge.at_program_proof` are `{loop, label}`
+refs; the cross-bundle form instead carries:
+
+```json
+"bridge": {
+  "callee_address": "0x…",
+  "code_hash": "…",                                       // keccak256 of the callee runtime
+  "concrete_proof": { "dep": "<callee_root>", "root": "<claim_hash>" }
+  // at_program_proof: OMITTED — the dep root is both D and B
+}
+```
+
+`concrete_proof.root` must be one of the dep bundle's declared roots. The two
+forms are distinguished by the **shape** of `concrete_proof` (`{loop,label}` vs
+`{dep,root}`); a cross-bundle block that also carries `at_program_proof` is
+refused (it is exactly the caller-side re-execution REUSE avoids).
+
+**Why no caller-side `B` is sound.** `binding_errors(S, D)` enforces the rule of
+consequence `S⟸D` across the program-abstraction boundary — `S`'s entry is at
+least as general as `D`'s, `S`'s asserted effects and storage delta equal `D`'s
+— with the **identical strictness** of the in-graph bridge, and `D` is a genuine
+execution proof over the real code `P` that **the dep bundle itself verified**
+(the caller re-runs the full verifier protocol on the dep before trusting it).
+Nothing about `P` is re-executed in the caller. If the dep's root is in a shape
+too loose to pin `S`, binding fails — correctly; the dep must export a root in
+the summary shape. No new assumption is introduced over the in-graph bridge:
+code-identity is still *computed* (keccak256 of the dep's own runtime), and the
+binding is still *performed*.
+
+**verify obligations** (bundle-only, in order; see §8 step 4):
+
+1. **Recurse** — run the *full* verifier protocol on `deps/<callee_root>/` first
+   (post-order). A dep that does not itself verify refuses the caller; the dep's
+   exit code is propagated verbatim (a dep *Unknown* stays Unknown, not laundered
+   into a Refute).
+2. **Membership** — `concrete_proof.root` ∈ the dep MANIFEST's roots, and the
+   dep is content-addressed: `sha256(dep MANIFEST) == <callee_root>`.
+3. **Code-identity, computed** — `keccak256(deps/<callee_root>/subject/runtime.bin)`
+   == the node's `code_hash`, AND `environment.external_code[callee]` ==
+   `deps/<callee_root>/subject/runtime.bin` byte-for-byte, AND the dep root `D`'s
+   `<program>` == that runtime `P`.
+4. **Binding `S⟺D`** — `binding_errors(S, D)`, the same anti-proxy checks as the
+   in-graph bridge, with `D` = the dep root's claim text.
+5. `S` is **not** replayed in the caller (a symbolic program cannot Accept) and
+   is injected as a trusted child into its caller's replay, exactly as the
+   in-graph bridge.
+
+Steps 2–4 are the pure structural verdict, computed by the same function in
+`graph check`, `freeze`, and `verify` (three-way agreement); step 1 (the kprove
+recursion) is verify-only, exactly as `D`/`B` replay is for the in-graph bridge.
+
 ## 6. Evidence
 
 **v1 — replay records.** `evidence/replay/<h>.json` fixes the exact prover
@@ -230,6 +308,19 @@ Named entries the v1 manifest must carry:
   equals the on-chain `EXTCODEHASH` at the callee address — a chain read,
   exactly the residual `subject_identity` already leaves for the primary
   subject. Nothing else new is assumed.
+- `link_S_from_dep` — present ONLY when the graph contains a cross-bundle
+  (REUSE) summary node (§5b). Status *machine-checkable (structural + keccak +
+  dep re-verified, PERFORMED) + verifier-action-required (on-chain code hash)*.
+  **Discharged** (performed by the verifier): the vendored dep is re-verified
+  with the full protocol (post-order recursion); `concrete_proof.root` is a
+  declared dep root proving over the dep's own runtime `P`; code-identity
+  (`keccak256(dep runtime) == code_hash` and `external_code[callee] == dep
+  runtime`), computed in-tool; the anti-proxy binding `S⟺D` at the in-graph
+  bridge's strictness. **Assumed** (named, not silent): the declared `code_hash`
+  equals the on-chain `EXTCODEHASH` at the callee address — the same residual
+  `subject_identity` leaves for the primary subject. No caller-side re-execution
+  over `P` is assumed away: the dep proved it and the caller re-verified the dep.
+  The entry carries `links: [{summary, dep, root}, …]`, the load-bearing edges.
 - two reading-discipline lines: a prover Accept is read as a derivation in the
   prover's proof system; a checker Accept on an implication is read as
   validity of that implication.
@@ -288,6 +379,20 @@ Strictly ordered; failure of any step is **refusal of the certificate**.
   entry. A false, swapped, or plausible-but-false summary cannot ride through —
   its `B` fails over `P`, or the binding rejects it. The one node not replayed
   is pinned tighter than a normal trusted lemma, not looser.
+- **Cross-bundle discharge (REUSE, §5b).** A summary node whose
+  `bridge.concrete_proof` is a `{dep, root}` ref is discharged by **REUSE** of a
+  vendored callee bundle, not an in-graph `D`+`B`. The verifier **recurses**
+  into `deps/<callee_root>/` and runs the *full* protocol on it first
+  (post-order) — an unverifiable dep refuses the caller, its exit code
+  propagated verbatim — then re-derives the linker's structural verdict
+  bundle-only (text + keccak): the dep is content-addressed
+  (`sha256(dep MANIFEST) == <callee_root>`), `root` is a declared dep root over
+  the dep runtime `P`, code-identity holds (`keccak256(dep runtime) ==
+  code_hash` and `external_code[callee] == dep runtime`), and the anti-proxy
+  binding `S⟺D` holds at the in-graph bridge's strictness (`D` = the dep root).
+  A `{dep,root}` block that also carries `at_program_proof` is refused. As with
+  the in-graph bridge, `S` is skipped in replay yet injected as a trusted child
+  into its caller.
 - hash links resolve; every trusted claim used in a node's evidence is a
   proved node with a corresponding edge — OR, for an abstract-summary node, is
   discharged by its bridge as above (closure);
@@ -353,6 +458,15 @@ controls, and must pass the last one:
    proxy) → refused; a tampered `external_code[callee]` (keccak mismatch) →
    refused at step 4; an abstract summary with no bridge → still refused (never
    a false green). Each must refuse.
+9. **cross-bundle linker controls (REUSE, §5b)** — for a `{dep,root}` summary
+   node: a dep that does not itself verify → refused (the post-order recursion);
+   a proxy summary asserting a storage delta the dep root does not carry →
+   refused at the binding; `code_hash` / `external_code[callee]` not matching the
+   dep runtime → refused at code-identity; `concrete_proof.root` pointing at a
+   non-root dep claim → refused at membership; the dep absent, or its MANIFEST
+   hash ≠ `<callee_root>` → refused; a flipped byte in a vendored dep file (with
+   the caller MANIFEST left stale) → refused at step 1 integrity. The honest
+   composition must verify (exit 0). Each control must hold.
 
 Controls 1–6 are exercised by `scripts/conformance.sh` against copies of the
 reference bundle. Control 7 is exercised by `scripts/false-green.sh`, which
@@ -361,4 +475,8 @@ cannot manufacture an infeasible antecedent without re-proving), and shows both
 Hole-1 false greens reproduced (prove Accept) and then refused. Control 8 is
 exercised by `tests/reference/callext/run-tcg-bridge-discriminators.sh` (all
 five anti-proxy controls refused, the honest composition still verifying),
-alongside the pure structural coverage in `tests/test_bridge.py`.
+alongside the pure structural coverage in `tests/test_bridge.py`. Control 9 is
+exercised by `tests/reference/callext/run-tcg-linker-discriminators.sh` (honest
+REUSE verifies under the real prover, every tamper refused), alongside the pure
+structural + recursion-control coverage in `tests/test_xbridge.py` and the
+freeze/graph-check three-way-agreement round-trip in `tests/test_xfreeze.py`.
