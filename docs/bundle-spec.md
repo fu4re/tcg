@@ -234,6 +234,74 @@ Steps 2–4 are the pure structural verdict, computed by the same function in
 `graph check`, `freeze`, and `verify` (three-way agreement); step 1 (the kprove
 recursion) is verify-only, exactly as `D`/`B` replay is for the in-graph bridge.
 
+## 5c. Typed-stub assumption — the opaque callee (STUB)
+
+The bridge (RECURSE) *proves* the callee summary `S` over the real code `P`; the
+linker (REUSE) *reuses* an independently-verified callee bundle that did. The
+**stub** does neither: the callee is **opaque** — its code is not proved — and
+the caller chooses to *assume* a typed frame for it. This is the honest way to
+compose against code you cannot or will not prove (an unverified third party, a
+proxy whose implementation is out of scope), **provided the assumption is never
+silent**: it is enumerated in the trust ledger, surfaced as load-bearing, and
+refused under `--strict`.
+
+**Assume-block variant** (in `spec/graph.json`, the abstract-summary node),
+**mutually exclusive** with `bridge`:
+
+```json
+"assume": {
+  "callee_address": "0x…",
+  "frame": "human-readable typed frame: what the opaque callee MAY and MAY NOT
+            do — MUST state the storage-frame (does it touch caller storage?)
+            and reentrancy (may it reenter?). Conservative by default.",
+  "ledger_id": "A_callee_<addr>"        // its key in trust-manifest.json
+}
+```
+
+The node's summary `S` (free `<program>`) is still a **real injected trusted
+child** consumed by the caller's replay — a root that consumes it genuinely
+depends on it (load-bearing iff a root reaches it over trusted-lemma edges). It
+is **not** bridged and **not** replayed (a symbolic program cannot Accept).
+
+**Structural verdict** (bundle-only, the same function in `graph check`,
+`freeze`, `verify`): the node carries an `assume` block and **not** a `bridge`
+block; the block is well-formed (`callee_address` numeric, `frame` non-empty,
+`ledger_id` present); `ledger_id` is **exactly** `A_callee_<callee_address>` (so
+the graph node and its ledger entry are cross-checkable by content); the summary
+abstracts **only** its `<program>` cell; and the summary `<id>` frames the
+declared `callee_address`. The frame text is **never interpreted** — see below.
+
+**Ledger consistency** (verify-only; `freeze` writes it consistent by
+construction): every assume-node's `ledger_id` **must** be present in
+`trust-manifest.json`, and every `A_callee_*` entry **must** be referenced by
+some assume-node. A missing entry (a silent stub) **or** an orphan entry (a
+ledger record with no graph node) is a **refusal**. `graph check` cannot run
+this — the ledger only exists after `freeze` — so it checks the structural half
+only.
+
+**verify never validates the frame.** The frame is an *assumption* the caller
+made *precisely because* the callee is not proved. Interpreting or checking it
+against the callee would be unsound theatre — it would read as a discharge where
+none exists. `verify` only checks ledger consistency and **surfaces** the frame
+(the `⚠` section and `tcg roots`). What the reader does with the frame is the
+irreducible semantic step, exactly as for the roots (§8 step 6).
+
+**Report semantics.** After steps 1–5v pass:
+
+- **default** — `verify` exits 0 but prints a prominent trailing section,
+  `⚠ N author-chosen assumption(s) load-bearing:`, enumerating each
+  (`callee_address`, `frame`, the roots it is load-bearing for). A bundle with
+  **zero** assume-nodes prints nothing extra — no behavior change for existing
+  bundles.
+- **`--strict`** — if any assume-node is present, `verify` **refuses** (exit 3):
+  "the auditor asked for a fully-discharged certificate." Propagated into deps,
+  so a stub hidden in a vendored callee also refuses.
+
+The `--strict` gate and the `⚠` section fire **after** steps 1–5v — a stub
+bundle that also fails integrity, replay, vacuity, or ledger consistency is
+refused for *that* reason first. `tcg roots` surfaces the same load-bearing
+assumptions next to the roots.
+
 ## 6. Evidence
 
 **v1 — replay records.** `evidence/replay/<h>.json` fixes the exact prover
@@ -321,6 +389,17 @@ Named entries the v1 manifest must carry:
   `subject_identity` leaves for the primary subject. No caller-side re-execution
   over `P` is assumed away: the dep proved it and the caller re-verified the dep.
   The entry carries `links: [{summary, dep, root}, …]`, the load-bearing edges.
+- `A_callee_<addr>` — present ONLY when the graph contains a typed-stub
+  assume-node (§5c), one entry per stub. Status *assumed-callee (AUTHOR-CHOSEN,
+  load-bearing) — opaque callee summary, NOT discharged over the callee's code*.
+  This status **must** make it distinguishable from the baseline environment
+  assumptions (`A_keccak` etc.): these are author-chosen, per-bundle, and
+  load-bearing. The entry carries `callee_address`, `frame` (the typed frame,
+  verbatim — **never interpreted** by the verifier), and `load_bearing_for`: the
+  root claim hashes whose proof injects this `S`. Unlike `bridge_S_from_D` /
+  `link_S_from_dep`, nothing here is *discharged* — the callee code is not
+  proved; the assumption is named so it can never be a silent pass, and
+  `verify --strict` refuses any bundle carrying one.
 - two reading-discipline lines: a prover Accept is read as a derivation in the
   prover's proof system; a checker Accept on an implication is read as
   validity of that implication.
@@ -346,7 +425,7 @@ Strictly ordered; failure of any step is **refusal of the certificate**.
 | 2 | Identity | `keccak(runtime.bin)` equals the on-chain code hash; constructor args / immutables per `environment.json` | seconds |
 | 3 | Theory | build the vendored semantics (with patches); re-check every re-checkable `annotations.json` fact against `runtime.bin` | minutes |
 | 4 | Graph | see below (includes root **program binding**) | minutes |
-| 5 | Replay (v1) | topological order over the trusted-lemma subgraph; for each node, run the pinned invocation with children as trusted; expect Accept. An abstract-summary node is **skipped** here (it is bridge-discharged in step 4, and a symbolic program cannot Accept) yet is still injected as a trusted child into its caller's replay. **Unknown = refusal** (retry per `toolchain.lock`) | CPU hours |
+| 5 | Replay (v1) | topological order over the trusted-lemma subgraph; for each node, run the pinned invocation with children as trusted; expect Accept. An abstract-summary node (bridge, linker, **or typed stub**) is **skipped** here (it is discharged in step 4, and a symbolic program cannot Accept) yet is still injected as a trusted child into its caller's replay. **Unknown = refusal** (retry per `toolchain.lock`) | CPU hours |
 | 5v | Vacuity | for each root, re-derive and re-prove the **falsified** form (post → `false`); if it still Accepts the root is vacuous — refusal | CPU (one run/root) |
 | 6 | Semantic step | read the roots. The only step needing formal literacy — bounded to the roots, not the graph, the code, or the session | human |
 
@@ -393,6 +472,18 @@ Strictly ordered; failure of any step is **refusal of the certificate**.
   A `{dep,root}` block that also carries `at_program_proof` is refused. As with
   the in-graph bridge, `S` is skipped in replay yet injected as a trusted child
   into its caller.
+- **Typed-stub discharge (STUB, §5c).** A node carrying an `assume` block (and
+  not a `bridge` block) is an **opaque-callee** summary: its `S` is discharged
+  by a *named assumption*, not by a proof over the callee's code. The verifier
+  re-derives the structural verdict bundle-only (the block is well-formed, its
+  `ledger_id` is canonical `A_callee_<addr>`, `S` abstracts only its `<program>`
+  and frames the declared callee) **and** checks **ledger consistency** against
+  `trust-manifest.json`: every assume-node's `ledger_id` is present, and no
+  `A_callee_*` entry is orphaned. A missing or orphan entry is a refusal (a stub
+  is never a silent pass). The frame is **surfaced, never interpreted**. `S` is
+  skipped in replay yet injected as a trusted child into its caller, exactly as
+  the bridge. Ledger consistency is verify-only (the ledger exists only after
+  freeze); the structural half is shared with `graph check` and `freeze`.
 - hash links resolve; every trusted claim used in a node's evidence is a
   proved node with a corresponding edge — OR, for an abstract-summary node, is
   discharged by its bridge as above (closure);
@@ -428,6 +519,18 @@ sheaf project's Finding 0005 vacuity discipline (`assert(false)`-proves ⇒
 unreachable ⇒ vacuous) into the reachability setting; it catches
 antecedent-failure vacuity, **not** a live-but-weak postcondition (that needs a
 component/family mutation probe, out of scope for v1).
+
+**Author-chosen assumptions (STUB, §5c).** *After* steps 1–5v pass, the verifier
+handles typed stubs. If any assume-node is present and `--strict` was passed, the
+certificate is **refused** (exit 3): the auditor asked for a fully-discharged
+certificate, and an opaque-callee summary is assumed, not proved. Otherwise the
+verifier exits 0 but prints a prominent `⚠ N author-chosen assumption(s)
+load-bearing:` section enumerating each (`callee_address`, `frame`, the roots it
+bears). A bundle with zero assume-nodes prints nothing extra. This is the "a stub
+is never a silent pass" guarantee at the report boundary; the ledger-consistency
+refusal (step 4) is its structural counterpart. Because the gate fires last, a
+stub bundle that also fails integrity/replay/vacuity/consistency is refused for
+*that* reason first.
 
 **What the bundle transfers and what it does not.** It transfers the entire
 mechanical part — that the bytecode satisfies the root claims, with the stated
@@ -467,6 +570,16 @@ controls, and must pass the last one:
    hash ≠ `<callee_root>` → refused; a flipped byte in a vendored dep file (with
    the caller MANIFEST left stale) → refused at step 1 integrity. The honest
    composition must verify (exit 0). Each control must hold.
+10. **typed-stub controls (STUB, §5c)** — for an `assume` summary node:
+    **B0** an honest stub → default `verify` exits 0 **and** the `⚠` section
+    names it (address, frame, roots); **B1** the same bundle under `--strict` →
+    refused (exit 3); **B2** a stub whose `A_callee_<addr>` ledger entry is
+    deleted (MANIFEST re-hashed so integrity still passes) → refused at step 4
+    (consistency: missing); **B3** an orphan `A_callee_*` ledger entry with no
+    assume-node → refused at step 4 (consistency: orphan); **B4** `tcg roots`
+    surfaces the load-bearing assumption; **B5** a zero-stub bundle → exits 0 and
+    prints **nothing** extra (hard regression guard: no behavior change for
+    existing bundles). Each control must hold.
 
 Controls 1–6 are exercised by `scripts/conformance.sh` against copies of the
 reference bundle. Control 7 is exercised by `scripts/false-green.sh`, which
@@ -480,3 +593,8 @@ exercised by `tests/reference/callext/run-tcg-linker-discriminators.sh` (honest
 REUSE verifies under the real prover, every tamper refused), alongside the pure
 structural + recursion-control coverage in `tests/test_xbridge.py` and the
 freeze/graph-check three-way-agreement round-trip in `tests/test_xfreeze.py`.
+Control 10 is exercised by `tests/test_assume.py` (rows B0–B5 over synthetic
+bundles with the injected prover seam), plus the freeze/graph-check three-way-
+agreement round-trip in the same file. No prover is needed: the assume-node is
+skipped in replay, and every refusal row refuses at step 4 (structural /
+consistency) before any replay verdict matters.
