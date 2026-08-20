@@ -13,9 +13,11 @@
 #    own theory/patches/ tree — and anything proved against it — has already
 #    moved on, silently.
 #
-# 2. bundle-only-imports: tcg/commands/verify.py, tcg/commands/roots.py, and
-#    tcg/verdict.py (the prover-verdict judge shared with `prove`) must not
-#    import tcg.workspace or tcg.commands.* — the bundle-only contract:
+# 2. bundle-only-imports: tcg/commands/verify.py, tcg/commands/roots.py,
+#    tcg/verdict.py (the prover-verdict judge shared with `prove`), and
+#    tcg/assume.py (the typed-stub structural verdict shared by graph check /
+#    freeze / verify) must not import tcg.workspace or tcg.commands.* — the
+#    bundle-only contract:
 #    a verifier that can reach workspace state is no longer verifying just
 #    the bundle a stranger handed it. Mechanical (grep), not "someone will
 #    remember" — the contract erodes silently otherwise, one convenient
@@ -35,7 +37,7 @@ script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 repo_root=$(CDPATH= cd -- "$script_dir/.." && pwd -P)
 
 vendored_patches="ghost.diff lemmas.diff"
-bundle_only_files="tcg/commands/verify.py tcg/commands/roots.py tcg/verdict.py"
+bundle_only_files="tcg/commands/verify.py tcg/commands/roots.py tcg/verdict.py tcg/assume.py"
 
 fail_count=0
 
