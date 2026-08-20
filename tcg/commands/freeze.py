@@ -25,6 +25,10 @@ from tcg.workspace import (
     WORKSPACE_DIR, WorkspaceError, find_root, load_graph, load_loop, read_json,
     sha256_file, write_json,
 )
+from tcg.xbridge import (
+    is_xbridge_node, structural_errors as xbridge_structural_errors,
+    xbundle_deps,
+)
 
 
 def run(args) -> int:
@@ -57,6 +61,16 @@ def run(args) -> int:
     # Accept+evidence gate below). The bridge structural check is re-run here so
     # freeze and `tcg graph check` agree.
     for h, n in nodes.items():
+        if is_xbridge_node(n):
+            # Cross-bundle (REUSE) summary: discharged by a vendored callee
+            # bundle under deps/<callee_root>/ (checked against the WORKSPACE
+            # deps/ tree here; the same tree is copied into the bundle below, so
+            # verify re-derives an identical verdict). No Accept/evidence gate —
+            # like any bridge node, S can never Accept.
+            berrs, _ = xbridge_structural_errors(
+                h, nodes, claim_text_of, environment, root / "deps")
+            errors.extend(berrs)
+            continue
         if is_bridge_node(n):
             berrs, _ = bridge_structural_errors(
                 h, nodes, claim_text_of, environment)
@@ -161,6 +175,25 @@ def run(args) -> int:
     else:
         write_json(bundle / "assumptions" / "annotations.json", {})
 
+    # Vendor each cross-bundle (REUSE) dep sub-bundle into deps/<callee_root>/.
+    # COPIED, not referenced by a remote path — `tcg verify <caller>` must need
+    # nothing but the caller bundle. copytree brings the dep's own deps/ subtree
+    # along (a content-addressed DAG). Each vendored MANIFEST is re-asserted to
+    # hash to its declared <callee_root> (check_graph already gated this; this is
+    # the belt-and-braces integrity assertion at copy time). Every copied file
+    # lands in the hash tree below like any other bundle file, so the caller
+    # MANIFEST hash-links the whole dep (integrity step 1 covers it).
+    for callee_root in sorted(xbundle_deps(nodes)):
+        src = root / "deps" / callee_root
+        dst = bundle / "deps" / callee_root
+        shutil.copytree(src, dst)
+        got = sha256_file(dst / "MANIFEST.json")
+        if got != callee_root:
+            print(f"freeze: vendored dep {callee_root} MANIFEST hashes to {got}, "
+                  "not its declared callee_root — refusing", file=sys.stderr)
+            shutil.rmtree(bundle)
+            return int(Exit.REFUSED)
+
     # Trust manifest: named assumptions with statuses. Facts not discharged in
     # this workspace are listed as assumed — never silently. The vendored,
     # pinned prover patches (theory/patches/*.diff, travelling in the hash tree
@@ -247,6 +280,51 @@ def run(args) -> int:
                 "address — a chain read, exactly the residual subject_identity "
                 "leaves for the primary subject (verifier action)",
             ],
+        }
+    # Cross-bundle linker (REUSE). Present ONLY when a cross-bundle summary node
+    # is present, so non-linker bundles' manifests are unchanged. The dep is
+    # vendored (self-contained) and re-verified by the verifier's post-order
+    # recursion; the only new residual assumption over the in-graph bridge is
+    # NONE — code-identity is still COMPUTED, binding still PERFORMED.
+    xdeps = xbundle_deps(nodes)
+    if xdeps:
+        links = []
+        for h, n in nodes.items():
+            if is_xbridge_node(n):
+                cp = n["bridge"]["concrete_proof"]
+                links.append({"summary": f"{n['loop']}/{n['label']}",
+                              "dep": cp["dep"], "root": cp["root"]})
+        manifest_data["link_S_from_dep"] = {
+            "status": "machine-checkable (structural + keccak + dep re-verified, "
+                      "PERFORMED) + verifier-action-required (on-chain code hash)",
+            "what": "an abstract callee-summary node S (free <program>) is "
+                    "DISCHARGED by REUSE of a vendored, independently-verified "
+                    "callee bundle under deps/<callee_root>/ — the linker — "
+                    "instead of a caller-side re-proof over the callee code P. "
+                    "The dep's declared root plays the role of both D and B.",
+            "discharged": [
+                "the vendored dep is re-verified with the FULL verifier protocol "
+                "(post-order recursion) before it is trusted — an unverifiable "
+                "dep refuses the caller",
+                "concrete_proof.root is one of the dep's declared roots and its "
+                "<program> is the dep's own runtime P (a real execution proof "
+                "over P, dep-verified)",
+                "code-identity: keccak256(dep runtime) == the declared code_hash "
+                "AND environment.external_code[callee] == the dep runtime "
+                "byte-for-byte, COMPUTED by the verifier (tcg/keccak.py)",
+                "the anti-proxy binding S<=>D: the dep root agrees with S "
+                "cell-for-cell on every entry/effect S pins, carries S's exact "
+                "storage delta, and is at least as general as S at entry — "
+                "IDENTICAL strictness to the in-graph bridge (tcg.bridge)",
+            ],
+            "assumed": [
+                "declared code_hash == the on-chain EXTCODEHASH at the callee "
+                "address — a chain read, the same residual subject_identity "
+                "leaves for the primary subject (verifier action). No caller-side "
+                "re-execution over P is assumed away: the dep proved it, and the "
+                "caller re-verified the dep.",
+            ],
+            "links": links,
         }
     write_json(bundle / "assumptions" / "trust-manifest.json", manifest_data)
 

@@ -30,6 +30,9 @@ from graphlib import CycleError, TopologicalSorter
 from tcg.bridge import is_bridge_node, structural_errors as bridge_structural_errors
 from tcg.claims import program_binding_error
 from tcg.outcome import Exit
+from tcg.xbridge import (
+    is_xbridge_node, structural_errors as xbridge_structural_errors,
+)
 from tcg.workspace import (
     EDGE_TYPES, WorkspaceError, find_root, load_graph, load_loop, read_json,
     sha256_text,
@@ -157,7 +160,17 @@ def check_graph(root) -> list[str]:
             continue
         seen.add(h)
         node = nodes[h]
-        if is_bridge_node(node):
+        if is_xbridge_node(node):
+            # Cross-bundle (REUSE) summary: discharged by a vendored callee
+            # bundle under deps/<callee_root>/, not by in-graph D+B. The dep
+            # root plays the role of both D and B; its own execution proof over
+            # P is re-verified by verify's post-order recursion (not here — this
+            # is the structural verdict the three commands share). No in-graph
+            # child to require Accepted.
+            berrs, _ = xbridge_structural_errors(
+                h, nodes, claim_text_of, environment, root / "deps")
+            errors.extend(berrs)
+        elif is_bridge_node(node):
             berrs, refs = bridge_structural_errors(
                 h, nodes, claim_text_of, environment)
             errors.extend(berrs)

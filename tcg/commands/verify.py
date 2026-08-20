@@ -3,7 +3,9 @@
 Reads nothing but the bundle (plus a kompiled definition for replay). Steps
 are strictly ordered; the first failing step refuses the certificate.
 
-1. Integrity  — recompute the hash tree from MANIFEST.json.
+1. Integrity  — recompute the hash tree from MANIFEST.json (covers vendored
+                deps/** too — every dep file is hash-linked in the caller
+                MANIFEST).
 2. Identity   — subject identity is machine-checkable but needs chain access;
                 printed as a verifier action, per the trust manifest.
 3. Theory     — re-hash vendored patches against toolchain.lock.
@@ -11,7 +13,12 @@ are strictly ordered; the first failing step refuses the certificate.
                 binding (P0-A): every root's <program> cell must equal
                 subject/runtime.bin, re-derived bundle-only (text + byte
                 compare, no prover). A root about a different program than the
-                installed subject is refused here.
+                installed subject is refused here. For a cross-bundle (REUSE)
+                summary node, step 4 ALSO recurses into each vendored dep
+                bundle deps/<callee_root>/ and runs the FULL protocol on it
+                first (post-order) — an unverifiable dep refuses the caller —
+                then re-derives the linker's structural discharge (dep-root
+                membership, code-identity, and the anti-proxy binding S<=>D).
 5. Replay     — topological re-proof of every node, children as trusted,
                 judged by the SAME classifier `prove` uses (tcg.verdict) --
                 same judge, same discipline, on both sides. Accept closes the
@@ -28,6 +35,12 @@ are strictly ordered; the first failing step refuses the certificate.
                 bundle-only; the bundled evidence/vacuity record is not trusted.
 
 Step 6 (reading the roots) is `tcg roots`.
+
+The prover invocation is factored behind a `run_prover` seam so the cross-bundle
+recursion and its control flow can be exercised in a unit test WITHOUT kprove
+(production always calls the real subprocess seam). The seam is a test aid only:
+a fake that Accepts everything makes step 5v (vacuity) refuse, never pass, so it
+cannot manufacture a false green.
 """
 from __future__ import annotations
 
@@ -45,6 +58,10 @@ from tcg.claims import (
 )
 from tcg.outcome import Exit
 from tcg.verdict import classify, to_text
+from tcg.xbridge import (
+    is_xbridge_node, structural_errors as xbridge_structural_errors,
+    xbundle_deps,
+)
 
 _ZERO_STEP_ROLES = ("junction", "compat")
 
@@ -69,8 +86,52 @@ def _fail(step: str, msgs: list[str]) -> int:
     return int(Exit.REFUSED)
 
 
+def _subprocess_prover(argv: list[str], timeout: int) -> tuple[int, str, bool]:
+    """Default prover seam: run kprove, return (returncode, log, timed_out).
+    Raises FileNotFoundError if kprove is not on PATH (the caller maps that to
+    a USAGE exit). This is the ONLY place production verify shells out; the
+    recursion and unit tests thread a substitute through `run_prover`."""
+    try:
+        proc = subprocess.run(argv, capture_output=True, text=True, timeout=timeout)
+        return proc.returncode, proc.stdout + proc.stderr, False
+    except subprocess.TimeoutExpired as e:
+        return -1, to_text(e.stdout) + to_text(e.stderr), True
+
+
+def _prove(run_prover, argv: list[str], timeout: int, retries: int):
+    """Run `argv` up to retries+1 times, absorbing an UNDECIDED result only --
+    Accept and Refute are both final on the first attempt (re-running a
+    deterministic prover against the same fixed claim hoping a genuine
+    refutation goes away would be forum shopping, not a retry). Returns
+    (verdict, unknown_class, hint) from the shared judge tcg.verdict.classify.
+    May raise FileNotFoundError (kprove missing)."""
+    verdict = ucls = hint = None
+    for _ in range(retries + 1):
+        returncode, log, timed_out = run_prover(argv, timeout)
+        verdict, ucls, hint = classify(returncode, log, timed_out)
+        if verdict != "Unknown":
+            break
+    return verdict, ucls, hint
+
+
 def run(args) -> int:
-    bundle = Path(args.bundle)
+    """CLI entry: verify the bundle with the real (subprocess) prover seam."""
+    return verify_bundle(
+        Path(args.bundle),
+        definition_arg=args.definition,
+        includes_arg=args.include,
+        run_prover=_subprocess_prover,
+    )
+
+
+def verify_bundle(bundle: Path, *, definition_arg=None, includes_arg=None,
+                  run_prover=_subprocess_prover, _seen: set | None = None) -> int:
+    """The verifier protocol on one bundle. Recurses (post-order) into every
+    vendored cross-bundle dep. `_seen` dedups deps already verified OK in this
+    run (content-addressing already forbids a cycle). `run_prover(argv, timeout)
+    -> (returncode, log, timed_out)` is the injectable prover boundary."""
+    if _seen is None:
+        _seen = set()
     manifest_path = bundle / "MANIFEST.json"
     if not manifest_path.is_file():
         print(f"tcg: no MANIFEST.json in {bundle}; pass a directory produced "
@@ -113,6 +174,38 @@ def run(args) -> int:
     # --- Step 4: graph -----------------------------------------------------
     graph = _read_json(bundle / "spec" / "graph.json")
     nodes, edges = graph["nodes"], graph["edges"]
+
+    # 4a. Cross-bundle recursion (REUSE, verify obligation #1): verify every
+    # vendored dep bundle FULLY, post-order, BEFORE the caller's own replay. A
+    # dep that does not itself verify refuses the caller — and the dep's exit
+    # code is propagated verbatim, so a dep Unknown stays Unknown (2) rather
+    # than being laundered into a Refute (3): "could not verify the dep" is not
+    # "the dep refuted".
+    xdeps = sorted(xbundle_deps(nodes))
+    if xdeps:
+        print(f"step 4 (deps): {len(xdeps)} cross-bundle dep(s) — verifying each "
+              "with the full protocol first (post-order)")
+        for cr in xdeps:
+            if cr in _seen:
+                print(f"step 4 (deps): dep {cr[:12]} already verified in this run")
+                continue
+            dep_dir = bundle / "deps" / cr
+            if not (dep_dir / "MANIFEST.json").is_file():
+                return _fail("4-deps", [
+                    f"cross-bundle dep deps/{cr}/ is absent (no MANIFEST) — the "
+                    "caller is not self-contained; re-freeze to vendor it"])
+            print(f"step 4 (deps): --> recursing into deps/{cr[:12]}/")
+            rc = verify_bundle(dep_dir, definition_arg=definition_arg,
+                               includes_arg=includes_arg, run_prover=run_prover,
+                               _seen=_seen)
+            if rc != int(Exit.OK):
+                print(f"verify[4-deps]: dep {cr[:12]} did NOT itself verify "
+                      f"(exit {rc}) — a caller cannot reuse an unverified callee; "
+                      "REFUSING the caller", file=sys.stderr)
+                return rc
+            _seen.add(cr)
+            print(f"step 4 (deps): <-- dep {cr[:12]} verified OK")
+
     for h, n in nodes.items():
         path = bundle / "spec" / "claims" / f"{h}.k"
         if not path.is_file():
@@ -123,8 +216,9 @@ def run(args) -> int:
             errors.append(f"{h[:12]}: content does not match its hash")
         if not re.search(r"\[[^\[\]]*all-path[^\[\]]*\]", text):
             errors.append(f"{h[:12]}: missing all-path attribute")
-        # An abstract-summary node carries no replay evidence — it is bridge-
-        # discharged, never directly proved (checked below + in step 5).
+        # An abstract-summary node (in-graph bridge OR cross-bundle linker)
+        # carries no replay evidence — it is discharged structurally, never
+        # directly proved (checked below + in step 5).
         if (not is_bridge_node(n)
                 and not (bundle / "evidence" / "replay" / f"{h}.json").is_file()):
             errors.append(f"{h[:12]}: no replay evidence")
@@ -178,13 +272,14 @@ def run(args) -> int:
                 n = nodes.get(h, {})
                 errors.append(f"root {n.get('loop')}/{n.get('label')}: {reason}")
 
-    # Bridge S<==D, re-derived bundle-only (structural + keccak; no prover): for
-    # each abstract-summary node, re-check that its bridge discharges it — S
-    # abstracts only its <program>, the anti-proxy binding S<=>B holds, and
-    # code-identity keccak256(external_code[callee]) == the declared code_hash.
-    # D and B are replayed in step 5 like any node; this is the structural half
-    # that a self-consistent hash tree does not launder (cf. root program
-    # binding). Same tcg.bridge verdict freeze and `graph check` computed.
+    # Bridge / linker discharge, re-derived bundle-only (structural + keccak; no
+    # prover): for each abstract-summary node, re-check that it is discharged —
+    # S abstracts only its <program>, the anti-proxy binding holds, and
+    # code-identity keccak256(callee code) == the declared code_hash. In-graph
+    # bridge nodes bind against their at-P proof B; cross-bundle (REUSE) nodes
+    # bind against the vendored dep's root D (deps/<callee_root>/), which the
+    # 4a recursion just re-verified. Same tcg.bridge / tcg.xbridge verdict that
+    # freeze and `graph check` computed (three-way agreement).
     env_path = bundle / "subject" / "environment.json"
     environment = _read_json(env_path) if env_path.is_file() else {}
 
@@ -192,26 +287,36 @@ def run(args) -> int:
         return (bundle / "spec" / "claims" / f"{h}.k").read_text(encoding="utf-8")
 
     for h, n in nodes.items():
-        if is_bridge_node(n):
+        if is_xbridge_node(n):
+            berrs, _ = xbridge_structural_errors(
+                h, nodes, _bridge_claim_text, environment, bundle / "deps")
+            errors.extend(berrs)
+        elif is_bridge_node(n):
             berrs, _ = bridge_structural_errors(
                 h, nodes, _bridge_claim_text, environment)
             errors.extend(berrs)
     if errors:
         return _fail("4-graph", errors)
-    bridge_count = sum(1 for n in nodes.values() if is_bridge_node(n))
-    bridge_note = (f"; {bridge_count} abstract-summary node(s) bridge-discharged "
-                   "S<==D") if bridge_count else ""
+    bridge_count = sum(1 for n in nodes.values()
+                       if is_bridge_node(n) and not is_xbridge_node(n))
+    xbridge_count = sum(1 for n in nodes.values() if is_xbridge_node(n))
+    disc = []
+    if bridge_count:
+        disc.append(f"{bridge_count} abstract-summary node(s) bridge-discharged S<==D")
+    if xbridge_count:
+        disc.append(f"{xbridge_count} node(s) linker-discharged S<==D (REUSE)")
+    disc_note = ("; " + "; ".join(disc)) if disc else ""
     print(f"step 4 graph: OK ({len(nodes)} node(s), {len(roots)} root(s); "
-          f"root <program> cells bind to subject/runtime.bin{bridge_note})")
+          f"root <program> cells bind to subject/runtime.bin{disc_note})")
 
     # --- Step 5: replay ----------------------------------------------------
-    definition = args.definition or lock.get("definition")
+    definition = definition_arg or lock.get("definition")
     if not definition:
         print("verify: no kompiled definition for replay; pass "
               "--definition PATH, or add \"definition\" to the bundle's "
               "theory/toolchain.lock", file=sys.stderr)
         return int(Exit.USAGE)
-    includes = list(args.include or []) + list(lock.get("includes", []))
+    includes = list(includes_arg or []) + list(lock.get("includes", []))
     retries = int(lock.get("replay", {}).get("retries", 0))
     timeout = lock.get("replay", {}).get("timeout_seconds", 3600)
 
@@ -226,126 +331,100 @@ def run(args) -> int:
     # Replay modules go to a scratch dir: verify never writes into the bundle.
     scratch = Path(tempfile.mkdtemp(prefix="tcg-replay-"))
 
-    for idx, h in enumerate(order, 1):
-        # An abstract-summary node is discharged by its bridge S<==D (step 4),
-        # never by direct replay — its symbolic <program> cannot Accept. It is
-        # still injected as a trusted child into its caller's replay below
-        # (children[caller] includes it), exactly as at prove time; its
-        # soundness rides on the bridge, which D and B (replayed here) close.
-        if is_bridge_node(nodes[h]):
-            print(f"step 5 replay [{idx}/{len(order)}]: "
-                  f"{nodes[h]['loop']}/{nodes[h]['label']} bridge-discharged "
-                  "(S<==D; not replayed directly)")
-            continue
-        goal = claim_text(h)
-        reqs, imps = module_header(goal)
-        trusted_bodies = []
-        for c in children[h]:
-            child_text = claim_text(c)
-            creqs, cimps = module_header(child_text)
-            reqs += [r for r in creqs if r not in reqs]
-            imps += [i for i in cimps if i not in imps]
-            trusted_bodies.append(extract_body(child_text))
-        module_text = assemble_prove_module(
-            "REPLAY-NODE", reqs, imps, trusted_bodies, [extract_body(goal)])
-        spec = scratch / f"replay-{h[:12]}.k"
-        spec.write_text(module_text, encoding="utf-8")
+    try:
+        for idx, h in enumerate(order, 1):
+            # An abstract-summary node is discharged structurally (step 4), never
+            # by direct replay — its symbolic <program> cannot Accept. It is still
+            # injected as a trusted child into its caller's replay below
+            # (children[caller] includes it), exactly as at prove time.
+            if is_bridge_node(nodes[h]):
+                how = ("linker-discharged (REUSE; dep re-verified)"
+                       if is_xbridge_node(nodes[h])
+                       else "bridge-discharged (S<==D; not replayed directly)")
+                print(f"step 5 replay [{idx}/{len(order)}]: "
+                      f"{nodes[h]['loop']}/{nodes[h]['label']} {how}")
+                continue
+            goal = claim_text(h)
+            reqs, imps = module_header(goal)
+            trusted_bodies = []
+            for c in children[h]:
+                child_text = claim_text(c)
+                creqs, cimps = module_header(child_text)
+                reqs += [r for r in creqs if r not in reqs]
+                imps += [i for i in cimps if i not in imps]
+                trusted_bodies.append(extract_body(child_text))
+            module_text = assemble_prove_module(
+                "REPLAY-NODE", reqs, imps, trusted_bodies, [extract_body(goal)])
+            spec = scratch / f"replay-{h[:12]}.k"
+            spec.write_text(module_text, encoding="utf-8")
 
-        argv = ["kprove", str(spec), "--definition", str(definition),
-                "--spec-module", "REPLAY-NODE"]
-        for inc in includes:
-            argv += ["-I", str(inc)]
+            argv = ["kprove", str(spec), "--definition", str(definition),
+                    "--spec-module", "REPLAY-NODE"]
+            for inc in includes:
+                argv += ["-I", str(inc)]
 
-        # Retries absorb solver nondeterminism on an UNDECIDED result only --
-        # Accept and Refute are both final on the first attempt. Re-running a
-        # deterministic prover against the same fixed claim hoping a genuine
-        # structural refutation goes away on attempt 2 would not be a retry,
-        # it would be forum shopping.
-        verdict = ucls = hint = None
-        for attempt in range(retries + 1):
-            timed_out = False
-            try:
-                proc = subprocess.run(argv, capture_output=True, text=True,
-                                      timeout=timeout)
-                returncode, log = proc.returncode, proc.stdout + proc.stderr
-            except subprocess.TimeoutExpired as e:
-                returncode, log, timed_out = (
-                    -1, to_text(e.stdout) + to_text(e.stderr), True)
-            except FileNotFoundError:
-                print("verify: kprove not found on PATH; install/activate the "
-                      "pinned K toolchain (see theory/toolchain.lock in the "
-                      "bundle)", file=sys.stderr)
-                return int(Exit.USAGE)
-            verdict, ucls, hint = classify(returncode, log, timed_out)
-            if verdict != "Unknown":
-                break
-        spec.unlink(missing_ok=True)
+            verdict, ucls, hint = _prove(run_prover, argv, timeout, retries)
+            spec.unlink(missing_ok=True)
 
-        n = nodes[h]
-        if verdict == "Accept":
-            print(f"step 5 replay [{idx}/{len(order)}]: "
-                  f"{n['loop']}/{n['label']} Accept")
-            continue
-        if verdict == "Unknown":
-            hint_note = f" — {hint}" if hint else ""
-            print(f"verify[5-replay]: {n['loop']}/{n['label']} Unknown({ucls}) "
-                  f"after {retries + 1} attempt(s){hint_note} — conservative "
-                  "refusal", file=sys.stderr)
-            print("verify: certificate UNVERIFIED at step 5-replay — could "
-                  "not decide (this is not a refutation); raise "
-                  "replay.timeout_seconds/retries in toolchain.lock and "
-                  "re-run `tcg verify`, or investigate the claim",
-                  file=sys.stderr)
-            return int(Exit.UNKNOWN)
-        # verdict == "Refute": a genuine structural counterexample.
-        return _fail("5-replay",
-                     [f"{n['loop']}/{n['label']} did not replay to Accept "
-                      "(Refute — prover reached a state that does not "
-                      "unify with the claimed destination)"])
+            n = nodes[h]
+            if verdict == "Accept":
+                print(f"step 5 replay [{idx}/{len(order)}]: "
+                      f"{n['loop']}/{n['label']} Accept")
+                continue
+            if verdict == "Unknown":
+                hint_note = f" — {hint}" if hint else ""
+                print(f"verify[5-replay]: {n['loop']}/{n['label']} Unknown({ucls}) "
+                      f"after {retries + 1} attempt(s){hint_note} — conservative "
+                      "refusal", file=sys.stderr)
+                print("verify: certificate UNVERIFIED at step 5-replay — could "
+                      "not decide (this is not a refutation); raise "
+                      "replay.timeout_seconds/retries in toolchain.lock and "
+                      "re-run `tcg verify`, or investigate the claim",
+                      file=sys.stderr)
+                return int(Exit.UNKNOWN)
+            # verdict == "Refute": a genuine structural counterexample.
+            return _fail("5-replay",
+                         [f"{n['loop']}/{n['label']} did not replay to Accept "
+                          "(Refute — prover reached a state that does not "
+                          "unify with the claimed destination)"])
 
-    print(f"step 5 replay: OK ({len(order)} node(s) re-proved)")
+        print(f"step 5 replay: OK ({len(order)} node(s) re-proved)")
 
-    # --- Step 5v: vacuity re-derivation over roots -------------------------
-    # P0-B, bundle-only: for each ROOT, falsify its postcondition (ensures
-    # false) and re-prove the mutant. If the falsified claim STILL proves
-    # Accept, the root's antecedent is infeasible ⇒ the proof is vacuous ⇒
-    # REFUSE. verify does NOT trust the bundled evidence/vacuity record; it
-    # re-derives the mutant from the root claim text and re-runs the prover.
-    # Single attempt, no retry: Accept is the only outcome that flags vacuity;
-    # Refute/Unknown both mean "not vacuously provable" (the safe direction).
-    for h in sorted(roots):
-        goal = claim_text(h)
-        reqs, imps = module_header(goal)
-        mutant = assemble_prove_module(
-            "REPLAY-VACUITY", reqs, imps, [], [falsify_body(extract_body(goal))])
-        spec = scratch / f"vacuity-{h[:12]}.k"
-        spec.write_text(mutant, encoding="utf-8")
-        argv = ["kprove", str(spec), "--definition", str(definition),
-                "--spec-module", "REPLAY-VACUITY"]
-        for inc in includes:
-            argv += ["-I", str(inc)]
-        timed_out = False
-        try:
-            proc = subprocess.run(argv, capture_output=True, text=True, timeout=timeout)
-            returncode, log = proc.returncode, proc.stdout + proc.stderr
-        except subprocess.TimeoutExpired as e:
-            returncode, log, timed_out = -1, to_text(e.stdout) + to_text(e.stderr), True
-        except FileNotFoundError:
-            print("verify: kprove not found on PATH; install/activate the "
-                  "pinned K toolchain (see theory/toolchain.lock in the "
-                  "bundle)", file=sys.stderr)
-            return int(Exit.USAGE)
-        spec.unlink(missing_ok=True)
-        verdict, _, _ = classify(returncode, log, timed_out)
-        n = nodes[h]
-        if verdict == "Accept":
-            return _fail("5-vacuity",
-                         [f"root {n['loop']}/{n['label']} is VACUOUS — its "
-                          "falsified form (ensures false) still proves Accept, "
-                          "so the antecedent is infeasible and the proof is "
-                          "empty; a vacuous proof is a refusal, never a pass"])
-        print(f"step 5v vacuity [{n['loop']}/{n['label']}]: OK "
-              f"(falsified form does not prove: {verdict})")
+        # --- Step 5v: vacuity re-derivation over roots ---------------------
+        # P0-B, bundle-only: for each ROOT, falsify its postcondition (ensures
+        # false) and re-prove the mutant. If the falsified claim STILL proves
+        # Accept, the root's antecedent is infeasible ⇒ the proof is vacuous ⇒
+        # REFUSE. verify does NOT trust the bundled evidence/vacuity record; it
+        # re-derives the mutant from the root claim text and re-runs the prover.
+        # Single attempt, no retry: Accept is the only outcome that flags
+        # vacuity; Refute/Unknown both mean "not vacuously provable" (safe).
+        for h in sorted(roots):
+            goal = claim_text(h)
+            reqs, imps = module_header(goal)
+            mutant = assemble_prove_module(
+                "REPLAY-VACUITY", reqs, imps, [], [falsify_body(extract_body(goal))])
+            spec = scratch / f"vacuity-{h[:12]}.k"
+            spec.write_text(mutant, encoding="utf-8")
+            argv = ["kprove", str(spec), "--definition", str(definition),
+                    "--spec-module", "REPLAY-VACUITY"]
+            for inc in includes:
+                argv += ["-I", str(inc)]
+            verdict, _, _ = _prove(run_prover, argv, timeout, 0)
+            spec.unlink(missing_ok=True)
+            n = nodes[h]
+            if verdict == "Accept":
+                return _fail("5-vacuity",
+                             [f"root {n['loop']}/{n['label']} is VACUOUS — its "
+                              "falsified form (ensures false) still proves Accept, "
+                              "so the antecedent is infeasible and the proof is "
+                              "empty; a vacuous proof is a refusal, never a pass"])
+            print(f"step 5v vacuity [{n['loop']}/{n['label']}]: OK "
+                  f"(falsified form does not prove: {verdict})")
+    except FileNotFoundError:
+        print("verify: kprove not found on PATH; install/activate the pinned K "
+              "toolchain (see theory/toolchain.lock in the bundle)",
+              file=sys.stderr)
+        return int(Exit.USAGE)
 
     print("certificate holds; step 6 is yours: `tcg roots <bundle>`")
     return int(Exit.OK)
