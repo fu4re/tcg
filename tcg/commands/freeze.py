@@ -18,6 +18,10 @@ import shutil
 import sys
 from pathlib import Path
 
+from tcg.assume import (
+    is_assume_node, ledger_entry, roots_injecting,
+    structural_errors as assume_structural_errors,
+)
 from tcg.bridge import is_bridge_node, structural_errors as bridge_structural_errors
 from tcg.commands.graph import check_graph
 from tcg.outcome import Exit
@@ -75,6 +79,13 @@ def run(args) -> int:
             berrs, _ = bridge_structural_errors(
                 h, nodes, claim_text_of, environment)
             errors.extend(berrs)
+            continue
+        if is_assume_node(n):
+            # Typed stub (STUB): an opaque callee summary discharged by a named
+            # assumption. Like a bridge node, S can never Accept — so no
+            # Accept/evidence gate; its discharge is the structural check + the
+            # ledger entry emitted below.
+            errors.extend(assume_structural_errors(h, nodes, claim_text_of))
             continue
         try:
             state = load_loop(root, n["loop"])["state"]
@@ -148,10 +159,11 @@ def run(args) -> int:
     put("subject/environment.json", root / "subject" / "environment.json")
     for h, n in nodes.items():
         put(f"spec/claims/{h}.k", root / "spec" / "claims" / f"{h}.k")
-        # An abstract-summary node has no replay evidence (it is bridge-
-        # discharged, never directly proved); its claim text still travels so
-        # verify can re-derive the bridge and inject S into its caller's replay.
-        if not is_bridge_node(n):
+        # An abstract-summary node has no replay evidence (it is bridge- or
+        # stub-discharged, never directly proved); its claim text still travels
+        # so verify can re-derive its discharge and inject S into its caller's
+        # replay.
+        if not is_bridge_node(n) and not is_assume_node(n):
             put(f"evidence/replay/{h}.json",
                 root / "evidence" / "replay" / f"{h}.json")
     # Vacuity records travel with the roots (in the hash tree): they record the
@@ -326,6 +338,18 @@ def run(args) -> int:
             ],
             "links": links,
         }
+    # Typed-stub assumptions (STUB, Mechanism B). One A_callee_<addr> entry per
+    # assume-node, present ONLY when an assume-node exists so existing bundles'
+    # manifests are byte-unchanged. `status` marks it author-chosen and load-
+    # bearing (distinct from the baseline A_keccak/A_simp_lemmas assumptions);
+    # `load_bearing_for` names the roots whose proof injects this S. verify
+    # re-checks that every assume-node's ledger_id is present here and that no
+    # A_callee_* entry is orphaned (consistency) — a stub is never a silent pass.
+    edges = graph.get("edges", [])
+    for h, n in nodes.items():
+        if is_assume_node(n):
+            manifest_data[n["assume"]["ledger_id"]] = ledger_entry(
+                n, roots_injecting(h, nodes, edges))
     write_json(bundle / "assumptions" / "trust-manifest.json", manifest_data)
 
     (bundle / "nav").mkdir()

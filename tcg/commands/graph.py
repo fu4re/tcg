@@ -27,6 +27,9 @@ import re
 import sys
 from graphlib import CycleError, TopologicalSorter
 
+from tcg.assume import (
+    is_assume_node, structural_errors as assume_structural_errors,
+)
 from tcg.bridge import is_bridge_node, structural_errors as bridge_structural_errors
 from tcg.claims import program_binding_error
 from tcg.outcome import Exit
@@ -181,6 +184,16 @@ def check_graph(root) -> list[str]:
                 dh = refs.get(key)
                 if dh is not None:
                     stack.append(dh)
+        elif is_assume_node(node):
+            # Typed stub (STUB): an opaque callee summary discharged by a NAMED
+            # assumption, not by a proof over the callee's code. Its "discharge"
+            # is the assumption itself, checked structurally here (the summary
+            # abstracts only its <program>, frames the declared callee, and the
+            # ledger_id is canonical). No Accepted child to require — the ledger
+            # CONSISTENCY half (the entry actually exists) lives in freeze/verify
+            # where trust-manifest.json is available. verify surfaces it as
+            # load-bearing; --strict refuses it. Never a silent pass.
+            errors.extend(assume_structural_errors(h, nodes, claim_text_of))
         else:
             try:
                 state = load_loop(root, node["loop"])["state"]
