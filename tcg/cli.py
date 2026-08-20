@@ -195,6 +195,13 @@ def build_parser() -> argparse.ArgumentParser:
                     help="kompiled definition dir for replay")
     vf.add_argument("-I", "--include", action="append", default=None,
                     help="include dir for the prover (repeatable)")
+    vf.add_argument("--strict", action="store_true",
+                    help="refuse (exit 3) any bundle carrying an author-chosen "
+                         "typed-stub assumption (an opaque callee summary that is "
+                         "assumed, not proved over the callee's code) — for an "
+                         "auditor who wants a fully-discharged certificate. "
+                         "Default: exit 0 with a prominent ⚠ section enumerating "
+                         "each load-bearing assumption.")
 
     rt = sub.add_parser("roots", help="render a bundle's root claims for reading")
     rt.add_argument("bundle", help="path to a bundle directory")

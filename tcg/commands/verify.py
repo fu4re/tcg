@@ -51,6 +51,10 @@ import tempfile
 from graphlib import CycleError, TopologicalSorter
 from pathlib import Path
 
+from tcg.assume import (
+    consistency_errors, is_assume_node, roots_injecting,
+    structural_errors as assume_structural_errors,
+)
 from tcg.bridge import is_bridge_node, structural_errors as bridge_structural_errors
 from tcg.claims import (
     assemble_prove_module, extract_body, falsify_body, module_header,
@@ -120,16 +124,24 @@ def run(args) -> int:
         Path(args.bundle),
         definition_arg=args.definition,
         includes_arg=args.include,
+        strict=getattr(args, "strict", False),
         run_prover=_subprocess_prover,
     )
 
 
 def verify_bundle(bundle: Path, *, definition_arg=None, includes_arg=None,
-                  run_prover=_subprocess_prover, _seen: set | None = None) -> int:
+                  strict=False, run_prover=_subprocess_prover,
+                  _seen: set | None = None) -> int:
     """The verifier protocol on one bundle. Recurses (post-order) into every
     vendored cross-bundle dep. `_seen` dedups deps already verified OK in this
     run (content-addressing already forbids a cycle). `run_prover(argv, timeout)
-    -> (returncode, log, timed_out)` is the injectable prover boundary."""
+    -> (returncode, log, timed_out)` is the injectable prover boundary.
+
+    `strict`: refuse (exit 3) any bundle carrying an author-chosen typed-stub
+    assumption (Mechanism B) — "the auditor asked for a fully-discharged
+    certificate". Propagated into deps so a stub hidden in a vendored callee
+    also refuses. Default False: a stub bundle exits 0 but with a prominent
+    trailing ⚠ section enumerating each load-bearing assumption."""
     if _seen is None:
         _seen = set()
     manifest_path = bundle / "MANIFEST.json"
@@ -196,8 +208,8 @@ def verify_bundle(bundle: Path, *, definition_arg=None, includes_arg=None,
                     "caller is not self-contained; re-freeze to vendor it"])
             print(f"step 4 (deps): --> recursing into deps/{cr[:12]}/")
             rc = verify_bundle(dep_dir, definition_arg=definition_arg,
-                               includes_arg=includes_arg, run_prover=run_prover,
-                               _seen=_seen)
+                               includes_arg=includes_arg, strict=strict,
+                               run_prover=run_prover, _seen=_seen)
             if rc != int(Exit.OK):
                 print(f"verify[4-deps]: dep {cr[:12]} did NOT itself verify "
                       f"(exit {rc}) — a caller cannot reuse an unverified callee; "
@@ -216,10 +228,11 @@ def verify_bundle(bundle: Path, *, definition_arg=None, includes_arg=None,
             errors.append(f"{h[:12]}: content does not match its hash")
         if not re.search(r"\[[^\[\]]*all-path[^\[\]]*\]", text):
             errors.append(f"{h[:12]}: missing all-path attribute")
-        # An abstract-summary node (in-graph bridge OR cross-bundle linker)
-        # carries no replay evidence — it is discharged structurally, never
-        # directly proved (checked below + in step 5).
-        if (not is_bridge_node(n)
+        # An abstract-summary node (in-graph bridge, cross-bundle linker, OR
+        # typed stub) carries no replay evidence — it is discharged structurally
+        # (bridge/linker) or by a named assumption (stub), never directly proved
+        # (checked below + in step 5).
+        if (not is_bridge_node(n) and not is_assume_node(n)
                 and not (bundle / "evidence" / "replay" / f"{h}.json").is_file()):
             errors.append(f"{h[:12]}: no replay evidence")
     for e in edges:
@@ -295,6 +308,22 @@ def verify_bundle(bundle: Path, *, definition_arg=None, includes_arg=None,
             berrs, _ = bridge_structural_errors(
                 h, nodes, _bridge_claim_text, environment)
             errors.extend(berrs)
+        elif is_assume_node(n):
+            # Typed stub (STUB): structural half of its discharge (same pure
+            # tcg.assume verdict graph check / freeze computed). The frame is
+            # SURFACED, never interpreted — validating it would be unsound.
+            errors.extend(assume_structural_errors(h, nodes, _bridge_claim_text))
+
+    # Ledger consistency (STUB): every assume-node's ledger_id must be present
+    # in trust-manifest.json, and every A_callee_* entry must be referenced by
+    # some assume-node. A missing or orphan entry REFUSES — a stub is never a
+    # silent pass, and the ledger cannot drift from the graph. (graph check
+    # cannot run this — the ledger only exists post-freeze; freeze writes it
+    # consistent by construction, verify re-checks it.) A zero-stub bundle with
+    # no A_callee_* entries yields no errors: existing bundles are unaffected.
+    tm_path = bundle / "assumptions" / "trust-manifest.json"
+    trust_manifest = _read_json(tm_path) if tm_path.is_file() else {}
+    errors.extend(consistency_errors(nodes, trust_manifest))
     if errors:
         return _fail("4-graph", errors)
     bridge_count = sum(1 for n in nodes.values()
@@ -333,14 +362,18 @@ def verify_bundle(bundle: Path, *, definition_arg=None, includes_arg=None,
 
     try:
         for idx, h in enumerate(order, 1):
-            # An abstract-summary node is discharged structurally (step 4), never
-            # by direct replay — its symbolic <program> cannot Accept. It is still
-            # injected as a trusted child into its caller's replay below
-            # (children[caller] includes it), exactly as at prove time.
-            if is_bridge_node(nodes[h]):
-                how = ("linker-discharged (REUSE; dep re-verified)"
-                       if is_xbridge_node(nodes[h])
-                       else "bridge-discharged (S<==D; not replayed directly)")
+            # An abstract-summary node is discharged structurally (step 4) or by
+            # a named assumption (stub), never by direct replay — its symbolic
+            # <program> cannot Accept. It is still injected as a trusted child
+            # into its caller's replay below (children[caller] includes it),
+            # exactly as at prove time.
+            if is_bridge_node(nodes[h]) or is_assume_node(nodes[h]):
+                if is_assume_node(nodes[h]):
+                    how = "assumed-callee (STUB; author-chosen, not replayed)"
+                elif is_xbridge_node(nodes[h]):
+                    how = "linker-discharged (REUSE; dep re-verified)"
+                else:
+                    how = "bridge-discharged (S<==D; not replayed directly)"
                 print(f"step 5 replay [{idx}/{len(order)}]: "
                       f"{nodes[h]['loop']}/{nodes[h]['label']} {how}")
                 continue
@@ -426,5 +459,33 @@ def verify_bundle(bundle: Path, *, definition_arg=None, includes_arg=None,
               file=sys.stderr)
         return int(Exit.USAGE)
 
+    # --- Typed-stub assumptions (STUB, Mechanism B) ------------------------
+    # Fires ONLY after steps 1–5v pass — a stub bundle that also fails
+    # integrity/replay/vacuity/consistency is refused for THAT reason first
+    # (above). A bundle with ZERO assume-nodes reaches neither branch and prints
+    # nothing extra (hard regression requirement: no behavior change).
+    assume_pairs = [(h, n) for h, n in nodes.items() if is_assume_node(n)]
+    if assume_pairs and strict:
+        return _fail("strict", [
+            f"{len(assume_pairs)} author-chosen typed-stub assumption(s) present, "
+            "but --strict asked for a fully-discharged certificate — an opaque "
+            "callee summary is ASSUMED, not proved over the callee's code. "
+            "Re-run without --strict to accept the bundle WITH its load-bearing "
+            "assumption(s) (they will be enumerated)."])
+
     print("certificate holds; step 6 is yours: `tcg roots <bundle>`")
+    if assume_pairs:
+        print(f"\n⚠ {len(assume_pairs)} author-chosen assumption(s) "
+              "load-bearing:")
+        for h, n in sorted(assume_pairs,
+                           key=lambda p: (nodes[p[0]]["loop"], nodes[p[0]]["label"])):
+            a = n["assume"]
+            lb = roots_injecting(h, nodes, edges)
+            lb_names = ", ".join(f"{nodes[r]['loop']}/{nodes[r]['label']}"
+                                 for r in lb) or "(none — injected by no root)"
+            print(f"  - callee {a['callee_address']}  (ledger {a['ledger_id']})")
+            print(f"      frame: {a['frame']}")
+            print(f"      load-bearing for root(s): {lb_names}")
+        print("  these are NOT discharged over the callee's code; re-run with "
+              "--strict to refuse any bundle that carries one.")
     return int(Exit.OK)
