@@ -11,6 +11,7 @@ the guarantee mechanically: `tcg verify` replays every proof in topological
 order and refuses the certificate on any failure.
 
 The format is specified in [docs/bundle-spec.md](docs/bundle-spec.md).
+The agent-facing audit workflow (driving tcg end-to-end on a subject) is packaged as the [tcg-evm-audit skill](.claude/skills/tcg-evm-audit/SKILL.md).
 
 ## Design rules
 
