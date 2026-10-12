@@ -41,7 +41,7 @@ REPO="$(cd "$SCRIPT_DIR/.." && pwd)"
 REF="$REPO/tests/reference/getters-full"
 SUBJECT="$REPO/tests/reference/getters/subject"
 
-TCG_PYTHON="${TCG_PYTHON:-/Users/akkedeline/.pyenv/versions/3.12.2/bin/python3}"
+TCG_PYTHON="${TCG_PYTHON:-python3}"
 KEVM="${KEVM:-$HOME/toolchains/kevm-1.0.678-lemmas}"
 DEF="$KEVM/haskell"
 INC1="$KEVM/evm-semantics-source"

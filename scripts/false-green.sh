@@ -29,7 +29,7 @@ set -uo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$SCRIPT_DIR/.." && pwd)"
 REF="$REPO/tests/reference"
-TCG_PYTHON="${TCG_PYTHON:-/Users/akkedeline/.pyenv/versions/3.12.2/bin/python3}"
+TCG_PYTHON="${TCG_PYTHON:-python3}"
 KEVM="${KEVM:-$HOME/toolchains/kevm-1.0.678}"
 DEF="$KEVM/haskell"; INC1="$KEVM/evm-semantics-source"; INC2="$KEVM/plugin"
 

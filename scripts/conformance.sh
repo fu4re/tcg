@@ -37,7 +37,7 @@ set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(cd "$SCRIPT_DIR/.." && pwd)"
-TCG_PYTHON="${TCG_PYTHON:-/Users/akkedeline/.pyenv/versions/3.12.2/bin/python3}"
+TCG_PYTHON="${TCG_PYTHON:-python3}"
 
 BUNDLE="${1:-}"
 if [ -z "$BUNDLE" ]; then
