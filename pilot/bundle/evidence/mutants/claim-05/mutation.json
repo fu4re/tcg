@@ -1,0 +1,51 @@
+{
+  "claim": "claim-05",
+  "function": "join()",
+  "mutation": "join() live check neutralised: EQ -> OR at 0x34e, so live == 1 becomes 1 | live (always non-zero) and the JUMPI past the revert is always taken",
+  "edits": [
+    {
+      "offset": "0x34e",
+      "old": "0x14",
+      "new": "0x17"
+    }
+  ],
+  "artifact_sha256": "c5f9e8e8da82f5ee5b74608bf05c818537174be13ea0bc00ce15d5fe55e2bd27",
+  "mutant_sha256": "2a259e3f6cf048ddac39132d621b2e35029c2789490e9231c2d0b24e03e8dab5",
+  "source_claim": "hard/spec/claim-05.k",
+  "source_claim_sha256": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+  "semantics": "KEVM (evm-semantics d4bf484a + ghost.diff + lemmas2.diff) via kprove in sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+  "kind": "concrete_trace_violation",
+  "state": {
+    "id": "0x2f0b23f53734252bda2277357e97e1517d6b042a",
+    "caller": "0xc0ffee01",
+    "storage": {
+      "0": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "1": "0x00000000000000000000000035d1b3f3d7966a1dfe207aa4514c12a259a0492b",
+      "2": "0x4554482d41000000000000000000000000000000000000000000000000000000",
+      "3": "0x000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "4": "0x0000000000000000000000000000000000000000000000000000000000000012",
+      "5": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "gemjoin_balance": 0,
+    "gemjoin_nonce": 1,
+    "callDepth": 0,
+    "vars": {
+      "USR": "0xbeef1",
+      "WAD": "0xde0b6b3a7640000"
+    },
+    "other_accounts": [
+      {
+        "address": "0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b",
+        "code": "0x00",
+        "role": "harness stub"
+      },
+      {
+        "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "code": "0x600160005260206000f3",
+        "role": "harness stub"
+      }
+    ],
+    "storage_source": "GemJoin storage at block 26298481 (provenance/rpc_probe.json); slot 5 (live) set to 0 = the state after cage()",
+    "note": "Vat/WETH are stubs (Vat: STOP; WETH: returns true). claim-05's Pre leaves every other account unconstrained, so this state is inside its quantification. They model only 'the external calls succeed', not real Vat/WETH behaviour."
+  }
+}

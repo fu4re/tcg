@@ -1,0 +1,18 @@
+{
+  "claim": "claim-02",
+  "getter": "ilk",
+  "mutation": "ilk() body PUSH1 0x02 -> PUSH1 0x03 at 0xa5c: SLOAD reads slot 3 (gem) instead of slot 2 (ilk)",
+  "edits": [
+    {
+      "offset": "0xa5c",
+      "old": "0x2",
+      "new": "0x3"
+    }
+  ],
+  "artifact_sha256": "c5f9e8e8da82f5ee5b74608bf05c818537174be13ea0bc00ce15d5fe55e2bd27",
+  "mutant_sha256": "73e7f8604c35e31f017690d40a8619bfa4f8e7855f346a49bc8a6e43ab84d036",
+  "source_claim": "provenance/rebuild/controls-osaka/ilk-ilk-prove.k",
+  "source_claim_sha256": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+  "semantics": "KEVM (evm-semantics d4bf484a + ghost.diff + lemmas2.diff) via kprove in sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+  "kind": "decided by the judge at record time"
+}

@@ -1,0 +1,29 @@
+{
+  "claim_source": "provenance/rebuild/controls/cagews-cagews-prove.k",
+  "schedule": "OSAKA",
+  "acct_id": "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
+  "caller": "0x000000000000000000000000000000000000dEaD",
+  "storage_nonzero": {
+    "1": "0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b",
+    "2": "0x4554482d41000000000000000000000000000000000000000000000000000000",
+    "3": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "4": "0x12",
+    "5": "0x1"
+  },
+  "storage_source": "provenance/rpc_probe.json (eth_getStorageAt, block 26298481)",
+  "overrides": [],
+  "subst": [],
+  "chain_slot_checks": [
+    {
+      "slot": "0x44ad89ba62b98ff34f51403ac22759b55759460c0bb5521eb4b6ee3cff49cf83",
+      "map_value": "0x0",
+      "chain": {
+        "https://eth.drpc.org": "0x0",
+        "https://mainnet.gateway.tenderly.co": "0x0",
+        "https://eth-mainnet.public.blastapi.io": "0x0"
+      },
+      "agree": 3
+    }
+  ],
+  "unlisted_slots": "every slot not in storage_nonzero is 0 in this map; on chain other slots (e.g. other wards entries) may be non-zero. Only slots the execution reads matter for the instance: 0-5 (probe) and any listed in chain_slot_checks"
+}

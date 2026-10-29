@@ -1,0 +1,110 @@
+{
+  "format": "tcg-pilot-backtranslation/0.1",
+  "class": "T*",
+  "translator": {
+    "model": "claude-opus-5-5",
+    "session_id": "82b08fb0-aeb5-42a0-a695-0f4d1f137754",
+    "cli": "2.1.312 (Claude Code)",
+    "transcript": {
+      "provenance/sessions/bt-20261029T144536Z.stdin.txt": "541a95ad96cbd4a2abaebc415205de1894a4cd2f62e393a2b93af8237a1435fd",
+      "provenance/sessions/bt-20261029T144536Z.result.json": "406e87036b0db9109027f477a86b6d293a3d5089f87028c4a3ca2dc5264e6460",
+      "provenance/sessions/bt-20261029T144536Z.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "provenance/sessions/bt-20261029T144536Z.env.txt": "2678c99a2c727eec487441ac63323d49a0c43c59a8050b37d5cb47ca4f9c56f2",
+      "provenance/sessions/bt-20261029T144536Z.listing-before.txt": "9701cc246ae2e2c00443880a335bdbded05ccff2f880279f50411b4088f0ea54",
+      "provenance/sessions/bt-20261029T144536Z.listing-after.txt": "3dcb827a1a8e4715e7ce929a35d52a8fbffe2deaceb92a81d3074d8f5d55d6eb"
+    },
+    "prompt": {
+      "provenance/sessions/backtranslation_prompt.md": "9098fbfa7bc5529f52cbb1e8c97ba6d9219c46763b237b6e144008c6a6e4bce2"
+    }
+  },
+  "requirements_withheld": {
+    "how": "translator ran as unix user agent, which cannot read /home/vladimir (checked in listing-before); its working directory held only claim-01..05.k and a stripped phi.json; all tools disabled (--tools \"\"), no MCP; its entire input is the recorded stdin file",
+    "strip_record": {
+      "provenance/sessions/bt-input.strip_record.json": "3bbb63cfc4d1096b56de00821caaad0346d262afa78b254147930ba040b52b8c"
+    },
+    "requirements_sha256_withheld": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14"
+  },
+  "pairing": {
+    "by": "provenance/rebuild/edits/bt_pair.py (script)",
+    "sha256": "6eba170b745c56530506aa81e04892555d3d380590b1eb42fe588684983fc87b"
+  },
+  "caveats": [
+    "The translator saw the producer's own English paraphrase of each claim (phi.json pre/post/quantifies_over); its sentences may echo that wording rather than reflect an independent reading of the K text. It checks that phi is readable and consistent, not that a second reader derives the same meaning from K alone.",
+    "The translator is the same model family as the producing agent (claude-opus-5-5); blind to n, not independent of the producer's model.",
+    "One sample, no repetition: no measure of translation variance."
+  ],
+  "claims": [
+    {
+      "claim": "claim-01",
+      "claim_file": "hard/spec/claim-01.k",
+      "claim_sha256": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+      "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly the 4 bytes 0x36569e77, from any 160-bit caller to any 160-bit executing account whose storage slot 1 holds a value in [0, 2^256) (other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_SUCCESS. The output is the 32-byte big-endian encoding of storage[1] masked to its low 160 bits, and the account's storage is left unchanged.",
+      "referenced_requirement": [
+        {
+          "id": "R1",
+          "text": "`vat()` succeeds for every caller when sent with zero value, returns the address stored as `vat` (slot 1, low 160 bits), and changes no state."
+        }
+      ],
+      "agreement": "unclear",
+      "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+    },
+    {
+      "claim": "claim-02",
+      "claim_file": "hard/spec/claim-02.k",
+      "claim_sha256": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+      "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly the 4 bytes 0xc5ce281e, from any 160-bit caller to any 160-bit executing account whose storage slot 2 holds a value in [0, 2^256) (other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_SUCCESS. The output is the 32-byte big-endian encoding of storage[2], and the account's storage is left unchanged.",
+      "referenced_requirement": [
+        {
+          "id": "R2",
+          "text": "`ilk()` succeeds for every caller when sent with zero value, returns the `bytes32` stored as `ilk` (slot 2), and changes no state."
+        }
+      ],
+      "agreement": "unclear",
+      "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+    },
+    {
+      "claim": "claim-03",
+      "claim_file": "hard/spec/claim-03.k",
+      "claim_sha256": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+      "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly the 4 bytes 0x7bd2bea7, from any 160-bit caller to any 160-bit executing account whose storage slot 3 holds a value in [0, 2^256) (other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_SUCCESS. The output is the 32-byte big-endian encoding of storage[3] masked to its low 160 bits, and the account's storage is left unchanged.",
+      "referenced_requirement": [
+        {
+          "id": "R3",
+          "text": "`gem()` succeeds for every caller when sent with zero value, returns the address stored as `gem` (slot 3, low 160 bits), and changes no state."
+        }
+      ],
+      "agreement": "unclear",
+      "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+    },
+    {
+      "claim": "claim-04",
+      "claim_file": "hard/spec/claim-04.k",
+      "claim_sha256": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+      "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly the 4 bytes 0x69245009, from any 160-bit caller to any 160-bit executing account, restricted to storages where the slot at keccak(32-byte caller ++ 32-byte 0) holds 0 (all other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_REVERT. The output is unconstrained, and the account's storage is left unchanged.",
+      "referenced_requirement": [
+        {
+          "id": "R4",
+          "text": "Only a ward (`wards[msg.sender] == 1`) can call `cage()`, `rely(usr)` or `deny(usr)`. For any other caller the call reverts and changes no state."
+        }
+      ],
+      "agreement": "unclear",
+      "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+    },
+    {
+      "claim": "claim-05",
+      "claim_file": "hard/spec/claim-05.k",
+      "claim_sha256": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+      "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly 0x3b4da69f followed by two 32-byte words USR and WAD (each any value in [0, 2^256)), from any 160-bit caller to any 160-bit executing account, restricted to storages where slot 5 holds 0 (all other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_REVERT. The output is unconstrained, and the account's storage is left unchanged.",
+      "referenced_requirement": [
+        {
+          "id": "R5",
+          "text": "Once the adapter is caged (`live == 0`), `join(usr, wad)` reverts for every caller and every `usr`, `wad`, before making any external call and without changing any state."
+        }
+      ],
+      "agreement": "unclear",
+      "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+    }
+  ],
+  "claims_without_translation": [],
+  "quarantined_sentences": 0
+}

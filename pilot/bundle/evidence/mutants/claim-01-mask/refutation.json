@@ -1,0 +1,6 @@
+{
+  "claim": "claim-01",
+  "kind": "concrete_trace_violation",
+  "output_sha256": "392bd3aa2dabcd550b66b3800e17afb72e37078de339784a0ee58c00bac0d23b",
+  "runs": 2
+}

@@ -1,0 +1,13 @@
+{
+  "output_sha256": "d7ad4c9335eb624194b84292ff6dd7649b71ae941f7fa6f1904d1fbaaa4a73ba",
+  "lines": [
+    "CLAIM-02-INSTANCE Accept",
+    "CLAIM-02-VACUITY NotAccept",
+    "CLAIM-04-INSTANCE Accept",
+    "CLAIM-04-VACUITY NotAccept",
+    "CLAIM-05-INSTANCE Accept",
+    "CLAIM-05-VACUITY NotAccept"
+  ],
+  "produced_by": "ledger seq 63 (first replay, exit 0); re-confirmed by seq 132 with the host-path-free replay.sh (caller held the prover slot; env -i, scratch HOME), same stdout; pinned image sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+  "rule": "exit 0 iff every *-INSTANCE Accepts and every *-VACUITY does not"
+}

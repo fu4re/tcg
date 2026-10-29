@@ -1,0 +1,8 @@
+{
+  "phi_sha256": "adf5371ed9ebaddff2409d2e46c2ca0f05ffbd5958350f8591c04b43b73790e9",
+  "requirements_sha256": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14",
+  "signed_message": "sha256(phi.json) || sha256(requirements.md), ASCII hex, per D4",
+  "signer": "oracle (H = the author, D5)",
+  "signed_at_utc": "2026-10-29T14:55:31.067004Z",
+  "signed_at_basis": "mtime of evidence/approval.sig on the producer VM (not a signed timestamp)"
+}

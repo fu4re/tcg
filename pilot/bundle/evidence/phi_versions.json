@@ -1,0 +1,194 @@
+{
+  "format": "tcg-pilot-phi-versions/0.1",
+  "phi_json_versions": [
+    {
+      "ledger_seq": 59,
+      "sha256": "adf5371ed9ebaddff2409d2e46c2ca0f05ffbd5958350f8591c04b43b73790e9",
+      "rewritten_identically_at_seq": [
+        91
+      ],
+      "version": 1,
+      "seen_by_H": true,
+      "approved_by_H": true,
+      "approval": {
+        "file": "evidence/approval.json",
+        "sig": "evidence/approval.sig",
+        "signed_at_utc": "2026-10-29T14:55:31.067004Z",
+        "requirements_sha256": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14",
+        "check": "signature validity is checked at L3 (oracle key out of band)"
+      },
+      "note": "first and only phi.json written so far (hardspec seq 59, schedule OSAKA, forms vat/ilk/gem/cagews/joinsym; re-written byte-identically by later re-runs)"
+    }
+  ],
+  "current": {
+    "file": "hard/spec/phi.json",
+    "sha256": "adf5371ed9ebaddff2409d2e46c2ca0f05ffbd5958350f8591c04b43b73790e9"
+  },
+  "pre_phi_json_history": {
+    "why": "Before phi.json existed, the claim statements it now references changed twice; those changes are recorded here by claim-file hash, because no phi.json was ever written for the earlier forms.",
+    "changes": [
+      {
+        "change": "claim-04 cage(): EMPTY storage -> reachable Pre (symbolic storage, wards[caller] == 0)",
+        "from": {
+          "file": "provenance/rebuild/controls/cage-cage-prove.k",
+          "sha256": "dfb1e6907c04e76d7833c2466a9b55e900a3c0be830a42ffa9ccc233adbfbde3",
+          "spec_module": "CAGE-CAGE-PROVE",
+          "run": {
+            "ledger_seq": 4,
+            "exit": 0
+          },
+          "note": "Finding-0003 shape rebuilt; unreachable Pre (kept as control)"
+        },
+        "to": {
+          "file": "provenance/rebuild/controls/cagews-cagews-prove.k",
+          "sha256": "6d04a51941ad9f589794684e9951ea7c32170575b4fad4ae3057fceea90a7c1c",
+          "spec_module": "CAGEWS-CAGEWS-PROVE",
+          "run": {
+            "ledger_seq": 17,
+            "exit": 0
+          },
+          "note": "assemble_hard.py variant, ledger seq 8"
+        }
+      },
+      {
+        "change": "claim-05 join(): one concrete (usr, wad) -> every 256-bit usr, wad",
+        "from": {
+          "file": "provenance/rebuild/controls/join-join-prove.k",
+          "sha256": "5daba21d52cd399329dd88eb588d03ef05d629362520a1b5d462300b54d54cdb",
+          "spec_module": "JOIN-JOIN-PROVE",
+          "run": {
+            "ledger_seq": 5,
+            "exit": 0
+          },
+          "note": "symbolic storage + live == 0, usr = 0xdead, wad = 1e18"
+        },
+        "to": {
+          "file": "provenance/rebuild/controls/joinsym-joinsym-prove.k",
+          "sha256": "315d34bee5ea8e2160799b7de9a99cd75795aa096a90ef0f46b40744d896c926",
+          "spec_module": "JOINSYM-JOINSYM-PROVE",
+          "run": {
+            "ledger_seq": 19,
+            "exit": 0
+          },
+          "note": "assemble_hard.py variant, ledger seq 9"
+        }
+      },
+      {
+        "change": "all five claims: <schedule> SHANGHAI </schedule> -> <schedule> OSAKA </schedule> (mainnet runs osaka at the pin)",
+        "pairs": [
+          {
+            "from": {
+              "file": "provenance/rebuild/controls/vat-vat-prove.k",
+              "sha256": "e5ae28025eabccceba17e94f9ab9bfefadbfbabcb44b1221173b870658b8f879",
+              "spec_module": "VAT-VAT-PROVE",
+              "run": {
+                "ledger_seq": 12,
+                "exit": 0
+              },
+              "note": "SHANGHAI"
+            },
+            "to": {
+              "file": "provenance/rebuild/controls-osaka/vat-vat-prove.k",
+              "sha256": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+              "spec_module": "VAT-VAT-PROVE",
+              "run": {
+                "ledger_seq": 6,
+                "exit": 0
+              },
+              "note": "OSAKA; byte-identical to hard/spec/claim-01.k"
+            }
+          },
+          {
+            "from": {
+              "file": "provenance/rebuild/controls/ilk-ilk-prove.k",
+              "sha256": "400c9bd93ab379aeb08c56ee779c40d9c8bb3ffa8d574dd5ebb66413568436d7",
+              "spec_module": "ILK-ILK-PROVE",
+              "run": {
+                "ledger_seq": 21,
+                "exit": 0
+              },
+              "note": "SHANGHAI"
+            },
+            "to": {
+              "file": "provenance/rebuild/controls-osaka/ilk-ilk-prove.k",
+              "sha256": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+              "spec_module": "ILK-ILK-PROVE",
+              "run": {
+                "ledger_seq": 41,
+                "exit": 0
+              },
+              "note": "OSAKA; byte-identical to hard/spec/claim-02.k"
+            }
+          },
+          {
+            "from": {
+              "file": "provenance/rebuild/controls/gem-gem-prove.k",
+              "sha256": "98b902b37d8a8b21839fac53ebe507e9846da5578f183add0757b6b3db2b8401",
+              "spec_module": "GEM-GEM-PROVE",
+              "run": {
+                "ledger_seq": 31,
+                "exit": 0
+              },
+              "note": "SHANGHAI"
+            },
+            "to": {
+              "file": "provenance/rebuild/controls-osaka/gem-gem-prove.k",
+              "sha256": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+              "spec_module": "GEM-GEM-PROVE",
+              "run": {
+                "ledger_seq": 48,
+                "exit": 0
+              },
+              "note": "OSAKA; byte-identical to hard/spec/claim-03.k"
+            }
+          },
+          {
+            "from": {
+              "file": "provenance/rebuild/controls/cagews-cagews-prove.k",
+              "sha256": "6d04a51941ad9f589794684e9951ea7c32170575b4fad4ae3057fceea90a7c1c",
+              "spec_module": "CAGEWS-CAGEWS-PROVE",
+              "run": {
+                "ledger_seq": 17,
+                "exit": 0
+              },
+              "note": "SHANGHAI"
+            },
+            "to": {
+              "file": "provenance/rebuild/controls-osaka/cagews-cagews-prove.k",
+              "sha256": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+              "spec_module": "CAGEWS-CAGEWS-PROVE",
+              "run": {
+                "ledger_seq": 35,
+                "exit": 0
+              },
+              "note": "OSAKA; byte-identical to hard/spec/claim-04.k"
+            }
+          },
+          {
+            "from": {
+              "file": "provenance/rebuild/controls/joinsym-joinsym-prove.k",
+              "sha256": "315d34bee5ea8e2160799b7de9a99cd75795aa096a90ef0f46b40744d896c926",
+              "spec_module": "JOINSYM-JOINSYM-PROVE",
+              "run": {
+                "ledger_seq": 19,
+                "exit": 0
+              },
+              "note": "SHANGHAI"
+            },
+            "to": {
+              "file": "provenance/rebuild/controls-osaka/joinsym-joinsym-prove.k",
+              "sha256": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+              "spec_module": "JOINSYM-JOINSYM-PROVE",
+              "run": {
+                "ledger_seq": 42,
+                "exit": 0
+              },
+              "note": "OSAKA; byte-identical to hard/spec/claim-05.k"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "rule": "H signs sha256(phi.json) || sha256(requirements.md) (D4). Any later change appends a version here and makes an earlier signature stale (L3 fails), by design."
+}

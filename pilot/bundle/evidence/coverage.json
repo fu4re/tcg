@@ -1,0 +1,101 @@
+{
+  "requirement_to_claims": {
+    "R1": [
+      "claim-01"
+    ],
+    "R2": [
+      "claim-02"
+    ],
+    "R3": [
+      "claim-03"
+    ],
+    "R4": [
+      "claim-04"
+    ],
+    "R5": [
+      "claim-05"
+    ],
+    "R6": [],
+    "R7": [],
+    "R8": [],
+    "R9": []
+  },
+  "claim_to_requirements": {
+    "claim-01": [
+      "R1"
+    ],
+    "claim-02": [
+      "R2"
+    ],
+    "claim-03": [
+      "R3"
+    ],
+    "claim-04": [
+      "R4"
+    ],
+    "claim-05": [
+      "R5"
+    ]
+  },
+  "requirement_state": {
+    "R1": "covered",
+    "R2": "covered",
+    "R3": "covered",
+    "R4": "partial",
+    "R5": "partial",
+    "R6": "blind",
+    "R7": "blind",
+    "R8": "blind",
+    "R9": "blind"
+  },
+  "covered": [
+    "R1",
+    "R2",
+    "R3"
+  ],
+  "partial": [
+    "R4",
+    "R5"
+  ],
+  "blind": [
+    "R6",
+    "R7",
+    "R8",
+    "R9"
+  ],
+  "declared_blind_spots": {
+    "R4": {
+      "reason": "claim-04 proves cage() reverts for every non-ward caller (wards[caller] == 0) over every other storage. Not proved: rely/deny by a non-ward; a caller with wards[caller] not in {0, 1} (unreachable by bytecode inspection, not proved); cage/rely/deny success for a ward.",
+      "partial": true
+    },
+    "R5": {
+      "reason": "claim-05 proves join reverts with live == 0 for every caller, every storage and every 256-bit (usr, wad). Not proved: calldata longer than 68 bytes; callvalue > 0 (R9); a call from a non-top-level frame (Aasm-toplevel-call). 'Before any external call' is by bytecode inspection.",
+      "partial": true
+    },
+    "R6": {
+      "reason": "Not proved. join's value movement needs the external calls Vat.slip and WETH.transferFrom composed (assume-guarantee over unaudited callees); Stage C is open (Finding 0006 + correction). The overflow guard (wad >= 2^255 reverts, Finding 0003 row 6) is outside this claim set.",
+      "partial": false
+    },
+    "R7": {
+      "reason": "Not proved. exit's value movement needs Vat.slip and WETH.transfer composed; open (Finding 0006). The overflow guard (Finding 0003 row 5) is outside this claim set.",
+      "partial": false
+    },
+    "R8": {
+      "reason": "Not proved as stated. Claims 01-05 show storage is unchanged on the three getter paths and the two revert paths only; no success path of join/exit/cage/rely/deny is covered.",
+      "partial": false
+    },
+    "R9": {
+      "reason": "Not proved. Every claim fixes callvalue = 0; the non-payable guard (Finding 0003 row 7, cage only) is outside this claim set.",
+      "partial": false
+    }
+  },
+  "uncovered_undeclared": [],
+  "blind_spots_not_in_requirements": [],
+  "blind_spots_actually_covered": [],
+  "partial_without_claim": [],
+  "blind_spots_without_reason": [],
+  "unreferenced_clauses": [],
+  "unknown_requirement_refs": [],
+  "phi_file_hash_mismatch": [],
+  "total": false
+}
