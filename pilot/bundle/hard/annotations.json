@@ -1,0 +1,283 @@
+{
+  "format": "tcg-pilot-annotations/0.1",
+  "description": "a: every lemma family, Aasm fact and configuration abstraction the 5 KEVM claims depend on. Closed by `python3 pilot/tools/assemble_hard.py closure` (fails if a name grepped from the K sources or claims is missing here, or if an entry names something absent). Class T throughout. Loop/arith annotations: none (no claim contains a loop invariant or circularity; all paths are straight-line). Lean: none under variant A (no .lean in hard/certs).",
+  "definition_main_module": "LEMMAS-DRIVER",
+  "definition_driver": {
+    "file": "/opt/kevm/evm-semantics-source/lemmas-driver.k",
+    "sha256": "403296f0e62af6eb3fe37f4d08a94a6cd584491cd4aa6d0b55e98fc04bcd6e38",
+    "patch": "pilot/checker/patches/lemmas2.diff",
+    "patch_sha256": "dcc8789dac6c3661635360ecc681388e0e68a93e34eb9dcd24001e767b469f2c"
+  },
+  "annotations": [
+    {
+      "id": "A_simp_bytes",
+      "class": "T",
+      "kind": "simplification_lemma_family",
+      "statement": "Every rule of K module BYTES-SIMPLIFICATION (lemmas/bytes-simplification.k) is a sound equation over the KEVM term algebra. Byte-array simplification lemmas (#buf/#range/#padToWidth/#asByteStack algebra). Rule bytes-simplification.k:282 `#padToWidth(32, #asByteStack(V)) => #buf(32, V) requires #rangeUInt(256, V)` is the fold the three getter return values need (Finding 0003b).",
+      "k_source": {
+        "file": "/opt/kevm/evm-semantics-source/lemmas/bytes-simplification.k",
+        "sha256": "8fe2a15386aa238495973381c7784883b74e325dc3cc346fd1825ed3ad8a3d6c",
+        "module": "BYTES-SIMPLIFICATION"
+      },
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "used_by_note": "baked into the kompiled definition (main module LEMMAS-DRIVER) every claim is proved under, so the backend may apply any rule of the family to any claim; per-claim rule usage was not measured (no ablation run)",
+      "justification": "Upstream KEVM lemmas (evm-semantics d4bf484a), all carrying [simplification]; the four Finding-0004 families were probed by 4 known-false identities (scripts/lemma-consistency.sh, none proved, on the laptop lemma definition). Not machine-checked against the semantics.",
+      "covered_by_assumption": "A_simp_lemmas"
+    },
+    {
+      "id": "A_simp_int",
+      "class": "T",
+      "kind": "simplification_lemma_family",
+      "statement": "Every rule of K module INT-SIMPLIFICATION (lemmas/int-simplification.k) is a sound equation over the KEVM term algebra. Integer arithmetic/comparison simplification lemmas (+Int/-Int/<Int normal forms).",
+      "k_source": {
+        "file": "/opt/kevm/evm-semantics-source/lemmas/int-simplification.k",
+        "sha256": "657f82a775421ec6f30b2521945a37a96c0b2895ed8181a50b0d5ee2777b3d62",
+        "module": "INT-SIMPLIFICATION"
+      },
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "used_by_note": "baked into the kompiled definition (main module LEMMAS-DRIVER) every claim is proved under, so the backend may apply any rule of the family to any claim; per-claim rule usage was not measured (no ablation run)",
+      "justification": "Upstream KEVM lemmas (evm-semantics d4bf484a), all carrying [simplification]; the four Finding-0004 families were probed by 4 known-false identities (scripts/lemma-consistency.sh, none proved, on the laptop lemma definition). Not machine-checked against the semantics.",
+      "covered_by_assumption": "A_simp_lemmas"
+    },
+    {
+      "id": "A_simp_evm_int",
+      "class": "T",
+      "kind": "simplification_lemma_family",
+      "statement": "Every rule of K module EVM-INT-SIMPLIFICATION (lemmas/evm-int-simplification.k) is a sound equation over the KEVM term algebra. EVM word lemmas (#asWord/#buf inversion, chop, word arithmetic).",
+      "k_source": {
+        "file": "/opt/kevm/evm-semantics-source/lemmas/evm-int-simplification.k",
+        "sha256": "650b46bd38e554d561402c72bd7430d5ba8688d9fe976c489f6e9096ba05138b",
+        "module": "EVM-INT-SIMPLIFICATION"
+      },
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "used_by_note": "baked into the kompiled definition (main module LEMMAS-DRIVER) every claim is proved under, so the backend may apply any rule of the family to any claim; per-claim rule usage was not measured (no ablation run)",
+      "justification": "Upstream KEVM lemmas (evm-semantics d4bf484a), all carrying [simplification]; the four Finding-0004 families were probed by 4 known-false identities (scripts/lemma-consistency.sh, none proved, on the laptop lemma definition). Not machine-checked against the semantics.",
+      "covered_by_assumption": "A_simp_lemmas"
+    },
+    {
+      "id": "A_simp_bitwise",
+      "class": "T",
+      "kind": "simplification_lemma_family",
+      "statement": "Every rule of K module BITWISE-SIMPLIFICATION (lemmas/bitwise-simplification.k) is a sound equation over the KEVM term algebra. Bitwise lemmas (&Int masks, maxUInt160 masking; the getters' double PUSH20 AND).",
+      "k_source": {
+        "file": "/opt/kevm/evm-semantics-source/lemmas/bitwise-simplification.k",
+        "sha256": "b559cb138843e7787a30c4abf06a97ab5618d2264c525fa5342e69d531f74276",
+        "module": "BITWISE-SIMPLIFICATION"
+      },
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "used_by_note": "baked into the kompiled definition (main module LEMMAS-DRIVER) every claim is proved under, so the backend may apply any rule of the family to any claim; per-claim rule usage was not measured (no ablation run)",
+      "justification": "Upstream KEVM lemmas (evm-semantics d4bf484a), all carrying [simplification]; the four Finding-0004 families were probed by 4 known-false identities (scripts/lemma-consistency.sh, none proved, on the laptop lemma definition). Not machine-checked against the semantics.",
+      "covered_by_assumption": "A_simp_lemmas"
+    },
+    {
+      "id": "A_simp_bool2word",
+      "class": "T",
+      "kind": "simplification_lemma_family",
+      "statement": "Every rule of K module BOOL2WORD-SIMPLIFICATION (lemmas/bool2word-simplification.k) is a sound equation over the KEVM term algebra. bool2Word reasoning lemmas, extracted verbatim from evm-semantics lemmas/lemmas.k:58-111 by lemmas2.diff (EQ/ISZERO/JUMPI guards).",
+      "k_source": {
+        "file": "/opt/kevm/evm-semantics-source/lemmas/bool2word-simplification.k",
+        "sha256": "ac568ff0569a4f0b4f4993d99c871b4fdf19525a765ce4963fa44c65681fedc5",
+        "module": "BOOL2WORD-SIMPLIFICATION"
+      },
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "used_by_note": "baked into the kompiled definition (main module LEMMAS-DRIVER) every claim is proved under, so the backend may apply any rule of the family to any claim; per-claim rule usage was not measured (no ablation run)",
+      "justification": "Upstream KEVM lemmas (evm-semantics d4bf484a), all carrying [simplification]; the four Finding-0004 families were probed by 4 known-false identities (scripts/lemma-consistency.sh, none proved, on the laptop lemma definition). Not machine-checked against the semantics.",
+      "covered_by_assumption": "A_simp_lemmas"
+    },
+    {
+      "id": "A_simp_map",
+      "class": "T",
+      "kind": "simplification_lemma_family",
+      "statement": "Every rule of K module MAP-REASONING-SIMPLIFICATION (lemmas/map-simplification.k) is a sound equation over the KEVM term algebra. #lookup-over-updated-map lemmas, extracted verbatim from evm-semantics lemmas/lemmas.k:125-130 by lemmas2.diff.",
+      "k_source": {
+        "file": "/opt/kevm/evm-semantics-source/lemmas/map-simplification.k",
+        "sha256": "a37a160d024606083b0dcdffbc88b946adc83cea82735261cf2baa565d58a9c6",
+        "module": "MAP-REASONING-SIMPLIFICATION"
+      },
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "used_by_note": "baked into the kompiled definition (main module LEMMAS-DRIVER) every claim is proved under, so the backend may apply any rule of the family to any claim; per-claim rule usage was not measured (no ablation run)",
+      "justification": "Upstream KEVM lemmas (evm-semantics d4bf484a), all carrying [simplification]; the four Finding-0004 families were probed by 4 known-false identities (scripts/lemma-consistency.sh, none proved, on the laptop lemma definition). Not machine-checked against the semantics.",
+      "covered_by_assumption": "A_simp_lemmas"
+    },
+    {
+      "id": "A_kevm_edsl_simp",
+      "class": "T",
+      "kind": "semantics_builtin_simplification",
+      "statement": "The [simplification] rules that ship inside the stock KEVM EDSL closure (buf.md BUF, gas.md GAS-SIMPLIFICATION/INFINITE-GAS, hashed-locations.md HASHED-LOCATIONS) are sound. They are part of the KEVM verification substrate, not added by this bundle.",
+      "k_source": [
+        {
+          "file": "/opt/kevm/evm-semantics-source/buf.md",
+          "sha256": "289421eb8b750193fa979b474887ffe639513a2fd9e097b80cf8f90efb1ab010",
+          "module": "BUF"
+        },
+        {
+          "file": "/opt/kevm/evm-semantics-source/gas.md",
+          "sha256": "edc0fdad06792ff4055b3a6f89d178a071a5aa19fbf9950b165a2e12528d41e3",
+          "module": "GAS-SIMPLIFICATION"
+        },
+        {
+          "file": "/opt/kevm/evm-semantics-source/hashed-locations.md",
+          "sha256": "c3a5aea37b60b36a2f69d6ea9b65838fd070843bd4fbd8522617c895e9ae35bf",
+          "module": "HASHED-LOCATIONS"
+        }
+      ],
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "used_by_note": "imported by EDSL, the base of LEMMAS-DRIVER",
+      "justification": "Stock KEVM; trusted as part of semantics adequacy (A1).",
+      "covered_by_assumption": "A1"
+    },
+    {
+      "id": "Aasm-rangeUInt-storage",
+      "class": "T",
+      "kind": "aasm_precondition",
+      "statement": "For the getter slot k (1 for vat, 2 for ilk, 3 for gem): #rangeUInt(256, #lookup(STORAGE, k)), i.e. the stored word is in [0, 2^256).",
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03"
+      ],
+      "justification": "SSTORE only ever writes a 256-bit word, so every storage cell of a reachable EVM state satisfies it; it is asserted in `requires`, not derived inside the claim (Finding 0003b caveat 1). Without it the #padToWidth fold does not fire.",
+      "covered_by_assumption": "Aasm-01",
+      "k_patterns": {
+        "requires": [
+          "#rangeUInt\\(256, #lookup\\(STORAGE, [123]\\)\\)"
+        ]
+      }
+    },
+    {
+      "id": "Aasm-address-range",
+      "class": "T",
+      "kind": "aasm_precondition",
+      "statement": "0 <= ACCTID < 2^160 and 0 <= MSGSENDER < 2^160 (the executing account and the caller are 160-bit addresses).",
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "justification": "Every EVM account id and CALLER value is a 160-bit address by construction of the machine.",
+      "covered_by_assumption": "Aasm-02",
+      "k_patterns": {
+        "requires": [
+          "0 <=Int (ACCTID|MSGSENDER)",
+          "(ACCTID|MSGSENDER) <Int \\(2 \\^Int 160\\)"
+        ]
+      }
+    },
+    {
+      "id": "Aasm-gas-abstraction",
+      "class": "T",
+      "kind": "configuration_abstraction",
+      "statement": "<useGas> false </useGas>: the claims are proved with gas accounting switched off.",
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "justification": "Standard KEVM functional-correctness configuration. Consequence: every claim holds only for executions that do not run out of gas. Out-of-gas is an exceptional halt (status EVMC_OUT_OF_GAS, all gas consumed), which is neither the EVMC_SUCCESS of claims 01-03 nor the EVMC_REVERT of claims 04-05; no claim guarantees termination within any gas limit.",
+      "covered_by_assumption": "Aasm-03",
+      "k_patterns": {
+        "config": [
+          "<useGas> false </useGas>"
+        ]
+      }
+    },
+    {
+      "id": "Aasm-toplevel-call",
+      "class": "T",
+      "kind": "configuration_abstraction",
+      "statement": "<callStack> .List and <callValue> 0 and <static> false: GemJoin executes as the top-level frame of a non-static call with zero value, and its code runs under its own account (<id> = the account whose <storage> is constrained).",
+      "used_by": [
+        "claim-01",
+        "claim-02",
+        "claim-03",
+        "claim-04",
+        "claim-05"
+      ],
+      "justification": "Matches a direct external call. Not covered: execution via DELEGATECALL into GemJoin (then <id>/storage differ), STATICCALL (static=true), or a nested frame; R9 (callvalue > 0) is outside the claims.",
+      "covered_by_assumption": "Aasm-04",
+      "k_patterns": {
+        "config": [
+          "<callStack> \\.List </callStack>"
+        ]
+      }
+    },
+    {
+      "id": "Aasm-keccak-wards-slot",
+      "class": "T",
+      "kind": "aasm_precondition",
+      "statement": "Pre conjunct #lookup(STORAGE, keccak(#buf(32, MSGSENDER) +Bytes #buf(32, 0))) ==Int 0 states wards[caller] == 0: the slot of key caller in the mapping at slot 0 under solc 0.5.12's layout keccak256(pad32(key) ++ pad32(slot)), with KEVM's keccak(Bytes) standing for Keccak-256.",
+      "used_by": [
+        "claim-04"
+      ],
+      "justification": "solc's documented mapping layout and KEVM's keccak hook (blockchain-k-plugin) computing Keccak-256 on concrete bytes. During the symbolic proof keccak stays an uninterpreted function and the proof needs neither injectivity nor a concrete value; the assumption only fixes what the Pre MEANS for the deployed contract.",
+      "covered_by_assumption": "A_keccak",
+      "k_patterns": {
+        "requires": [
+          "#lookup\\(STORAGE, keccak\\(#buf\\(32, MSGSENDER\\) \\+Bytes #buf\\(32, 0\\)\\)\\) ==Int 0"
+        ]
+      }
+    },
+    {
+      "id": "Aasm-rangeUInt-args",
+      "class": "T",
+      "kind": "aasm_precondition",
+      "statement": "#rangeUInt(256, USR) and #rangeUInt(256, WAD): each ABI argument word of join's calldata is in [0, 2^256).",
+      "used_by": [
+        "claim-05"
+      ],
+      "justification": "A calldata word is 32 bytes, so every value it can hold is in range; #buf(32, X) is only the intended encoding for X in range. Excludes nothing a real call can send.",
+      "covered_by_assumption": "Aasm-05",
+      "k_patterns": {
+        "requires": [
+          "#rangeUInt\\(256, (USR|WAD)\\)"
+        ]
+      }
+    }
+  ]
+}

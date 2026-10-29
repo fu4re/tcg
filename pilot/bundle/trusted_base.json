@@ -1,0 +1,483 @@
+{
+  "format": "tcg-pilot-trusted-base/0.1",
+  "description": "T-hat for the GemJoin ETH-A pilot bundle, variant A (pinned KEVM re-discharge). Every hash here is recomputed by `python3 pilot/tools/assemble_hard.py rehash --rpc <archive RPC>`.",
+  "semantics": [
+    {
+      "name": "KEVM",
+      "role": "primary",
+      "version": "runtimeverification/evm-semantics d4bf484a5dfe1e38d729a30434cd6f41e3590fb2 (tag v1.0.921; its kevm_pyk VERSION constant still says 1.0.678, which is what tcg's TOOLCHAIN pin and the task files call it)",
+      "commit": "d4bf484a5dfe1e38d729a30434cd6f41e3590fb2",
+      "hash": "5f8e3bcd093077c1912973a65d33430426a178a309ea63a09cce983a2f323275",
+      "hash_of": "sha256 of the GitHub source tarball of that commit, as stored at /opt/kevm/inputs/evm-semantics.tar.gz in the checker image",
+      "plugin": {
+        "name": "blockchain-k-plugin",
+        "commit": "207ae5121e5178a09742ed746f2d15e34b1750cc",
+        "tarball_sha256": "1921eea09b2a25cacc6ea84ac154f7afe1008b8c84f12cac7e1a7e8001bf8846"
+      },
+      "patches": [
+        {
+          "name": "ghost.diff",
+          "sha256": "e300f622c9c68ef07db2914ef87e0dfff64f520af004770db5c80744b6ca68d1",
+          "repo_path": "pilot/checker/patches/ghost.diff"
+        },
+        {
+          "name": "lemmas2.diff",
+          "sha256": "dcc8789dac6c3661635360ecc681388e0e68a93e34eb9dcd24001e767b469f2c",
+          "repo_path": "pilot/checker/patches/lemmas2.diff",
+          "origin": "git show p1-b-vat-slip:theory/patches/lemmas.diff (NOT main's theory/patches/lemmas.diff 8e0e5b57..., which lacks BOOL2WORD- and MAP-REASONING-SIMPLIFICATION)"
+        }
+      ],
+      "kompiled_definition": {
+        "main_module": "LEMMAS-DRIVER",
+        "definition_kore_sha256": "041aa516ccac29585bc5028fa2908dc2d4f0fae1fe27eceb04eb1c97e7e9a7ba",
+        "note": "kompile is not byte-deterministic (embeds paths/ordering): the consumer uses the definition inside the pinned image, never a rebuild"
+      },
+      "schedule_used_by_claims": "OSAKA",
+      "adequacy_evidence": "KEVM d4bf484a's OSAKA schedule is PRAGUE + EIP-7939 (CLZ) only, with PRAGUE's precompile set (schedule.md: syntax Schedule ::= \"OSAKA\" [symbol(OSAKA_EVM), smtlib(schedule_OSAKA)] // ----------------------------------------------------------------------- rule [SCHEDCO...). Mainnet osaka execution-layer EIPs it does NOT model: EIP-7823/7883 (MODEXP bounds and repricing), EIP-7951 (P256VERIFY at 0x100), EIP-7825 (tx gas cap), EIP-7918 (blob base fee floor), EIP-7934 (block RLP size). KEVM's own declared-failing conformance list (tests/execution-spec-tests/failing.llvm, fixtures v5.4.0) has 498 of 743 entries on the Osaka fork, by test dir: cancun/eip4844_blobs 160, osaka/eip7883_modexp_gas_increase 146, static/state_tests 55, byzantium/eip198_modexp_precompile 29, osaka/eip7823_modexp_upper_bounds 18, osaka/eip7918_blob_reserve_price 18, osaka/eip7825_transaction_gas_limit_cap 13, osaka/eip7951_p256verify_precompiles 12, prague/eip7623_increase_calldata_cost 8, prague/eip7702_set_code_tx 7, shanghai/eip4895_withdrawals 7, prague/eip7002_el_triggerable_withdrawals 5. No pass/total was computed in this pilot (fixtures not in the tarball, not run). Record: provenance/kevm_osaka_adequacy.json.",
+      "adequacy_evidence_for_this_artifact": "GemJoin uses no opcode introduced after Shanghai (linear sweep of the 3410-byte code section, CBOR trailer excluded: none of CLZ, BLOBHASH, BLOBBASEFEE, TLOAD, TSTORE, MCOPY; no SELFDESTRUCT, no BLOCKHASH), so the KEVM SHANGHAI/OSAKA differences reachable from its code are gas constants only, which no claim models. Record: provenance/opscan.json.",
+      "adequacy_records": {
+        "provenance/kevm_osaka_adequacy.json": "2bb6e8f75e8847e21a8d59419523fa034eb533416729923fe9182bd149a1ba5a",
+        "provenance/opscan.json": "f2c512f9bd3fea3f1fa33605f007a984722f8bc06108c76d6ecd03982988c776"
+      }
+    }
+  ],
+  "checker": [
+    {
+      "name": "kevm-prove",
+      "hash": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+      "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+      "platform": "linux/amd64",
+      "size_bytes": 1320740476,
+      "docker_save_sha256": "4fda05f85c32c470479ad24ba7605d6d209b34eeaa22e0ef51a60b4b01c6b772",
+      "in_image_manifest_sha256": "388c1276e8d7a00fa85ef66e68f453248ed5e4cc6176bf1b98f7aab45d959e08",
+      "contents": "kprove/kore-exec of K v7.1.337 (commit 4a46d1231473b599c699160132fd6e76a5c46406, RV Ubuntu jammy build, base image runtimeverificationinc/kframework-k:ubuntu-jammy-7.1.337@sha256:a63698c015f2b349bb9807d486bf2a48a764237a018fd207c23ac7571519b12b), kore-exec 0.1.155, Z3 version 4.12.1 - 64 bit, plus the kompiled definition above",
+      "solver": {
+        "name": "z3",
+        "version": "Z3 version 4.12.1 - 64 bit",
+        "note": "the image carries RV's bundled z3 4.12.1; the repo's CLAUDE.md pins z3 4.16.0 for the laptop SMTChecker toolchain. Every verdict in this bundle came from 4.12.1 (A3)"
+      },
+      "entry": "pilot/checker/run-claim.sh <claim.k> --spec-module <MODULE> (docker run --network none --memory=6g --cpus=2); Accept iff exit 0 and stdout contains #Top",
+      "size_loc": null,
+      "self_contained": false,
+      "recipe_files": {
+        "checker/Dockerfile": "3af211b3088f5d8bbd6419b5bafd848464ff484e926d098f25ebd69687506da2",
+        "checker/IMAGE_ID": "cb0662d671d3e349d4177c4edfd71861224c717115313acb171d126c327b046d",
+        "checker/PROVENANCE.json": "ce88374776ebacddf0299f2f848efe473b68cea53c881314e76009439ab08b22",
+        "checker/README.md": "dbb68f4282edbecf460c9adba23512d5a56a412ccc370d6458c0cb3dbd6c71df",
+        "checker/build.sh": "a196411bb206275a4ce428935ed127e226c86879c84f1a86e10ac7ab63cd5fa2",
+        "checker/patches/ghost.diff": "e300f622c9c68ef07db2914ef87e0dfff64f520af004770db5c80744b6ca68d1",
+        "checker/patches/lemmas2.diff": "dcc8789dac6c3661635360ecc681388e0e68a93e34eb9dcd24001e767b469f2c",
+        "checker/run-claim.sh": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651"
+      },
+      "recipe_note": "checker/** in the bundle: the image recipe and digests (role checker). The recipe documents how the image was built; the image itself is identified by its Id above and pulled out of band (a rebuild is not byte-identical, D6)",
+      "note": "external prover, re-discharge only; emits no proof object. Distributed out of band as tcg-kevm-checker.tar (docker load), identified by image Id."
+    },
+    {
+      "name": "tcg-verifier",
+      "hash": "f7bde819d11db29babaf52cdf9fe4c3560651ff38ebfc9839ca679ed3321f364",
+      "note": "= python3 pilot/verifier/verify.py --self-hash of the FROZEN verifier (WS-A, frozen 2026-10-29T17:36:57Z; per-file hashes in pilot/verifier/FROZEN.txt, files read-only); rehash recomputes it"
+    }
+  ],
+  "identity": {
+    "function": "keccak256(runtime_bytecode)",
+    "value": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+    "address": "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
+    "block": 26298481,
+    "constructor_and_immutables": "none; runtime code only (solc 0.5.12 GemJoin has no immutables; vat/ilk/gem/dec are storage slots 1-4)",
+    "artifact": "hard/artifact.bin"
+  },
+  "environment": {
+    "chain_id": 1,
+    "fork": "osaka",
+    "fork_basis": "the claims are proved under KEVM <schedule> OSAKA </schedule>; mainnet at the pinned block runs osaka execution rules (eth_config current.forkId 0x07c9462e, activationTime 1767747671 = BPO2 blob schedule {'baseFeeUpdateFraction': 11684671, 'max': 21, 'target': 14}, from 3 RPCs). KEVM OSAKA is a partial model of mainnet osaka (semantics[0].adequacy_evidence, A_osaka_model) and does not model the BPO blob parameters (A_blob_params).",
+    "block_hash": "0x21bc8ec3e7a3d67c7f387dcb076dd22f91545d9299c265e183cbc7dc13c684e0",
+    "block_timestamp": 1793277911,
+    "fee_schedule": "not modelled: every claim runs with <useGas> false (Aasm-gas-abstraction); the KEVM OSAKA gas constants are present in the semantics but unused",
+    "external_code": [
+      {
+        "name": "WETH9",
+        "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "code_hash": "0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23",
+        "role": "gem (slot 3 at the pinned block)",
+        "reached_by_any_claim": false
+      },
+      {
+        "name": "MCD_Vat",
+        "address": "0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B",
+        "code_hash": "0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59",
+        "role": "vat (slot 1 at the pinned block)",
+        "reached_by_any_claim": false
+      }
+    ],
+    "external_code_note": "No proved path reaches a CALL (by bytecode inspection: the 4 CALLs sit in join/exit after the live check and the overflow guard), so WETH and Vat code are part of E for the deployed contract but no claim depends on their behaviour. A different gem/vat at the same slots would not change any claim.",
+    "caller_assumptions": "msg.sender arbitrary (any 160-bit address; claim-04 additionally: not a ward); GemJoin's code runs as the top-level frame under its own account; no DELEGATECALL into GemJoin; non-static; callvalue 0 (Aasm-toplevel-call)",
+    "precompiles": "KEVM OSAKA's precompile set (#precompiledAccountsUB(PRAGUE): no P256VERIFY at 0x100, MODEXP without EIP-7823/7883) differs from mainnet osaka; no proved path calls a precompile and GemJoin's CALL targets come from storage",
+    "resource_limits": "gas not modelled (<useGas> false): every claim holds for executions that do not run out of gas (Aasm-03). No claim guarantees termination within any gas limit; an out-of-gas halt is outside every claim. Within the gas-free semantics each all-path claim states that every path from Pre reaches #halt.",
+    "storage_at_pinned_block": {
+      "0": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "1": "0x00000000000000000000000035d1b3f3d7966a1dfe207aa4514c12a259a0492b",
+      "2": "0x4554482d41000000000000000000000000000000000000000000000000000000",
+      "3": "0x000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "4": "0x0000000000000000000000000000000000000000000000000000000000000012",
+      "5": "0x0000000000000000000000000000000000000000000000000000000000000001"
+    },
+    "archive_rpc_status": {
+      "probed_at_utc": "2026-10-29T17:34:41Z",
+      "block": 26298481,
+      "method": "cast code <GemJoin> --block <pin> per RPC; keccak compared with identity.value",
+      "rpcs": [
+        {
+          "rpc": "https://eth.drpc.org",
+          "serves_pinned_block": true,
+          "gemjoin_keccak_matches_identity": true
+        },
+        {
+          "rpc": "https://mainnet.gateway.tenderly.co",
+          "serves_pinned_block": true,
+          "gemjoin_keccak_matches_identity": true
+        },
+        {
+          "rpc": "https://eth-mainnet.public.blastapi.io",
+          "serves_pinned_block": true,
+          "gemjoin_keccak_matches_identity": true
+        },
+        {
+          "rpc": "https://1rpc.io/eth",
+          "serves_pinned_block": false,
+          "failure": "no historical state at the pin (pruned / not archive)",
+          "detail": "Error: server returned an error response: error code -32000: historical state 22c6f156923ff5dc5923df085df019f2fe8b85722515248d87cab1441f4a8712 is not available"
+        },
+        {
+          "rpc": "https://ethereum-rpc.publicnode.com",
+          "serves_pinned_block": false,
+          "failure": "error",
+          "detail": "server: cloudflare"
+        }
+      ],
+      "earlier_observations_2026_10_29": [
+        {
+          "rpc": "https://eth-mainnet.public.blastapi.io",
+          "what": "HTTP 429 rate limit (compute units per second) during rehash, ledger seq 136 and 137 (exit 1, could not recompute); served again later"
+        },
+        {
+          "rpc": "https://1rpc.io/eth",
+          "what": "no historical state at block 26298481 during rehash, ledger seq 139; it served archive eth_getCode at fetch time (provenance/rpc_probe.json)"
+        },
+        {
+          "rpc": "https://ethereum-rpc.publicnode.com",
+          "what": "refuses archive requests without a personal token (provenance/rpc_probe.json)"
+        },
+        {
+          "rpc": "https://rpc.flashbots.net, https://eth.llamarpc.com",
+          "what": "504 / 525 at fetch time (provenance/chain_fetch.json)"
+        }
+      ],
+      "recommendation": "use an RPC with serves_pinned_block true (at probe time: https://eth.drpc.org, https://mainnet.gateway.tenderly.co, https://eth-mainnet.public.blastapi.io); public endpoints change: re-probe, and a failure to fetch is 'could not check', never a pass"
+    }
+  },
+  "assumptions": [
+    {
+      "id": "A1",
+      "name": "semantics adequacy",
+      "status": "assumption",
+      "covers": [
+        "A_kevm_edsl_simp"
+      ],
+      "evidence": "KEVM is the reference K semantics of the EVM; see semantics[0].adequacy_evidence (its own declared-failing list; no pass/total measured here)",
+      "risk_if_false": "a KEVM rule (including the OSAKA schedule rules and the stock EDSL [simplification] rules) that differs from mainnet osaka execution would make a proved claim false of the deployed contract, undetectably from inside the bundle"
+    },
+    {
+      "id": "A_osaka_model",
+      "name": "KEVM OSAKA agrees with mainnet osaka on every opcode GemJoin's proved paths execute",
+      "status": "assumption",
+      "evidence": "GemJoin uses no opcode introduced after Shanghai (linear sweep of the 3410-byte code section, CBOR trailer excluded: none of CLZ, BLOBHASH, BLOBBASEFEE, TLOAD, TSTORE, MCOPY; no SELFDESTRUCT, no BLOCKHASH), so the KEVM SHANGHAI/OSAKA differences reachable from its code are gas constants only, which no claim models. Record: provenance/opscan.json. The unmodelled osaka EIPs (7823, 7883, 7951, 7825, 7918, 7934) touch precompiles, tx- and block-level rules, none of which a proved path executes.",
+      "risk_if_false": "if an opcode on a proved path (CALLDATALOAD, SLOAD, KECCAK256, MSTORE, JUMPI, REVERT, RETURN, AND, EQ, ...) behaved differently on mainnet osaka than in KEVM, a claim could be false of the deployed contract"
+    },
+    {
+      "id": "A_blob_params",
+      "name": "BPO1/BPO2 blob parameters not modelled and not relied on",
+      "status": "assumption",
+      "evidence": "mainnet at the pin is past BPO2 (eth_config blobSchedule {'baseFeeUpdateFraction': 11684671, 'max': 21, 'target': 14}); KEVM's schedule carries PRAGUE blob constants (Gmaxblobgas 1179648, Gtargetblobgas 786432) and no BPO forks. GemJoin has no BLOBHASH (0x49) or BLOBBASEFEE (0x4a) (provenance/opscan.json), and no claim models gas or block-level blob accounting",
+      "risk_if_false": "none for these claims as long as GemJoin's code has no blob opcode (checked by opscan); a claim about a contract reading BLOBBASEFEE would be about the wrong parameter set"
+    },
+    {
+      "id": "A2",
+      "name": "environment adequacy",
+      "status": "checked_at_L0",
+      "note": "chain_id, fork (derived from the block) and external code hashes are compared with the chain at the pinned block; fee_schedule, caller_assumptions, precompiles and resource_limits are declared, not checked",
+      "risk_if_false": "the proof transfers to a machine other than the deployed one"
+    },
+    {
+      "id": "A3",
+      "name": "checker soundness",
+      "status": "assumption",
+      "hashes": [
+        "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465"
+      ],
+      "note": "kprove + Haskell backend kore-exec 0.1.155 + Z3 version 4.12.1 - 64 bit inside the image (CLAUDE.md pins z3 4.16.0 for the laptop toolchain; the image carries RV's bundled z3 4.12.1, which produced every verdict here)",
+      "risk_if_false": "an unsound prover step or solver answer could Accept a false claim; no proof object exists to re-check independently (variant A)"
+    },
+    {
+      "id": "A4",
+      "name": "artefact identity",
+      "status": "checked_at_L0",
+      "risk_if_false": "the bundle would describe different bytecode; L0 reports a different artefact"
+    },
+    {
+      "id": "A5",
+      "name": "annotation discipline",
+      "status": "partially_checked",
+      "note": "every lemma family / Aasm fact the claims depend on is listed in hard/annotations.json and closed mechanically (assemble_hard.py closure); their justifications are not checked",
+      "risk_if_false": "an unlisted assumption would be trusted silently"
+    },
+    {
+      "id": "A6",
+      "name": "spec well-formedness",
+      "status": "partially_checked",
+      "note": "pre_witness replays concrete states satisfying the Pre of claim-02, claim-04, claim-05; every claim's antecedent is K-feasible (vacuity probes) and its opposite exit status is not provable (discriminators). Reachability (phi.json claims[].quantifies_over.reachability): claims 01-03 and 04 are reached by the deployed storage at the pinned block; claim-05's Pre (live == 0) is the post-cage() state, reachable by judgement only. claim-04: reachable, shown on chain: pre_witness claim-04 is the deployed storage at the pinned block with caller 0x000000000000000000000000000000000000dEaD, whose wards slot reads 0 at the pinned block (eth_getStorageAt, recorded in claim-04-config.json chain_slot_checks); its instance Accepts and its vacuity probe does not",
+      "risk_if_false": "a claim over an unreachable Pre is true but says nothing about the deployed contract (a reachable-state trap: vacuity PASS does not detect it)"
+    },
+    {
+      "id": "A_simp_lemmas",
+      "name": "simplification lemmas sound",
+      "status": "assumption",
+      "covers": [
+        "A_simp_bytes",
+        "A_simp_int",
+        "A_simp_evm_int",
+        "A_simp_bitwise",
+        "A_simp_bool2word",
+        "A_simp_map"
+      ],
+      "evidence": "320 rules in 6 families (all [simplification], checked by closure); the 4 Finding-0004 families probed with 4 known-false identities (none proved, laptop lemma definition, scripts/lemma-consistency.sh); BOOL2WORD/MAP-REASONING extracted verbatim from upstream lemmas.k; none machine-checked against the semantics",
+      "risk_if_false": "a false [simplification] rule lets kprove Accept a false postcondition; vacuity probes and program binding do not detect it (Finding 0004)"
+    },
+    {
+      "id": "A_keccak",
+      "name": "KEVM keccak(Bytes) is Keccak-256; solc 0.5.12 mapping layout",
+      "status": "assumption",
+      "covers": [
+        "Aasm-keccak-wards-slot"
+      ],
+      "note": "relied on by claim-04 for the MEANING of its Pre: storage[keccak(pad32(caller) ++ pad32(0))] is wards[caller]. The symbolic proof keeps keccak uninterpreted and needs no injectivity (nothing is written before the revert, so no two keys are compared). The claim-04 pre_witness evaluates keccak concretely (plugin) for caller 0x...dEaD and its wards slot was read from the chain at the slot cast computes (claim-04-config.json chain_slot_checks)",
+      "risk_if_false": "if KEVM's keccak or the assumed layout differed from mainnet, claim-04's Pre would constrain a slot other than wards[caller], and the claim would not say that non-wards cannot cage()"
+    },
+    {
+      "id": "Aasm-01",
+      "name": "storage words are 256-bit",
+      "status": "assumption",
+      "covers": [
+        "Aasm-rangeUInt-storage"
+      ],
+      "justification": "SSTORE only ever writes a 256-bit word, so every storage cell of a reachable EVM state satisfies it; it is asserted in `requires`, not derived inside the claim (Finding 0003b caveat 1). Without it the #padToWidth fold does not fire.",
+      "risk_if_false": "none on a real EVM (SSTORE cannot write more than 256 bits); if KEVM storage could hold a larger Int, the getter claims would cover only states satisfying the bound"
+    },
+    {
+      "id": "Aasm-02",
+      "name": "addresses are 160-bit",
+      "status": "assumption",
+      "covers": [
+        "Aasm-address-range"
+      ],
+      "justification": "Every EVM account id and CALLER value is a 160-bit address by construction of the machine.",
+      "risk_if_false": "none on a real EVM; the claims say nothing about a configuration with a wider id/caller"
+    },
+    {
+      "id": "Aasm-03",
+      "name": "gas not modelled: claims hold for executions that do not run out of gas",
+      "status": "assumption",
+      "covers": [
+        "Aasm-gas-abstraction"
+      ],
+      "justification": "Standard KEVM functional-correctness configuration. Consequence: every claim holds only for executions that do not run out of gas. Out-of-gas is an exceptional halt (status EVMC_OUT_OF_GAS, all gas consumed), which is neither the EVMC_SUCCESS of claims 01-03 nor the EVMC_REVERT of claims 04-05; no claim guarantees termination within any gas limit.",
+      "risk_if_false": "a call with too little gas halts EVMC_OUT_OF_GAS, outside every claim (claims 01-03 say SUCCESS, 04-05 say REVERT); termination within a gas limit is not claimed"
+    },
+    {
+      "id": "Aasm-04",
+      "name": "top-level, non-static, zero-value call",
+      "status": "assumption",
+      "covers": [
+        "Aasm-toplevel-call"
+      ],
+      "justification": "Matches a direct external call. Not covered: execution via DELEGATECALL into GemJoin (then <id>/storage differ), STATICCALL (static=true), or a nested frame; R9 (callvalue > 0) is outside the claims.",
+      "risk_if_false": "a call with value, a STATICCALL, or a DELEGATECALL into GemJoin's code is outside every claim"
+    },
+    {
+      "id": "Aasm-05",
+      "name": "ABI argument words are 256-bit",
+      "status": "assumption",
+      "covers": [
+        "Aasm-rangeUInt-args"
+      ],
+      "justification": "A calldata word is 32 bytes, so every value it can hold is in range; #buf(32, X) is only the intended encoding for X in range. Excludes nothing a real call can send.",
+      "risk_if_false": "none on a real EVM: a 32-byte calldata word cannot hold a larger value"
+    },
+    {
+      "id": "A_checker_build",
+      "name": "image build purity",
+      "status": "assumption",
+      "note": "the image kompiles the same K source tree as the laptop's kevm-1.0.678-lemmas2 (diff -rq identical, pilot/checker/STATUS.md) but with RV's Ubuntu K build instead of the nix build; patch was installed from an unpinned apt mirror if missing (pilot/checker/STATUS.md open problem 3)",
+      "risk_if_false": "the image's prover could differ in behaviour from the laptop toolchain that produced Findings 0003/0003b; mitigated only empirically (WS-C smoke reproduces the getter Accepts)"
+    }
+  ],
+  "pre_witness": {
+    "claims": [
+      "claim-02",
+      "claim-04",
+      "claim-05"
+    ],
+    "config": {
+      "claim-02": {
+        "claim_source": "provenance/rebuild/controls/ilk-ilk-prove.k",
+        "schedule": "OSAKA",
+        "acct_id": "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
+        "caller": "0x00000000000000000000000000000000000000aa",
+        "storage_nonzero": {
+          "1": "0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b",
+          "2": "0x4554482d41000000000000000000000000000000000000000000000000000000",
+          "3": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "4": "0x12",
+          "5": "0x1"
+        },
+        "storage_source": "provenance/rpc_probe.json (eth_getStorageAt, block 26298481)",
+        "overrides": [],
+        "subst": [],
+        "chain_slot_checks": [],
+        "unlisted_slots": "every slot not in storage_nonzero is 0 in this map; on chain other slots (e.g. other wards entries) may be non-zero. Only slots the execution reads matter for the instance: 0-5 (probe) and any listed in chain_slot_checks"
+      },
+      "claim-04": {
+        "claim_source": "provenance/rebuild/controls/cagews-cagews-prove.k",
+        "schedule": "OSAKA",
+        "acct_id": "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
+        "caller": "0x000000000000000000000000000000000000dEaD",
+        "storage_nonzero": {
+          "1": "0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b",
+          "2": "0x4554482d41000000000000000000000000000000000000000000000000000000",
+          "3": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "4": "0x12",
+          "5": "0x1"
+        },
+        "storage_source": "provenance/rpc_probe.json (eth_getStorageAt, block 26298481)",
+        "overrides": [],
+        "subst": [],
+        "chain_slot_checks": [
+          {
+            "slot": "0x44ad89ba62b98ff34f51403ac22759b55759460c0bb5521eb4b6ee3cff49cf83",
+            "map_value": "0x0",
+            "chain": {
+              "https://eth.drpc.org": "0x0",
+              "https://mainnet.gateway.tenderly.co": "0x0",
+              "https://eth-mainnet.public.blastapi.io": "0x0"
+            },
+            "agree": 3
+          }
+        ],
+        "unlisted_slots": "every slot not in storage_nonzero is 0 in this map; on chain other slots (e.g. other wards entries) may be non-zero. Only slots the execution reads matter for the instance: 0-5 (probe) and any listed in chain_slot_checks"
+      },
+      "claim-05": {
+        "claim_source": "provenance/rebuild/controls/joinsym-joinsym-prove.k",
+        "schedule": "OSAKA",
+        "acct_id": "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
+        "caller": "0x00000000000000000000000000000000000000aa",
+        "storage_nonzero": {
+          "1": "0x35d1b3f3d7966a1dfe207aa4514c12a259a0492b",
+          "2": "0x4554482d41000000000000000000000000000000000000000000000000000000",
+          "3": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "4": "0x12"
+        },
+        "storage_source": "provenance/rpc_probe.json (eth_getStorageAt, block 26298481)",
+        "overrides": [
+          "5=0"
+        ],
+        "subst": [
+          "USR=0xdead",
+          "WAD=1000000000000000000"
+        ],
+        "chain_slot_checks": [],
+        "unlisted_slots": "every slot not in storage_nonzero is 0 in this map; on chain other slots (e.g. other wards entries) may be non-zero. Only slots the execution reads matter for the instance: 0-5 (probe) and any listed in chain_slot_checks"
+      }
+    },
+    "replay": "cd evidence/pre_witness && sh replay.sh  (run from its own directory; needs docker + the pinned image, takes prover slots on the VM; prints one normalised verdict line per module; exit 0 iff each *-instance Accepts and each *-vacuity does not; stdout sha256 in expected.json)",
+    "semantics": "the pinned KEVM image (same as every claim)",
+    "files": {
+      "evidence/pre_witness/claim-02-config.json": "7d5cca0bc42c5c191c1e919e66a9371bb6d177b0bc40baa2c36e3cc94029d46e",
+      "evidence/pre_witness/claim-02-instance.k": "72436013da2d7e2a2713b3b2a718445db90a35b8ed81c755d1a0c1ab0d3dcccc",
+      "evidence/pre_witness/claim-02-vacuity.k": "b612bdb926191e06810eac9fa6f9e5f54add620b1449acee4a9644cbabb9809e",
+      "evidence/pre_witness/claim-04-config.json": "25729daa3c5a9addca667e0f5fe8ece5e98338333c7d736fff3caf2b2a46f55b",
+      "evidence/pre_witness/claim-04-instance.k": "cbbbeed573e9c8c754b0621c2dd3e52beeef182b18b3aad7ece6d60fe8f2bf8e",
+      "evidence/pre_witness/claim-04-vacuity.k": "bd2a8432e3d3236dfb82ef5664a258b14eb266e9b38f9b4e089a1d4a727ff163",
+      "evidence/pre_witness/claim-05-config.json": "f1a9cd33c4aa0fe514ce5bebe6ff02b1576d17d8b39c63df2b8299c99b548bd0",
+      "evidence/pre_witness/claim-05-instance.k": "272365e07c874930917312c2aa8075fd14552911adc11367229a65bd38b7955c",
+      "evidence/pre_witness/claim-05-vacuity.k": "9b557cf55d8f0e7e7808dc5a7b3b714246eeacbf7ab72fc70aa9d50a6c352081",
+      "evidence/pre_witness/expected.json": "74129a8fb677f5264481ecc566937793c4932d3cb76ee8d84611b6594fa5dda4",
+      "evidence/pre_witness/replay.out": "d7ad4c9335eb624194b84292ff6dd7649b71ae941f7fa6f1904d1fbaaa4a73ba",
+      "evidence/pre_witness/replay.sh": "e84cf975a8c416e23ba74fccd58f41b92cb68ba8ca6f80bdec0df7bd6b296745"
+    },
+    "reachability": {
+      "claim-02": "reachable, shown on chain: pre_witness claim-02 is the deployed storage at the pinned block (eth_getStorageAt, 4 RPCs agree) with a concrete caller; its instance Accepts and its vacuity probe does not",
+      "claim-04": "reachable, shown on chain: pre_witness claim-04 is the deployed storage at the pinned block with caller 0x000000000000000000000000000000000000dEaD, whose wards slot reads 0 at the pinned block (eth_getStorageAt, recorded in claim-04-config.json chain_slot_checks); its instance Accepts and its vacuity probe does not",
+      "claim-05": "reachable by judgement, not shown on chain: pre_witness claim-05 is the deployed storage at the pinned block with slot 5 (live) set to 0, i.e. the state right after a ward calls cage(); live is 1 at the pinned block"
+    },
+    "location_note": "evidence/pre_witness/ is a byte-identical copy (ledger seq 69) of provenance/rebuild/pre_witness/, where the witnesses were generated (seq 27-29) and first replayed (seq 63); the original is kept so those ledger events stay replayable"
+  },
+  "claims_without_certificate": [
+    {
+      "claim": "claim-01",
+      "reason": "K prover emits no proof object; re-discharged by pinned prover"
+    },
+    {
+      "claim": "claim-02",
+      "reason": "K prover emits no proof object; re-discharged by pinned prover"
+    },
+    {
+      "claim": "claim-03",
+      "reason": "K prover emits no proof object; re-discharged by pinned prover"
+    },
+    {
+      "claim": "claim-04",
+      "reason": "K prover emits no proof object; re-discharged by pinned prover"
+    },
+    {
+      "claim": "claim-05",
+      "reason": "K prover emits no proof object; re-discharged by pinned prover"
+    }
+  ],
+  "hashed_objects": [
+    {
+      "path": "hard/artifact.bin",
+      "sha256": "c5f9e8e8da82f5ee5b74608bf05c818537174be13ea0bc00ce15d5fe55e2bd27"
+    },
+    {
+      "path": "hard/annotations.json",
+      "sha256": "a4e84d6069e548b42b5a2b337f0c9f8f73b7edba0ac15dd812b5bc17cfa220aa"
+    },
+    {
+      "path": "hard/spec/phi.json",
+      "sha256": "adf5371ed9ebaddff2409d2e46c2ca0f05ffbd5958350f8591c04b43b73790e9"
+    },
+    {
+      "path": "hard/spec/requirements.md",
+      "sha256": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14"
+    },
+    {
+      "path": "provenance/opscan.json",
+      "sha256": "f2c512f9bd3fea3f1fa33605f007a984722f8bc06108c76d6ecd03982988c776"
+    },
+    {
+      "path": "provenance/kevm_osaka_adequacy.json",
+      "sha256": "2bb6e8f75e8847e21a8d59419523fa034eb533416729923fe9182bd149a1ba5a"
+    },
+    {
+      "path": "provenance/chain_fetch.json",
+      "sha256": "2cbd475aab03439264f9e3f9762ad49ec9c4913facb7f0995ed871116bf5b940"
+    },
+    {
+      "path": "provenance/rpc_probe.json",
+      "sha256": "7069831b6f96960db25a5935d65b713f83d2b49c5628753510740ff53bd8e01a"
+    },
+    {
+      "path": "provenance/rpc_status.json",
+      "sha256": "025e96b2124e2a4166f5a3728bfd8c7ad0a270b79df248b55826dded810c5c6c"
+    }
+  ]
+}

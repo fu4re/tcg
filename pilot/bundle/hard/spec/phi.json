@@ -1,0 +1,571 @@
+{
+  "format": "tcg-pilot-phi/0.1",
+  "status": "DRAFT for the author's review; NOT signed (DECISIONS D4: the oracle signs sha256(phi.json) || sha256(requirements.md))",
+  "artifact": {
+    "file": "hard/artifact.bin",
+    "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+    "address": "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
+    "chain_id": 1,
+    "block": 26298481
+  },
+  "requirements_file": "hard/spec/requirements.md",
+  "requirements_sha256": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14",
+  "semantics": "KEVM evm-semantics d4bf484a5dfe1e38d729a30434cd6f41e3590fb2 + lemmas2, schedule OSAKA; see trusted_base.json",
+  "claims": [
+    {
+      "id": "claim-01",
+      "claim": "claim-01",
+      "file": "hard/spec/claim-01.k",
+      "sha256": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+      "spec_module": "VAT-VAT-PROVE",
+      "k_label": "vat",
+      "source": "tests/reference/getters-full/src/vat/vat.k (Finding 0003b), assembled as provenance/rebuild/controls*/vat-vat-prove.k; <schedule> SHANGHAI </schedule> replaced by <schedule> OSAKA </schedule>",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata exactly 0x36569e77 (4 bytes); storage: any Map with storage[1] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "reachability": "reachable, shown on chain: the deployed storage at the pinned block satisfies Pre for every caller (slot values in provenance/rpc_probe.json; concrete instance replayed for ilk() in pre_witness claim-02)"
+      },
+      "pre": {
+        "function": "vat()",
+        "calldata": "exactly 0x36569e77 (4 bytes)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[1] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_SUCCESS",
+        "output": "32-byte big-endian word of storage[1] & (2^160 - 1)",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_SUCCESS"
+      ],
+      "pre_scope_k": [],
+      "aasm": [
+        "Aasm-rangeUInt-storage",
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call"
+      ],
+      "requirements": [
+        "R1"
+      ],
+      "coverage_of_requirements": {
+        "R1": "full, under the listed Aasm facts"
+      },
+      "caveats": [
+        "'No external call' is a bytecode-inspection fact (straight-line getter body), not a separate K postcondition (Finding 0003b caveat 2)."
+      ],
+      "controls": {
+        "vacuity": {
+          "module": "VAT-VAT-VACUITY",
+          "what": "same Pre, ensures false: must NOT Accept (Accept would mean Pre is unsatisfiable, a vacuous proof)",
+          "expected": "not Accept",
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 64.0,
+          "log_sha256": "35bb7e229b903c65ae9ad5ebea43a16b76d4f8e2c66a2938912c59ad567f71f0",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/vat-vat-vacuity.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "discriminator": {
+          "module": "VAT-VAT-DISCRIMINATOR",
+          "what": "same claim, opposite exit status (SUCCESS<->REVERT): must NOT Accept",
+          "expected": "not Accept",
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 144.0,
+          "log_sha256": "263992333e6b12c8b2ec3fadcc7eb4b3ea4bc4d05ef49fe0f688fa59ce603295",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/vat-vat-discriminator.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "wrong_slot": {
+          "module": "WRONG-SLOT-VAT-SPEC",
+          "what": "same getter claim, return value bound to a DIFFERENT storage slot: must NOT Accept",
+          "expected": "not Accept",
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 167.4,
+          "log_sha256": "190f94a846376943fb0dbfb36a3bd97be7f1bf924b009bd051d37cddae416a2c",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/wrong-slot.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        }
+      },
+      "observed": {
+        "verdict": "Accept",
+        "unknown_class": "-",
+        "exit": 0,
+        "wall_s": 130.1,
+        "log_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "spec": "provenance/rebuild/controls-osaka/vat-vat-prove.k",
+        "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv",
+        "ledger_seq": 37
+      }
+    },
+    {
+      "id": "claim-02",
+      "claim": "claim-02",
+      "file": "hard/spec/claim-02.k",
+      "sha256": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+      "spec_module": "ILK-ILK-PROVE",
+      "k_label": "ilk",
+      "source": "tests/reference/getters-full/src/ilk/ilk.k (Finding 0003b), assembled as provenance/rebuild/controls*/ilk-ilk-prove.k; <schedule> SHANGHAI </schedule> replaced by <schedule> OSAKA </schedule>",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata exactly 0xc5ce281e (4 bytes); storage: any Map with storage[2] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "reachability": "reachable, shown on chain: pre_witness claim-02 is the deployed storage at the pinned block (eth_getStorageAt, 4 RPCs agree) with a concrete caller; its instance Accepts and its vacuity probe does not"
+      },
+      "pre": {
+        "function": "ilk()",
+        "calldata": "exactly 0xc5ce281e (4 bytes)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[2] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_SUCCESS",
+        "output": "32-byte big-endian word of storage[2]",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_SUCCESS"
+      ],
+      "pre_scope_k": [],
+      "aasm": [
+        "Aasm-rangeUInt-storage",
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call"
+      ],
+      "requirements": [
+        "R2"
+      ],
+      "coverage_of_requirements": {
+        "R2": "full, under the listed Aasm facts"
+      },
+      "caveats": [
+        "'No external call' is a bytecode-inspection fact (straight-line getter body), not a separate K postcondition (Finding 0003b caveat 2)."
+      ],
+      "controls": {
+        "vacuity": {
+          "module": "ILK-ILK-VACUITY",
+          "what": "same Pre, ensures false: must NOT Accept (Accept would mean Pre is unsatisfiable, a vacuous proof)",
+          "expected": "not Accept",
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 75.9,
+          "log_sha256": "222c6172b5996a731d86ae896ee5865fc13b10b552df419485bb1d73d0b25a0a",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/ilk-ilk-vacuity.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "discriminator": {
+          "module": "ILK-ILK-DISCRIMINATOR",
+          "what": "same claim, opposite exit status (SUCCESS<->REVERT): must NOT Accept",
+          "expected": "not Accept",
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 158.5,
+          "log_sha256": "c5c742885c5a9a404789312f7b7c1880030ba545fa0fec9333136ea7ec2c5db5",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/ilk-ilk-discriminator.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "wrong_slot": {
+          "module": "WRONG-SLOT-ILK-SPEC",
+          "what": "same getter claim, return value bound to a DIFFERENT storage slot: must NOT Accept",
+          "expected": "not Accept",
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 122.2,
+          "log_sha256": "d9b4fb2bb57cb4f7a283c27ca387eb1d382894cb9a8880eab809415aea987309",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/wrong-slot.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        }
+      },
+      "observed": {
+        "verdict": "Accept",
+        "unknown_class": "-",
+        "exit": 0,
+        "wall_s": 128.7,
+        "log_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "spec": "provenance/rebuild/controls-osaka/ilk-ilk-prove.k",
+        "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv",
+        "ledger_seq": 41
+      }
+    },
+    {
+      "id": "claim-03",
+      "claim": "claim-03",
+      "file": "hard/spec/claim-03.k",
+      "sha256": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+      "spec_module": "GEM-GEM-PROVE",
+      "k_label": "gem",
+      "source": "tests/reference/getters-full/src/gem/gem.k (Finding 0003b), assembled as provenance/rebuild/controls*/gem-gem-prove.k; <schedule> SHANGHAI </schedule> replaced by <schedule> OSAKA </schedule>",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata exactly 0x7bd2bea7 (4 bytes); storage: any Map with storage[3] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "reachability": "reachable, shown on chain: the deployed storage at the pinned block satisfies Pre for every caller (same slot record as claim-02)"
+      },
+      "pre": {
+        "function": "gem()",
+        "calldata": "exactly 0x7bd2bea7 (4 bytes)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[3] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_SUCCESS",
+        "output": "32-byte big-endian word of storage[3] & (2^160 - 1)",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_SUCCESS"
+      ],
+      "pre_scope_k": [],
+      "aasm": [
+        "Aasm-rangeUInt-storage",
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call"
+      ],
+      "requirements": [
+        "R3"
+      ],
+      "coverage_of_requirements": {
+        "R3": "full, under the listed Aasm facts"
+      },
+      "caveats": [
+        "'No external call' is a bytecode-inspection fact (straight-line getter body), not a separate K postcondition (Finding 0003b caveat 2)."
+      ],
+      "controls": {
+        "vacuity": {
+          "module": "GEM-GEM-VACUITY",
+          "what": "same Pre, ensures false: must NOT Accept (Accept would mean Pre is unsatisfiable, a vacuous proof)",
+          "expected": "not Accept",
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 74.5,
+          "log_sha256": "556247c3ea14b79562123c2f8b7acaaff1500bab4a53c0e29fcbcf27eb4c9cd7",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/gem-gem-vacuity.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "discriminator": {
+          "module": "GEM-GEM-DISCRIMINATOR",
+          "what": "same claim, opposite exit status (SUCCESS<->REVERT): must NOT Accept",
+          "expected": "not Accept",
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 195.0,
+          "log_sha256": "61815fe5eda1540a38b3af496892ae6e7ef974927e6baec6a49b313a69eb0c61",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/gem-gem-discriminator.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "wrong_slot": {
+          "module": "WRONG-SLOT-GEM-SPEC",
+          "what": "same getter claim, return value bound to a DIFFERENT storage slot: must NOT Accept",
+          "expected": "not Accept",
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 190.2,
+          "log_sha256": "ca2486524614336006f755484aa8a06d1538c985cf13c18107fc22bca9b2b1fb",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/wrong-slot.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        }
+      },
+      "observed": {
+        "verdict": "Accept",
+        "unknown_class": "-",
+        "exit": 0,
+        "wall_s": 181.6,
+        "log_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "spec": "provenance/rebuild/controls-osaka/gem-gem-prove.k",
+        "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv",
+        "ledger_seq": 48
+      }
+    },
+    {
+      "id": "claim-04",
+      "claim": "claim-04",
+      "file": "hard/spec/claim-04.k",
+      "sha256": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+      "spec_module": "CAGEWS-CAGEWS-PROVE",
+      "k_label": "cagews",
+      "source": "NEW CONTENT 2026-10-29: `assemble_hard.py variant --label cagews --storage-symbolic --requires '#lookup(STORAGE, keccak(#buf(32, MSGSENDER) +Bytes #buf(32, 0))) ==Int 0'` of the rebuilt Finding-0003 cage claim (provenance/rebuild/src/cage/cage.k); see provenance/decision-stub.md; <schedule> SHANGHAI </schedule> replaced by <schedule> OSAKA </schedule>",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata exactly 0x69245009 (4 bytes); storage: any Map with storage[keccak256(pad32(caller) ++ pad32(0))] == 0, i.e. wards[caller] == 0 (caller is not a ward); every other slot arbitrary. keccak is KEVM's keccak(Bytes) left opaque by the prover (symbolic argument)",
+        "reachability": "reachable, shown on chain: pre_witness claim-04 is the deployed storage at the pinned block with caller 0x000000000000000000000000000000000000dEaD, whose wards slot reads 0 at the pinned block (eth_getStorageAt, recorded in claim-04-config.json chain_slot_checks); its instance Accepts and its vacuity probe does not"
+      },
+      "pre": {
+        "function": "cage()",
+        "calldata": "exactly 0x69245009 (4 bytes)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[keccak256(pad32(caller) ++ pad32(0))] == 0, i.e. wards[caller] == 0 (caller is not a ward); every other slot arbitrary. keccak is KEVM's keccak(Bytes) left opaque by the prover (symbolic argument)",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_REVERT",
+        "output": "unconstrained (revert payload)",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_REVERT"
+      ],
+      "pre_scope_k": [
+        "#lookup(STORAGE, keccak(#buf(32, MSGSENDER) +Bytes #buf(32, 0))) ==Int 0"
+      ],
+      "aasm": [
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call",
+        "Aasm-keccak-wards-slot"
+      ],
+      "requirements": [
+        "R4"
+      ],
+      "coverage_of_requirements": {
+        "R4": "partial: see caveats and declared_blind_spots"
+      },
+      "caveats": [
+        "Pre says wards[caller] == 0, not wards[caller] != 1. Every write to wards in the bytecode (constructor, rely, deny) stores 0 or 1, so every reachable non-ward has 0; that invariant is a bytecode-inspection argument, not proved.",
+        "The meaning 'wards[caller]' rests on KEVM's keccak(Bytes) being Keccak-256 and on solc 0.5.12's mapping layout (slot = keccak256(pad32(key) ++ pad32(0))): Aasm-keccak-wards-slot / A_keccak in trusted_base.json. The proof itself treats keccak as an opaque function and needs no injectivity.",
+        "Not proved: rely(usr)/deny(usr) by a non-ward (the rest of R4); cage() by a ward (success path)."
+      ],
+      "controls": {
+        "vacuity": {
+          "module": "CAGEWS-CAGEWS-VACUITY",
+          "what": "same Pre, ensures false: must NOT Accept (Accept would mean Pre is unsatisfiable, a vacuous proof)",
+          "expected": "not Accept",
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 62.1,
+          "log_sha256": "d7ccf38285e6b955bd52c1dff4e841a3d0d2cd97644ccdb7ce6aba99da5ff17a",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/cagews-cagews-vacuity.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        },
+        "discriminator": {
+          "module": "CAGEWS-CAGEWS-DISCRIMINATOR",
+          "what": "same claim, opposite exit status (SUCCESS<->REVERT): must NOT Accept",
+          "expected": "not Accept",
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 220.4,
+          "log_sha256": "6c97c3ba817e0e1e31348054513fd920d3c2dec0469b99db5969fa7ead32f1c5",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/cagews-cagews-discriminator.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        }
+      },
+      "observed": {
+        "verdict": "Accept",
+        "unknown_class": "-",
+        "exit": 0,
+        "wall_s": 202.1,
+        "log_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "spec": "provenance/rebuild/controls-osaka/cagews-cagews-prove.k",
+        "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv",
+        "ledger_seq": 35
+      }
+    },
+    {
+      "id": "claim-05",
+      "claim": "claim-05",
+      "file": "hard/spec/claim-05.k",
+      "sha256": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+      "spec_module": "JOINSYM-JOINSYM-PROVE",
+      "k_label": "joinsym",
+      "source": "NEW CONTENT 2026-10-29: `assemble_hard.py variant --label joinsym --calldata 'b\"\\x3b\\x4d\\xa6\\x9f\" +Bytes #buf(32, USR:Int) +Bytes #buf(32, WAD:Int)' --requires '#rangeUInt(256, USR)' --requires '#rangeUInt(256, WAD)'` of provenance/rebuild/src/join/join.k (Finding 0003 row 4 rebuilt, generalised to symbolic storage with live == 0); see provenance/decision-stub.md; <schedule> SHANGHAI </schedule> replaced by <schedule> OSAKA </schedule>",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata 0x3b4da69f ++ word(USR) ++ word(WAD), exactly 68 bytes, for EVERY 256-bit USR and WAD (USR's upper 96 bits may be dirty; the code masks them); storage: any Map with storage[5] (live) == 0; every other slot arbitrary",
+        "reachability": "reachable by judgement, not shown on chain: pre_witness claim-05 is the deployed storage at the pinned block with slot 5 (live) set to 0, i.e. the state right after a ward calls cage(); live is 1 at the pinned block"
+      },
+      "pre": {
+        "function": "join(address,uint256)",
+        "calldata": "0x3b4da69f ++ word(USR) ++ word(WAD), exactly 68 bytes, for EVERY 256-bit USR and WAD (USR's upper 96 bits may be dirty; the code masks them)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[5] (live) == 0; every other slot arbitrary",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_REVERT",
+        "output": "unconstrained (revert payload)",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_REVERT"
+      ],
+      "pre_scope_k": [
+        "#lookup(STORAGE, 5) ==Int 0"
+      ],
+      "aasm": [
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call",
+        "Aasm-rangeUInt-args"
+      ],
+      "requirements": [
+        "R5"
+      ],
+      "coverage_of_requirements": {
+        "R5": "partial: see caveats and declared_blind_spots"
+      },
+      "caveats": [
+        "Calldata is exactly 68 bytes; longer calldata (extra trailing bytes, which the ABI decoder accepts) is outside this claim.",
+        "'Before any external call' is a bytecode-inspection fact (the revert at pc 0x03bf precedes both CALL sites at pc 0x04e9 and 0x05de), not a separate K postcondition; the K postcondition says every other account and GemJoin's storage and log are unchanged at the halt.",
+        "Covers the reachable post-cage() state (live == 0 with the rest of storage arbitrary)."
+      ],
+      "controls": {
+        "vacuity": {
+          "module": "JOINSYM-JOINSYM-VACUITY",
+          "what": "same Pre, ensures false: must NOT Accept (Accept would mean Pre is unsatisfiable, a vacuous proof)",
+          "expected": "not Accept",
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 71.6,
+          "log_sha256": "fa48eca965c11da77cd1e3d00335770e772a1a454fa69a4e096504bf4d7f3543",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/joinsym-joinsym-vacuity.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        },
+        "discriminator": {
+          "module": "JOINSYM-JOINSYM-DISCRIMINATOR",
+          "what": "same claim, opposite exit status (SUCCESS<->REVERT): must NOT Accept",
+          "expected": "not Accept",
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 202.6,
+          "log_sha256": "7087457860f19a61cc8c3043a1c28998c240e26f0d2f5638bc0e94e11e3ac045",
+          "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "spec": "provenance/rebuild/controls-osaka/joinsym-joinsym-discriminator.k",
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        }
+      },
+      "observed": {
+        "verdict": "Accept",
+        "unknown_class": "-",
+        "exit": 0,
+        "wall_s": 180.9,
+        "log_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "spec": "provenance/rebuild/controls-osaka/joinsym-joinsym-prove.k",
+        "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv",
+        "ledger_seq": 42
+      }
+    }
+  ],
+  "declared_blind_spots": [
+    {
+      "requirement": "R4",
+      "partial": true,
+      "reason": "claim-04 proves cage() reverts for every non-ward caller (wards[caller] == 0) over every other storage. Not proved: rely/deny by a non-ward; a caller with wards[caller] not in {0, 1} (unreachable by bytecode inspection, not proved); cage/rely/deny success for a ward."
+    },
+    {
+      "requirement": "R5",
+      "partial": true,
+      "reason": "claim-05 proves join reverts with live == 0 for every caller, every storage and every 256-bit (usr, wad). Not proved: calldata longer than 68 bytes; callvalue > 0 (R9); a call from a non-top-level frame (Aasm-toplevel-call). 'Before any external call' is by bytecode inspection."
+    },
+    {
+      "requirement": "R6",
+      "reason": "Not proved. join's value movement needs the external calls Vat.slip and WETH.transferFrom composed (assume-guarantee over unaudited callees); Stage C is open (Finding 0006 + correction). The overflow guard (wad >= 2^255 reverts, Finding 0003 row 6) is outside this claim set."
+    },
+    {
+      "requirement": "R7",
+      "reason": "Not proved. exit's value movement needs Vat.slip and WETH.transfer composed; open (Finding 0006). The overflow guard (Finding 0003 row 5) is outside this claim set."
+    },
+    {
+      "requirement": "R8",
+      "reason": "Not proved as stated. Claims 01-05 show storage is unchanged on the three getter paths and the two revert paths only; no success path of join/exit/cage/rely/deny is covered."
+    },
+    {
+      "requirement": "R9",
+      "reason": "Not proved. Every claim fixes callvalue = 0; the non-payable guard (Finding 0003 row 7, cage only) is outside this claim set."
+    }
+  ],
+  "declared_limits": [
+    "Every claim fixes callvalue 0, a top-level non-static frame, and gas not modelled: a claim holds for executions that do not run out of gas (Aasm-gas-abstraction). It does not guarantee termination within any gas limit.",
+    "Every claim is proved under KEVM <schedule> OSAKA </schedule>, which models mainnet osaka only partly (trusted_base.json semantics[0].adequacy_evidence, A1)."
+  ],
+  "reading_guide": "pre/post/exit are a non-K paraphrase of each claim; the K file (by sha256) is the statement that was proved. quantifies_over states the configuration set each claim ranges over and whether it is reachable. A requirement listed in a claim's `requirements` with coverage 'partial' is ALSO listed in declared_blind_spots with the uncovered part."
+}
