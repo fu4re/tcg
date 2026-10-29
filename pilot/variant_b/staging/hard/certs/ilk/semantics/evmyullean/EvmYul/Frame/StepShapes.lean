@@ -1,0 +1,1583 @@
+import EvmYul.Frame.StepFrame
+import EvmYul.Frame.MutualFrame
+
+/-!
+# Per-opcode step shape lemmas
+
+For each opcode, a single-step lemma describing the post-state shape
+in terms of `s.pc`, `s.stack`, and `s.executionEnv`. These are the
+building blocks any contract proof uses inside its
+`Reachable_step_preserves` walk: each PC case applies the shape
+lemma matching the decoded opcode, then reads off the next-PC
+disjunct.
+
+All lemmas have signature pattern:
+```
+theorem step_OP_shape (s s' : EVM.State) (f' cost : ℕ) (...inputs...) :
+    s'.pc = s.pc + UInt256.ofNat Δ ∧
+    (...stack-shape claim...) ∧
+    s'.executionEnv = s.executionEnv
+```
+
+Coverage so far (the eight opcodes that appear in Register's bytecode):
+PUSH1, CALLDATALOAD, CALLER, SSTORE, GAS, POP, STOP, CALL.
+
+Future work: extend to DUP*, SWAP*, JUMP, JUMPI, JUMPDEST, ADD, SUB,
+MUL, DIV, MOD, LT, GT, EQ, ISZERO, AND, OR, XOR, NOT, SHL, SHR,
+KECCAK256, MLOAD, MSTORE, MSTORE8, SLOAD, RETURN, REVERT,
+RETURNDATACOPY, etc. (cf. `GENERALIZATION_PLAN.md` step 2).
+-/
+
+namespace EvmYul.Frame
+
+open EvmYul EvmYul.EVM
+
+/-! ## Reusable proof-body macros
+
+These macros capture the four shape-proof patterns that recur across
+~50 of the per-opcode lemmas. Each lemma below that uses one is a
+one-liner; the dispatcher identifier is the only thing that varies. -/
+
+/-- Shape-proof body for an opcode that pushes one value (with no popped
+input) via a "dispatch op" of the form `dispatchD EVM.d`. Closes goals
+of shape `pc=pc+1 ∧ (∃ v, stack=v::stack) ∧ executionEnv=executionEnv`. -/
+local macro "step_push_via_dispatch" disp:ident op:ident hStep:ident : tactic => `(tactic| (
+  unfold EVM.step at $hStep:ident
+  simp only [bind, Except.bind, pure, Except.pure] at $hStep:ident
+  unfold EvmYul.step at $hStep:ident
+  simp only [Id.run] at $hStep:ident
+  unfold $disp:ident $op:ident at $hStep:ident
+  simp only [Id_run_ok, Except.ok.injEq] at $hStep:ident
+  subst $hStep:ident
+  refine ⟨rfl, ⟨_, rfl⟩, rfl⟩))
+
+/-- Shape-proof body for a unary state op (pops 1, pushes 1) of the
+form `dispatchUnaryStateOp EVM.unaryStateOp`. Closes goals of shape
+`pc=pc+1 ∧ (∃ v, stack=v::tl) ∧ executionEnv=executionEnv`. -/
+local macro "step_pop1_push1_unaryStateOp" hStk:ident hStep:ident : tactic => `(tactic| (
+  unfold EVM.step at $hStep:ident
+  simp only [bind, Except.bind, pure, Except.pure] at $hStep:ident
+  unfold EvmYul.step at $hStep:ident
+  simp only [Id.run] at $hStep:ident
+  unfold dispatchUnaryStateOp EVM.unaryStateOp at $hStep:ident
+  rw [$hStk:ident] at $hStep:ident
+  simp only [Stack.pop, Id_run_ok, Except.ok.injEq] at $hStep:ident
+  subst $hStep:ident
+  refine ⟨rfl, ⟨_, rfl⟩, rfl⟩))
+
+/-- Shape-proof body for a unary primop (pops 1, pushes 1) of the form
+`dispatchUnary EVM.execUnOp`. -/
+local macro "step_pop1_push1_unary" hStk:ident hStep:ident : tactic => `(tactic| (
+  unfold EVM.step at $hStep:ident
+  simp only [bind, Except.bind, pure, Except.pure] at $hStep:ident
+  unfold EvmYul.step at $hStep:ident
+  simp only [Id.run] at $hStep:ident
+  unfold dispatchUnary EVM.execUnOp at $hStep:ident
+  rw [$hStk:ident] at $hStep:ident
+  simp only [Stack.pop, Id_run_ok, Except.ok.injEq] at $hStep:ident
+  subst $hStep:ident
+  refine ⟨rfl, ⟨_, rfl⟩, rfl⟩))
+
+/-- Shape-proof body for a binary primop (pops 2, pushes 1) of the form
+`dispatchBinary EVM.execBinOp`. -/
+local macro "step_pop2_push1_binary" hStk:ident hStep:ident : tactic => `(tactic| (
+  unfold EVM.step at $hStep:ident
+  simp only [bind, Except.bind, pure, Except.pure] at $hStep:ident
+  unfold EvmYul.step at $hStep:ident
+  simp only [Id.run] at $hStep:ident
+  unfold dispatchBinary EVM.execBinOp at $hStep:ident
+  rw [$hStk:ident] at $hStep:ident
+  simp only [Stack.pop2, Id_run_ok, Except.ok.injEq] at $hStep:ident
+  subst $hStep:ident
+  refine ⟨rfl, ⟨_, rfl⟩, rfl⟩))
+
+/-- Shape-proof body for a ternary primop (pops 3, pushes 1) of the form
+`dispatchTernary EVM.execTriOp`. -/
+local macro "step_pop3_push1_ternary" hStk:ident hStep:ident : tactic => `(tactic| (
+  unfold EVM.step at $hStep:ident
+  simp only [bind, Except.bind, pure, Except.pure] at $hStep:ident
+  unfold EvmYul.step at $hStep:ident
+  simp only [Id.run] at $hStep:ident
+  unfold dispatchTernary EVM.execTriOp at $hStep:ident
+  rw [$hStk:ident] at $hStep:ident
+  simp only [Stack.pop3, Id_run_ok, Except.ok.injEq] at $hStep:ident
+  subst $hStep:ident
+  refine ⟨rfl, ⟨_, rfl⟩, rfl⟩))
+
+/-- Shape-proof body for a binary machine-state op (pops 2, no push) of
+the form `dispatchBinaryMachineStateOp EVM.binaryMachineStateOp`.
+Closes goals of shape `pc=pc+1 ∧ stack=tl ∧ executionEnv=executionEnv`. -/
+local macro "step_pop2_nopush_binaryMSOp" hStk:ident hStep:ident : tactic => `(tactic| (
+  unfold EVM.step at $hStep:ident
+  simp only [bind, Except.bind, pure, Except.pure] at $hStep:ident
+  unfold EvmYul.step at $hStep:ident
+  simp only [Id.run] at $hStep:ident
+  unfold dispatchBinaryMachineStateOp EVM.binaryMachineStateOp at $hStep:ident
+  rw [$hStk:ident] at $hStep:ident
+  simp only [Stack.pop2, Id_run_ok, Except.ok.injEq] at $hStep:ident
+  subst $hStep:ident
+  refine ⟨rfl, rfl, rfl⟩))
+
+/-- Shape-proof body for a ternary copy op (pops 3, no push) of the form
+`dispatchTernaryCopyOp EVM.ternaryCopyOp`. -/
+local macro "step_pop3_nopush_ternaryCopy" hStk:ident hStep:ident : tactic => `(tactic| (
+  unfold EVM.step at $hStep:ident
+  simp only [bind, Except.bind, pure, Except.pure] at $hStep:ident
+  unfold EvmYul.step at $hStep:ident
+  simp only [Id.run] at $hStep:ident
+  unfold dispatchTernaryCopyOp EVM.ternaryCopyOp at $hStep:ident
+  rw [$hStk:ident] at $hStep:ident
+  simp only [Stack.pop3, Id_run_ok, Except.ok.injEq] at $hStep:ident
+  subst $hStep:ident
+  refine ⟨rfl, rfl, rfl⟩))
+
+/-! ## Push / arithmetic-stack opcodes -/
+
+/-- PUSH1 with arg `(v, 1)`: pushes `v`, advances `pc` by 2. -/
+theorem step_PUSH1_shape
+    (s s' : EVM.State) (f' cost : ℕ) (v : UInt256)
+    (hStep : EVM.step (f' + 1) cost (some (.Push .PUSH1, some (v, 1))) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 2 ∧
+    s'.stack = v :: s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  injection hStep with hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-- PUSH0: pushes 0, advances `pc` by 1. -/
+theorem step_PUSH0_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.Push .PUSH0, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = ⟨0⟩ :: s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  injection hStep with hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-- Generic PUSH (`PUSHn` for `n ≥ 1`) with arg `(v, n)`: pushes `v`, advances
+`pc` by `n + 1`. Covers PUSH2..PUSH32. -/
+theorem step_PUSH_shape
+    (s s' : EVM.State) (f' cost : ℕ) (op : Operation.POp)
+    (hOpNeq : op ≠ .PUSH0)
+    (v : UInt256) (n : Nat)
+    (hStep : EVM.step (f' + 1) cost (some (.Push op, some (v, n))) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat (n + 1) ∧
+    s'.stack = v :: s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  cases op
+  · exact absurd rfl hOpNeq
+  all_goals (
+    simp only [Id.run] at hStep
+    injection hStep with hStep
+    subst hStep
+    refine ⟨rfl, rfl, rfl⟩)
+
+/-- JUMPDEST: pc += 1, stack unchanged. -/
+theorem step_JUMPDEST_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.JUMPDEST, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  injection hStep with hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-- PC: pushes the current pc, advances pc by 1. -/
+theorem step_PC_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.PC, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  injection hStep with hStep
+  subst hStep
+  refine ⟨rfl, ⟨_, rfl⟩, rfl⟩
+
+/-! ## Stack-data opcodes -/
+
+/-- CALLDATALOAD: pops 1, pushes 1, `pc += 1`. The pushed value is
+abstracted (`∃ v`) since it depends on `s`'s calldata. -/
+theorem step_CALLDATALOAD_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.CALLDATALOAD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop1_push1_unaryStateOp hStk hStep
+
+/-- CALLER: pushes 1 (the caller address), `pc += 1`. -/
+theorem step_CALLER_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.CALLER, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-- GAS: pushes 1 (the remaining gas), `pc += 1`. -/
+theorem step_GAS_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.GAS, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchMachineStateOp EVM.machineStateOp hStep
+
+/-- ADDRESS: pushes 1 (the contract's address), `pc += 1`. -/
+theorem step_ADDRESS_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.ADDRESS, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-- ORIGIN: pushes 1 (the tx origin), `pc += 1`. -/
+theorem step_ORIGIN_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.ORIGIN, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-- CALLVALUE: pushes 1 (the call's wei value), `pc += 1`. -/
+theorem step_CALLVALUE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.CALLVALUE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-- CALLDATASIZE: pushes 1 (the calldata size), `pc += 1`. -/
+theorem step_CALLDATASIZE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.CALLDATASIZE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-- CODESIZE: pushes 1 (the code size), `pc += 1`. -/
+theorem step_CODESIZE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.CODESIZE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-- GASPRICE: pushes 1 (the gas price), `pc += 1`. -/
+theorem step_GASPRICE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.GASPRICE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-- BASEFEE: pushes 1 (the basefee), `pc += 1`. -/
+theorem step_BASEFEE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.BASEFEE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-- RETURNDATASIZE: pushes 1, `pc += 1`. -/
+theorem step_RETURNDATASIZE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.RETURNDATASIZE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchMachineStateOp EVM.machineStateOp hStep
+
+/-- MSIZE: pushes 1, `pc += 1`. -/
+theorem step_MSIZE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.MSIZE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchMachineStateOp EVM.machineStateOp hStep
+
+/-- COINBASE: pushes 1, `pc += 1`. -/
+theorem step_COINBASE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.COINBASE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchStateOp EVM.stateOp hStep
+
+/-- TIMESTAMP: pushes 1, `pc += 1`. -/
+theorem step_TIMESTAMP_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.TIMESTAMP, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchStateOp EVM.stateOp hStep
+
+/-- NUMBER: pushes 1, `pc += 1`. -/
+theorem step_NUMBER_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.NUMBER, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchStateOp EVM.stateOp hStep
+
+/-- GASLIMIT: pushes 1, `pc += 1`. -/
+theorem step_GASLIMIT_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.GASLIMIT, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchStateOp EVM.stateOp hStep
+
+/-- CHAINID: pushes 1, `pc += 1`. -/
+theorem step_CHAINID_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.CHAINID, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchStateOp EVM.stateOp hStep
+
+/-- SELFBALANCE: pushes 1, `pc += 1`. -/
+theorem step_SELFBALANCE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.SELFBALANCE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchStateOp EVM.stateOp hStep
+
+/-- POP: pops 1, no push, `pc += 1`. -/
+theorem step_POP_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.POP, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-! ## Unary / binary primops -/
+
+/-- ISZERO: pops 1, pushes 1, `pc += 1`. -/
+theorem step_ISZERO_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.ISZERO, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop1_push1_unary hStk hStep
+
+/-- NOT: pops 1, pushes 1, `pc += 1`. -/
+theorem step_NOT_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.NOT, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop1_push1_unary hStk hStep
+
+/-- BALANCE: pops 1, pushes 1, `pc += 1`. -/
+theorem step_BALANCE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.BALANCE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop1_push1_unaryStateOp hStk hStep
+
+/-- BLOCKHASH: pops 1, pushes 1, `pc += 1`. -/
+theorem step_BLOCKHASH_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.BLOCKHASH, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop1_push1_unaryStateOp hStk hStep
+
+/-- EXTCODESIZE: pops 1, pushes 1, `pc += 1`. -/
+theorem step_EXTCODESIZE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.EXTCODESIZE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop1_push1_unaryStateOp hStk hStep
+
+/-- EXTCODEHASH: pops 1, pushes 1, `pc += 1`. -/
+theorem step_EXTCODEHASH_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.EXTCODEHASH, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchUnaryStateOp EVM.unaryStateOp at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop, Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ⟨_, rfl⟩, ?_⟩
+  show (EvmYul.State.extCodeHash s.toState hd).1.executionEnv = s.executionEnv
+  rw [extCodeHash_preserves_executionEnv]
+
+/-- SLOAD: pops 1, pushes 1, `pc += 1`. -/
+theorem step_SLOAD_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SLOAD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop1_push1_unaryStateOp hStk hStep
+
+/-- SLOAD strong: like `step_SLOAD_shape`, but also exposes the pushed
+value as the storage lookup at the contract's own address (the EVM
+`SLOAD` semantics) and proves `accountMap` preservation. -/
+theorem step_SLOAD_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SLOAD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack =
+      (s.lookupAccount s.executionEnv.codeOwner
+        |>.option ⟨0⟩ (Account.lookupStorage (k := hd))) :: tl ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchUnaryStateOp EVM.unaryStateOp at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop, Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl, rfl⟩
+
+/-- MLOAD: pops 1, pushes 1, `pc += 1`. -/
+theorem step_MLOAD_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.MLOAD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ⟨_, rfl⟩, rfl⟩
+
+/-! ## Storage / control-flow opcodes -/
+
+/-- SSTORE: pops 2, no push, `pc += 1`. The two popped values are
+discarded (storage is updated, but executionEnv is preserved). -/
+theorem step_SSTORE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SSTORE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchBinaryStateOp EVM.binaryStateOp at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop2, Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, ?_⟩
+  show (EvmYul.State.sstore _ _ _).executionEnv = s.executionEnv
+  rw [sstore_preserves_executionEnv]
+
+/-- STOP: pc, stack, and executionEnv all unchanged. -/
+theorem step_STOP_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.STOP, arg)) s = .ok s') :
+    s'.pc = s.pc ∧
+    s'.stack = s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run, Except.ok.injEq] at hStep
+  subst hStep
+  exact ⟨rfl, rfl, rfl⟩
+
+/-! ## CALL family -/
+
+/-- `EVM.call` preserves the input's `pc` and `executionEnv` — both gate
+branches (gate-pass-with-Θ-success and gate-fail-with-state-passthrough)
+return states identical to the input on these projections. Used by
+`step_CALL_shape` to derive the post-CALL frame. -/
+theorem EVM_call_preserves_pc
+    (f' cost : ℕ) (bvh : List ByteArray)
+    (g src rcp t v v' io is oo os : UInt256) (perm : Bool)
+    (es : EVM.State) (xv : UInt256) (es' : EVM.State)
+    (h : EVM.call f' cost bvh g src rcp t v v' io is oo os perm es = .ok (xv, es')) :
+    es'.pc = es.pc ∧ es'.executionEnv = es.executionEnv := by
+  unfold EVM.call at h
+  match f' with
+  | 0 => exact absurd h (by simp)
+  | n + 1 =>
+    simp only [bind, Except.bind, pure, Except.pure] at h
+    split at h
+    · split at h
+      · exact absurd h (by simp)
+      · simp only [Except.ok.injEq, Prod.mk.injEq] at h
+        obtain ⟨_, hes⟩ := h
+        rw [← hes]
+        exact ⟨rfl, rfl⟩
+    · simp only [Except.ok.injEq, Prod.mk.injEq] at h
+      obtain ⟨_, hes⟩ := h
+      rw [← hes]
+      exact ⟨rfl, rfl⟩
+
+/-- CALL: pops 7, pushes 1 (the success flag), `pc += 1`. The pushed
+value is abstracted (`∃ v`) since it's the dynamic call-success flag.
+The pre-call stack must have at least 7 elements. -/
+theorem step_CALL_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 hd4 hd5 hd6 hd7 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: hd4 :: hd5 :: hd6 :: hd7 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.CALL, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  simp only [EVM.step, Operation.CALL, bind, Except.bind, pure, Except.pure] at hStep
+  rw [hStk] at hStep
+  split at hStep
+  · exact absurd hStep (by simp)
+  · rename_i p hpop7
+    obtain ⟨stack', μ₀, μ₁, μ₂, μ₃, μ₄, μ₅, μ₆⟩ := p
+    have hStack : stack' = tl := by
+      simp only [Stack.pop7] at hpop7
+      injection hpop7 with h
+      injection h with h
+      exact h.symm
+    split at hStep
+    · exact absurd hStep (by simp)
+    · rename_i p_call hCall
+      injection hStep with hEq
+      have hCallPres := EVM_call_preserves_pc _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ hCall
+      obtain ⟨hPC, hEE⟩ := hCallPres
+      rw [← hEq]
+      refine ⟨?_, ⟨p_call.1, ?_⟩, ?_⟩
+      · show (p_call.2.replaceStackAndIncrPC (stack'.push p_call.1)).pc = s.pc + UInt256.ofNat 1
+        show p_call.2.pc + UInt256.ofNat 1 = s.pc + UInt256.ofNat 1
+        rw [hPC]
+      · show (p_call.2.replaceStackAndIncrPC (stack'.push p_call.1)).stack = p_call.1 :: tl
+        show stack'.push p_call.1 = p_call.1 :: tl
+        rw [hStack]; rfl
+      · show p_call.2.executionEnv = s.executionEnv
+        rw [hEE]
+
+/-! ## Binary primops (ADD, SUB, MUL, ...) -/
+
+/-- ADD: pops 2, pushes 1, `pc += 1`. -/
+theorem step_ADD_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.ADD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SUB: pops 2, pushes 1, `pc += 1`. -/
+theorem step_SUB_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SUB, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SUB strong: like `step_SUB_shape`, but exposes the pushed value as
+`UInt256.sub hd1 hd2` (the EVM `SUB` semantics: top - second-from-top)
+and proves `accountMap` preservation. -/
+theorem step_SUB_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SUB, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = UInt256.sub hd1 hd2 :: tl ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchBinary EVM.execBinOp at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop2, Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl, rfl⟩
+
+/-- MUL: pops 2, pushes 1, `pc += 1`. -/
+theorem step_MUL_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.MUL, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- DIV: pops 2, pushes 1, `pc += 1`. -/
+theorem step_DIV_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DIV, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- MOD: pops 2, pushes 1, `pc += 1`. -/
+theorem step_MOD_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.MOD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- LT: pops 2, pushes 1, `pc += 1`. -/
+theorem step_LT_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.LT, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- LT strong: like `step_LT_shape`, but exposes the pushed value as
+`UInt256.lt hd1 hd2` (the EVM `LT` semantics: `1` if top < second, else
+`0`) and proves `accountMap` preservation. -/
+theorem step_LT_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.LT, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = UInt256.lt hd1 hd2 :: tl ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchBinary EVM.execBinOp at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop2, Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl, rfl⟩
+
+/-- GT: pops 2, pushes 1, `pc += 1`. -/
+theorem step_GT_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.GT, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SLT: pops 2, pushes 1, `pc += 1`. -/
+theorem step_SLT_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SLT, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SGT: pops 2, pushes 1, `pc += 1`. -/
+theorem step_SGT_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SGT, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- EQ: pops 2, pushes 1, `pc += 1`. -/
+theorem step_EQ_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.EQ, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- AND: pops 2, pushes 1, `pc += 1`. -/
+theorem step_AND_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.AND, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- OR: pops 2, pushes 1, `pc += 1`. -/
+theorem step_OR_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.OR, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- XOR: pops 2, pushes 1, `pc += 1`. -/
+theorem step_XOR_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.XOR, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SHL: pops 2, pushes 1, `pc += 1`. -/
+theorem step_SHL_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SHL, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SHR: pops 2, pushes 1, `pc += 1`. -/
+theorem step_SHR_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SHR, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SDIV: pops 2, pushes 1, `pc += 1`. -/
+theorem step_SDIV_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SDIV, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SMOD: pops 2, pushes 1, `pc += 1`. -/
+theorem step_SMOD_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SMOD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- EXP: pops 2, pushes 1, `pc += 1`. -/
+theorem step_EXP_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.EXP, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SIGNEXTEND: pops 2, pushes 1, `pc += 1`. -/
+theorem step_SIGNEXTEND_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SIGNEXTEND, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- BYTE: pops 2, pushes 1, `pc += 1`. -/
+theorem step_BYTE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.BYTE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-- SAR: pops 2, pushes 1, `pc += 1`. -/
+theorem step_SAR_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SAR, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_push1_binary hStk hStep
+
+/-! ## Ternary primops -/
+
+/-- ADDMOD: pops 3, pushes 1, `pc += 1`. -/
+theorem step_ADDMOD_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.ADDMOD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop3_push1_ternary hStk hStep
+
+/-- MULMOD: pops 3, pushes 1, `pc += 1`. -/
+theorem step_MULMOD_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.MULMOD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop3_push1_ternary hStk hStep
+
+/-! ## Transient storage / extra env opcodes -/
+
+/-- TLOAD: pops 1, pushes 1, `pc += 1`. -/
+theorem step_TLOAD_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.TLOAD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop1_push1_unaryStateOp hStk hStep
+
+/-- TSTORE: pops 2, no push, `pc += 1`. -/
+theorem step_TSTORE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.TSTORE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchBinaryStateOp EVM.binaryStateOp at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop2, Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, ?_⟩
+  show (EvmYul.State.tstore s.toState hd1 hd2).executionEnv = s.executionEnv
+  rw [tstore_preserves_executionEnv]
+
+/-- PREVRANDAO: pushes 1, `pc += 1`. -/
+theorem step_PREVRANDAO_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.PREVRANDAO, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-- BLOBBASEFEE: pushes 1, `pc += 1`. -/
+theorem step_BLOBBASEFEE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.BLOBBASEFEE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv := by
+  step_push_via_dispatch dispatchExecutionEnvOp EVM.executionEnvOp hStep
+
+/-! ## Memory / hashing two-pop opcodes -/
+
+/-- KECCAK256: pops 2, pushes 1 (the hash), `pc += 1`. -/
+theorem step_KECCAK256_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.KECCAK256, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchBinaryMachineStateOp' EVM.binaryMachineStateOp' at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop2, Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ⟨_, rfl⟩, rfl⟩
+
+/-- MSTORE: pops 2, no push, `pc += 1`. -/
+theorem step_MSTORE_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.MSTORE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_nopush_binaryMSOp hStk hStep
+
+/-- MSTORE8: pops 2, no push, `pc += 1`. -/
+theorem step_MSTORE8_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.MSTORE8, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_nopush_binaryMSOp hStk hStep
+
+/-! ## JUMP family -/
+
+/-- JUMP: pops 1, pc replaced by popped value. -/
+theorem step_JUMP_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.JUMP, arg)) s = .ok s') :
+    s'.pc = hd ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-- JUMPI: pops 2, pc set to first popped value if second is non-zero, else pc+1. -/
+theorem step_JUMPI_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.JUMPI, arg)) s = .ok s') :
+    s'.pc = (if hd2 != ⟨0⟩ then hd1 else s.pc + ⟨1⟩) ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop2, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-! ## RETURN / REVERT -/
+
+/-- RETURN: pops 2 (the return-data offset and length); the result has stack
+without those two elements, `pc += 1` and `executionEnv` preserved. -/
+theorem step_RETURN_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.RETURN, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_nopush_binaryMSOp hStk hStep
+
+/-- REVERT: same shape as RETURN at the EVM-step level (the X loop catches
+the actual halt by inspecting the operation kind). -/
+theorem step_REVERT_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.REVERT, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop2_nopush_binaryMSOp hStk hStep
+
+/-! ## Copy ops (CALLDATACOPY, CODECOPY, RETURNDATACOPY, EXTCODECOPY) -/
+
+/-- CALLDATACOPY: pops 3, no push, `pc += 1`. -/
+theorem step_CALLDATACOPY_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.CALLDATACOPY, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop3_nopush_ternaryCopy hStk hStep
+
+/-- CODECOPY: pops 3, no push, `pc += 1`. -/
+theorem step_CODECOPY_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.CODECOPY, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  step_pop3_nopush_ternaryCopy hStk hStep
+
+/-- RETURNDATACOPY: pops 3, no push, `pc += 1`. Implemented inline in
+`EvmYul.step` (does not go through a generic dispatcher). -/
+theorem step_RETURNDATACOPY_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.RETURNDATACOPY, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop3, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-- EXTCODECOPY: pops 4, no push, `pc += 1`. -/
+theorem step_EXTCODECOPY_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 hd4 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: hd4 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.EXTCODECOPY, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchQuaternaryCopyOp EVM.quaternaryCopyOp at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop4, Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-! ## DUP1 / SWAP1 -/
+
+/-- DUP1: pops 0, pushes a copy of the top, `pc += 1`. -/
+theorem step_DUP1_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DUP1, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd :: s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dup at hStep
+  rw [hStk] at hStep
+  simp only [show List.take 1 (hd :: tl) = [hd] from rfl,
+             List.length_singleton, ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ?_, rfl⟩
+  show [hd].getLast! :: (hd :: tl) = hd :: s.stack
+  rw [hStk]; rfl
+
+/-- DUP2: duplicates the second-from-top, `pc += 1`. -/
+theorem step_DUP2_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DUP2, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd2 :: s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dup at hStep
+  rw [hStk] at hStep
+  simp only [show List.take 2 (hd1 :: hd2 :: tl) = [hd1, hd2] from rfl,
+             show ([hd1, hd2] : List UInt256).length = 2 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ?_, rfl⟩
+  show [hd1, hd2].getLast! :: (hd1 :: hd2 :: tl) = hd2 :: s.stack
+  rw [hStk]; rfl
+
+/-- DUP3: duplicates the third-from-top, `pc += 1`. -/
+theorem step_DUP3_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DUP3, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd3 :: s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dup at hStep
+  rw [hStk] at hStep
+  simp only [show List.take 3 (hd1 :: hd2 :: hd3 :: tl) = [hd1, hd2, hd3] from rfl,
+             show ([hd1, hd2, hd3] : List UInt256).length = 3 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ?_, rfl⟩
+  show [hd1, hd2, hd3].getLast! :: (hd1 :: hd2 :: hd3 :: tl) = hd3 :: s.stack
+  rw [hStk]; rfl
+
+/-- DUP4: duplicates the fourth-from-top, `pc += 1`. -/
+theorem step_DUP4_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 hd4 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: hd4 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DUP4, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd4 :: s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dup at hStep
+  rw [hStk] at hStep
+  simp only [show List.take 4 (hd1 :: hd2 :: hd3 :: hd4 :: tl) = [hd1, hd2, hd3, hd4] from rfl,
+             show ([hd1, hd2, hd3, hd4] : List UInt256).length = 4 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ?_, rfl⟩
+  show [hd1, hd2, hd3, hd4].getLast! :: (hd1 :: hd2 :: hd3 :: hd4 :: tl) = hd4 :: s.stack
+  rw [hStk]; rfl
+
+/-- DUP5: duplicates the fifth-from-top, `pc += 1`. -/
+theorem step_DUP5_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 hd4 hd5 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: hd4 :: hd5 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DUP5, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd5 :: s.stack ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dup at hStep
+  rw [hStk] at hStep
+  simp only [show List.take 5 (hd1 :: hd2 :: hd3 :: hd4 :: hd5 :: tl)
+                = [hd1, hd2, hd3, hd4, hd5] from rfl,
+             show ([hd1, hd2, hd3, hd4, hd5] : List UInt256).length = 5 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ?_, rfl⟩
+  show [hd1, hd2, hd3, hd4, hd5].getLast!
+        :: (hd1 :: hd2 :: hd3 :: hd4 :: hd5 :: tl) = hd5 :: s.stack
+  rw [hStk]; rfl
+
+/-- SWAP1: swaps the top two stack elements, `pc += 1`. -/
+theorem step_SWAP1_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SWAP1, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd2 :: hd1 :: tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold swap at hStep
+  rw [hStk] at hStep
+  simp only [show List.take (1 + 1) (hd1 :: hd2 :: tl) = [hd1, hd2] from rfl,
+             show List.drop (1 + 1) (hd1 :: hd2 :: tl) = tl from rfl,
+             show ([hd1, hd2] : List UInt256).length = 1 + 1 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-- SWAP2: swaps element 1 (top) with element 3 (count from 1), `pc += 1`. -/
+theorem step_SWAP2_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SWAP2, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd3 :: hd2 :: hd1 :: tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold swap at hStep
+  rw [hStk] at hStep
+  simp only [show List.take (2 + 1) (hd1 :: hd2 :: hd3 :: tl) = [hd1, hd2, hd3] from rfl,
+             show List.drop (2 + 1) (hd1 :: hd2 :: hd3 :: tl) = tl from rfl,
+             show ([hd1, hd2, hd3] : List UInt256).length = 2 + 1 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-- SWAP3: swaps top with the 4th element, `pc += 1`. -/
+theorem step_SWAP3_shape
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 hd4 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: hd4 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SWAP3, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd4 :: hd2 :: hd3 :: hd1 :: tl ∧
+    s'.executionEnv = s.executionEnv := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold swap at hStep
+  rw [hStk] at hStep
+  simp only [show List.take (3 + 1) (hd1 :: hd2 :: hd3 :: hd4 :: tl) = [hd1, hd2, hd3, hd4] from rfl,
+             show List.drop (3 + 1) (hd1 :: hd2 :: hd3 :: hd4 :: tl) = tl from rfl,
+             show ([hd1, hd2, hd3, hd4] : List UInt256).length = 3 + 1 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl⟩
+
+/-! ## Strong shape lemmas (with `accountMap` preservation)
+
+These mirror the corresponding non-strong shape lemmas but additionally
+expose `s'.accountMap = s.accountMap`. Used by per-PC cascade-threading
+walks to propagate a storage-equation fact across non-storage opcodes
+(e.g. between an SLOAD and a downstream SSTORE in the same block). -/
+
+theorem step_DUP1_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DUP1, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd :: s.stack ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dup at hStep
+  rw [hStk] at hStep
+  simp only [show List.take 1 (hd :: tl) = [hd] from rfl,
+             List.length_singleton, ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ?_, rfl, rfl⟩
+  show [hd].getLast! :: (hd :: tl) = hd :: s.stack
+  rw [hStk]; rfl
+
+theorem step_DUP2_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DUP2, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd2 :: s.stack ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dup at hStep
+  rw [hStk] at hStep
+  simp only [show List.take 2 (hd1 :: hd2 :: tl) = [hd1, hd2] from rfl,
+             show ([hd1, hd2] : List UInt256).length = 2 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ?_, rfl, rfl⟩
+  show [hd1, hd2].getLast! :: (hd1 :: hd2 :: tl) = hd2 :: s.stack
+  rw [hStk]; rfl
+
+theorem step_DUP3_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DUP3, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd3 :: s.stack ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dup at hStep
+  rw [hStk] at hStep
+  simp only [show List.take 3 (hd1 :: hd2 :: hd3 :: tl) = [hd1, hd2, hd3] from rfl,
+             show ([hd1, hd2, hd3] : List UInt256).length = 3 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ?_, rfl, rfl⟩
+  show [hd1, hd2, hd3].getLast! :: (hd1 :: hd2 :: hd3 :: tl) = hd3 :: s.stack
+  rw [hStk]; rfl
+
+theorem step_SWAP1_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.SWAP1, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd2 :: hd1 :: tl ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold swap at hStep
+  rw [hStk] at hStep
+  simp only [show List.take (1 + 1) (hd1 :: hd2 :: tl) = [hd1, hd2] from rfl,
+             show List.drop (1 + 1) (hd1 :: hd2 :: tl) = tl from rfl,
+             show ([hd1, hd2] : List UInt256).length = 1 + 1 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl, rfl⟩
+
+theorem step_PUSH_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (op : Operation.POp)
+    (hOpNeq : op ≠ .PUSH0)
+    (v : UInt256) (n : Nat)
+    (hStep : EVM.step (f' + 1) cost (some (.Push op, some (v, n))) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat (n + 1) ∧
+    s'.stack = v :: s.stack ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  cases op
+  · exact absurd rfl hOpNeq
+  all_goals (
+    simp only [Id.run] at hStep
+    injection hStep with hStep
+    subst hStep
+    refine ⟨rfl, rfl, rfl, rfl⟩)
+
+theorem step_JUMPI_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.JUMPI, arg)) s = .ok s') :
+    s'.pc = (if hd2 != ⟨0⟩ then hd1 else s.pc + ⟨1⟩) ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop2, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl, rfl⟩
+
+/-- JUMPDEST strong: like `step_JUMPDEST_shape`, additionally proves
+`accountMap` preservation. -/
+theorem step_JUMPDEST_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.JUMPDEST, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = s.stack ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  injection hStep with hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl, rfl⟩
+
+/-- POP strong: like `step_POP_shape`, additionally proves `accountMap`
+preservation. -/
+theorem step_POP_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.POP, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = tl ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl, rfl⟩
+
+/-- CALLER strong: like `step_CALLER_shape`, additionally proves
+`accountMap` preservation. -/
+theorem step_CALLER_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.CALLER, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchExecutionEnvOp EVM.executionEnvOp at hStep
+  simp only [Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ⟨_, rfl⟩, rfl, rfl⟩
+
+/-- CALLVALUE strong: like `step_CALLVALUE_shape`, additionally proves
+`accountMap` preservation. -/
+theorem step_CALLVALUE_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.CALLVALUE, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchExecutionEnvOp EVM.executionEnvOp at hStep
+  simp only [Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ⟨_, rfl⟩, rfl, rfl⟩
+
+/-- ADD strong: like `step_ADD_shape`, additionally proves `accountMap`
+preservation. -/
+theorem step_ADD_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 : UInt256) (tl : Stack UInt256) (hStk : s.stack = hd1 :: hd2 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.ADD, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: tl) ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchBinary EVM.execBinOp at hStep
+  rw [hStk] at hStep
+  simp only [Stack.pop2, Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ⟨_, rfl⟩, rfl, rfl⟩
+
+/-- DUP5 strong: like `step_DUP5_shape`, additionally proves `accountMap`
+preservation. -/
+theorem step_DUP5_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hd1 hd2 hd3 hd4 hd5 : UInt256) (tl : Stack UInt256)
+    (hStk : s.stack = hd1 :: hd2 :: hd3 :: hd4 :: hd5 :: tl)
+    (hStep : EVM.step (f' + 1) cost (some (.DUP5, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    s'.stack = hd5 :: s.stack ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dup at hStep
+  rw [hStk] at hStep
+  simp only [show List.take 5 (hd1 :: hd2 :: hd3 :: hd4 :: hd5 :: tl) =
+               [hd1, hd2, hd3, hd4, hd5] from rfl,
+             show ([hd1, hd2, hd3, hd4, hd5] : List UInt256).length = 5 from rfl,
+             ↓reduceIte, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ?_, rfl, rfl⟩
+  show [hd1, hd2, hd3, hd4, hd5].getLast! :: (hd1 :: hd2 :: hd3 :: hd4 :: hd5 :: tl)
+       = hd5 :: s.stack
+  rw [hStk]; rfl
+
+/-- GAS strong: like `step_GAS_shape`, additionally proves `accountMap`
+preservation. -/
+theorem step_GAS_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (arg : Option (UInt256 × Nat))
+    (hStep : EVM.step (f' + 1) cost (some (.GAS, arg)) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 1 ∧
+    (∃ v, s'.stack = v :: s.stack) ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  unfold dispatchMachineStateOp EVM.machineStateOp at hStep
+  simp only [Id_run_ok, Except.ok.injEq] at hStep
+  subst hStep
+  refine ⟨rfl, ⟨_, rfl⟩, rfl, rfl⟩
+
+/-- PUSH1 strong: like `step_PUSH1_shape`, additionally proves `accountMap`
+preservation. -/
+theorem step_PUSH1_shape_strong
+    (s s' : EVM.State) (f' cost : ℕ) (v : UInt256)
+    (hStep : EVM.step (f' + 1) cost (some (.Push .PUSH1, some (v, 1))) s = .ok s') :
+    s'.pc = s.pc + UInt256.ofNat 2 ∧
+    s'.stack = v :: s.stack ∧
+    s'.executionEnv = s.executionEnv ∧
+    s'.accountMap = s.accountMap := by
+  unfold EVM.step at hStep
+  simp only [bind, Except.bind, pure, Except.pure] at hStep
+  unfold EvmYul.step at hStep
+  simp only [Id.run] at hStep
+  injection hStep with hStep
+  subst hStep
+  refine ⟨rfl, rfl, rfl, rfl⟩
+
+end EvmYul.Frame

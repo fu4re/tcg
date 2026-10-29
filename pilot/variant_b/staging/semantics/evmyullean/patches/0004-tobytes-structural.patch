@@ -1,0 +1,24 @@
+diff -ru a/EvmYul/UInt256.lean b/EvmYul/UInt256.lean
+--- a/EvmYul/UInt256.lean
++++ b/EvmYul/UInt256.lean
+@@ -301,7 +301,19 @@
+       apply Nat.div_lt_self <;> simp
+     byte :: toBytes' (n / UInt8.size)
+ 
+-def toBytesBigEndian : ℕ → List UInt8 := List.reverse ∘ toBytes'
++-- tcg pilot patch 0004: upstream is `List.reverse ∘ toBytes'`, and `toBytes'` is
++-- well-founded recursion, which the kernel does not reduce. `toBytesFuel` has
++-- the same equations, recursion bounded by fuel `n` (each step divides by 256,
++-- so at most 33 steps are taken for n < 2^256); `toBytesFuel n n = toBytes' n`
++-- (`GemJoin.toBytesFuel_eq`).
++def toBytesFuel : ℕ → ℕ → List UInt8
++  | 0, _ => []
++  | _ + 1, 0 => []
++  | fuel + 1, n@(.succ _) =>
++    let byte : UInt8 := ⟨Nat.mod n UInt8.size, Nat.mod_lt _ (by linarith)⟩
++    byte :: toBytesFuel fuel (n / UInt8.size)
++
++def toBytesBigEndian : ℕ → List UInt8 := fun n => (toBytesFuel n n).reverse
+ 
+ -- | If n < 2⁸ᵏ, then (toBytes' n).length ≤ k.
+ private lemma toBytes'_le {k : ℕ} (h : n < 2 ^ (8 * k)) : (toBytes' n).length ≤ k := by

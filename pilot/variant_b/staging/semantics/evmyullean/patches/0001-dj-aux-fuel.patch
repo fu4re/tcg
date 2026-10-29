@@ -1,0 +1,27 @@
+diff -ru a/EvmYul/EVM/Semantics.lean b/EvmYul/EVM/Semantics.lean
+--- a/EvmYul/EVM/Semantics.lean
++++ b/EvmYul/EVM/Semantics.lean
+@@ -96,13 +96,20 @@
+                Except EVM.ExecutionException (Operation .EVM × Option (UInt256 × Nat)) :=
+   decode I.code pc |>.option (.error .StackUnderflow) Except.ok
+ 
+-partial def D_J_aux (c : ByteArray) (i : UInt256) (result : Array UInt256) : Array UInt256 :=
++-- tcg pilot patch 0001: upstream is a `partial def` (opaque to the kernel).
++-- Same body, recursion bounded by `fuel`. `D_J` passes `c.size + 1`, which is
++-- never exhausted while `c.size + 33 < 2^256`: every recursive call needs
++-- `i.toNat < c.size` and advances `i` by 1 + push width (at most 33) without wrapping.
++def D_J_aux (fuel : ℕ) (c : ByteArray) (i : UInt256) (result : Array UInt256) : Array UInt256 :=
++  match fuel with
++  | 0 => result
++  | fuel + 1 =>
+   match c.get? i.toNat >>= EvmYul.EVM.parseInstr with
+     | none => result
+-    | some cᵢ => D_J_aux c (N i cᵢ) (if cᵢ = .JUMPDEST then result.push i else result)
++    | some cᵢ => D_J_aux fuel c (N i cᵢ) (if cᵢ = .JUMPDEST then result.push i else result)
+ 
+ def D_J (c : ByteArray) (i : UInt256) : Array UInt256 :=
+-  D_J_aux c i #[]
++  D_J_aux (c.size + 1) c i #[]
+ 
+ private def BitVec.ofFn {k} (x : Fin k → Bool) : BitVec k :=
+   BitVec.ofNat k (natOfBools (Vector.ofFn x))

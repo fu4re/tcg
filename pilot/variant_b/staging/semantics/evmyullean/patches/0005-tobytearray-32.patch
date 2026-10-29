@@ -1,0 +1,18 @@
+diff -ru a/EvmYul/Wheels.lean b/EvmYul/Wheels.lean
+--- a/EvmYul/Wheels.lean
++++ b/EvmYul/Wheels.lean
+@@ -9,9 +9,12 @@
+ 
+ def chainId : ℕ := 1
+ 
++-- tcg pilot patch 0005: upstream is `zeroes (32 - b.size) ++ b` with `b := BE val.toNat`.
++-- Its length depends on `val`, so for a symbolic word the kernel cannot see that it
++-- is 32 and gets stuck at the next memory read. Same 32 big-endian bytes, written
++-- elementwise; equal to upstream's expression by `GemJoin.toByteArray_eq`.
+ def UInt256.toByteArray (val : UInt256) : ByteArray :=
+-  let b := BE val.toNat
+-  ffi.ByteArray.zeroes (32 - b.size) ++ b
++  ⟨((List.range 32).map fun i => UInt8.ofNat (val.toNat / 256 ^ i)).reverse.toArray⟩
+ 
+ abbrev Literal := UInt256
+ 

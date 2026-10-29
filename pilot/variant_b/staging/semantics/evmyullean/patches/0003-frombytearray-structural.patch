@@ -1,0 +1,15 @@
+diff -ru a/EvmYul/UInt256.lean b/EvmYul/UInt256.lean
+--- a/EvmYul/UInt256.lean
++++ b/EvmYul/UInt256.lean
+@@ -262,7 +262,10 @@
+ | b :: bs => b.toFin.val + 2^8 * fromBytes' bs
+ 
+ def fromBytesBigEndian : List UInt8 → ℕ := fromBytes' ∘ List.reverse
+-def fromByteArrayBigEndian (b : ByteArray) : ℕ := fromBytesBigEndian b.toList
++-- tcg pilot patch 0003: upstream reads `b.toList`, a well-founded loop in Lean core
++-- that the kernel does not reduce. `b.data.toList` is the same list
++-- (`GemJoin.ByteArray_toList_eq`) by structural recursion.
++def fromByteArrayBigEndian (b : ByteArray) : ℕ := fromBytesBigEndian b.data.toList
+ 
+ variable {bs : List UInt8}
+          {n : ℕ}

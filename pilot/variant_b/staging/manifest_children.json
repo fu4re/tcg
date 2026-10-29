@@ -1,0 +1,96 @@
+{
+ "format": "tcg-pilot-manifest-children/0.1",
+ "note": "role-c children for the assembler (pilot/tools/assemble_hard.py) to add in bundle version 2. Exactly one proof object (with theorem); the rest are Lean project support files (no claim). semantics/ trees are bound by T_hat semantics hashes. List every file of both trees as children too: the verifier only reports unlisted files (unlisted_files_ignored), but its Lean check copies and builds the whole project directory, so an unlisted file would still be compiled",
+ "proof_objects": [
+  {
+   "path": "hard/certs/ilk/GemJoin/Ilk.lean",
+   "role": "c",
+   "media": "text/x-lean",
+   "claim": "claim-02",
+   "theorem": "GemJoin.Ilk.ilk_correct",
+   "sha256": "215eb9f7dd18aae4242c5ac1c7d0ca55f566545f8790387a411bf2cf793c180f"
+  }
+ ],
+ "support_files": [
+  {
+   "path": "hard/certs/ilk/GemJoin.lean",
+   "role": "c",
+   "sha256": "a20e18aca4a23375ff5e3fc295426af2242fddbf16f7084f2701656f41eac917"
+  },
+  {
+   "path": "hard/certs/ilk/GemJoin/Bytes.lean",
+   "role": "c",
+   "sha256": "40f4c8d617679f4bb5e419a38f44286e1a45d59b96f758f525cfd9ebbe95e745"
+  },
+  {
+   "path": "hard/certs/ilk/GemJoin/JumpDest.lean",
+   "role": "c",
+   "sha256": "1c8bd22039a2753172c591ed4a58e1922f63c7d79810dba3055ede6a36d3d140"
+  },
+  {
+   "path": "hard/certs/ilk/GemJoin/JumpDest/Basic.lean",
+   "role": "c",
+   "sha256": "09301e191c482feb7f5662403491f271bfd5197882fd90b160c95abfea917b29"
+  },
+  {
+   "path": "hard/certs/ilk/GemJoin/JumpDest/Chunks0.lean",
+   "role": "c",
+   "sha256": "378fa1119a4e858443c33d3527180b183ba31568e3711b56b6be7140d0d9f6af"
+  },
+  {
+   "path": "hard/certs/ilk/GemJoin/JumpDest/Chunks1.lean",
+   "role": "c",
+   "sha256": "1ac86110206a9edcd103f2850836a4cfb3bb3a49bb51803502e42301da12de3c"
+  },
+  {
+   "path": "hard/certs/ilk/GemJoin/JumpDest/Chunks2.lean",
+   "role": "c",
+   "sha256": "b5d99d256e03f20535a5b291051ab3071ba30ba51ed74aabf4999657b20f78c0"
+  },
+  {
+   "path": "hard/certs/ilk/GemJoin/JumpDest/Chunks3.lean",
+   "role": "c",
+   "sha256": "72f945fb87a9ee90c4db3ac1d8a6a53ee8fccd778174f46bb333d6af36f9b07c"
+  },
+  {
+   "path": "hard/certs/ilk/GemJoin/KernelRfl.lean",
+   "role": "c",
+   "sha256": "c705cf93ac338cf2d07acfaa3114420465c52d03947504d449b0863d24df6dbb"
+  },
+  {
+   "path": "hard/certs/ilk/GemJoin/Runtime.lean",
+   "role": "c",
+   "sha256": "8b9b8c7c494b445d32dd5038a7432517cbb8e0a505d66b8efc64a4e72c17f27f"
+  },
+  {
+   "path": "hard/certs/ilk/controls/IlkMutants.lean",
+   "role": "c",
+   "sha256": "68056a04644ed44b0d53fa99add70a1fb241c8fbda16b56f1d2e0b5f5caef790"
+  },
+  {
+   "path": "hard/certs/ilk/lake-manifest.json",
+   "role": "c",
+   "sha256": "fd9ca87d7f8149958c4021e03107c6b37a45e105ce35777f840867a28b65408a"
+  },
+  {
+   "path": "hard/certs/ilk/lakefile.lean",
+   "role": "c",
+   "sha256": "41c7daafa2617a25b60b2565c1c57cc68c42506a92cbd75e563384420a746de3"
+  },
+  {
+   "path": "hard/certs/ilk/lean-toolchain",
+   "role": "c",
+   "sha256": "8f6680f8389e8adee06cb2bd44372c6d60dce0e8301630b61a99a5642d1bd71b"
+  }
+ ],
+ "trees": [
+  {
+   "path": "semantics/evmyullean/upstream",
+   "tree_hash": "eac5e8d49ee15fdf2b604c6f4f27e4873226467a3d14b93b3234ca890bc99fe1"
+  },
+  {
+   "path": "hard/certs/ilk/semantics/evmyullean",
+   "tree_hash": "10a934b33c29a15e3fd7668cfb3a80b133b076abdcc4996ef5856385b41bd427"
+  }
+ ]
+}

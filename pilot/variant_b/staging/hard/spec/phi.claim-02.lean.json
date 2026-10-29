@@ -1,0 +1,92 @@
+{
+ "format": "tcg-pilot-phi-entry/0.1",
+ "status": "PROPOSED new formulation of claim-02 for phi version 2; NOT signed. H must re-sign phi.json after it is merged (L3 fails until then)",
+ "merge": "add as claims[id=claim-02].lean (the K formulation stays; the claim gains a second formulation and a second discharge)",
+ "id": "claim-02",
+ "claim": "claim-02",
+ "k_label": "ilk",
+ "kind": "Lean theorem over EVMYulLean: the message call Ξ ends in success with the stated output and account map",
+ "file": "hard/certs/ilk/GemJoin/Ilk.lean",
+ "sha256": "215eb9f7dd18aae4242c5ac1c7d0ca55f566545f8790387a411bf2cf793c180f",
+ "theorem": "GemJoin.Ilk.ilk_correct",
+ "statement": "theorem ilk_correct (f : ℕ) (cA : Batteries.RBSet AccountAddress compare) (gbh : BlockHeader)\n    (blocks : ProcessedBlocks) (σ σ₀ : AccountMap .EVM) (a s o : AccountAddress) (gp : ℕ)\n    (h : BlockHeader) (d : ℕ) (bvh : List ByteArray) :\n    ∃ cA' g' A', Ξ (f + 79) cA gbh blocks σ σ₀ G0 default (env a s o gp h d bvh)\n      = .ok (.success (cA', σ, g', A') (UInt256.toByteArray (slot σ a ⟨2⟩)))",
+ "statement_depends_on": {
+  "definitions": {
+   "GemJoin.Ilk.env": "call environment: codeOwner a, sender s, source o, weiValue 0, calldata 0xc5ce281e, code GemJoin.runtime, perm true (non-static), other fields universally quantified",
+   "GemJoin.Ilk.slot": "(σ.find? a).option 0 (Account.lookupStorage k): EVMYulLean's SLOAD read, 0 for an absent account or key",
+   "GemJoin.Ilk.G0": "30000000 (gas at entry)",
+   "GemJoin.runtime": "the 3462 bytes of hard/artifact.bin (keccak 0x8661c673…0874fa)",
+   "UInt256.toByteArray": "EVMYulLean (patched by 0005); GemJoin.toByteArray_eq proves it is the 32 big-endian bytes"
+  },
+  "files": {
+   "hard/certs/ilk/GemJoin/Ilk.lean": "215eb9f7dd18aae4242c5ac1c7d0ca55f566545f8790387a411bf2cf793c180f",
+   "hard/certs/ilk/GemJoin/Runtime.lean": "8b9b8c7c494b445d32dd5038a7432517cbb8e0a505d66b8efc64a4e72c17f27f"
+  },
+  "semantics": "hard/certs/ilk/semantics/evmyullean (T_hat semantics 'EVMYulLean as built')"
+ },
+ "program": {
+  "binds": "hard/artifact.bin",
+  "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+  "how": "GemJoin.runtime is generated from hard/artifact.bin (byte-identical, 3462 bytes); its jump table is D_J runtime 0, kernel-checked equal to a 59-entry table (GemJoin.DJ.D_J_runtime)"
+ },
+ "quantifies_over": "every account map σ (so every storage of the callee, every word in slot 2), callee a, caller s, origin o, gas price, block header, depth, blob hashes, σ₀, created accounts, processed blocks, genesis header, and fuel f + 79 for every f",
+ "pre": {
+  "function": "ilk()",
+  "calldata": "exactly 0xc5ce281e (4 bytes)",
+  "callvalue": 0,
+  "caller": "any address",
+  "executing_account": "any address",
+  "storage": "any (σ arbitrary)",
+  "gas": "exactly 30,000,000 at entry (NARROWER than K: K does not model gas)",
+  "substate": "empty at entry (NARROWER than K: slot 2 cold)",
+  "frame": "any depth d; non-static"
+ },
+ "post": {
+  "status": "success (Ξ returns .ok (.success ...))",
+  "output": "UInt256.toByteArray (slot σ a 2) = 32-byte big-endian word of storage[2]",
+  "account_map": "unchanged (σ)",
+  "not_stated": "remaining gas, substate (logs, touched accounts), created accounts: existentially quantified"
+ },
+ "narrowings_vs_k": [
+  {
+   "id": "N_gas",
+   "what": "gas at entry fixed at 30,000,000 (the run uses 2393); K proves it for <useGas> false. Generalising needs symbolic gas comparisons through UInt256 % 2^256; not attempted"
+  },
+  {
+   "id": "N_substate",
+   "what": "substate at entry empty; with slot 2 warm only the SLOAD cost differs; not proved"
+  },
+  {
+   "id": "N_log",
+   "what": "K's Post says the log is unchanged; the Lean statement leaves the returned substate (which holds the logs) existential, so 'no log' is not stated"
+  },
+  {
+   "id": "N_semantics",
+   "what": "the statement is about EVMYulLean 56253eb4 + patches 0001-0005 (0001, 0002 assumed faithful: A_sem_DJ, A_sem_zeroes; 0003-0005 proved equal)"
+  }
+ ],
+ "aasm": [
+  "A1_evmyul",
+  "A_sem_DJ",
+  "A_sem_zeroes",
+  "A3_lean"
+ ],
+ "requirements": [
+  "R2"
+ ],
+ "coverage_of_requirements": {
+  "R2": "partial under the narrowings N_gas, N_substate, N_log; the K formulation stays the full one"
+ },
+ "controls": {
+  "negative": {
+   "file": "hard/certs/ilk/controls/IlkMutants.lean",
+   "sha256": "68056a04644ed44b0d53fa99add70a1fb241c8fbda16b56f1d2e0b5f5caef790",
+   "run": "lake env lean controls/IlkMutants.lean (in hard/certs/ilk, after lake build)",
+   "expected": "mut_slot3 (output bound to slot 3), mut_gem_selector (calldata 0x7bd2bea7), mut_callvalue (call value 1) rejected by the kernel; ctl (the true statement) accepted",
+   "observed": "as expected, 2026-10-29, 198 s, 5.8 GB (pilot/variant_b/STATUS.md)",
+   "checked_by_verifier": false
+  },
+  "vacuity": "not applicable in the K sense: the statement is an equation about a total function, not an implication; Pre is the universally quantified environment, and every instance is satisfiable (e.g. the empty account map)"
+ },
+ "translation_table": "hard/spec/phi_delta.md"
+}

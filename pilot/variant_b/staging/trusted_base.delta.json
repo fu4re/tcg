@@ -1,0 +1,222 @@
+{
+ "format": "tcg-pilot-trusted-base-delta/0.1",
+ "status": "PROPOSED for bundle version 2 (variant B). Not merged into pilot/bundle/trusted_base.json; the variant-A ladder is computed without it. The phi change it goes with needs H's re-signature.",
+ "applies_to": {
+  "file": "trusted_base.json",
+  "sha256_when_written": "8bb0b042764a4540bb0c381b3a3a28c521c8b04b51b176a560d66e921d8e38cb"
+ },
+ "generated_by": "python3 pilot/variant_b/tools/build_staging.py",
+ "semantics_add": [
+  {
+   "name": "EVMYulLean (pristine upstream)",
+   "role": "second semantics; cross-check of claim-02 only",
+   "path": "semantics/evmyullean/upstream",
+   "hash": "eac5e8d49ee15fdf2b604c6f4f27e4873226467a3d14b93b3234ca890bc99fe1",
+   "hash_of": "canon.tree_hash (pilot/verifier/tcgverify/canon.py) of the directory",
+   "upstream": {
+    "repo": "https://github.com/leonardoalt/EVMYulLean",
+    "commit": "56253eb468bb39355ed522440502e3480c0139f0",
+    "export": "git archive of that commit",
+    "licence": "Apache-2.0 (upstream/license.txt)"
+   },
+   "listing_sha256": "57ed86e0a58e0936d9f3aaf092db6d3409411300088f1f7b81be673b5e768e99",
+   "listing_of": "sha256 of semantics/evmyullean/TREE_SHA256.txt (per-file sha256sum listing that apply_patches.sh checks)",
+   "provenance": "semantics/evmyullean/PROVENANCE.md"
+  },
+  {
+   "name": "EVMYulLean as built (upstream + patches 0001-0005)",
+   "role": "the semantics the claim-02 Lean certificate is kernel-checked against",
+   "path": "hard/certs/ilk/semantics/evmyullean",
+   "hash": "10a934b33c29a15e3fd7668cfb3a80b133b076abdcc4996ef5856385b41bd427",
+   "hash_of": "canon.tree_hash of the directory",
+   "derived_from": {
+    "path": "semantics/evmyullean/upstream",
+    "hash": "eac5e8d49ee15fdf2b604c6f4f27e4873226467a3d14b93b3234ca890bc99fe1"
+   },
+   "derivation": "sh semantics/evmyullean/apply_patches.sh <dst>; then canon.tree_hash(<dst>) must equal this hash",
+   "derivation_checked_by_verifier": false,
+   "derivation_note": "the verifier (variant B) checks both tree hashes, not that one is derived from the other; re-running apply_patches.sh is the check",
+   "vendored_hash_rule": "the vendored semantics is upstream tree hash + the ordered patch hashes; it is a MODIFICATION of upstream",
+   "patches": [
+    {
+     "name": "0001-dj-aux-fuel.patch",
+     "sha256": "d5d73e8f8948cf5af9b5aaf55f2c45027ba6b55748c2414816ca5b7069bd2933",
+     "repo_path": "semantics/evmyullean/patches/0001-dj-aux-fuel.patch",
+     "kind": "modification",
+     "faithfulness": "assumption A_sem_DJ (upstream D_J_aux is a partial def: no equations to prove against)"
+    },
+    {
+     "name": "0002-zeroes-transparent.patch",
+     "sha256": "385b680ea5aa6e5ee3826bee9d10d132ac97f86ceb9d99b84497e9ba8682fc28",
+     "repo_path": "semantics/evmyullean/patches/0002-zeroes-transparent.patch",
+     "kind": "modification",
+     "faithfulness": "assumption A_sem_zeroes (upstream zeroes is an opaque FFI constant)"
+    },
+    {
+     "name": "0003-frombytearray-structural.patch",
+     "sha256": "cbe24e88376d50608622d05502665650b52ace2fb3c7a92ce14008405977cd0a",
+     "repo_path": "semantics/evmyullean/patches/0003-frombytearray-structural.patch",
+     "kind": "modification, proved equal",
+     "faithfulness": "GemJoin.ByteArray_toList_eq (hard/certs/ilk/GemJoin/Bytes.lean)"
+    },
+    {
+     "name": "0004-tobytes-structural.patch",
+     "sha256": "774ddee637d2fcfb657a908a5ec35427dbf14231fcb4e53ca5fb3e599991a197",
+     "repo_path": "semantics/evmyullean/patches/0004-tobytes-structural.patch",
+     "kind": "modification, proved equal",
+     "faithfulness": "GemJoin.toBytesFuel_eq (hard/certs/ilk/GemJoin/Bytes.lean)"
+    },
+    {
+     "name": "0005-tobytearray-32.patch",
+     "sha256": "fbb2e02ec38b74c186419330a00dcb732e9d0cca13e8d7865a6d0407b8cbd428",
+     "repo_path": "semantics/evmyullean/patches/0005-tobytearray-32.patch",
+     "kind": "modification, proved equal given 0002 and 0004",
+     "faithfulness": "GemJoin.toByteArray_eq (hard/certs/ilk/GemJoin/Bytes.lean)"
+    }
+   ]
+  }
+ ],
+ "checker_add": [
+  {
+   "name": "lean",
+   "hash": [
+    "cbf5fd536e142ef1beaccf33f788fd8a7f3f29fb214e75c11319a8d8677b4b2b",
+    "c89073b8a577a5914ead7b740d2ad996af1ad5ad5b4bfc2825e0bce2f01b6aa4"
+   ],
+   "hash_of": "sha256 of bin/lean of the elan toolchain leanprover/lean4:v4.22.0 (linux/amd64, darwin/arm64)",
+   "toolchain": "leanprover/lean4:v4.22.0",
+   "project": "hard/certs/ilk",
+   "entry": "lake build in a scratch copy with every .olean deleted, then `#print axioms GemJoin.Ilk.ilk_correct` (pilot/verifier/tcgverify/checkers.py lean_project)",
+   "accept_rule": "build exit 0, no sorry/admit in the certificate source, axioms within lean_axioms",
+   "proof_style": "kernel evaluation (kernel_theorem: Eq.refl added with addDecl, so only the kernel checks it) and decide +kernel; no native_decide, no Lean.ofReduceBool, no Lean.trustCompiler",
+   "lake_dependencies_outside_bundle": [
+    {
+     "name": "mathlib",
+     "rev": "79e94a093aff4a60fb1b1f92d9681e407124c2ca",
+     "url": "https://github.com/leanprover-community/mathlib4.git"
+    },
+    {
+     "name": "plausible",
+     "rev": "b100ad4c5d74a464f497aaa8e7c74d86bf39a56f",
+     "url": "https://github.com/leanprover-community/plausible"
+    },
+    {
+     "name": "LeanSearchClient",
+     "rev": "99657ad92e23804e279f77ea6dbdeebaa1317b98",
+     "url": "https://github.com/leanprover-community/LeanSearchClient"
+    },
+    {
+     "name": "importGraph",
+     "rev": "eb164a46de87078f27640ee71e6c3841defc2484",
+     "url": "https://github.com/leanprover-community/import-graph"
+    },
+    {
+     "name": "proofwidgets",
+     "rev": "1253a071e6939b0faf5c09d2b30b0bfc79dae407",
+     "url": "https://github.com/leanprover-community/ProofWidgets4"
+    },
+    {
+     "name": "aesop",
+     "rev": "1256a18522728c2eeed6109b02dd2b8f207a2a3c",
+     "url": "https://github.com/leanprover-community/aesop"
+    },
+    {
+     "name": "Qq",
+     "rev": "917bfa5064b812b7fbd7112d018ea0b4def25ab3",
+     "url": "https://github.com/leanprover-community/quote4"
+    },
+    {
+     "name": "batteries",
+     "rev": "240676e9568c254a69be94801889d4b13f3b249f",
+     "url": "https://github.com/leanprover-community/batteries"
+    },
+    {
+     "name": "Cli",
+     "rev": "c682c91d2d4dd59a7187e2ab977ac25bd1f87329",
+     "url": "https://github.com/leanprover/lean4-cli"
+    }
+   ],
+   "cost_note": "measured on the VM (8 vCPU): GemJoin library 637 s wall, 5.9 GB peak, with Mathlib oleans present. The verifier deletes every .olean including the dependencies', so a verifier run also rebuilds the imported part of Mathlib from source: not measured"
+  }
+ ],
+ "assumptions_add": [
+  {
+   "id": "A3_lean",
+   "name": "Lean kernel soundness (variant B checker)",
+   "status": "assumption",
+   "hashes": [
+    "cbf5fd536e142ef1beaccf33f788fd8a7f3f29fb214e75c11319a8d8677b4b2b",
+    "c89073b8a577a5914ead7b740d2ad996af1ad5ad5b4bfc2825e0bce2f01b6aa4"
+   ],
+   "note": "Lean 4 v4.22.0 kernel; replaces A3 (kprove) for claim-02 under variant B only. The certificate is re-checked from source, so the elaborator and tactics are untrusted; the kernel and the axioms propext, Classical.choice, Quot.sound are trusted",
+   "risk_if_false": "a kernel bug could accept a false claim-02 statement"
+  },
+  {
+   "id": "A1_evmyul",
+   "name": "EVMYulLean adequacy for the claim-02 path",
+   "status": "assumption",
+   "note": "A1 gains a second semantics: the Lean statement is about EVMYulLean 56253eb4, not about mainnet. The ilk() path executes 77 instructions of 53 opcodes all present in EVMYulLean's step; no conformance pass rate was measured here",
+   "risk_if_false": "an EVMYulLean rule on the path (CALLDATALOAD, SLOAD, MSTORE, MLOAD, JUMPI, RETURN, ...) that differs from mainnet would make the Lean claim false of the deployed contract; agreement with KEVM on claim-02 (cross_checked) makes a shared error less likely, not impossible"
+  },
+  {
+   "id": "A_sem_DJ",
+   "name": "patch 0001: fuel-bounded D_J_aux equals upstream partial D_J_aux",
+   "status": "assumption",
+   "patch": {
+    "name": "0001-dj-aux-fuel.patch",
+    "sha256": "d5d73e8f8948cf5af9b5aaf55f2c45027ba6b55748c2414816ca5b7069bd2933"
+   },
+   "argument": "every recursive call needs i < c.size and advances i by at most 33 without wrapping, so fuel c.size + 1 is never exhausted while c.size + 33 < 2^256. Not provable: a partial def has no equations",
+   "evidence": "empirical, not a verdict: compiled #eval of the upstream body (copied verbatim as a partial def) and of patched D_J give the same 59 entries [16, 113, 169, ..., 3354] on the GemJoin runtime, equal to the kernel-checked table (GemJoin.DJ.D_J_runtime) and to an independent Python scan, all stopping at 3470. WETH9/Vat not checked (no runtime bytecode on the VM)",
+   "risk_if_false": "JUMP/JUMPI destinations accepted or rejected differently from upstream; a proof could certify a run upstream rejects, or the reverse"
+  },
+  {
+   "id": "A_sem_zeroes",
+   "name": "patch 0002: ByteArray.zeroes n = ⟨Array.replicate n 0⟩ matches upstream's C memset_zero",
+   "status": "assumption",
+   "patch": {
+    "name": "0002-zeroes-transparent.patch",
+    "sha256": "385b680ea5aa6e5ee3826bee9d10d132ac97f86ceb9d99b84497e9ba8682fc28"
+   },
+   "argument": "equal for n < 2^64; compiled upstream passes n mod 2^64 beyond that, unreachable under any gas schedule. The extern is removed, so kernel and compiled code agree on the patched tree",
+   "risk_if_false": "wrong memory contents or sizes after MSTORE, padded reads or RETURN"
+  },
+  {
+   "id": "A_lean_deps",
+   "name": "Lean dependencies fetched by lake",
+   "status": "assumption",
+   "note": "Mathlib and its dependencies are not in the bundle; lake fetches them at the git revs in hard/certs/ilk/lake-manifest.json (verifier reports them in outside_bundle). They are rebuilt from source by the kernel, so a bad dependency can only add axioms (caught by the whitelist) or break the build",
+   "risk_if_false": "a dependency rev could become unavailable and make L1 for claim-02 unreproducible (checker_unavailable / not_accept, never a false accept)"
+  }
+ ],
+ "assumptions_unchanged_note": "A3 (kprove) stays for claims 01, 03, 04, 05 and for the variant-A discharge of claim-02",
+ "lean_axioms": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "claims_without_certificate_remove": [
+  "claim-02"
+ ],
+ "cross_checked": [
+  "claim-02"
+ ],
+ "cross_checked_basis": {
+  "claim-02": {
+   "kevm": "Accept under variant A (phi.json claim-02 observed, ledger_seq 41); to be re-confirmed by ladder_A",
+   "lean": "accept: lake build OK, #print axioms GemJoin.Ilk.ilk_correct = [propext, Classical.choice, Quot.sound] (pilot/variant_b/STATUS.md); to be re-confirmed by the verifier --variant B",
+   "scope": "agreement under the Lean narrowings (gas 30,000,000, empty substate at entry); see hard/spec/phi.claim-02.lean.json"
+  }
+ },
+ "hashed_objects_add": [
+  {
+   "path": "hard/spec/phi.claim-02.lean.json",
+   "sha256": null,
+   "note": "filled when merged into phi.json"
+  },
+  {
+   "path": "semantics/evmyullean/PROVENANCE.md",
+   "sha256": "b325aad130157d9597741d18a38e4a1b67a79e411bd221d094431536724206ba"
+  }
+ ]
+}

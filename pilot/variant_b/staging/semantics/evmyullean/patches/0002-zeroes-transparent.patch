@@ -1,0 +1,113 @@
+diff -ru a/EvmYul/EVM/PrecompiledContracts.lean b/EvmYul/EVM/PrecompiledContracts.lean
+--- a/EvmYul/EVM/PrecompiledContracts.lean
++++ b/EvmYul/EVM/PrecompiledContracts.lean
+@@ -47,7 +47,7 @@
+       else
+         match ECDSARECOVER h ⟨#[.ofNat v' - 27]⟩ r s with
+           | .ok s =>
+-              ffi.ByteArray.zeroes ⟨12⟩ ++ (ffi.KEC s).extract 12 32
++              ffi.ByteArray.zeroes (12) ++ (ffi.KEC s).extract 12 32
+           | .error e =>
+             dbg_trace s!"Ξ_ECREC failed: {e}"
+             .empty
+@@ -183,14 +183,14 @@
+     let modulus := nat_of_slice data (96 + base_length + exp_length) modulus_length
+     let o : ByteArray :=
+       if modulus_length == 0 || modulus == 0 then
+-        ffi.ByteArray.zeroes ⟨modulus_length⟩
++        ffi.ByteArray.zeroes (modulus_length)
+       else
+         let base := nat_of_slice data 96 base_length
+         let exp := nat_of_slice data (96 + base_length) exp_length
+         let expmod_base := BE (expMod modulus (.ofNat base) exp)
+         let expmod_zeroes :=
+           if modulus_length ≥ expmod_base.size then
+-            ffi.ByteArray.zeroes ⟨modulus_length - expmod_base.size⟩
++            ffi.ByteArray.zeroes (modulus_length - expmod_base.size)
+           else
+             ByteArray.empty
+         expmod_zeroes ++ expmod_base
+@@ -336,7 +336,7 @@
+       ⟨100000⟩
+       default
+       { (default : ExecutionEnv .EVM) with
+-        calldata := x ++ y ++ ffi.ByteArray.zeroes ⟨32 * 4⟩
++        calldata := x ++ y ++ ffi.ByteArray.zeroes (32 * 4)
+       }
+   o
+  where
+diff -ru a/EvmYul/FFI/ffi.lean b/EvmYul/FFI/ffi.lean
+--- a/EvmYul/FFI/ffi.lean
++++ b/EvmYul/FFI/ffi.lean
+@@ -14,8 +14,12 @@
+   if d[212]! ∉ [0, 1].map Nat.toUInt8 then throw "error"
+   return BLAKE2Compress d
+ 
+-@[extern "memset_zero"]
+-opaque ByteArray.zeroes (n : USize) : ByteArray
++-- tcg pilot patch 0002: upstream is an `opaque` FFI constant over `USize`, which
++-- the kernel cannot unfold (and `USize` literals depend on the opaque
++-- `System.Platform.numBits`). Same result, n zero bytes, as a Lean definition
++-- over `Nat`. Differs from the compiled upstream only for n ≥ 2^64, where the
++-- C `memset_zero` would receive n mod 2^64.
++def ByteArray.zeroes (n : Nat) : ByteArray := ⟨Array.replicate n 0⟩
+ 
+ @[extern "keccak256"]
+ opaque keccak256 (input : @& ByteArray) (len : USize) : ByteArray
+diff -ru a/EvmYul/Wheels.lean b/EvmYul/Wheels.lean
+--- a/EvmYul/Wheels.lean
++++ b/EvmYul/Wheels.lean
+@@ -11,7 +11,7 @@
+ 
+ def UInt256.toByteArray (val : UInt256) : ByteArray :=
+   let b := BE val.toNat
+-  ffi.ByteArray.zeroes ⟨32 - b.size⟩ ++ b
++  ffi.ByteArray.zeroes (32 - b.size) ++ b
+ 
+ abbrev Literal := UInt256
+ 
+@@ -36,7 +36,7 @@
+ 
+ def toByteArray (a : AccountAddress) : ByteArray :=
+   let b := BE a
+-  ffi.ByteArray.zeroes ⟨20 - b.size⟩ ++ b
++  ffi.ByteArray.zeroes (20 - b.size) ++ b
+ 
+ end AccountAddress
+ 
+@@ -193,7 +193,7 @@
+       source.copySlice start empty 0 size
+     else
+       ⟨⟨source.toList.drop start |>.take size⟩⟩
+-  read ++ ffi.ByteArray.zeroes ⟨size - read.size⟩
++  read ++ ffi.ByteArray.zeroes (size - read.size)
+ 
+ def ByteArray.readWithoutPadding (source : ByteArray) (addr len : ℕ) : ByteArray :=
+   if addr ≥ source.size then .empty else
+@@ -207,7 +207,7 @@
+     panic! s!"ByteArray.readWithPadding: can not handle byte arrays of length {len}"
+   else
+     let read := source.readWithoutPadding addr len
+-    read ++ ffi.ByteArray.zeroes ⟨len - read.size⟩
++    read ++ ffi.ByteArray.zeroes (len - read.size)
+ 
+ inductive 𝕋 where
+   | 𝔹 : ByteArray → 𝕋
+@@ -355,14 +355,14 @@
+     if sourceAddr ≥ source.size then
+       let len := min len (dest.size - destAddr)
+       let destAddr := min destAddr dest.size
+-      (ffi.ByteArray.zeroes ⟨len⟩).copySlice 0 dest destAddr len
++      (ffi.ByteArray.zeroes (len)).copySlice 0 dest destAddr len
+     else
+       let practicalLen := min len (source.size - sourceAddr)
+       let endPaddingAddr := min dest.size (destAddr + len)
+       let sourcePaddingLength : ℕ := endPaddingAddr - (destAddr + practicalLen)
+-      let sourcePadding := ffi.ByteArray.zeroes ⟨sourcePaddingLength⟩
++      let sourcePadding := ffi.ByteArray.zeroes (sourcePaddingLength)
+       let destPaddingLength : ℕ := destAddr - dest.size
+-      let destPadding := ffi.ByteArray.zeroes ⟨destPaddingLength⟩
++      let destPadding := ffi.ByteArray.zeroes (destPaddingLength)
+       (source ++ sourcePadding).copySlice sourceAddr
+         (dest ++ destPadding)
+         destAddr
