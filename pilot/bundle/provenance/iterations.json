@@ -1,0 +1,1175 @@
+{
+  "format": "tcg-pilot-iterations/0.1",
+  "class": "U",
+  "august_2026_pilot": {
+    "iterations_retained": false,
+    "reason": "The original G4 runs (Finding 0003, cert 668f3d7d...) lived in an August session scratchpad that no longer exists; their claim sources, intermediate Refute/Unknown runs and counterexamples were never committed. Only the Finding's prose survives, from which claims 04/05 were rebuilt (provenance/decision-stub.md N1)."
+  },
+  "this_assembly_2026_10_29": {
+    "iterations_retained": true,
+    "where": "every kprove run is a ledger event (provenance/ledger.jsonl); verdicts in provenance/rebuild/results/{round1,osaka,matrix-shanghai,matrix-osaka}/*.tsv with logs/ beside them",
+    "infra_fail": [
+      {
+        "module": "ILK-ILK-PROVE",
+        "spec": "provenance/rebuild/controls-osaka/ilk-ilk-prove.k",
+        "note": "in flight at the VM reboot; no ledger run event, empty log; not counted (ledger note seq 7)"
+      },
+      {
+        "module": "CAGE-CAGE-VACUITY",
+        "spec": "provenance/rebuild/controls/cage-cage-vacuity.k",
+        "note": "in flight at the VM reboot; no ledger run event, empty log; not counted (ledger note seq 7)"
+      }
+    ],
+    "refute_or_unknown_before_accept": "none: no prove module of any shipped claim's lineage ever returned Refute or Unknown before its Accept; every Refute/Unknown in the TSVs is a control (vacuity / discriminator / wrong-slot), expected to not Accept",
+    "per_claim": {
+      "claim-01": [
+        {
+          "ledger_seq": 6,
+          "module": "VAT-VAT-PROVE",
+          "spec": "provenance/rebuild/controls-osaka/vat-vat-prove.k",
+          "spec_sha256": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+          "verdict": "Accept",
+          "role": "preceding run"
+        },
+        {
+          "ledger_seq": 12,
+          "module": "VAT-VAT-PROVE",
+          "spec": "provenance/rebuild/controls/vat-vat-prove.k",
+          "spec_sha256": "e5ae28025eabccceba17e94f9ab9bfefadbfbabcb44b1221173b870658b8f879",
+          "verdict": "Accept",
+          "role": "preceding run"
+        },
+        {
+          "ledger_seq": 37,
+          "module": "VAT-VAT-PROVE",
+          "spec": "provenance/rebuild/controls-osaka/vat-vat-prove.k",
+          "spec_sha256": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+          "verdict": "Accept",
+          "role": "accepted (shipped)"
+        }
+      ],
+      "claim-02": [
+        {
+          "ledger_seq": 21,
+          "module": "ILK-ILK-PROVE",
+          "spec": "provenance/rebuild/controls/ilk-ilk-prove.k",
+          "spec_sha256": "400c9bd93ab379aeb08c56ee779c40d9c8bb3ffa8d574dd5ebb66413568436d7",
+          "verdict": "Accept",
+          "role": "preceding run"
+        },
+        {
+          "ledger_seq": 41,
+          "module": "ILK-ILK-PROVE",
+          "spec": "provenance/rebuild/controls-osaka/ilk-ilk-prove.k",
+          "spec_sha256": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+          "verdict": "Accept",
+          "role": "accepted (shipped)"
+        }
+      ],
+      "claim-03": [
+        {
+          "ledger_seq": 31,
+          "module": "GEM-GEM-PROVE",
+          "spec": "provenance/rebuild/controls/gem-gem-prove.k",
+          "spec_sha256": "98b902b37d8a8b21839fac53ebe507e9846da5578f183add0757b6b3db2b8401",
+          "verdict": "Accept",
+          "role": "preceding run"
+        },
+        {
+          "ledger_seq": 48,
+          "module": "GEM-GEM-PROVE",
+          "spec": "provenance/rebuild/controls-osaka/gem-gem-prove.k",
+          "spec_sha256": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+          "verdict": "Accept",
+          "role": "accepted (shipped)"
+        }
+      ],
+      "claim-04": [
+        {
+          "ledger_seq": 4,
+          "module": "CAGE-CAGE-PROVE",
+          "spec": "provenance/rebuild/controls/cage-cage-prove.k",
+          "spec_sha256": "dfb1e6907c04e76d7833c2466a9b55e900a3c0be830a42ffa9ccc233adbfbde3",
+          "verdict": "Accept",
+          "role": "preceding run"
+        },
+        {
+          "ledger_seq": 17,
+          "module": "CAGEWS-CAGEWS-PROVE",
+          "spec": "provenance/rebuild/controls/cagews-cagews-prove.k",
+          "spec_sha256": "6d04a51941ad9f589794684e9951ea7c32170575b4fad4ae3057fceea90a7c1c",
+          "verdict": "Accept",
+          "role": "preceding run"
+        },
+        {
+          "ledger_seq": 35,
+          "module": "CAGEWS-CAGEWS-PROVE",
+          "spec": "provenance/rebuild/controls-osaka/cagews-cagews-prove.k",
+          "spec_sha256": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+          "verdict": "Accept",
+          "role": "accepted (shipped)"
+        }
+      ],
+      "claim-05": [
+        {
+          "ledger_seq": 5,
+          "module": "JOIN-JOIN-PROVE",
+          "spec": "provenance/rebuild/controls/join-join-prove.k",
+          "spec_sha256": "5daba21d52cd399329dd88eb588d03ef05d629362520a1b5d462300b54d54cdb",
+          "verdict": "Accept",
+          "role": "preceding run"
+        },
+        {
+          "ledger_seq": 19,
+          "module": "JOINSYM-JOINSYM-PROVE",
+          "spec": "provenance/rebuild/controls/joinsym-joinsym-prove.k",
+          "spec_sha256": "315d34bee5ea8e2160799b7de9a99cd75795aa096a90ef0f46b40744d896c926",
+          "verdict": "Accept",
+          "role": "preceding run"
+        },
+        {
+          "ledger_seq": 42,
+          "module": "JOINSYM-JOINSYM-PROVE",
+          "spec": "provenance/rebuild/controls-osaka/joinsym-joinsym-prove.k",
+          "spec_sha256": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+          "verdict": "Accept",
+          "role": "accepted (shipped)"
+        }
+      ]
+    },
+    "all_kevm_runs": [
+      {
+        "ledger_seq": 4,
+        "module": "CAGE-CAGE-PROVE",
+        "spec": "provenance/rebuild/controls/cage-cage-prove.k",
+        "spec_sha256": "dfb1e6907c04e76d7833c2466a9b55e900a3c0be830a42ffa9ccc233adbfbde3",
+        "exit": 0,
+        "started": "2026-10-29T13:07:21.787Z",
+        "ended": "2026-10-29T13:11:04.611Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 222.9,
+          "results_file": "provenance/rebuild/results/round1/results.tsv"
+        },
+        "log": [
+          {
+            "path": "../../../../pilot-hard/round1/logs/CAGE-CAGE-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 5,
+        "module": "JOIN-JOIN-PROVE",
+        "spec": "provenance/rebuild/controls/join-join-prove.k",
+        "spec_sha256": "5daba21d52cd399329dd88eb588d03ef05d629362520a1b5d462300b54d54cdb",
+        "exit": 0,
+        "started": "2026-10-29T13:11:04.802Z",
+        "ended": "2026-10-29T13:16:06.947Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 302.3,
+          "results_file": "provenance/rebuild/results/round1/results.tsv"
+        },
+        "log": [
+          {
+            "path": "../../../../pilot-hard/round1/logs/JOIN-JOIN-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 6,
+        "module": "VAT-VAT-PROVE",
+        "spec": "provenance/rebuild/controls-osaka/vat-vat-prove.k",
+        "spec_sha256": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+        "exit": 0,
+        "started": "2026-10-29T13:13:23.414Z",
+        "ended": "2026-10-29T13:18:55.014Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 130.1,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/osaka/logs/VAT-VAT-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/osaka/logs/VAT-VAT-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 12,
+        "module": "VAT-VAT-PROVE",
+        "spec": "provenance/rebuild/controls/vat-vat-prove.k",
+        "spec_sha256": "e5ae28025eabccceba17e94f9ab9bfefadbfbabcb44b1221173b870658b8f879",
+        "exit": 0,
+        "started": "2026-10-29T13:39:14.322Z",
+        "ended": "2026-10-29T13:41:39.504Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 145.3,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 16,
+        "module": "VAT-VAT-VACUITY",
+        "spec": "provenance/rebuild/controls/vat-vat-vacuity.k",
+        "spec_sha256": "cc370b8b98d745614d10ce114b76fa077e9faebfb1840ea97833bec1f235e80e",
+        "exit": 1,
+        "started": "2026-10-29T13:41:39.642Z",
+        "ended": "2026-10-29T13:42:48.397Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 68.8,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-VACUITY.log",
+            "sha256": "a303686c65cac4ffc33e058b58f6a2d113e5ea5d30a015d04766248c0aee7e02"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-VACUITY.log.err",
+            "sha256": "df72c80a4f971866d5a1be67bafbc69e106a6b15e50af1b78a0c5748f527e52b"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 17,
+        "module": "CAGEWS-CAGEWS-PROVE",
+        "spec": "provenance/rebuild/controls/cagews-cagews-prove.k",
+        "spec_sha256": "6d04a51941ad9f589794684e9951ea7c32170575b4fad4ae3057fceea90a7c1c",
+        "exit": 0,
+        "started": "2026-10-29T13:38:54.306Z",
+        "ended": "2026-10-29T13:42:49.614Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 235.4,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/attempts.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 18,
+        "module": "VAT-VAT-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls/vat-vat-discriminator.k",
+        "spec_sha256": "0d1d6c88b169ae5dbf49270624013bf955ca0e06175fb064cdf2d6d50a867b67",
+        "exit": 1,
+        "started": "2026-10-29T13:42:48.532Z",
+        "ended": "2026-10-29T13:45:18.461Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 150.0,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-DISCRIMINATOR.log",
+            "sha256": "deca504ab7603eed1127b19bcf7f13a3c08e1b6be074045610336696576c6354"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-DISCRIMINATOR.log.err",
+            "sha256": "381e1ea77898cba547e8e88737865dd70ff6646bbdf311280360026c41c7980c"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 19,
+        "module": "JOINSYM-JOINSYM-PROVE",
+        "spec": "provenance/rebuild/controls/joinsym-joinsym-prove.k",
+        "spec_sha256": "315d34bee5ea8e2160799b7de9a99cd75795aa096a90ef0f46b40744d896c926",
+        "exit": 0,
+        "started": "2026-10-29T13:42:49.744Z",
+        "ended": "2026-10-29T13:45:33.415Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 163.7,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/attempts.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 20,
+        "module": "CAGEWS-CAGEWS-VACUITY",
+        "spec": "provenance/rebuild/controls/cagews-cagews-vacuity.k",
+        "spec_sha256": "f89ad47c25252c3120d1db0f1d5e30eee24d46f4014071aaaf6c13e3dfdffb38",
+        "exit": 1,
+        "started": "2026-10-29T13:45:33.546Z",
+        "ended": "2026-10-29T13:46:41.245Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 67.8,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/attempts.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-VACUITY.log",
+            "sha256": "63f4a721d084e53b4cb914def75937322d55d8cf34ddac4640d0eac5cfef07f4"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-VACUITY.log.err",
+            "sha256": "8e7e01aabac040de5de648faf4535a68167066016c70599d073a8cf9100346ac"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 21,
+        "module": "ILK-ILK-PROVE",
+        "spec": "provenance/rebuild/controls/ilk-ilk-prove.k",
+        "spec_sha256": "400c9bd93ab379aeb08c56ee779c40d9c8bb3ffa8d574dd5ebb66413568436d7",
+        "exit": 0,
+        "started": "2026-10-29T13:45:18.603Z",
+        "ended": "2026-10-29T13:47:17.998Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 119.5,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 22,
+        "module": "JOINSYM-JOINSYM-VACUITY",
+        "spec": "provenance/rebuild/controls/joinsym-joinsym-vacuity.k",
+        "spec_sha256": "898a8fa59c779130abb5f7c09e0b7a54d880682abba74378371ce3ae1fbc1771",
+        "exit": 1,
+        "started": "2026-10-29T13:46:41.372Z",
+        "ended": "2026-10-29T13:47:53.978Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 72.7,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/attempts.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-VACUITY.log",
+            "sha256": "40ac87471960e047343237d741e83d6ffb6f077e1a93dfe076914fed6ed46f17"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-VACUITY.log.err",
+            "sha256": "b60b3cf9a41aeb14c81dd5ef1663ed140336fea6564efd50d3a04e3e861539f7"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 25,
+        "module": "ILK-ILK-VACUITY",
+        "spec": "provenance/rebuild/controls/ilk-ilk-vacuity.k",
+        "spec_sha256": "8658c00f91b85bc39731f39a0e4e6cd9a20d7a89f94a6c09790141e7e1873eef",
+        "exit": 1,
+        "started": "2026-10-29T13:47:18.135Z",
+        "ended": "2026-10-29T13:48:31.573Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 73.5,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-VACUITY.log",
+            "sha256": "b2e29b191b7693909ca793dda5f0ccc468350103566631130161b9e4e816d64c"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-VACUITY.log.err",
+            "sha256": "7756b064883f98766839cafff3896fa1918a7938d700ef969448229b8921b1e1"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 26,
+        "module": "ILK-ILK-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls/ilk-ilk-discriminator.k",
+        "spec_sha256": "4a7d2538fa505869a4bcab2bd4998c48046b1bab0b300046c8f82a43ebf32305",
+        "exit": 1,
+        "started": "2026-10-29T13:48:31.690Z",
+        "ended": "2026-10-29T13:50:35.000Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 123.4,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-DISCRIMINATOR.log",
+            "sha256": "2f7e3889ee0dbd3a3bd4298313de0af1dfc0ee6af90a6137fb4f1760d11dddba"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-DISCRIMINATOR.log.err",
+            "sha256": "0dae1d665ce8c06d12144a91b2288ce8bce2aef4d02610b765ae0230a87510aa"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 30,
+        "module": "CAGEWS-CAGEWS-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls/cagews-cagews-discriminator.k",
+        "spec_sha256": "bd0b8a8a0f8ceaf49aaa38ec6dac3a706ad79f3c0b9947be68f8acdd6bf84879",
+        "exit": 1,
+        "started": "2026-10-29T13:47:54.134Z",
+        "ended": "2026-10-29T13:51:51.891Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 237.8,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/attempts.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-DISCRIMINATOR.log",
+            "sha256": "bfeb0e0810853afa0585d16849634343e5139f7dc0c79865090de9634ae2b3a7"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-DISCRIMINATOR.log.err",
+            "sha256": "c7f318235b30ea9c8284b1fc40811444eb0632bbcbdc04f2ffc107c3f74fd46b"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 31,
+        "module": "GEM-GEM-PROVE",
+        "spec": "provenance/rebuild/controls/gem-gem-prove.k",
+        "spec_sha256": "98b902b37d8a8b21839fac53ebe507e9846da5578f183add0757b6b3db2b8401",
+        "exit": 0,
+        "started": "2026-10-29T13:50:35.159Z",
+        "ended": "2026-10-29T13:53:27.012Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 171.9,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 32,
+        "module": "GEM-GEM-VACUITY",
+        "spec": "provenance/rebuild/controls/gem-gem-vacuity.k",
+        "spec_sha256": "28a6914d6cd55f2cf38987070b710edfd3c5859b269e1029df47b000ad98a506",
+        "exit": 1,
+        "started": "2026-10-29T13:53:27.137Z",
+        "ended": "2026-10-29T13:54:33.489Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 66.4,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-VACUITY.log",
+            "sha256": "afcff8b80482fd15250a53a16b384fce27e43d129d265e9164996727b4b7c007"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-VACUITY.log.err",
+            "sha256": "7a5068cc398ba2baf2ba5cd9b7bd4df4d6b1259c86e1a589a789ba0130319e1f"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 33,
+        "module": "JOINSYM-JOINSYM-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls/joinsym-joinsym-discriminator.k",
+        "spec_sha256": "0693a66da1d1c950adba3c312d1f57c813d6590838ed77bbad08d5f695b447ec",
+        "exit": 1,
+        "started": "2026-10-29T13:51:52.033Z",
+        "ended": "2026-10-29T13:54:36.014Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 164.1,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/attempts.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-DISCRIMINATOR.log",
+            "sha256": "a8daa5cc19db49fab88f8a75077809bba270cb69a080c6c28a8c44b3c8f4238c"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-DISCRIMINATOR.log.err",
+            "sha256": "5d1471757715472ab5e3ca239b304c484fe00289ea6b22f2a761c7bd08261aba"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 34,
+        "module": "GEM-GEM-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls/gem-gem-discriminator.k",
+        "spec_sha256": "6e6ed8d39eb4aad9bd1c5c83d373458b9bcc2c9f839672be80f735962c2e304c",
+        "exit": 1,
+        "started": "2026-10-29T13:54:33.616Z",
+        "ended": "2026-10-29T13:57:03.250Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 149.7,
+          "results_file": "provenance/rebuild/results/matrix-shanghai/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-DISCRIMINATOR.log",
+            "sha256": "b17ffbfb6ea6a8fef405f6d357d7134f27680256c63c1cbc8d8a0c4c207825d5"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-DISCRIMINATOR.log.err",
+            "sha256": "682f2817f5f063a4e8dc7909917425098f5cdb84b7d2440e3f0b6b351c9ad38d"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 35,
+        "module": "CAGEWS-CAGEWS-PROVE",
+        "spec": "provenance/rebuild/controls-osaka/cagews-cagews-prove.k",
+        "spec_sha256": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+        "exit": 0,
+        "started": "2026-10-29T13:54:40.920Z",
+        "ended": "2026-10-29T13:58:02.947Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 202.1,
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 36,
+        "module": "CAGEWS-CAGEWS-VACUITY",
+        "spec": "provenance/rebuild/controls-osaka/cagews-cagews-vacuity.k",
+        "spec_sha256": "62da2164d905a524bd1c811d42ea970ba60cc94c8670860e078a4af47b64e149",
+        "exit": 1,
+        "started": "2026-10-29T13:58:03.070Z",
+        "ended": "2026-10-29T13:59:05.097Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 62.1,
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-VACUITY.log",
+            "sha256": "d7ccf38285e6b955bd52c1dff4e841a3d0d2cd97644ccdb7ce6aba99da5ff17a"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-VACUITY.log.err",
+            "sha256": "8681fe0a0ab93f40ef9e7e295565ac0154260be1be7df7fbbcd88dfb20eddc39"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 37,
+        "module": "VAT-VAT-PROVE",
+        "spec": "provenance/rebuild/controls-osaka/vat-vat-prove.k",
+        "spec_sha256": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+        "exit": 0,
+        "started": "2026-10-29T13:57:21.046Z",
+        "ended": "2026-10-29T13:59:31.058Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 130.1,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 38,
+        "module": "VAT-VAT-VACUITY",
+        "spec": "provenance/rebuild/controls-osaka/vat-vat-vacuity.k",
+        "spec_sha256": "e9aa1bdad52c93f2cb42334ab252ae721eee8997ea6f936264bdb4cdb36a4ec3",
+        "exit": 1,
+        "started": "2026-10-29T13:59:31.178Z",
+        "ended": "2026-10-29T14:00:35.114Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 64.0,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-VACUITY.log",
+            "sha256": "35bb7e229b903c65ae9ad5ebea43a16b76d4f8e2c66a2938912c59ad567f71f0"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-VACUITY.log.err",
+            "sha256": "7bf0733bf885b24afc1b1a0290387d90d3bccf76c14eb3a3baee64f27ac56fdd"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 39,
+        "module": "CAGEWS-CAGEWS-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls-osaka/cagews-cagews-discriminator.k",
+        "spec_sha256": "b73a1e16f11f08a8a91001b0273b2494ca6f56867c8abb744fe41c949fc62102",
+        "exit": 1,
+        "started": "2026-10-29T13:59:05.225Z",
+        "ended": "2026-10-29T14:02:45.553Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 220.4,
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-DISCRIMINATOR.log",
+            "sha256": "6c97c3ba817e0e1e31348054513fd920d3c2dec0469b99db5969fa7ead32f1c5"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-DISCRIMINATOR.log.err",
+            "sha256": "62a17fad1fc30be587acbf6f0c015c60491f5787202477e9c16b6e083feb71a8"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 40,
+        "module": "VAT-VAT-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls-osaka/vat-vat-discriminator.k",
+        "spec_sha256": "e7f69b8470ec54ea7a9649fc83833820ee2437a9ebf310d364825358fecb3abf",
+        "exit": 1,
+        "started": "2026-10-29T14:00:35.253Z",
+        "ended": "2026-10-29T14:02:59.174Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 144.0,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-DISCRIMINATOR.log",
+            "sha256": "263992333e6b12c8b2ec3fadcc7eb4b3ea4bc4d05ef49fe0f688fa59ce603295"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-DISCRIMINATOR.log.err",
+            "sha256": "7fa2057b5db30b8d717301f77f2a0c635017339c3da7f27a8bcacd53ae3ec829"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 41,
+        "module": "ILK-ILK-PROVE",
+        "spec": "provenance/rebuild/controls-osaka/ilk-ilk-prove.k",
+        "spec_sha256": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+        "exit": 0,
+        "started": "2026-10-29T14:02:59.306Z",
+        "ended": "2026-10-29T14:05:07.972Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 128.7,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 42,
+        "module": "JOINSYM-JOINSYM-PROVE",
+        "spec": "provenance/rebuild/controls-osaka/joinsym-joinsym-prove.k",
+        "spec_sha256": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+        "exit": 0,
+        "started": "2026-10-29T14:02:45.692Z",
+        "ended": "2026-10-29T14:05:46.536Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 180.9,
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 43,
+        "module": "ILK-ILK-VACUITY",
+        "spec": "provenance/rebuild/controls-osaka/ilk-ilk-vacuity.k",
+        "spec_sha256": "caa23d7aa72b08226f954d566145837ab49fe535485a0ca83c7012858db5ea86",
+        "exit": 1,
+        "started": "2026-10-29T14:05:08.138Z",
+        "ended": "2026-10-29T14:06:23.948Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 75.9,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-VACUITY.log",
+            "sha256": "222c6172b5996a731d86ae896ee5865fc13b10b552df419485bb1d73d0b25a0a"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-VACUITY.log.err",
+            "sha256": "1866b6f05756996195bb18a44dcce4c677bc45b3b9e8a538266041c20b83a831"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 44,
+        "module": "JOINSYM-JOINSYM-VACUITY",
+        "spec": "provenance/rebuild/controls-osaka/joinsym-joinsym-vacuity.k",
+        "spec_sha256": "8083741c1f624e2cc8b9507edf975b383332d68fe1c6d35b051bf3d8dc2666b2",
+        "exit": 1,
+        "started": "2026-10-29T14:05:46.687Z",
+        "ended": "2026-10-29T14:06:58.263Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 71.6,
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-VACUITY.log",
+            "sha256": "fa48eca965c11da77cd1e3d00335770e772a1a454fa69a4e096504bf4d7f3543"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-VACUITY.log.err",
+            "sha256": "14aac2abe1a82265ac5f4a80777bf2ce6fa722af98baa0698b1c081e8568da39"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 45,
+        "module": "ILK-ILK-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls-osaka/ilk-ilk-discriminator.k",
+        "spec_sha256": "733fe48b09dde673eefd9c3a04732752089ea9b99b83194d3136fc57c8e4a9d5",
+        "exit": 1,
+        "started": "2026-10-29T14:06:24.071Z",
+        "ended": "2026-10-29T14:09:02.533Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 158.5,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-DISCRIMINATOR.log",
+            "sha256": "c5c742885c5a9a404789312f7b7c1880030ba545fa0fec9333136ea7ec2c5db5"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-DISCRIMINATOR.log.err",
+            "sha256": "041a13a94ca0466bd6040d883bffee2d5932b4daa27ba6c8d9ca55050553cca0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 47,
+        "module": "JOINSYM-JOINSYM-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls-osaka/joinsym-joinsym-discriminator.k",
+        "spec_sha256": "003ffb3e7cc7f8446f8566b63586655e29371e024f082b3feb0e8566aab402aa",
+        "exit": 1,
+        "started": "2026-10-29T14:06:58.392Z",
+        "ended": "2026-10-29T14:10:20.886Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 202.6,
+          "results_file": "provenance/rebuild/results/matrix-osaka/revert.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-DISCRIMINATOR.log",
+            "sha256": "7087457860f19a61cc8c3043a1c28998c240e26f0d2f5638bc0e94e11e3ac045"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-DISCRIMINATOR.log.err",
+            "sha256": "2df4b25d82f6bb1ff6c9a0514eaf4af20bd733dffdf5046409fce874916506f9"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 48,
+        "module": "GEM-GEM-PROVE",
+        "spec": "provenance/rebuild/controls-osaka/gem-gem-prove.k",
+        "spec_sha256": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+        "exit": 0,
+        "started": "2026-10-29T14:09:02.697Z",
+        "ended": "2026-10-29T14:12:04.205Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 181.6,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 49,
+        "module": "CAGE-CAGE-PROVE",
+        "spec": "provenance/rebuild/controls-osaka/cage-cage-prove.k",
+        "spec_sha256": "50db5f42d808147d09ce3acdf4f4d9a51c06651d2543920656c0189b105abab2",
+        "exit": 0,
+        "started": "2026-10-29T14:10:35.914Z",
+        "ended": "2026-10-29T14:13:09.122Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 153.3,
+          "results_file": "provenance/rebuild/results/matrix-osaka/empty-controls.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGE-CAGE-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGE-CAGE-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 50,
+        "module": "GEM-GEM-VACUITY",
+        "spec": "provenance/rebuild/controls-osaka/gem-gem-vacuity.k",
+        "spec_sha256": "3e3826d7c7f98038466fa2b320d9c0256160577829a8f398841aa54e13090280",
+        "exit": 1,
+        "started": "2026-10-29T14:12:04.335Z",
+        "ended": "2026-10-29T14:13:18.733Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 74.5,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-VACUITY.log",
+            "sha256": "556247c3ea14b79562123c2f8b7acaaff1500bab4a53c0e29fcbcf27eb4c9cd7"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-VACUITY.log.err",
+            "sha256": "0b9cd55b6bc5533b6da9369745a6682c23529b986f45d0fa7a7d9e2e1f300806"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 51,
+        "module": "CAGE-CAGE-VACUITY",
+        "spec": "provenance/rebuild/controls-osaka/cage-cage-vacuity.k",
+        "spec_sha256": "af94ad3fcfeaf91771c0b60ad49751e3b67907b47c787c172eee5a9d317490be",
+        "exit": 1,
+        "started": "2026-10-29T14:13:09.257Z",
+        "ended": "2026-10-29T14:14:22.947Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 73.8,
+          "results_file": "provenance/rebuild/results/matrix-osaka/empty-controls.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGE-CAGE-VACUITY.log",
+            "sha256": "26ed92de0078151c948aae5c26d96b441c4e88b30a6685a6c1c493b2c5337186"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/CAGE-CAGE-VACUITY.log.err",
+            "sha256": "7c9699036526258c536d65dbe40be47c3b274fe6b4a78d8af0dcbca09c5a02cc"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 52,
+        "module": "GEM-GEM-DISCRIMINATOR",
+        "spec": "provenance/rebuild/controls-osaka/gem-gem-discriminator.k",
+        "spec_sha256": "1d90aa157d4f8109533a1bd45ce1e6ceda6e074dcb3d4b03ac780abe6ef253d2",
+        "exit": 1,
+        "started": "2026-10-29T14:13:18.910Z",
+        "ended": "2026-10-29T14:16:33.827Z",
+        "result": {
+          "verdict": "Refute",
+          "unknown_class": "-",
+          "exit": 1,
+          "wall_s": 195.0,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-DISCRIMINATOR.log",
+            "sha256": "61815fe5eda1540a38b3af496892ae6e7ef974927e6baec6a49b313a69eb0c61"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-DISCRIMINATOR.log.err",
+            "sha256": "5c7872fdbc73e4cf878aa78840879d7bcfd7e9003fcf550568b28e5dfe094ea1"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 53,
+        "module": "JOINEMPTY-JOINEMPTY-PROVE",
+        "spec": "provenance/rebuild/controls-osaka/joinempty-joinempty-prove.k",
+        "spec_sha256": "6c61b805d346f3e3936c065c9cd201e2ef5b27df2d2db2ab1221569e9dafff23",
+        "exit": 0,
+        "started": "2026-10-29T14:14:23.092Z",
+        "ended": "2026-10-29T14:17:11.634Z",
+        "result": {
+          "verdict": "Accept",
+          "unknown_class": "-",
+          "exit": 0,
+          "wall_s": 168.6,
+          "results_file": "provenance/rebuild/results/matrix-osaka/empty-controls.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINEMPTY-JOINEMPTY-PROVE.log",
+            "sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINEMPTY-JOINEMPTY-PROVE.log.err",
+            "sha256": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 54,
+        "module": "JOINEMPTY-JOINEMPTY-VACUITY",
+        "spec": "provenance/rebuild/controls-osaka/joinempty-joinempty-vacuity.k",
+        "spec_sha256": "01c135c9dae134f5430105e72fa29b3c43861baa18a5da578de7d011f19035c1",
+        "exit": 1,
+        "started": "2026-10-29T14:17:11.777Z",
+        "ended": "2026-10-29T14:18:28.606Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 76.9,
+          "results_file": "provenance/rebuild/results/matrix-osaka/empty-controls.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINEMPTY-JOINEMPTY-VACUITY.log",
+            "sha256": "f3b5baeccfb0241edd4ba295796f41026d6a4ce450dd2f6da71126f262818c32"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/JOINEMPTY-JOINEMPTY-VACUITY.log.err",
+            "sha256": "e1714cb4684cb4e920bbb870af876b9ab7b7c6d9a81dc186d219d173dae1dcee"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 55,
+        "module": "WRONG-SLOT-VAT-SPEC",
+        "spec": "provenance/rebuild/controls-osaka/wrong-slot.k",
+        "spec_sha256": "7ac32a6043076e8fb281b3f8f904eee5f31d7ef09e8bd51ed55955ede811a09b",
+        "exit": 1,
+        "started": "2026-10-29T14:16:33.980Z",
+        "ended": "2026-10-29T14:19:21.252Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 167.4,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-VAT-SPEC.log",
+            "sha256": "190f94a846376943fb0dbfb36a3bd97be7f1bf924b009bd051d37cddae416a2c"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-VAT-SPEC.log.err",
+            "sha256": "4d641c54515c56b759c7246839225e4356616b07a79940ee16eaed3780f5f689"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 56,
+        "module": "WRONG-SLOT-ILK-SPEC",
+        "spec": "provenance/rebuild/controls-osaka/wrong-slot.k",
+        "spec_sha256": "7ac32a6043076e8fb281b3f8f904eee5f31d7ef09e8bd51ed55955ede811a09b",
+        "exit": 1,
+        "started": "2026-10-29T14:19:21.395Z",
+        "ended": "2026-10-29T14:21:23.554Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 122.2,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-ILK-SPEC.log",
+            "sha256": "d9b4fb2bb57cb4f7a283c27ca387eb1d382894cb9a8880eab809415aea987309"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-ILK-SPEC.log.err",
+            "sha256": "c2f21f113d3c1eed39e8931c12b2ca3fcb40154f7e879c15f757de42f8692dd0"
+          }
+        ]
+      },
+      {
+        "ledger_seq": 58,
+        "module": "WRONG-SLOT-GEM-SPEC",
+        "spec": "provenance/rebuild/controls-osaka/wrong-slot.k",
+        "spec_sha256": "7ac32a6043076e8fb281b3f8f904eee5f31d7ef09e8bd51ed55955ede811a09b",
+        "exit": 1,
+        "started": "2026-10-29T14:21:23.710Z",
+        "ended": "2026-10-29T14:24:33.856Z",
+        "result": {
+          "verdict": "Unknown",
+          "unknown_class": "c",
+          "exit": 1,
+          "wall_s": 190.2,
+          "results_file": "provenance/rebuild/results/matrix-osaka/getters.tsv"
+        },
+        "log": [
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-GEM-SPEC.log",
+            "sha256": "ca2486524614336006f755484aa8a06d1538c985cf13c18107fc22bca9b2b1fb"
+          },
+          {
+            "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-GEM-SPEC.log.err",
+            "sha256": "ff22ceb8e8fb2a3669c853a25b55796c1a5d7911bca8924db3fe4293ba55173e"
+          }
+        ]
+      }
+    ]
+  }
+}

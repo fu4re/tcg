@@ -1,0 +1,5 @@
+spec	module	expected	exit	verdict	unknown_class	wall_s	log_sha256	image
+provenance/rebuild/controls-osaka/cage-cage-prove.k	CAGE-CAGE-PROVE	Accept	0	Accept	-	153.3	8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d	sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465
+provenance/rebuild/controls-osaka/cage-cage-vacuity.k	CAGE-CAGE-VACUITY	NotAccept	1	Unknown	c	73.8	26ed92de0078151c948aae5c26d96b441c4e88b30a6685a6c1c493b2c5337186	sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465
+provenance/rebuild/controls-osaka/joinempty-joinempty-prove.k	JOINEMPTY-JOINEMPTY-PROVE	Accept	0	Accept	-	168.6	8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d	sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465
+provenance/rebuild/controls-osaka/joinempty-joinempty-vacuity.k	JOINEMPTY-JOINEMPTY-VACUITY	NotAccept	1	Unknown	c	76.9	f3b5baeccfb0241edd4ba295796f41026d6a4ce450dd2f6da71126f262818c32	sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465

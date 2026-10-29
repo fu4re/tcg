@@ -1,0 +1,4 @@
+coverage: 9 requirement(s): 3 covered, 2 partial, 4 blind; 5 claim(s); total=False
+  partial: ['R4', 'R5']
+  blind: ['R6', 'R7', 'R8', 'R9']
+written to evidence/coverage.json

@@ -1,0 +1,145 @@
+{
+  "input_dir": "provenance/sessions/bt-input",
+  "files": {
+    "claim-01.k": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+    "claim-02.k": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+    "claim-03.k": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+    "claim-04.k": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+    "claim-05.k": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+    "phi.json": "73216aae6e524b6dc7949dc16db5af3bb813a52313e11d97e2df0b0345f7ae61"
+  },
+  "phi_source": {
+    "file": "hard/spec/phi.json",
+    "sha256": "adf5371ed9ebaddff2409d2e46c2ca0f05ffbd5958350f8591c04b43b73790e9"
+  },
+  "removed_fields": [
+    {
+      "path": "requirements_file",
+      "why": "path of n"
+    },
+    {
+      "path": "requirements_sha256",
+      "why": "hash of n"
+    },
+    {
+      "path": "declared_blind_spots",
+      "why": "one entry per requirement R4-R9 paraphrasing what n asks and is not proved"
+    },
+    {
+      "path": "reading_guide",
+      "why": "explains how claims relate to requirements"
+    },
+    {
+      "path": "status",
+      "why": "mentions the requirements file and signature"
+    },
+    {
+      "path": "claims[claim-01].coverage_of_requirements",
+      "why": "producer's judgement of how far the claim covers a requirement"
+    },
+    {
+      "path": "claims[claim-01].caveats",
+      "why": "producer commentary; names parts of R4/R5/R9 that are not proved"
+    },
+    {
+      "path": "claims[claim-01].controls",
+      "why": "prover results of control runs (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-01].observed",
+      "why": "prover verdict of the claim (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-01].source",
+      "why": "producer provenance of the claim text (Findings, commands)"
+    },
+    {
+      "path": "claims[claim-02].coverage_of_requirements",
+      "why": "producer's judgement of how far the claim covers a requirement"
+    },
+    {
+      "path": "claims[claim-02].caveats",
+      "why": "producer commentary; names parts of R4/R5/R9 that are not proved"
+    },
+    {
+      "path": "claims[claim-02].controls",
+      "why": "prover results of control runs (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-02].observed",
+      "why": "prover verdict of the claim (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-02].source",
+      "why": "producer provenance of the claim text (Findings, commands)"
+    },
+    {
+      "path": "claims[claim-03].coverage_of_requirements",
+      "why": "producer's judgement of how far the claim covers a requirement"
+    },
+    {
+      "path": "claims[claim-03].caveats",
+      "why": "producer commentary; names parts of R4/R5/R9 that are not proved"
+    },
+    {
+      "path": "claims[claim-03].controls",
+      "why": "prover results of control runs (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-03].observed",
+      "why": "prover verdict of the claim (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-03].source",
+      "why": "producer provenance of the claim text (Findings, commands)"
+    },
+    {
+      "path": "claims[claim-04].coverage_of_requirements",
+      "why": "producer's judgement of how far the claim covers a requirement"
+    },
+    {
+      "path": "claims[claim-04].caveats",
+      "why": "producer commentary; names parts of R4/R5/R9 that are not proved"
+    },
+    {
+      "path": "claims[claim-04].controls",
+      "why": "prover results of control runs (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-04].observed",
+      "why": "prover verdict of the claim (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-04].source",
+      "why": "producer provenance of the claim text (Findings, commands)"
+    },
+    {
+      "path": "claims[claim-05].coverage_of_requirements",
+      "why": "producer's judgement of how far the claim covers a requirement"
+    },
+    {
+      "path": "claims[claim-05].caveats",
+      "why": "producer commentary; names parts of R4/R5/R9 that are not proved"
+    },
+    {
+      "path": "claims[claim-05].controls",
+      "why": "prover results of control runs (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-05].observed",
+      "why": "prover verdict of the claim (not part of the statement)"
+    },
+    {
+      "path": "claims[claim-05].source",
+      "why": "producer provenance of the claim text (Findings, commands)"
+    }
+  ],
+  "kept_requirement_refs": "claims[].requirements (ids R1..R5 only, no text)",
+  "leakage_check": {
+    "method": "every 6-word shingle of hard/spec/requirements.md (lowercased word tokens) searched in the concatenated input files",
+    "requirements_sha256": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14",
+    "shingles": 402,
+    "shingle_hits": [],
+    "verbatim_requirement_sentences": []
+  }
+}

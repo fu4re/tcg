@@ -1,0 +1,1466 @@
+{
+  "format": "tcg-pilot-tool-map/0.1",
+  "class": "U",
+  "files": {
+    "provenance/tools/assemble_hard.py": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+    "provenance/tools/coverage.py": "47f52f76f9c4e5a9abf0a887e005d87bb456b125cff8225ec64946099d1cacd6",
+    "provenance/tools/mutant_witness.py": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+    "provenance/tools/run-claim.sh": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+    "provenance/tools/run-controls.sh": "bcf6f76258818bc7d1b66701d7c83228a7508a832ce3a4d2d48bc86093278b64",
+    "provenance/tools/tcg/__init__.py": "d747c6cce16cf6a40b69deec61ec125e3e298f7a33816540052c18531684c7c4",
+    "provenance/tools/tcg/claims.py": "780658865576ae62e2046ed0d75f86306f2709e239ca5a51877a4423ed24b276",
+    "provenance/tools/tcg/keccak.py": "93e3d696482439e6be1fe6be2cfcd7c0e200fc9998cdb268fd7140d5511aa354",
+    "provenance/tools/tcg/verdict.py": "915d7838ad38c5c95e75f2f1e00edbdd938a018d72efd81402f32db97f20191f",
+    "provenance/tools/versions/__init__-d747c6cce16c.py": "d747c6cce16cf6a40b69deec61ec125e3e298f7a33816540052c18531684c7c4",
+    "provenance/tools/versions/assemble_hard-0af2e8b8118d.py": "0af2e8b8118ddbf55cf79fc35df250cd03ce63b31f2c6c8087c0e18386e32ecb",
+    "provenance/tools/versions/assemble_hard-f41c4cc37d58.py": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+    "provenance/tools/versions/claims-780658865576.py": "780658865576ae62e2046ed0d75f86306f2709e239ca5a51877a4423ed24b276",
+    "provenance/tools/versions/coverage-47f52f76f9c4.py": "47f52f76f9c4e5a9abf0a887e005d87bb456b125cff8225ec64946099d1cacd6",
+    "provenance/tools/versions/keccak-93e3d6964824.py": "93e3d696482439e6be1fe6be2cfcd7c0e200fc9998cdb268fd7140d5511aa354",
+    "provenance/tools/versions/mutant_witness-57c51c7992de.py": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+    "provenance/tools/versions/run-claim-c5b93db53473.sh": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+    "provenance/tools/versions/run-controls-bcf6f7625881.sh": "bcf6f76258818bc7d1b66701d7c83228a7508a832ce3a4d2d48bc86093278b64",
+    "provenance/tools/versions/verdict-915d7838ad38.py": "915d7838ad38c5c95e75f2f1e00edbdd938a018d72efd81402f32db97f20191f"
+  },
+  "repo_sources": {
+    "provenance/tools/assemble_hard.py": "../tools/assemble_hard.py",
+    "provenance/tools/coverage.py": "../tools/coverage.py",
+    "provenance/tools/run-claim.sh": "../checker/run-claim.sh",
+    "provenance/tools/mutant_witness.py": "../tools/mutant_witness.py",
+    "provenance/tools/tcg/__init__.py": "tcg/__init__.py",
+    "provenance/tools/tcg/keccak.py": "tcg/keccak.py",
+    "provenance/tools/tcg/claims.py": "tcg/claims.py",
+    "provenance/tools/tcg/verdict.py": "tcg/verdict.py",
+    "provenance/tools/run-controls.sh": "provenance/rebuild/run-controls.sh"
+  },
+  "imports": {
+    "tcg/__init__.py": "package marker of tcg, imported with tcg.keccak / tcg.claims",
+    "tcg/keccak.py": "assemble_hard.py (keccak256_hex)",
+    "tcg/claims.py": "assemble_hard.py spec/variant/witness (assemble_prove_module, canonicalize, falsify_body)",
+    "tcg/verdict.py": "provenance/rebuild/run-controls.sh (classify)"
+  },
+  "not_copied": {
+    "pilot/verifier/tcgverify/": "imported by coverage.py and by assemble_hard.py tbase/rehash (verifier_hash); it is the `tcg-verifier` checker named in trusted_base.json, frozen and hashed by WS-A, not a producer tool",
+    "KEVM inputs (~/pilot-checker/pins.json, evm-semantics tarball, extracted K source)": "stay outside the bundle by decision; L4 reports them as outside_bundle"
+  },
+  "status_meaning": {
+    "same_bytes": "the bundled copy has exactly the hash the event recorded: replay with it",
+    "hash_not_recorded": "the event did not hash the script (e.g. run-claim.sh, whose events record the image Id as tool_hash); the bundled copy is the current version, identity with the version that ran is not proven",
+    "version_not_retained": "the event ran an earlier version of the script (assemble_hard.py was extended during assembly); that version was not kept, so the event cannot be replayed byte-for-byte",
+    "not_bundled": "no copy available"
+  },
+  "summary": {
+    "../checker/run-claim.sh": {
+      "hash_not_recorded": [
+        4,
+        5,
+        6,
+        12,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        25,
+        26,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        58
+      ]
+    },
+    "../tools/assemble_hard.py": {
+      "version_not_retained": [
+        8,
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        27,
+        28,
+        29,
+        59,
+        60,
+        61,
+        65,
+        67,
+        70,
+        71
+      ],
+      "same_bytes": [
+        79,
+        80,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        135,
+        136,
+        137,
+        139,
+        141,
+        146,
+        147,
+        149,
+        150
+      ]
+    },
+    "/home/vladimir/pilot-hard/edit_annotations.py": {
+      "same_bytes": [
+        23
+      ]
+    },
+    "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": {
+      "same_bytes": [
+        46,
+        57,
+        66,
+        75,
+        101,
+        109,
+        111,
+        113,
+        115,
+        116,
+        117,
+        119,
+        131
+      ]
+    },
+    "provenance/rebuild/controls-closure/closure_neg.sh": {
+      "same_bytes": [
+        62
+      ]
+    },
+    "replay.sh": {
+      "same_bytes": [
+        63
+      ],
+      "hash_not_recorded": [
+        102,
+        110,
+        112,
+        114,
+        118,
+        120,
+        132
+      ]
+    },
+    "../tools/coverage.py": {
+      "version_not_retained": [
+        68
+      ],
+      "same_bytes": [
+        107
+      ]
+    },
+    "provenance/rebuild/edits/make_phi_versions.py": {
+      "version_not_retained": [
+        72
+      ],
+      "same_bytes": [
+        100
+      ]
+    },
+    "provenance/rebuild/edits/bt_prepare.py": {
+      "same_bytes": [
+        73
+      ]
+    },
+    "provenance/rebuild/edits/bt_pair.py": {
+      "same_bytes": [
+        76
+      ]
+    },
+    "provenance/rebuild/edits/make_iterations.py": {
+      "same_bytes": [
+        77
+      ]
+    },
+    "provenance/rebuild/edits/make_generators.py": {
+      "version_not_retained": [
+        78
+      ],
+      "same_bytes": [
+        104
+      ]
+    },
+    "provenance/rebuild/edits/bundle_tools.py": {
+      "version_not_retained": [
+        81,
+        95,
+        106,
+        108,
+        123,
+        138,
+        140,
+        142
+      ],
+      "same_bytes": [
+        148
+      ]
+    },
+    "provenance/rebuild/edits/make_approval.py": {
+      "same_bytes": [
+        98
+      ]
+    },
+    "provenance/rebuild/edits/fix_replay.py": {
+      "same_bytes": [
+        121
+      ]
+    },
+    "provenance/rebuild/edits/fix_replay_comment.py": {
+      "same_bytes": [
+        122
+      ]
+    },
+    "provenance/rebuild/edits/fix_expected.py": {
+      "same_bytes": [
+        133
+      ]
+    }
+  },
+  "events": [
+    {
+      "seq": 4,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 5,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 6,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 8,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "6b2a159a9ff1457affb30256f97e596d10aff31f25009df02628f0ace061c06f",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 9,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "6b2a159a9ff1457affb30256f97e596d10aff31f25009df02628f0ace061c06f",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 10,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "6b2a159a9ff1457affb30256f97e596d10aff31f25009df02628f0ace061c06f",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 11,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "6b2a159a9ff1457affb30256f97e596d10aff31f25009df02628f0ace061c06f",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 12,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 13,
+      "tool": "assemble_hard.opscan",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "3803ba3432259cae424cecbed4d8a77042c3ed51ec6276ecff74aadd6e4890c7",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 14,
+      "tool": "assemble_hard.osaka-evidence",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "3803ba3432259cae424cecbed4d8a77042c3ed51ec6276ecff74aadd6e4890c7",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 15,
+      "tool": "assemble_hard.osaka-evidence",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "6c7817ea006ffab884e7f5986eceef7562b56622fc32becca0491ab2ae3e0a98",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 16,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 17,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 18,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 19,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 20,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 21,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 22,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 23,
+      "tool": "manual-edit",
+      "recorded_path": "/home/vladimir/pilot-hard/edit_annotations.py",
+      "recorded_sha256": "b70212009ea4ad667868ec872c08eaf6608cf9b3dacff45f2b6723128c0fce0a",
+      "bundled": "provenance/rebuild/edits/edit_annotations.py",
+      "bundled_sha256": "b70212009ea4ad667868ec872c08eaf6608cf9b3dacff45f2b6723128c0fce0a",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 25,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 26,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 27,
+      "tool": "assemble_hard.witness",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "5121fabae98fb9a8b22c29e927553f37d112ceb69255307405fd25b4ee0acf81",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 28,
+      "tool": "assemble_hard.witness",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "5121fabae98fb9a8b22c29e927553f37d112ceb69255307405fd25b4ee0acf81",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 29,
+      "tool": "assemble_hard.witness",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "5121fabae98fb9a8b22c29e927553f37d112ceb69255307405fd25b4ee0acf81",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 30,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 31,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 32,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 33,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 34,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 35,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 36,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 37,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 38,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 39,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 40,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 41,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 42,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 43,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 44,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 45,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 46,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 47,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 48,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 49,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 50,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 51,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 52,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 53,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 54,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 55,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 56,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 57,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 58,
+      "tool": "kevm-prove",
+      "recorded_path": "../checker/run-claim.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/tools/run-claim.sh",
+      "bundled_sha256": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 59,
+      "tool": "assemble_hard.hardspec",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "5121fabae98fb9a8b22c29e927553f37d112ceb69255307405fd25b4ee0acf81",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 60,
+      "tool": "assemble_hard.closure",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "5121fabae98fb9a8b22c29e927553f37d112ceb69255307405fd25b4ee0acf81",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 61,
+      "tool": "assemble_hard.closure",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "764775e18cecfc35fef6700c16b62264d63bb9924d5153d7748420a7305e1329",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 62,
+      "tool": "closure-negative-controls",
+      "recorded_path": "provenance/rebuild/controls-closure/closure_neg.sh",
+      "recorded_sha256": "fee2dc14194eaca34003f4ab6f98e264ae28a29326929bfabdc578dbb23df94a",
+      "bundled": "provenance/rebuild/controls-closure/closure_neg.sh",
+      "bundled_sha256": "fee2dc14194eaca34003f4ab6f98e264ae28a29326929bfabdc578dbb23df94a",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 63,
+      "tool": "kevm-prove",
+      "recorded_path": "replay.sh",
+      "recorded_sha256": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "bundled": "provenance/rebuild/pre_witness/replay.sh",
+      "bundled_sha256": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 65,
+      "tool": "assemble_hard.tbase",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "764775e18cecfc35fef6700c16b62264d63bb9924d5153d7748420a7305e1329",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 66,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 67,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "764775e18cecfc35fef6700c16b62264d63bb9924d5153d7748420a7305e1329",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 68,
+      "tool": "coverage",
+      "recorded_path": "../tools/coverage.py",
+      "recorded_sha256": "76ffa48590ce7ba46b7dd76c8b5ce07c0e44069676c19ff1adc2d87a24b875aa",
+      "bundled": "provenance/tools/coverage.py",
+      "bundled_sha256": "47f52f76f9c4e5a9abf0a887e005d87bb456b125cff8225ec64946099d1cacd6",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 70,
+      "tool": "assemble_hard.tbase",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "5aeca4a8b85a5367b3ed34c9f4c4b6f1b1b81edbb1492cc423beba76867302a7",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 71,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "5aeca4a8b85a5367b3ed34c9f4c4b6f1b1b81edbb1492cc423beba76867302a7",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 72,
+      "tool": "make_phi_versions",
+      "recorded_path": "provenance/rebuild/edits/make_phi_versions.py",
+      "recorded_sha256": "4b93fe8c80046af6e686a18937b4f0969fcc7a91681ae64dbf7725737321eaa8",
+      "bundled": "provenance/rebuild/edits/make_phi_versions.py",
+      "bundled_sha256": "78e6c885bfb2f7a3672b397865baad2b74eb0942f9ec7fabcbc72f298f6ea869",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 73,
+      "tool": "bt_prepare",
+      "recorded_path": "provenance/rebuild/edits/bt_prepare.py",
+      "recorded_sha256": "ac841202937d20189d92978ed955e28e4f1a00dd99c9ac68e4694f7cf11c7092",
+      "bundled": "provenance/rebuild/edits/bt_prepare.py",
+      "bundled_sha256": "ac841202937d20189d92978ed955e28e4f1a00dd99c9ac68e4694f7cf11c7092",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 75,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 76,
+      "tool": "bt_pair",
+      "recorded_path": "provenance/rebuild/edits/bt_pair.py",
+      "recorded_sha256": "6eba170b745c56530506aa81e04892555d3d380590b1eb42fe588684983fc87b",
+      "bundled": "provenance/rebuild/edits/bt_pair.py",
+      "bundled_sha256": "6eba170b745c56530506aa81e04892555d3d380590b1eb42fe588684983fc87b",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 77,
+      "tool": "make_iterations",
+      "recorded_path": "provenance/rebuild/edits/make_iterations.py",
+      "recorded_sha256": "655a15fe7b593891bb89c3b1a46acaf234e9ff949c85ab341c946016e74dfabc",
+      "bundled": "provenance/rebuild/edits/make_iterations.py",
+      "bundled_sha256": "655a15fe7b593891bb89c3b1a46acaf234e9ff949c85ab341c946016e74dfabc",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 78,
+      "tool": "make_generators",
+      "recorded_path": "provenance/rebuild/edits/make_generators.py",
+      "recorded_sha256": "d56f48db89f76aa9eae40b7c2746912dee2afb66ff5c734ca090c80d4490f73c",
+      "bundled": "provenance/rebuild/edits/make_generators.py",
+      "bundled_sha256": "10ebcfe6ec8b931d15e20d3906f93c59e60ea4b3cd1c7fbcf48fde20230a3797",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 79,
+      "tool": "assemble_hard.tbase",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 80,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 81,
+      "tool": "bundle_tools",
+      "recorded_path": "provenance/rebuild/edits/bundle_tools.py",
+      "recorded_sha256": "bc530382d30af9b6075ab3fcfce32225ea78a1b4d2425b692adacfb292c192c5",
+      "bundled": "provenance/rebuild/edits/bundle_tools.py",
+      "bundled_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 82,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 83,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 84,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 85,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 86,
+      "tool": "assemble_hard.opscan",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 87,
+      "tool": "assemble_hard.osaka-evidence",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 88,
+      "tool": "assemble_hard.witness",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 89,
+      "tool": "assemble_hard.witness",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 90,
+      "tool": "assemble_hard.witness",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 91,
+      "tool": "assemble_hard.hardspec",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 92,
+      "tool": "assemble_hard.closure",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 93,
+      "tool": "assemble_hard.tbase",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 94,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 95,
+      "tool": "bundle_tools",
+      "recorded_path": "provenance/rebuild/edits/bundle_tools.py",
+      "recorded_sha256": "bc530382d30af9b6075ab3fcfce32225ea78a1b4d2425b692adacfb292c192c5",
+      "bundled": "provenance/rebuild/edits/bundle_tools.py",
+      "bundled_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 98,
+      "tool": "make_approval",
+      "recorded_path": "provenance/rebuild/edits/make_approval.py",
+      "recorded_sha256": "affefe09cdb0ad81f22691f38d6d643441e140c17e237fe41ca984c958044a86",
+      "bundled": "provenance/rebuild/edits/make_approval.py",
+      "bundled_sha256": "affefe09cdb0ad81f22691f38d6d643441e140c17e237fe41ca984c958044a86",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 100,
+      "tool": "make_phi_versions",
+      "recorded_path": "provenance/rebuild/edits/make_phi_versions.py",
+      "recorded_sha256": "78e6c885bfb2f7a3672b397865baad2b74eb0942f9ec7fabcbc72f298f6ea869",
+      "bundled": "provenance/rebuild/edits/make_phi_versions.py",
+      "bundled_sha256": "78e6c885bfb2f7a3672b397865baad2b74eb0942f9ec7fabcbc72f298f6ea869",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 101,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 102,
+      "tool": "replay-sh",
+      "recorded_path": "replay.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/rebuild/pre_witness/replay.sh",
+      "bundled_sha256": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 104,
+      "tool": "make_generators",
+      "recorded_path": "provenance/rebuild/edits/make_generators.py",
+      "recorded_sha256": "10ebcfe6ec8b931d15e20d3906f93c59e60ea4b3cd1c7fbcf48fde20230a3797",
+      "bundled": "provenance/rebuild/edits/make_generators.py",
+      "bundled_sha256": "10ebcfe6ec8b931d15e20d3906f93c59e60ea4b3cd1c7fbcf48fde20230a3797",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 106,
+      "tool": "bundle_tools",
+      "recorded_path": "provenance/rebuild/edits/bundle_tools.py",
+      "recorded_sha256": "bc530382d30af9b6075ab3fcfce32225ea78a1b4d2425b692adacfb292c192c5",
+      "bundled": "provenance/rebuild/edits/bundle_tools.py",
+      "bundled_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 107,
+      "tool": "coverage",
+      "recorded_path": "../tools/coverage.py",
+      "recorded_sha256": "47f52f76f9c4e5a9abf0a887e005d87bb456b125cff8225ec64946099d1cacd6",
+      "bundled": "provenance/tools/coverage.py",
+      "bundled_sha256": "47f52f76f9c4e5a9abf0a887e005d87bb456b125cff8225ec64946099d1cacd6",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 108,
+      "tool": "bundle_tools",
+      "recorded_path": "provenance/rebuild/edits/bundle_tools.py",
+      "recorded_sha256": "bc530382d30af9b6075ab3fcfce32225ea78a1b4d2425b692adacfb292c192c5",
+      "bundled": "provenance/rebuild/edits/bundle_tools.py",
+      "bundled_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 109,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 110,
+      "tool": "replay-sh",
+      "recorded_path": "replay.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/rebuild/pre_witness/replay.sh",
+      "bundled_sha256": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 111,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 112,
+      "tool": "replay-sh",
+      "recorded_path": "replay.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/rebuild/pre_witness/replay.sh",
+      "bundled_sha256": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 113,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 114,
+      "tool": "replay-sh",
+      "recorded_path": "replay.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/rebuild/pre_witness/replay.sh",
+      "bundled_sha256": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 115,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 116,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 117,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 118,
+      "tool": "replay-sh",
+      "recorded_path": "replay.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/rebuild/pre_witness/replay.sh",
+      "bundled_sha256": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 119,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 120,
+      "tool": "replay-sh",
+      "recorded_path": "replay.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/rebuild/pre_witness/replay.sh",
+      "bundled_sha256": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 121,
+      "tool": "fix_replay",
+      "recorded_path": "provenance/rebuild/edits/fix_replay.py",
+      "recorded_sha256": "ca056fe822558d897f47e1dec1762341043d55460c6f790dcdb249bcf98cb101",
+      "bundled": "provenance/rebuild/edits/fix_replay.py",
+      "bundled_sha256": "ca056fe822558d897f47e1dec1762341043d55460c6f790dcdb249bcf98cb101",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 122,
+      "tool": "fix_replay_comment",
+      "recorded_path": "provenance/rebuild/edits/fix_replay_comment.py",
+      "recorded_sha256": "7791085bb3b4bbcd04b69942afa9afededd5801940a9d282bacea0f762e6cb1f",
+      "bundled": "provenance/rebuild/edits/fix_replay_comment.py",
+      "bundled_sha256": "7791085bb3b4bbcd04b69942afa9afededd5801940a9d282bacea0f762e6cb1f",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 123,
+      "tool": "bundle_tools",
+      "recorded_path": "provenance/rebuild/edits/bundle_tools.py",
+      "recorded_sha256": "b029c35e2b4bd40a151f2f065b6780e32d057b31e68c388d41543c70a74f1661",
+      "bundled": "provenance/rebuild/edits/bundle_tools.py",
+      "bundled_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 124,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 125,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 126,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 127,
+      "tool": "assemble_hard.variant",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 128,
+      "tool": "assemble_hard.opscan",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 129,
+      "tool": "assemble_hard.witness",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 130,
+      "tool": "assemble_hard.witness",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 131,
+      "tool": "mutant-witness-record",
+      "recorded_path": "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py",
+      "recorded_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "bundled": "provenance/tools/mutant_witness.py",
+      "bundled_sha256": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 132,
+      "tool": "kevm-prove",
+      "recorded_path": "replay.sh",
+      "recorded_sha256": null,
+      "bundled": "provenance/rebuild/pre_witness/replay.sh",
+      "bundled_sha256": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "status": "hash_not_recorded"
+    },
+    {
+      "seq": 133,
+      "tool": "fix_expected",
+      "recorded_path": "provenance/rebuild/edits/fix_expected.py",
+      "recorded_sha256": "d5563c4f25a92330fd9829f30630288354788e655d6026ecdad3c191aa935d06",
+      "bundled": "provenance/rebuild/edits/fix_expected.py",
+      "bundled_sha256": "d5563c4f25a92330fd9829f30630288354788e655d6026ecdad3c191aa935d06",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 135,
+      "tool": "assemble_hard.tbase",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 136,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 137,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 138,
+      "tool": "bundle_tools",
+      "recorded_path": "provenance/rebuild/edits/bundle_tools.py",
+      "recorded_sha256": "b029c35e2b4bd40a151f2f065b6780e32d057b31e68c388d41543c70a74f1661",
+      "bundled": "provenance/rebuild/edits/bundle_tools.py",
+      "bundled_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 139,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 140,
+      "tool": "bundle_tools",
+      "recorded_path": "provenance/rebuild/edits/bundle_tools.py",
+      "recorded_sha256": "b029c35e2b4bd40a151f2f065b6780e32d057b31e68c388d41543c70a74f1661",
+      "bundled": "provenance/rebuild/edits/bundle_tools.py",
+      "bundled_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 141,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "bundled": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "bundled_sha256": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 142,
+      "tool": "bundle_tools",
+      "recorded_path": "provenance/rebuild/edits/bundle_tools.py",
+      "recorded_sha256": "b029c35e2b4bd40a151f2f065b6780e32d057b31e68c388d41543c70a74f1661",
+      "bundled": "provenance/rebuild/edits/bundle_tools.py",
+      "bundled_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "status": "version_not_retained"
+    },
+    {
+      "seq": 146,
+      "tool": "assemble_hard.tbase",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "0af2e8b8118ddbf55cf79fc35df250cd03ce63b31f2c6c8087c0e18386e32ecb",
+      "bundled": "provenance/tools/versions/assemble_hard-0af2e8b8118d.py",
+      "bundled_sha256": "0af2e8b8118ddbf55cf79fc35df250cd03ce63b31f2c6c8087c0e18386e32ecb",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 147,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "0af2e8b8118ddbf55cf79fc35df250cd03ce63b31f2c6c8087c0e18386e32ecb",
+      "bundled": "provenance/tools/versions/assemble_hard-0af2e8b8118d.py",
+      "bundled_sha256": "0af2e8b8118ddbf55cf79fc35df250cd03ce63b31f2c6c8087c0e18386e32ecb",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 148,
+      "tool": "bundle_tools",
+      "recorded_path": "provenance/rebuild/edits/bundle_tools.py",
+      "recorded_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "bundled": "provenance/rebuild/edits/bundle_tools.py",
+      "bundled_sha256": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 149,
+      "tool": "assemble_hard.tbase",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "same_bytes"
+    },
+    {
+      "seq": 150,
+      "tool": "assemble_hard.rehash",
+      "recorded_path": "../tools/assemble_hard.py",
+      "recorded_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "bundled": "provenance/tools/assemble_hard.py",
+      "bundled_sha256": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "status": "same_bytes"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+kore-exec: [14732028] Warning (WarnClaimRHSIsBottom):
+    The right-hand side of the claim is bottom: /claim/joinsym-joinsym-vacuity.k:7:5-53:20
+Context:
+    (InfoReachability) while checking the implication
+kore-exec: [14838086] Warning (WarnClaimRHSIsBottom):
+    The right-hand side of the claim is bottom: /claim/joinsym-joinsym-vacuity.k:7:5-53:20
+Context:
+    (InfoReachability) while checking the implication
+kore-exec: [14838806] Warning (WarnStuckClaimState):
+    The configuration's term unifies with the destination's term, but the implication check between the conditions has failed. Location: /claim/joinsym-joinsym-vacuity.k:7:5-53:20
+Context:
+    (InfoReachability) while checking the implication
+[Warning] Compiler: Variable '?SC' defined but not used. Prefix variable name
+with underscore if this is intentional.
+	Source(/claim/joinsym-joinsym-vacuity.k)
+	Location(15,29,15,32)
+	15 |	          <statusCode> _ => ?SC:StatusCode </statusCode>
+	   .	                            ^~~
+[Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name
+with underscore if this is intentional.
+	Source(/opt/kevm/evm-semantics-source/lemmas/bytes-simplification.k)
+	Location(301,25,301,27)
+	301 |	      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B1 [ I ]
+	    .	                        ^~
+[Error] Prover: backend terminated because the configuration cannot be
+rewritten further. See output for more details.

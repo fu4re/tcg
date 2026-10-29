@@ -1,0 +1,53 @@
+{
+  "probed_at_utc": "2026-10-29T17:34:41Z",
+  "block": 26298481,
+  "method": "cast code <GemJoin> --block <pin> per RPC; keccak compared with identity.value",
+  "rpcs": [
+    {
+      "rpc": "https://eth.drpc.org",
+      "serves_pinned_block": true,
+      "gemjoin_keccak_matches_identity": true
+    },
+    {
+      "rpc": "https://mainnet.gateway.tenderly.co",
+      "serves_pinned_block": true,
+      "gemjoin_keccak_matches_identity": true
+    },
+    {
+      "rpc": "https://eth-mainnet.public.blastapi.io",
+      "serves_pinned_block": true,
+      "gemjoin_keccak_matches_identity": true
+    },
+    {
+      "rpc": "https://1rpc.io/eth",
+      "serves_pinned_block": false,
+      "failure": "no historical state at the pin (pruned / not archive)",
+      "detail": "Error: server returned an error response: error code -32000: historical state 22c6f156923ff5dc5923df085df019f2fe8b85722515248d87cab1441f4a8712 is not available"
+    },
+    {
+      "rpc": "https://ethereum-rpc.publicnode.com",
+      "serves_pinned_block": false,
+      "failure": "error",
+      "detail": "server: cloudflare"
+    }
+  ],
+  "earlier_observations_2026_10_29": [
+    {
+      "rpc": "https://eth-mainnet.public.blastapi.io",
+      "what": "HTTP 429 rate limit (compute units per second) during rehash, ledger seq 136 and 137 (exit 1, could not recompute); served again later"
+    },
+    {
+      "rpc": "https://1rpc.io/eth",
+      "what": "no historical state at block 26298481 during rehash, ledger seq 139; it served archive eth_getCode at fetch time (provenance/rpc_probe.json)"
+    },
+    {
+      "rpc": "https://ethereum-rpc.publicnode.com",
+      "what": "refuses archive requests without a personal token (provenance/rpc_probe.json)"
+    },
+    {
+      "rpc": "https://rpc.flashbots.net, https://eth.llamarpc.com",
+      "what": "504 / 525 at fetch time (provenance/chain_fetch.json)"
+    }
+  ],
+  "recommendation": "use an RPC with serves_pinned_block true (at probe time: https://eth.drpc.org, https://mainnet.gateway.tenderly.co, https://eth-mainnet.public.blastapi.io); public endpoints change: re-probe, and a failure to fetch is 'could not check', never a pass"
+}

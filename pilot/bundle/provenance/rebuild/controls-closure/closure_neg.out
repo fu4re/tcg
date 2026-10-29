@@ -1,0 +1,21 @@
+drop=Aasm-keccak-wards-slot:
+closure: FAIL claim-04: requires conjunct `#lookup(STORAGE, keccak(#buf(32, MSGSENDER) +Bytes #buf(32, 0))) ==Int 0` uses keccak but no annotation covers it
+closure: FAILED (12 annotations, 5 claims, 1 problems)
+drop=Aasm-rangeUInt-args:
+closure: FAIL claim-05: requires conjunct `#rangeUInt(256, USR)` is neither an annotation nor declared Pre scope
+closure: FAIL claim-05: requires conjunct `#rangeUInt(256, WAD)` is neither an annotation nor declared Pre scope
+closure: FAILED (12 annotations, 5 claims, 2 problems)
+drop=Aasm-rangeUInt-storage:
+closure: FAIL claim-01: requires conjunct `#rangeUInt(256, #lookup(STORAGE, 1))` is neither an annotation nor declared Pre scope
+closure: FAIL claim-02: requires conjunct `#rangeUInt(256, #lookup(STORAGE, 2))` is neither an annotation nor declared Pre scope
+closure: FAIL claim-03: requires conjunct `#rangeUInt(256, #lookup(STORAGE, 3))` is neither an annotation nor declared Pre scope
+closure: FAILED (12 annotations, 5 claims, 3 problems)
+drop=Aasm-gas-abstraction:
+closure: FAIL claim-01: configuration abstraction (gas off) not annotated
+closure: FAIL claim-02: configuration abstraction (gas off) not annotated
+closure: FAIL claim-03: configuration abstraction (gas off) not annotated
+closure: FAIL claim-04: configuration abstraction (gas off) not annotated
+closure: FAIL claim-05: configuration abstraction (gas off) not annotated
+closure: FAILED (12 annotations, 5 claims, 5 problems)
+drop=NONE:
+closure: OK (13 annotations, 5 claims, 0 problems)

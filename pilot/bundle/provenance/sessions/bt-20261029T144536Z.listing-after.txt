@@ -1,0 +1,16 @@
+# bt-20261029T144536Z listing AFTER the call (as user agent)
+total 104
+drwxrwxr-x 2 agent agent  4096 Oct 29 14:45 .
+drwxr-x--- 4 agent agent  4096 Oct 29 14:45 ..
+-rw-rw-r-- 1 agent agent 15475 Oct 29 14:45 claim-01.k
+-rw-rw-r-- 1 agent agent 15459 Oct 29 14:45 claim-02.k
+-rw-rw-r-- 1 agent agent 15475 Oct 29 14:45 claim-03.k
+-rw-rw-r-- 1 agent agent 15443 Oct 29 14:45 claim-04.k
+-rw-rw-r-- 1 agent agent 15519 Oct 29 14:45 claim-05.k
+-rw-rw-r-- 1 agent agent 12983 Oct 29 14:45 phi.json
+37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426  claim-01.k
+e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06  claim-02.k
+4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197  claim-03.k
+ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470  claim-04.k
+eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd  claim-05.k
+73216aae6e524b6dc7949dc16db5af3bb813a52313e11d97e2df0b0345f7ae61  phi.json

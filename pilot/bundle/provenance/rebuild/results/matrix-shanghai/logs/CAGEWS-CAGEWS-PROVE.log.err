@@ -1,0 +1,6 @@
+[Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name
+with underscore if this is intentional.
+	Source(/opt/kevm/evm-semantics-source/lemmas/bytes-simplification.k)
+	Location(301,25,301,27)
+	301 |	      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B1 [ I ]
+	    .	                        ^~

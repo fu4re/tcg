@@ -1,0 +1,6 @@
+{
+  "format": "tcg-pilot-traces/0.1",
+  "class": "U",
+  "traces": "not recorded",
+  "reason": "interpretability traces are deferred in the pilot (task 05); no model internals were captured"
+}

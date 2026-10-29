@@ -1,0 +1,64 @@
+rehash: ok   identity.value vs keccak(hard/artifact.bin): 0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa
+rehash: ok   identity.value vs chain [https://eth.drpc.org]: 0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa
+rehash: ok   environment.block_hash vs chain [https://eth.drpc.org]: 0x21bc8ec3e7a3d67c7f387dcb076dd22f91545d9299c265e183cbc7dc13c684e0
+rehash: ok   external_code WETH9 vs chain [https://eth.drpc.org]: 0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23
+rehash: ok   external_code MCD_Vat vs chain [https://eth.drpc.org]: 0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59
+rehash: ok   identity.value vs chain [https://mainnet.gateway.tenderly.co]: 0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa
+rehash: ok   environment.block_hash vs chain [https://mainnet.gateway.tenderly.co]: 0x21bc8ec3e7a3d67c7f387dcb076dd22f91545d9299c265e183cbc7dc13c684e0
+rehash: ok   external_code WETH9 vs chain [https://mainnet.gateway.tenderly.co]: 0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23
+rehash: ok   external_code MCD_Vat vs chain [https://mainnet.gateway.tenderly.co]: 0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59
+rehash: ok   checker kevm-prove image Id: sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465
+rehash: ok   semantics KEVM hash (evm-semantics tarball in image): 5f8e3bcd093077c1912973a65d33430426a178a309ea63a09cce983a2f323275
+rehash: ok   semantics KEVM plugin tarball: 1921eea09b2a25cacc6ea84ac154f7afe1008b8c84f12cac7e1a7e8001bf8846
+rehash: ok   semantics patch ghost.diff (in image): e300f622c9c68ef07db2914ef87e0dfff64f520af004770db5c80744b6ca68d1
+rehash: ok   semantics patch ghost.diff (repo copy): e300f622c9c68ef07db2914ef87e0dfff64f520af004770db5c80744b6ca68d1
+rehash: ok   semantics patch lemmas2.diff (in image): dcc8789dac6c3661635360ecc681388e0e68a93e34eb9dcd24001e767b469f2c
+rehash: ok   semantics patch lemmas2.diff (repo copy): dcc8789dac6c3661635360ecc681388e0e68a93e34eb9dcd24001e767b469f2c
+rehash: ok   semantics KEVM definition.kore: 041aa516ccac29585bc5028fa2908dc2d4f0fae1fe27eceb04eb1c97e7e9a7ba
+rehash: ok   checker in-image MANIFEST.sha256: 388c1276e8d7a00fa85ef66e68f453248ed5e4cc6176bf1b98f7aab45d959e08
+rehash: ok   checker recipe file checker/Dockerfile: 3af211b3088f5d8bbd6419b5bafd848464ff484e926d098f25ebd69687506da2
+rehash: ok   checker recipe file checker/IMAGE_ID: cb0662d671d3e349d4177c4edfd71861224c717115313acb171d126c327b046d
+rehash: ok   checker recipe file checker/PROVENANCE.json: ce88374776ebacddf0299f2f848efe473b68cea53c881314e76009439ab08b22
+rehash: ok   checker recipe file checker/README.md: dbb68f4282edbecf460c9adba23512d5a56a412ccc370d6458c0cb3dbd6c71df
+rehash: ok   checker recipe file checker/build.sh: a196411bb206275a4ce428935ed127e226c86879c84f1a86e10ac7ab63cd5fa2
+rehash: ok   checker recipe file checker/patches/ghost.diff: e300f622c9c68ef07db2914ef87e0dfff64f520af004770db5c80744b6ca68d1
+rehash: ok   checker recipe file checker/patches/lemmas2.diff: dcc8789dac6c3661635360ecc681388e0e68a93e34eb9dcd24001e767b469f2c
+rehash: ok   checker recipe file checker/run-claim.sh: c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651
+rehash: ok   checker tcg-verifier (tcgverify.ladder.verifier_hash): f7bde819d11db29babaf52cdf9fe4c3560651ff38ebfc9839ca679ed3321f364
+rehash: ok   phi.json claim-01 -> hard/spec/claim-01.k: 37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426
+rehash: ok   phi.json claim-02 -> hard/spec/claim-02.k: e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06
+rehash: ok   phi.json claim-03 -> hard/spec/claim-03.k: 4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197
+rehash: ok   phi.json claim-04 -> hard/spec/claim-04.k: ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470
+rehash: ok   phi.json claim-05 -> hard/spec/claim-05.k: eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd
+rehash: ok   claim-01.rediscuss.json claim_file_sha256: 37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426
+rehash: ok   claim-01.rediscuss.json semantics_hash = definition.kore: 041aa516ccac29585bc5028fa2908dc2d4f0fae1fe27eceb04eb1c97e7e9a7ba
+rehash: ok   claim-02.rediscuss.json claim_file_sha256: e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06
+rehash: ok   claim-02.rediscuss.json semantics_hash = definition.kore: 041aa516ccac29585bc5028fa2908dc2d4f0fae1fe27eceb04eb1c97e7e9a7ba
+rehash: ok   claim-03.rediscuss.json claim_file_sha256: 4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197
+rehash: ok   claim-03.rediscuss.json semantics_hash = definition.kore: 041aa516ccac29585bc5028fa2908dc2d4f0fae1fe27eceb04eb1c97e7e9a7ba
+rehash: ok   claim-04.rediscuss.json claim_file_sha256: ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470
+rehash: ok   claim-04.rediscuss.json semantics_hash = definition.kore: 041aa516ccac29585bc5028fa2908dc2d4f0fae1fe27eceb04eb1c97e7e9a7ba
+rehash: ok   claim-05.rediscuss.json claim_file_sha256: eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd
+rehash: ok   claim-05.rediscuss.json semantics_hash = definition.kore: 041aa516ccac29585bc5028fa2908dc2d4f0fae1fe27eceb04eb1c97e7e9a7ba
+rehash: ok   pre_witness file evidence/pre_witness/claim-02-config.json: 7d5cca0bc42c5c191c1e919e66a9371bb6d177b0bc40baa2c36e3cc94029d46e
+rehash: ok   pre_witness file evidence/pre_witness/claim-02-instance.k: 72436013da2d7e2a2713b3b2a718445db90a35b8ed81c755d1a0c1ab0d3dcccc
+rehash: ok   pre_witness file evidence/pre_witness/claim-02-vacuity.k: b612bdb926191e06810eac9fa6f9e5f54add620b1449acee4a9644cbabb9809e
+rehash: ok   pre_witness file evidence/pre_witness/claim-04-config.json: 25729daa3c5a9addca667e0f5fe8ece5e98338333c7d736fff3caf2b2a46f55b
+rehash: ok   pre_witness file evidence/pre_witness/claim-04-instance.k: cbbbeed573e9c8c754b0621c2dd3e52beeef182b18b3aad7ece6d60fe8f2bf8e
+rehash: ok   pre_witness file evidence/pre_witness/claim-04-vacuity.k: bd2a8432e3d3236dfb82ef5664a258b14eb266e9b38f9b4e089a1d4a727ff163
+rehash: ok   pre_witness file evidence/pre_witness/claim-05-config.json: f1a9cd33c4aa0fe514ce5bebe6ff02b1576d17d8b39c63df2b8299c99b548bd0
+rehash: ok   pre_witness file evidence/pre_witness/claim-05-instance.k: 272365e07c874930917312c2aa8075fd14552911adc11367229a65bd38b7955c
+rehash: ok   pre_witness file evidence/pre_witness/claim-05-vacuity.k: 9b557cf55d8f0e7e7808dc5a7b3b714246eeacbf7ab72fc70aa9d50a6c352081
+rehash: ok   pre_witness file evidence/pre_witness/expected.json: 74129a8fb677f5264481ecc566937793c4932d3cb76ee8d84611b6594fa5dda4
+rehash: ok   pre_witness file evidence/pre_witness/replay.out: d7ad4c9335eb624194b84292ff6dd7649b71ae941f7fa6f1904d1fbaaa4a73ba
+rehash: ok   pre_witness file evidence/pre_witness/replay.sh: e84cf975a8c416e23ba74fccd58f41b92cb68ba8ca6f80bdec0df7bd6b296745
+rehash: ok   hashed_objects hard/artifact.bin: c5f9e8e8da82f5ee5b74608bf05c818537174be13ea0bc00ce15d5fe55e2bd27
+rehash: ok   hashed_objects hard/annotations.json: a4e84d6069e548b42b5a2b337f0c9f8f73b7edba0ac15dd812b5bc17cfa220aa
+rehash: ok   hashed_objects hard/spec/phi.json: adf5371ed9ebaddff2409d2e46c2ca0f05ffbd5958350f8591c04b43b73790e9
+rehash: ok   hashed_objects hard/spec/requirements.md: 94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14
+rehash: ok   hashed_objects provenance/opscan.json: f2c512f9bd3fea3f1fa33605f007a984722f8bc06108c76d6ecd03982988c776
+rehash: ok   hashed_objects provenance/kevm_osaka_adequacy.json: 2bb6e8f75e8847e21a8d59419523fa034eb533416729923fe9182bd149a1ba5a
+rehash: ok   hashed_objects provenance/chain_fetch.json: 2cbd475aab03439264f9e3f9762ad49ec9c4913facb7f0995ed871116bf5b940
+rehash: ok   hashed_objects provenance/rpc_probe.json: 7069831b6f96960db25a5935d65b713f83d2b49c5628753510740ff53bd8e01a
+rehash: ok   hashed_objects provenance/rpc_status.json: 025e96b2124e2a4166f5a3728bfd8c7ad0a270b79df248b55826dded810c5c6c
+rehash: OK (63 recomputed, 0 failures)

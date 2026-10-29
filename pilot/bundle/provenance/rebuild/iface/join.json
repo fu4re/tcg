@@ -1,0 +1,33 @@
+{
+  "pre": "GemJoin ETH-A runtime (0x2F0b23f53734252Bda2277357e97e1517d6B042A, 3462 bytes), calldata = selector 0x3b4da69f (join(address,uint256)) ++ #buf(32, 57005) ++ #buf(32, 10^18) (CONCRETE usr = 0xdead, wad = 1e18, as in Finding 0003's concrete-args idiom), callvalue 0, storage SYMBOLIC (STORAGE:Map) constrained only by #lookup(STORAGE, 5) ==Int 0 (live == 0, slot 5 per the deployed layout wards/vat/ilk/gem/dec/live = slots 0..5), id/caller symbolic over the full 160-bit range, SHANGHAI schedule, useGas off. Generalises Finding 0003 row 4 (whose root used EMPTY storage, a configuration no constructed GemJoin is ever in) to every storage with live == 0, which includes the reachable post-cage() state. Rebuilt 2026-10-29; see provenance/decision-stub.md",
+  "post": "halts EVMC_REVERT; <storage> is the SAME Map STORAGE (no SSTORE before the revert); <callStack> is .List; every cell under the elided <evm>/<substate>/<network> frames, including <log>, is unchanged (no LOG before the revert). <output> (the revert payload) is left abstract. 'Before any external call' is a BYTECODE-INSPECTION fact (the revert at pc 0x03bf precedes both CALL sites), not a separate K postcondition: the K claim pins <callStack> .List before/after and the frame unchanged, which is a strengthening, not a standalone no-CALL proof (same caveat as Finding 0003b #2)",
+  "exit": "EVMC_REVERT",
+  "footprint": {
+    "reads": [
+      "storage[5] (live)"
+    ],
+    "writes": []
+  },
+  "rely": "",
+  "guar": "join(0xdead, 1e18) with live == 0 reverts for every caller before any external call: the live check at pc 0x0348-0x0352 (SLOAD slot 5, EQ 1) precedes the Vat.slip CALL (pc ~0x04e8) and the gem.transferFrom CALL (pc ~0x05dd)",
+  "requires": [
+    "edsl.md"
+  ],
+  "imports": [
+    "EDSL"
+  ],
+  "claims": [
+    {
+      "label": "join",
+      "file": "join.k",
+      "role": "loop",
+      "root": true
+    },
+    {
+      "label": "join_g",
+      "file": "join_g.k",
+      "role": "guar",
+      "root": false
+    }
+  ]
+}

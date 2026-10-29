@@ -1,0 +1,186 @@
+{
+  "block_hash": "0x21bc8ec3e7a3d67c7f387dcb076dd22f91545d9299c265e183cbc7dc13c684e0",
+  "block_number": 26298481,
+  "block_timestamp": "0x6ae33fd7",
+  "chain_id": 1,
+  "contracts": {
+    "GemJoin_ETH_A": {
+      "address": "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
+      "dev_runtime_hex": "tests/reference/getters/subject/runtime.hex",
+      "equals_dev_constant": true,
+      "equals_dev_runtime_hex": true,
+      "keccak256_cast": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+      "keccak256_pure_python": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+      "keccak_tools_agree": true,
+      "sha256": "c5f9e8e8da82f5ee5b74608bf05c818537174be13ea0bc00ce15d5fe55e2bd27",
+      "size_bytes": 3462
+    },
+    "MCD_Vat": {
+      "address": "0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B",
+      "keccak256_cast": "0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59",
+      "keccak256_pure_python": "0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59",
+      "keccak_tools_agree": true,
+      "sha256": "a9893414fa5d7bc5ce336ed0c97a55420c6349ff96b7e4005e3aaecece131f0c",
+      "size_bytes": 13493
+    },
+    "WETH9": {
+      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "keccak256_cast": "0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23",
+      "keccak256_pure_python": "0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23",
+      "keccak_tools_agree": true,
+      "sha256": "5566bf50796faf93c9b6f6adacd3b32c70bfe16b48ffc59db6cd144cbdc89739",
+      "size_bytes": 3124
+    }
+  },
+  "eth_config": {
+    "https://1rpc.io/eth": {
+      "current": {
+        "activationTime": 1767747671,
+        "blobSchedule": {
+          "baseFeeUpdateFraction": 11684671,
+          "max": 21,
+          "target": 14
+        },
+        "chainId": "0x1",
+        "forkId": "0x07c9462e",
+        "precompiles": {
+          "BLAKE2F": "0x0000000000000000000000000000000000000009",
+          "BLS12_G1ADD": "0x000000000000000000000000000000000000000b",
+          "BLS12_G1MSM": "0x000000000000000000000000000000000000000c",
+          "BLS12_G2ADD": "0x000000000000000000000000000000000000000d",
+          "BLS12_G2MSM": "0x000000000000000000000000000000000000000e",
+          "BLS12_MAP_FP2_TO_G2": "0x0000000000000000000000000000000000000011",
+          "BLS12_MAP_FP_TO_G1": "0x0000000000000000000000000000000000000010",
+          "BLS12_PAIRING_CHECK": "0x000000000000000000000000000000000000000f",
+          "BN254_ADD": "0x0000000000000000000000000000000000000006",
+          "BN254_MUL": "0x0000000000000000000000000000000000000007",
+          "BN254_PAIRING": "0x0000000000000000000000000000000000000008",
+          "ECREC": "0x0000000000000000000000000000000000000001",
+          "ID": "0x0000000000000000000000000000000000000004",
+          "KZG_POINT_EVALUATION": "0x000000000000000000000000000000000000000a",
+          "MODEXP": "0x0000000000000000000000000000000000000005",
+          "P256VERIFY": "0x0000000000000000000000000000000000000100",
+          "RIPEMD160": "0x0000000000000000000000000000000000000003",
+          "SHA256": "0x0000000000000000000000000000000000000002"
+        },
+        "systemContracts": {
+          "BEACON_ROOTS_ADDRESS": "0x000f3df6d732807ef1319fb7b8bb8522d0beac02",
+          "CONSOLIDATION_REQUEST_PREDEPLOY_ADDRESS": "0x0000bbddc7ce488642fb579f8b00f3a590007251",
+          "DEPOSIT_CONTRACT_ADDRESS": "0x00000000219ab540356cbb839cbe05303d7705fa",
+          "HISTORY_STORAGE_ADDRESS": "0x0000f90827f1c53a10cb7a02335b175320002935",
+          "WITHDRAWAL_REQUEST_PREDEPLOY_ADDRESS": "0x00000961ef480eb55e80d19ad83579a64c007002"
+        }
+      },
+      "last": null,
+      "next": null
+    },
+    "https://eth.drpc.org": {
+      "current": {
+        "activationTime": 1767747671,
+        "blobSchedule": {
+          "baseFeeUpdateFraction": 11684671,
+          "max": 21,
+          "target": 14
+        },
+        "chainId": "0x1",
+        "forkId": "0x07c9462e",
+        "precompiles": {
+          "BLAKE2F": "0x0000000000000000000000000000000000000009",
+          "BLS12_G1ADD": "0x000000000000000000000000000000000000000b",
+          "BLS12_G1MSM": "0x000000000000000000000000000000000000000c",
+          "BLS12_G2ADD": "0x000000000000000000000000000000000000000d",
+          "BLS12_G2MSM": "0x000000000000000000000000000000000000000e",
+          "BLS12_MAP_FP2_TO_G2": "0x0000000000000000000000000000000000000011",
+          "BLS12_MAP_FP_TO_G1": "0x0000000000000000000000000000000000000010",
+          "BLS12_PAIRING_CHECK": "0x000000000000000000000000000000000000000f",
+          "BN254_ADD": "0x0000000000000000000000000000000000000006",
+          "BN254_MUL": "0x0000000000000000000000000000000000000007",
+          "BN254_PAIRING": "0x0000000000000000000000000000000000000008",
+          "ECREC": "0x0000000000000000000000000000000000000001",
+          "ID": "0x0000000000000000000000000000000000000004",
+          "KZG_POINT_EVALUATION": "0x000000000000000000000000000000000000000a",
+          "MODEXP": "0x0000000000000000000000000000000000000005",
+          "P256VERIFY": "0x0000000000000000000000000000000000000100",
+          "RIPEMD160": "0x0000000000000000000000000000000000000003",
+          "SHA256": "0x0000000000000000000000000000000000000002"
+        },
+        "systemContracts": {
+          "BEACON_ROOTS_ADDRESS": "0x000f3df6d732807ef1319fb7b8bb8522d0beac02",
+          "CONSOLIDATION_REQUEST_PREDEPLOY_ADDRESS": "0x0000bbddc7ce488642fb579f8b00f3a590007251",
+          "DEPOSIT_CONTRACT_ADDRESS": "0x00000000219ab540356cbb839cbe05303d7705fa",
+          "HISTORY_STORAGE_ADDRESS": "0x0000f90827f1c53a10cb7a02335b175320002935",
+          "WITHDRAWAL_REQUEST_PREDEPLOY_ADDRESS": "0x00000961ef480eb55e80d19ad83579a64c007002"
+        }
+      },
+      "last": null,
+      "next": null
+    },
+    "https://ethereum-rpc.publicnode.com": {
+      "current": {
+        "activationTime": 1767747671,
+        "blobSchedule": {
+          "baseFeeUpdateFraction": 11684671,
+          "max": 21,
+          "target": 14
+        },
+        "chainId": "0x1",
+        "forkId": "0x07c9462e",
+        "precompiles": {
+          "BLAKE2F": "0x0000000000000000000000000000000000000009",
+          "BLS12_G1ADD": "0x000000000000000000000000000000000000000b",
+          "BLS12_G1MSM": "0x000000000000000000000000000000000000000c",
+          "BLS12_G2ADD": "0x000000000000000000000000000000000000000d",
+          "BLS12_G2MSM": "0x000000000000000000000000000000000000000e",
+          "BLS12_MAP_FP2_TO_G2": "0x0000000000000000000000000000000000000011",
+          "BLS12_MAP_FP_TO_G1": "0x0000000000000000000000000000000000000010",
+          "BLS12_PAIRING_CHECK": "0x000000000000000000000000000000000000000f",
+          "BN254_ADD": "0x0000000000000000000000000000000000000006",
+          "BN254_MUL": "0x0000000000000000000000000000000000000007",
+          "BN254_PAIRING": "0x0000000000000000000000000000000000000008",
+          "ECREC": "0x0000000000000000000000000000000000000001",
+          "ID": "0x0000000000000000000000000000000000000004",
+          "KZG_POINT_EVALUATION": "0x000000000000000000000000000000000000000a",
+          "MODEXP": "0x0000000000000000000000000000000000000005",
+          "P256VERIFY": "0x0000000000000000000000000000000000000100",
+          "RIPEMD160": "0x0000000000000000000000000000000000000003",
+          "SHA256": "0x0000000000000000000000000000000000000002"
+        },
+        "systemContracts": {
+          "BEACON_ROOTS_ADDRESS": "0x000f3df6d732807ef1319fb7b8bb8522d0beac02",
+          "CONSOLIDATION_REQUEST_PREDEPLOY_ADDRESS": "0x0000bbddc7ce488642fb579f8b00f3a590007251",
+          "DEPOSIT_CONTRACT_ADDRESS": "0x00000000219ab540356cbb839cbe05303d7705fa",
+          "HISTORY_STORAGE_ADDRESS": "0x0000f90827f1c53a10cb7a02335b175320002935",
+          "WITHDRAWAL_REQUEST_PREDEPLOY_ADDRESS": "0x00000961ef480eb55e80d19ad83579a64c007002"
+        }
+      },
+      "last": null,
+      "next": null
+    }
+  },
+  "format": "tcg-pilot-chain-fetch/0.1",
+  "rpcs_agreeing": [
+    "https://ethereum-rpc.publicnode.com",
+    "https://eth.drpc.org",
+    "https://1rpc.io/eth",
+    "https://mainnet.gateway.tenderly.co",
+    "https://eth-mainnet.public.blastapi.io"
+  ],
+  "rpcs_disagreeing": [],
+  "rpcs_failed": [
+    {
+      "errors": [
+        "cast code 0x2F0b23f53734252Bda2277357e97e1517d6B042A --block 26298481 --rpc-url https://rpc.flashbots.net: exit 1: Error: HTTP error 504 with body: <html>\n<head><title>504 Gateway Time-out</title></head>\n<body>\n<center><h1>504 Gateway Time-out</h1></center>\n</body>\n</html>\n\n\nHTTP diagnostics:\nserver: awselb/2.0",
+        "eth_config: cast rpc --rpc-url https://rpc.flashbots.net eth_config: exit 1: Error: HTTP error 403 with body: {\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32601,\"message\":\"rpc method is not whitelisted\"},\"id\":0}"
+      ],
+      "rpc": "https://rpc.flashbots.net"
+    },
+    {
+      "errors": [
+        "cast chain-id --rpc-url https://eth.llamarpc.com: exit 1: Error: HTTP error 525 with body: <!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-js ie8 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if gt IE 8]><!--> <ht",
+        "eth_config: cast rpc --rpc-url https://eth.llamarpc.com eth_config: exit 1: Error: HTTP error 525 with body: <!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-js ie8 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if gt IE 8]><!--> <ht"
+      ],
+      "rpc": "https://eth.llamarpc.com"
+    }
+  ],
+  "state_root": "0x22c6f156923ff5dc5923df085df019f2fe8b85722515248d87cab1441f4a8712"
+}

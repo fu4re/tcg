@@ -1,0 +1,14 @@
+{
+  "pre": "GemJoin ETH-A runtime (0x2F0b23f53734252Bda2277357e97e1517d6B042A, 3462 bytes), calldata = selector 0x69245009 (cage()) only, callvalue 0, storage EMPTY (.Map: every slot reads 0, so wards[caller] == 0 for every caller), id/caller symbolic over the full 160-bit range, SHANGHAI schedule, useGas off. Rebuilt 2026-10-29 from Finding 0003 'Roots read' + table row 1 (the original claim source was never committed); see provenance/decision-stub.md",
+  "post": "halts EVMC_REVERT; <storage> is still .Map (no SSTORE before the revert); <callStack> is .List; every cell under the elided <evm>/<substate> frame, including <log>, is unchanged (no LOG before the revert). <output> (the revert payload) is left abstract",
+  "exit": "EVMC_REVERT",
+  "footprint": {"reads": ["storage[keccak256(caller . 0)] (wards[caller])"], "writes": []},
+  "rely": "",
+  "guar": "cage() with no ward set reverts for every caller, touching no storage and emitting no log (auth check at pc 0x07f1-0x0837 precedes the only SSTORE, at the live=0 write, and the LibNote LOG4)",
+  "requires": ["edsl.md"],
+  "imports": ["EDSL"],
+  "claims": [
+    {"label": "cage", "file": "cage.k", "role": "loop", "root": true},
+    {"label": "cage_g", "file": "cage_g.k", "role": "guar", "root": false}
+  ]
+}

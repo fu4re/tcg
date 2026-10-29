@@ -1,0 +1,7 @@
+closure: A_simp_bytes: 67 rules in /opt/kevm/evm-semantics-source/lemmas/bytes-simplification.k, non-[simplification]: 0
+closure: A_simp_int: 147 rules in /opt/kevm/evm-semantics-source/lemmas/int-simplification.k, non-[simplification]: 0
+closure: A_simp_evm_int: 47 rules in /opt/kevm/evm-semantics-source/lemmas/evm-int-simplification.k, non-[simplification]: 0
+closure: A_simp_bitwise: 26 rules in /opt/kevm/evm-semantics-source/lemmas/bitwise-simplification.k, non-[simplification]: 0
+closure: A_simp_bool2word: 28 rules in /opt/kevm/evm-semantics-source/lemmas/bool2word-simplification.k, non-[simplification]: 0
+closure: A_simp_map: 5 rules in /opt/kevm/evm-semantics-source/lemmas/map-simplification.k, non-[simplification]: 0
+closure: OK (13 annotations, 5 claims, 0 problems)

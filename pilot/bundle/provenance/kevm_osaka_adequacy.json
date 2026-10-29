@@ -1,0 +1,37 @@
+{
+  "tarball": "evm-semantics.tar.gz",
+  "tarball_sha256": "5f8e3bcd093077c1912973a65d33430426a178a309ea63a09cce983a2f323275",
+  "schedule_md_osaka_block": "syntax Schedule ::= \"OSAKA\" [symbol(OSAKA_EVM), smtlib(schedule_OSAKA)] // ----------------------------------------------------------------------- rule [SCHEDCONSTOsaka]: SCHEDCONST < OSAKA > => SCHEDCONST < PRAGUE > rule [GhasclzOsaka]: Ghasclz << OSAKA >> => true rule [SCHEDFLAGOsaka]: SCHEDFLAG << OSAKA >> => SCHEDFLAG << PRAGUE >> requires notBool ( SCHEDFLAG ==K Ghasclz )",
+  "precompiled_accounts_osaka": [
+    "#precompiledAccountsUB(PRAGUE)"
+  ],
+  "fixtures_version": "v5.4.0",
+  "failing_llvm_lines": 743,
+  "failing_llvm_osaka_lines": 498,
+  "failing_llvm_osaka_by_test_dir": {
+    "cancun/eip4844_blobs": 160,
+    "osaka/eip7883_modexp_gas_increase": 146,
+    "static/state_tests": 55,
+    "byzantium/eip198_modexp_precompile": 29,
+    "osaka/eip7823_modexp_upper_bounds": 18,
+    "osaka/eip7918_blob_reserve_price": 18,
+    "osaka/eip7825_transaction_gas_limit_cap": 13,
+    "osaka/eip7951_p256verify_precompiles": 12,
+    "prague/eip7623_increase_calldata_cost": 8,
+    "prague/eip7702_set_code_tx": 7,
+    "shanghai/eip4895_withdrawals": 7,
+    "prague/eip7002_el_triggerable_withdrawals": 5,
+    "osaka/eip7594_peerdas": 4,
+    "frontier/opcodes": 3,
+    "frontier/validation": 3,
+    "prague/eip7251_consolidations": 3,
+    "prague/eip2935_historical_block_hashes_from_state": 2,
+    "berlin/eip2929_gas_cost_increases": 1,
+    "frontier/precompiles": 1,
+    "frontier/scenarios": 1,
+    "osaka/eip7934_block_rlp_limit": 1,
+    "osaka/eip7939_count_leading_zeros": 1
+  },
+  "tests_in_tarball": 0,
+  "reading": "KEVM's OSAKA schedule = PRAGUE constants and flags + Ghasclz (EIP-7939 CLZ) only; its precompile set is PRAGUE's. Mainnet Osaka execution-layer EIPs NOT modelled by that schedule: EIP-7823 + EIP-7883 (MODEXP bounds/repricing), EIP-7951 (P256VERIFY precompile at 0x100), EIP-7825 (tx gas cap), EIP-7918 (blob base fee floor), EIP-7934 (block RLP size). KEVM's own declared-failing list names Osaka fixtures in exactly these directories. No pass/total was computed: the fixtures are not in the tarball (fetched by get_execution_spec_tests.sh) and were not run in this pilot."
+}

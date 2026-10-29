@@ -1,0 +1,2 @@
+spec	module	expected	exit	verdict	unknown_class	wall_s	log_sha256	image
+provenance/rebuild/controls-osaka/vat-vat-prove.k	VAT-VAT-PROVE	Accept	0	Accept	-	331.9	8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d	sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465

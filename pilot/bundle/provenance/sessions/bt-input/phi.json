@@ -1,0 +1,266 @@
+{
+  "format": "tcg-pilot-phi/0.1",
+  "artifact": {
+    "file": "hard/artifact.bin",
+    "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+    "address": "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
+    "chain_id": 1,
+    "block": 26298481
+  },
+  "semantics": "KEVM evm-semantics d4bf484a5dfe1e38d729a30434cd6f41e3590fb2 + lemmas2, schedule OSAKA; see trusted_base.json",
+  "claims": [
+    {
+      "id": "claim-01",
+      "claim": "claim-01",
+      "file": "hard/spec/claim-01.k",
+      "sha256": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+      "spec_module": "VAT-VAT-PROVE",
+      "k_label": "vat",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata exactly 0x36569e77 (4 bytes); storage: any Map with storage[1] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "reachability": "reachable, shown on chain: the deployed storage at the pinned block satisfies Pre for every caller (slot values in provenance/rpc_probe.json; concrete instance replayed for ilk() in pre_witness claim-02)"
+      },
+      "pre": {
+        "function": "vat()",
+        "calldata": "exactly 0x36569e77 (4 bytes)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[1] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_SUCCESS",
+        "output": "32-byte big-endian word of storage[1] & (2^160 - 1)",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_SUCCESS"
+      ],
+      "pre_scope_k": [],
+      "aasm": [
+        "Aasm-rangeUInt-storage",
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call"
+      ],
+      "requirements": [
+        "R1"
+      ]
+    },
+    {
+      "id": "claim-02",
+      "claim": "claim-02",
+      "file": "hard/spec/claim-02.k",
+      "sha256": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+      "spec_module": "ILK-ILK-PROVE",
+      "k_label": "ilk",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata exactly 0xc5ce281e (4 bytes); storage: any Map with storage[2] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "reachability": "reachable, shown on chain: pre_witness claim-02 is the deployed storage at the pinned block (eth_getStorageAt, 4 RPCs agree) with a concrete caller; its instance Accepts and its vacuity probe does not"
+      },
+      "pre": {
+        "function": "ilk()",
+        "calldata": "exactly 0xc5ce281e (4 bytes)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[2] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_SUCCESS",
+        "output": "32-byte big-endian word of storage[2]",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_SUCCESS"
+      ],
+      "pre_scope_k": [],
+      "aasm": [
+        "Aasm-rangeUInt-storage",
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call"
+      ],
+      "requirements": [
+        "R2"
+      ]
+    },
+    {
+      "id": "claim-03",
+      "claim": "claim-03",
+      "file": "hard/spec/claim-03.k",
+      "sha256": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+      "spec_module": "GEM-GEM-PROVE",
+      "k_label": "gem",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata exactly 0x7bd2bea7 (4 bytes); storage: any Map with storage[3] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "reachability": "reachable, shown on chain: the deployed storage at the pinned block satisfies Pre for every caller (same slot record as claim-02)"
+      },
+      "pre": {
+        "function": "gem()",
+        "calldata": "exactly 0x7bd2bea7 (4 bytes)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[3] in [0, 2^256) (Aasm-rangeUInt-storage)",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_SUCCESS",
+        "output": "32-byte big-endian word of storage[3] & (2^160 - 1)",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_SUCCESS"
+      ],
+      "pre_scope_k": [],
+      "aasm": [
+        "Aasm-rangeUInt-storage",
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call"
+      ],
+      "requirements": [
+        "R3"
+      ]
+    },
+    {
+      "id": "claim-04",
+      "claim": "claim-04",
+      "file": "hard/spec/claim-04.k",
+      "sha256": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+      "spec_module": "CAGEWS-CAGEWS-PROVE",
+      "k_label": "cagews",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata exactly 0x69245009 (4 bytes); storage: any Map with storage[keccak256(pad32(caller) ++ pad32(0))] == 0, i.e. wards[caller] == 0 (caller is not a ward); every other slot arbitrary. keccak is KEVM's keccak(Bytes) left opaque by the prover (symbolic argument)",
+        "reachability": "reachable, shown on chain: pre_witness claim-04 is the deployed storage at the pinned block with caller 0x000000000000000000000000000000000000dEaD, whose wards slot reads 0 at the pinned block (eth_getStorageAt, recorded in claim-04-config.json chain_slot_checks); its instance Accepts and its vacuity probe does not"
+      },
+      "pre": {
+        "function": "cage()",
+        "calldata": "exactly 0x69245009 (4 bytes)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[keccak256(pad32(caller) ++ pad32(0))] == 0, i.e. wards[caller] == 0 (caller is not a ward); every other slot arbitrary. keccak is KEVM's keccak(Bytes) left opaque by the prover (symbolic argument)",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_REVERT",
+        "output": "unconstrained (revert payload)",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_REVERT"
+      ],
+      "pre_scope_k": [
+        "#lookup(STORAGE, keccak(#buf(32, MSGSENDER) +Bytes #buf(32, 0))) ==Int 0"
+      ],
+      "aasm": [
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call",
+        "Aasm-keccak-wards-slot"
+      ],
+      "requirements": [
+        "R4"
+      ]
+    },
+    {
+      "id": "claim-05",
+      "claim": "claim-05",
+      "file": "hard/spec/claim-05.k",
+      "sha256": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+      "spec_module": "JOINSYM-JOINSYM-PROVE",
+      "k_label": "joinsym",
+      "kind": "KEVM all-path reachability claim: every execution from a Pre state reaches a halting state satisfying Post",
+      "program": {
+        "binds": "hard/artifact.bin",
+        "keccak256": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "how": "<program> and <jumpDests> cells are #parseByteStack of the exact 3462 bytes"
+      },
+      "quantifies_over": {
+        "configuration_set": "program = hard/artifact.bin; executing account ACCTID any value in [0, 2^160); caller MSGSENDER any value in [0, 2^160); callvalue 0; top-level frame (<callStack> .List), non-static; gas not modelled (<useGas> false); schedule OSAKA; calldata 0x3b4da69f ++ word(USR) ++ word(WAD), exactly 68 bytes, for EVERY 256-bit USR and WAD (USR's upper 96 bits may be dirty; the code masks them); storage: any Map with storage[5] (live) == 0; every other slot arbitrary",
+        "reachability": "reachable by judgement, not shown on chain: pre_witness claim-05 is the deployed storage at the pinned block with slot 5 (live) set to 0, i.e. the state right after a ward calls cage(); live is 1 at the pinned block"
+      },
+      "pre": {
+        "function": "join(address,uint256)",
+        "calldata": "0x3b4da69f ++ word(USR) ++ word(WAD), exactly 68 bytes, for EVERY 256-bit USR and WAD (USR's upper 96 bits may be dirty; the code masks them)",
+        "callvalue": 0,
+        "caller": "any 160-bit address (symbolic MSGSENDER)",
+        "executing_account": "any 160-bit address (symbolic ACCTID)",
+        "storage": "any Map with storage[5] (live) == 0; every other slot arbitrary",
+        "schedule": "OSAKA",
+        "gas": "not modelled (<useGas> false)",
+        "frame": "top-level call (<callStack> .List), non-static"
+      },
+      "post": {
+        "status": "EVMC_REVERT",
+        "output": "unconstrained (revert payload)",
+        "storage": "unchanged (same Map)",
+        "log": "unchanged",
+        "call_stack": "unchanged (top level)"
+      },
+      "exit": [
+        "#halt with status EVMC_REVERT"
+      ],
+      "pre_scope_k": [
+        "#lookup(STORAGE, 5) ==Int 0"
+      ],
+      "aasm": [
+        "Aasm-address-range",
+        "Aasm-gas-abstraction",
+        "Aasm-toplevel-call",
+        "Aasm-rangeUInt-args"
+      ],
+      "requirements": [
+        "R5"
+      ]
+    }
+  ],
+  "declared_limits": [
+    "Every claim fixes callvalue 0, a top-level non-static frame, and gas not modelled: a claim holds for executions that do not run out of gas (Aasm-gas-abstraction). It does not guarantee termination within any gas limit.",
+    "Every claim is proved under KEVM <schedule> OSAKA </schedule>, which models mainnet osaka only partly (trusted_base.json semantics[0].adequacy_evidence, A1)."
+  ]
+}

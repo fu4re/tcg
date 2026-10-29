@@ -1,0 +1,33 @@
+{
+  "pre": "GemJoin ETH-A runtime (0x2F0b23f53734252Bda2277357e97e1517d6B042A, 3462 bytes), calldata = selector 0x3b4da69f (join(address,uint256)); FAITHFUL Finding-0003 shape (empty storage), kept as a control for the symbolic-storage form ++ #buf(32, 57005) ++ #buf(32, 10^18) (CONCRETE usr = 0xdead, wad = 1e18, as in Finding 0003's concrete-args idiom), callvalue 0, storage EMPTY (.Map: live = slot 5 = 0), id/caller symbolic over the full 160-bit range, SHANGHAI schedule, useGas off. Rebuilt 2026-10-29 from Finding 0003 'Roots read' + table row 4 (the original claim source was never committed); see provenance/decision-stub.md",
+  "post": "halts EVMC_REVERT; <storage> is still .Map (no SSTORE before the revert); <callStack> is .List; every cell under the elided <evm>/<substate>/<network> frames, including <log>, is unchanged (no LOG before the revert). <output> (the revert payload) is left abstract. 'Before any external call' is a BYTECODE-INSPECTION fact (the revert at pc 0x03bf precedes both CALL sites), not a separate K postcondition: the K claim pins <callStack> .List before/after and the frame unchanged, which is a strengthening, not a standalone no-CALL proof (same caveat as Finding 0003b #2)",
+  "exit": "EVMC_REVERT",
+  "footprint": {
+    "reads": [
+      "storage[5] (live)"
+    ],
+    "writes": []
+  },
+  "rely": "",
+  "guar": "join(0xdead, 1e18) with live == 0 reverts for every caller before any external call: the live check at pc 0x0348-0x0352 (SLOAD slot 5, EQ 1) precedes the Vat.slip CALL (pc ~0x04e8) and the gem.transferFrom CALL (pc ~0x05dd)",
+  "requires": [
+    "edsl.md"
+  ],
+  "imports": [
+    "EDSL"
+  ],
+  "claims": [
+    {
+      "label": "joinempty",
+      "file": "joinempty.k",
+      "role": "loop",
+      "root": true
+    },
+    {
+      "label": "joinempty_g",
+      "file": "joinempty_g.k",
+      "role": "guar",
+      "root": false
+    }
+  ]
+}
