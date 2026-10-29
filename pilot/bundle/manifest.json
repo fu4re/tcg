@@ -1,0 +1,2698 @@
+{
+  "format": "tcg-bundle/0.1",
+  "domain": "evm-bytecode",
+  "children": [
+    {
+      "path": "DECISIONS.md",
+      "hash": "87eb69ddff22a4ac4907ad283bffac095635634b37da9c5c26a9b375a180e54a",
+      "class": "U",
+      "media": "text/markdown",
+      "role": "P"
+    },
+    {
+      "path": "checker/Dockerfile",
+      "hash": "3af211b3088f5d8bbd6419b5bafd848464ff484e926d098f25ebd69687506da2",
+      "class": "T",
+      "media": "application/octet-stream",
+      "role": "checker"
+    },
+    {
+      "path": "checker/IMAGE_ID",
+      "hash": "cb0662d671d3e349d4177c4edfd71861224c717115313acb171d126c327b046d",
+      "class": "T",
+      "media": "application/octet-stream",
+      "role": "checker"
+    },
+    {
+      "path": "checker/PROVENANCE.json",
+      "hash": "ce88374776ebacddf0299f2f848efe473b68cea53c881314e76009439ab08b22",
+      "class": "T",
+      "media": "application/json",
+      "role": "checker"
+    },
+    {
+      "path": "checker/README.md",
+      "hash": "dbb68f4282edbecf460c9adba23512d5a56a412ccc370d6458c0cb3dbd6c71df",
+      "class": "T",
+      "media": "text/markdown",
+      "role": "checker"
+    },
+    {
+      "path": "checker/build.sh",
+      "hash": "a196411bb206275a4ce428935ed127e226c86879c84f1a86e10ac7ab63cd5fa2",
+      "class": "T",
+      "media": "text/x-shellscript",
+      "role": "checker"
+    },
+    {
+      "path": "checker/patches/ghost.diff",
+      "hash": "e300f622c9c68ef07db2914ef87e0dfff64f520af004770db5c80744b6ca68d1",
+      "class": "T",
+      "media": "text/x-diff",
+      "role": "checker"
+    },
+    {
+      "path": "checker/patches/lemmas2.diff",
+      "hash": "dcc8789dac6c3661635360ecc681388e0e68a93e34eb9dcd24001e767b469f2c",
+      "class": "T",
+      "media": "text/x-diff",
+      "role": "checker"
+    },
+    {
+      "path": "checker/run-claim.sh",
+      "hash": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "class": "T",
+      "media": "text/x-shellscript",
+      "role": "checker"
+    },
+    {
+      "path": "evidence/approval.json",
+      "hash": "369a2a6a589dc5515b527a68e1aaef5b7b8b277a3c6f89269151c5d9c4123e9c",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/approval.sig",
+      "hash": "c2ddee23c1ddde95fc3a0c7d3127b1cb23929d61d2eb7a1a252ee36626febdd8",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/backtranslation.json",
+      "hash": "a6972fe0662ea53a109cf73aed73ef7e449007fe8de1f1a258c32f0e48941d2d",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/coverage.json",
+      "hash": "65ac8906579aa3bd417b966ab5433dba4f6564a02c831465643bd2bfd0631184",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/STATUS.md",
+      "hash": "771294257d197c00385d49ffdc1b831dd3ec7f64768cd82111ea22e0860bdb28",
+      "class": "T*",
+      "media": "text/markdown",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask-symbolic.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask-symbolic.record.out",
+      "hash": "e18dc55a9fecf1ab5dee5a4a4d4fc261276f1cd6bf764753a6007e06b4ddf117",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask-symbolic.trial.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask-symbolic.trial.out",
+      "hash": "0d2632f8877a51a5891a5e2a7265afe1c1dedcdac03b149e687168f360ff2dd0",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask-symbolic/claim.k",
+      "hash": "24f166a2f9116d3e04f8d592eff8c0f3bad99c3e39999eecb9910727600bbea4",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask-symbolic/mutant.bin",
+      "hash": "f36fb281fbc14b99adc15a7e3705f32b98ff3f69b31907ca184a675af9136ee0",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask-symbolic/mutation.json",
+      "hash": "833a9686729f91e5c39829f3e6e8dc3aa095d0bdd070c545cf3ad3b84bf527a9",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask-symbolic/refutation.json",
+      "hash": "0576837bbc2aad4c37ecc0399f16100d8a0db687ff76a46cc4148d947380126e",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask-symbolic/replay.sh",
+      "hash": "85d2c26e7b27461443571c7794acbd7841ee394962fd73744353fae1b05c5c65",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask.record.out",
+      "hash": "c4501fd475cc128c75b9320218823ffe63ee407f4d3e2f465d5895dde0c12864",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask/mutant.bin",
+      "hash": "f36fb281fbc14b99adc15a7e3705f32b98ff3f69b31907ca184a675af9136ee0",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask/mutation.json",
+      "hash": "80957e73cefdf32d5316eb813f88da23e9dc3db07b51b06e344b65ca57616449",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask/refutation.json",
+      "hash": "8e59cce3d2b4469b074f6d123d7b11fbaed7f90a227364355154323df175c522",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask/replay.sh",
+      "hash": "945824ef3fa78ffaeb5c8f6fb4b63ca1ac9bce007350e1c71fc26a9253baf139",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask/witness-mutant.k",
+      "hash": "2bb0b6630c3df8fc884c6a0f8d2926da8774fe733c15bfae0d21f2f295ba15ac",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask/witness-negative.k",
+      "hash": "0f2cacee6579c998c9a35bc13e82331c6e4ee1524b39402dd991e2cdcd950227",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-mask/witness-original.k",
+      "hash": "b99c84ffeaccc91a03465aa25bd76e6e1b38ae4bb8b71b1622584db30bc5663f",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-symbolic.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-symbolic.record.out",
+      "hash": "ec303c197e534b96c1f985ba917f4c3ecd42655e4b1afe8218164ee3237ed23f",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-symbolic.trial.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-symbolic.trial.out",
+      "hash": "eff30415427208cea826aa72810727ddd00ad2ac98ec13502306566447c456be",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-symbolic/claim.k",
+      "hash": "158e5c2d69f239da0a6b7aaaec8fd29848ec918a7141c1736d30f4c7f48d95e4",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-symbolic/mutant.bin",
+      "hash": "7fd7b73b86e574852259149f4891277e3d25a6857247a5cd90f700816f8fba05",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-symbolic/mutation.json",
+      "hash": "437ed0ebaf94a82038e04857c15b64a06041648b7496e4e276bc3a2ee4a56863",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-symbolic/refutation.json",
+      "hash": "fbe3066b4686d070221df8790bddf4b3cef9a25e72cfab1127e5b2d9ab62787d",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01-symbolic/replay.sh",
+      "hash": "2a0915e9ea9740a89734b120565e895ef73ca10996da84f5f72458b2d0b376cc",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01.record.out",
+      "hash": "b9d57594235c9cb892d27caea517de5da1a6c95a67c8d0b29650105de1effb5e",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01/mutant.bin",
+      "hash": "7fd7b73b86e574852259149f4891277e3d25a6857247a5cd90f700816f8fba05",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01/mutation.json",
+      "hash": "a723063af9ca058b75bfd351159bca3d713252dcf18c1109fc8b4372fa489763",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01/refutation.json",
+      "hash": "3d6af2ce4291bf7f8ce8f4fafcbfeb9b30559c4ac30b6772979da9611d5985ab",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01/replay.sh",
+      "hash": "4ed12f2a81d12d9efd2169c143483da133537ac9c4feb2dac00ef2cc8aeb88e8",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01/witness-mutant.k",
+      "hash": "4d03af992945fb2ab68da8b64c58ec04d5a3d459c1d252a0e5d0cdcee976f630",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01/witness-negative.k",
+      "hash": "8da3b5a8a6d6094f99780a19cdf085559cb6c6ffc33780016d79ddcc9d7baa5f",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-01/witness-original.k",
+      "hash": "8e249ec4f95193a70b241a1c11163c3a0a5867ae751c1122d9bc15e6f9b68895",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02-symbolic.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02-symbolic.record.out",
+      "hash": "9ad5a60a3f8860577ae14d52317978bf80d89e595cf7de13f35c221633b130c6",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02-symbolic.trial.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02-symbolic.trial.out",
+      "hash": "63cc13e04c8a5f879f6f1ff6c2ef96fafa362ce9bb24d61b85d3a72726918c57",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02-symbolic/claim.k",
+      "hash": "e3006b622691f1582674d3075528b767fcb7c6314d3d3d982b592ee99bd916b4",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02-symbolic/mutant.bin",
+      "hash": "73e7f8604c35e31f017690d40a8619bfa4f8e7855f346a49bc8a6e43ab84d036",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02-symbolic/mutation.json",
+      "hash": "99209d87127bbb49714468087ef34cd7dd9d8de9a3cbc0c571b7511cf612b3cc",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02-symbolic/refutation.json",
+      "hash": "bde64519aeeec4d66a30e186e24c98f32fbf5bd9547b44817a8ac58edb1d6e0f",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02-symbolic/replay.sh",
+      "hash": "83ff601b06041adb8b8a12a4ed1c45896fad17b8866c801d8481ab8104b198d1",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02.record.out",
+      "hash": "b7bb12045e8f24bdadaa17a536aaa5ff6915261d2fa207823128274645f0a413",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02/mutant.bin",
+      "hash": "73e7f8604c35e31f017690d40a8619bfa4f8e7855f346a49bc8a6e43ab84d036",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02/mutation.json",
+      "hash": "73c1b47f61c837b9f6a4d9bc99e1ac0850a1e11e9df814f7738f96ffe749d5f3",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02/refutation.json",
+      "hash": "fc131ac24433b564b54ca8fcc865718721b8360b8a893cd26bbc561dae50013e",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02/replay.sh",
+      "hash": "1f97e7998854ff2a7c85115de3b4f08c407914deac2ad9c7bef9689df1c520cc",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02/witness-mutant.k",
+      "hash": "e6fc4f4ab1de3da2e5754ae7e797903e267899ba14109147e87da79908526285",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02/witness-negative.k",
+      "hash": "b1f1aa1a54f1e01f8b6db9c8984a934ccd8411f72efca05ab82d9f6d1d8514c6",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-02/witness-original.k",
+      "hash": "782e4c221e71d5ae953734127f9dee3f8ae2e27fd448b7f175fcb14ab60456a9",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03-symbolic.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03-symbolic.record.out",
+      "hash": "52f2e975a8e3e250d6b6b19e69811bfdf69576efa3e5f563161c5373d39ba275",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03-symbolic.trial.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03-symbolic.trial.out",
+      "hash": "27f47f8aa1c69630247ccd80e1ed852154ddd5b5374aca82f7c2fb2afd5864f3",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03-symbolic/claim.k",
+      "hash": "cdc5ecb1efe7ad9008b3ab66b445845e12b519214af8bb687480178809ad3b97",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03-symbolic/mutant.bin",
+      "hash": "25fe35b708b489b93f8ce3d3a5167e2cadd67ee682e93aa0b1b0677197bf4ad6",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03-symbolic/mutation.json",
+      "hash": "0f40814463f57d5164224d7e16d7d4ede282a792de57fca27a23cfec0a915f64",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03-symbolic/refutation.json",
+      "hash": "7d80e27024e3947a4770ceb13093cc1f6522113718b0ae6f5a88bcc4ebab5282",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03-symbolic/replay.sh",
+      "hash": "b3eb90f0934960e8abbe0449cdf168aa6726c695f45fd906df525adc1b96408e",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03.record.out",
+      "hash": "8da543dbbe7baa06d60e6d22921409d722cfbd3581a30fd6f4d210233ace06c3",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03/mutant.bin",
+      "hash": "25fe35b708b489b93f8ce3d3a5167e2cadd67ee682e93aa0b1b0677197bf4ad6",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03/mutation.json",
+      "hash": "b1887e2be23d3c5e1979b9c91b55ccf590ede35649be7cee1c2e68f49df7c376",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03/refutation.json",
+      "hash": "6daad8020f4d34a5f504aaf373ee5a08556119d4162edbec3a324ffd397c25a8",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03/replay.sh",
+      "hash": "0e04560fc42aa79829c46becbff9a38f36b05a7cc444e538442c09d67d26626c",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03/witness-mutant.k",
+      "hash": "5874237523afbaf66eb0426eea62cde7312df6b2a88ba492aaf974c2e0a26f68",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03/witness-negative.k",
+      "hash": "e99b6698d047d37319ea9c01281c11d5b4a91d7e0323ed4d037132d42f6ff900",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-03/witness-original.k",
+      "hash": "481601799eec0910bde49a89db1c83f6f2e2181aac3b4020ecac713a7af477d1",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04-symbolic.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04-symbolic.record.out",
+      "hash": "b3fb802b124901afe8aef23e6f466d8aae5f28c822005bfc386e4dfd4f1ff499",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04-symbolic.trial.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04-symbolic.trial.out",
+      "hash": "ed130b833b7b17b833aecf282d0ed543442167f0a014ff87b916915975bc4274",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04-symbolic/claim.k",
+      "hash": "75aa79e224f72ac3eb91a294ba8c7f37bb7870f7e1d49813831c528feb7db00f",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04-symbolic/mutant.bin",
+      "hash": "73ff459d815a820be4e76485c9a7038c89c9a61026500a4475a2182accd7d11c",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04-symbolic/mutation.json",
+      "hash": "9909155395610d9387b149c1898d0ad31dd22525f15062b8ffd4df3a27ca3b2e",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04-symbolic/refutation.json",
+      "hash": "30e84311a7e9bb0c467a4a69866736893e2017e1726f5332e4f145da5ae2da16",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04-symbolic/replay.sh",
+      "hash": "9414a4972c461a73443f7b5f82c471b85783bb39e8ea2181da18a0e27c83244a",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04.record.out",
+      "hash": "ab71ecb72f255bf632ba84fdcda3af2ad05e031763f398d74622447ab716de06",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04/mutant.bin",
+      "hash": "73ff459d815a820be4e76485c9a7038c89c9a61026500a4475a2182accd7d11c",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04/mutation.json",
+      "hash": "75b9c23ed7a85515dc568a9f77ad1116653b7b2025a6f4d2be65f11a8342bda1",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04/refutation.json",
+      "hash": "453ee79208aede1cfc0e8af2d2bdb6b43463e3658810198e1023600ef5d8e2bb",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04/replay.sh",
+      "hash": "b7aadee1fe69e7e1b2fd36a24ebee8736235ab82e9e24b6d68d7b562bd94f6f3",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04/witness-mutant.k",
+      "hash": "2dde12424ae9f232e781d91315d68109e5c4b136c1f8838f5afcc6676bb9c85f",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04/witness-negative.k",
+      "hash": "b6f4bd0eec0390eb7716112043267a1ca2b72935766b0f20ee77e507e3d962d8",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-04/witness-original.k",
+      "hash": "1a53579960cd81eaa275a81c2f6eb3c52a00ef5a66f3dbee01084ec117f81f42",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05-symbolic.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05-symbolic.record.out",
+      "hash": "23d55a54be998b7ee1d40dbef134b86191d175143ef3d3e389d55642892bfc1c",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05-symbolic.trial.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05-symbolic.trial.out",
+      "hash": "a196639a0e50c6826d94973b30ad2ca9a6a50272c8d473fe0223664137fb4df5",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05-symbolic/claim.k",
+      "hash": "a52f4f0a416e1bc020e648868d929d3c6acb597f1003ac8847c2abe75f3e54ec",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05-symbolic/mutant.bin",
+      "hash": "2a259e3f6cf048ddac39132d621b2e35029c2789490e9231c2d0b24e03e8dab5",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05-symbolic/mutation.json",
+      "hash": "75adfcc192b0764186dae90fa3e6e36e91d7479b2ef8c5585b3ae5e727d70245",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05-symbolic/refutation.json",
+      "hash": "4b7642762bfe88a32f0d00519ba7bb37f1aab21b1e6f7e9e20c4fd76c9b72f02",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05-symbolic/replay.sh",
+      "hash": "94f73d884482afe00c24c7e17c2d75a28e51ae096e66fe4caa9f23c7ed8ce512",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05.record.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05.record.out",
+      "hash": "a043ad38a678af486cc8a5183f6ebfb13a36bbbf7359cad8a62aa8edc5decc58",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05/mutant.bin",
+      "hash": "2a259e3f6cf048ddac39132d621b2e35029c2789490e9231c2d0b24e03e8dab5",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05/mutation.json",
+      "hash": "0376b4f80466131e061775eabd572fe9871d6839eb29a2029903771e8bc1bd9d",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05/refutation.json",
+      "hash": "554d82461c7c1d3b0c780f4d0b67fd4c6146fd9cb2f424e11a51eef355630322",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05/replay.sh",
+      "hash": "b83a13986cd67cbcfa489194ec25dbdf02cbbeffb3ca40fa1f142b86d3c3cd5f",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05/witness-mutant.k",
+      "hash": "91010915460ee35608de0b1ffb0ebe07f2ff50f6709a6d2f8eca347261645340",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05/witness-negative.k",
+      "hash": "788801bea1b5ae9b292931e49b9f1fbb68d02e045f33981624e470faeed1924b",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/claim-05/witness-original.k",
+      "hash": "37ea69416b869bd2ad674da90f3759b660e351b762ac23d75cb4b067fcb63eae",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/gen_mutants.py",
+      "hash": "f65fae490d7e7361aba10a79e9af4cad121e5ee40da579df4ce151bc108bb86e",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/mutants/record_all.sh",
+      "hash": "2a22743eeae5d71331dfbce32ae4952fc6c9df096c30d4e6705da98059223fbd",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "evidence/phi_versions.json",
+      "hash": "4c14dbc212fbcca89d93a8d140c10f200d5713d4fbedc3957dacd07a8b3e4fde",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/claim-02-config.json",
+      "hash": "7d5cca0bc42c5c191c1e919e66a9371bb6d177b0bc40baa2c36e3cc94029d46e",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/claim-02-instance.k",
+      "hash": "72436013da2d7e2a2713b3b2a718445db90a35b8ed81c755d1a0c1ab0d3dcccc",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/claim-02-vacuity.k",
+      "hash": "b612bdb926191e06810eac9fa6f9e5f54add620b1449acee4a9644cbabb9809e",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/claim-04-config.json",
+      "hash": "25729daa3c5a9addca667e0f5fe8ece5e98338333c7d736fff3caf2b2a46f55b",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/claim-04-instance.k",
+      "hash": "cbbbeed573e9c8c754b0621c2dd3e52beeef182b18b3aad7ece6d60fe8f2bf8e",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/claim-04-vacuity.k",
+      "hash": "bd2a8432e3d3236dfb82ef5664a258b14eb266e9b38f9b4e089a1d4a727ff163",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/claim-05-config.json",
+      "hash": "f1a9cd33c4aa0fe514ce5bebe6ff02b1576d17d8b39c63df2b8299c99b548bd0",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/claim-05-instance.k",
+      "hash": "272365e07c874930917312c2aa8075fd14552911adc11367229a65bd38b7955c",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/claim-05-vacuity.k",
+      "hash": "9b557cf55d8f0e7e7808dc5a7b3b714246eeacbf7ab72fc70aa9d50a6c352081",
+      "class": "T*",
+      "media": "text/x-k",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/expected.json",
+      "hash": "74129a8fb677f5264481ecc566937793c4932d3cb76ee8d84611b6594fa5dda4",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/replay.out",
+      "hash": "d7ad4c9335eb624194b84292ff6dd7649b71ae941f7fa6f1904d1fbaaa4a73ba",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "evidence/pre_witness/replay.sh",
+      "hash": "e84cf975a8c416e23ba74fccd58f41b92cb68ba8ca6f80bdec0df7bd6b296745",
+      "class": "T*",
+      "media": "text/x-shellscript",
+      "role": "V"
+    },
+    {
+      "path": "hard/annotations.json",
+      "hash": "a4e84d6069e548b42b5a2b337f0c9f8f73b7edba0ac15dd812b5bc17cfa220aa",
+      "class": "T",
+      "media": "application/json",
+      "role": "a"
+    },
+    {
+      "path": "hard/artifact.bin",
+      "hash": "c5f9e8e8da82f5ee5b74608bf05c818537174be13ea0bc00ce15d5fe55e2bd27",
+      "class": "T",
+      "media": "application/octet-stream",
+      "role": "b"
+    },
+    {
+      "path": "hard/certs/claim-01.rediscuss.json",
+      "hash": "db6664b9d08e87b733fd38a47bfc7f7dfe3ec73b6efc2bcdbaa2ef6c88a85955",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-01"
+    },
+    {
+      "path": "hard/certs/claim-02.rediscuss.json",
+      "hash": "c5d5980136be89c33bbc9c6ff46d7d5dcf645f5ce4eede85d60a6c70c13729e6",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-02"
+    },
+    {
+      "path": "hard/certs/claim-03.rediscuss.json",
+      "hash": "0ca44dec7036b18779513d563d6e4bed8079a138e3afbb8010b092c977414120",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-03"
+    },
+    {
+      "path": "hard/certs/claim-04.rediscuss.json",
+      "hash": "0a61839f9405b73d94dd939db06f96250ce2f60c45a57aca6dc7bbf08b7a388d",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-04"
+    },
+    {
+      "path": "hard/certs/claim-05.rediscuss.json",
+      "hash": "cbecea716e2d3c4747171801a821436f9e5e6dfcde2d1dfc2bfa082f4899d4e8",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-05"
+    },
+    {
+      "path": "hard/spec/claim-01.k",
+      "hash": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-01"
+    },
+    {
+      "path": "hard/spec/claim-02.k",
+      "hash": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-02"
+    },
+    {
+      "path": "hard/spec/claim-03.k",
+      "hash": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-03"
+    },
+    {
+      "path": "hard/spec/claim-04.k",
+      "hash": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-04"
+    },
+    {
+      "path": "hard/spec/claim-05.k",
+      "hash": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-05"
+    },
+    {
+      "path": "hard/spec/phi.json",
+      "hash": "adf5371ed9ebaddff2409d2e46c2ca0f05ffbd5958350f8591c04b43b73790e9",
+      "class": "T",
+      "media": "application/json",
+      "role": "phi"
+    },
+    {
+      "path": "hard/spec/requirements.md",
+      "hash": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14",
+      "class": "T",
+      "media": "text/markdown",
+      "role": "phi"
+    },
+    {
+      "path": "provenance/chain_fetch.json",
+      "hash": "2cbd475aab03439264f9e3f9762ad49ec9c4913facb7f0995ed871116bf5b940",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/closure.out",
+      "hash": "696ea7488227fe9bc909a6572903ceae3e75c180e39f9a7eae1c3f466b483cac",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/coverage.out",
+      "hash": "5d059d782e302ebb852a094750666f9d2cb54d6d2fd0443d6bcf66be6dfc79f0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/decision-stub.md",
+      "hash": "85881273b0beaa37499a970b270f87e05688ce457c4c92ba2f5fbc4f154175da",
+      "class": "U",
+      "media": "text/markdown",
+      "role": "P"
+    },
+    {
+      "path": "provenance/generators.json",
+      "hash": "36418815c002aaf16161e5086262dec6f507b3bc49cf6c27ed0cf5852de0971f",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/iterations.json",
+      "hash": "487cbf86a81bc0cbe8171ee412db9d7760ec464a6b029b5600a6b8284c53ebfb",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/kevm_osaka_adequacy.json",
+      "hash": "2bb6e8f75e8847e21a8d59419523fa034eb533416729923fe9182bd149a1ba5a",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/ledger.jsonl",
+      "hash": "e86f63555de9da24932a4ff1a5fc2606e6a2fda022d0ec63be7165ddef66a436",
+      "class": "U",
+      "media": "application/x-ndjson",
+      "role": "P"
+    },
+    {
+      "path": "provenance/opscan.json",
+      "hash": "f2c512f9bd3fea3f1fa33605f007a984722f8bc06108c76d6ecd03982988c776",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-closure/closure_neg.out",
+      "hash": "69d3a90cb82543d3e320a764aaff73bf8f5a3667d34600c408cf5e0a5234f7aa",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-closure/closure_neg.sh",
+      "hash": "fee2dc14194eaca34003f4ab6f98e264ae28a29326929bfabdc578dbb23df94a",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/cage-cage-discriminator.k",
+      "hash": "d9580d3e1800a8a59a88246821fe69ce619eba497a4a8d773315ca119ea3bec1",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/cage-cage-prove.k",
+      "hash": "50db5f42d808147d09ce3acdf4f4d9a51c06651d2543920656c0189b105abab2",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/cage-cage-vacuity.k",
+      "hash": "af94ad3fcfeaf91771c0b60ad49751e3b67907b47c787c172eee5a9d317490be",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/cagews-cagews-discriminator.k",
+      "hash": "b73a1e16f11f08a8a91001b0273b2494ca6f56867c8abb744fe41c949fc62102",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/cagews-cagews-prove.k",
+      "hash": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/cagews-cagews-vacuity.k",
+      "hash": "62da2164d905a524bd1c811d42ea970ba60cc94c8670860e078a4af47b64e149",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/gem-gem-discriminator.k",
+      "hash": "1d90aa157d4f8109533a1bd45ce1e6ceda6e074dcb3d4b03ac780abe6ef253d2",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/gem-gem-prove.k",
+      "hash": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/gem-gem-vacuity.k",
+      "hash": "3e3826d7c7f98038466fa2b320d9c0256160577829a8f398841aa54e13090280",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/ilk-ilk-discriminator.k",
+      "hash": "733fe48b09dde673eefd9c3a04732752089ea9b99b83194d3136fc57c8e4a9d5",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/ilk-ilk-prove.k",
+      "hash": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/ilk-ilk-vacuity.k",
+      "hash": "caa23d7aa72b08226f954d566145837ab49fe535485a0ca83c7012858db5ea86",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/join-join-discriminator.k",
+      "hash": "d343de93bb8356a66b3aa00ffcb5d2744d11a774703a61814f81e6e0e2aff388",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/join-join-prove.k",
+      "hash": "5b2d8ca078030c91849ba65950363bf66ab671198a46aeeefa666fad5d7c7d97",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/join-join-vacuity.k",
+      "hash": "da1bebe3c19835a3d190b56786cd42312970e701ce616b8957fb1fd602549fc6",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/joinempty-joinempty-discriminator.k",
+      "hash": "7ed0cee70085081011aba5d29adaa02217e4898a982b86fc8ce3830f981ba758",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/joinempty-joinempty-prove.k",
+      "hash": "6c61b805d346f3e3936c065c9cd201e2ef5b27df2d2db2ab1221569e9dafff23",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/joinempty-joinempty-vacuity.k",
+      "hash": "01c135c9dae134f5430105e72fa29b3c43861baa18a5da578de7d011f19035c1",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/joinsym-joinsym-discriminator.k",
+      "hash": "003ffb3e7cc7f8446f8566b63586655e29371e024f082b3feb0e8566aab402aa",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/joinsym-joinsym-prove.k",
+      "hash": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/joinsym-joinsym-vacuity.k",
+      "hash": "8083741c1f624e2cc8b9507edf975b383332d68fe1c6d35b051bf3d8dc2666b2",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/vat-vat-discriminator.k",
+      "hash": "e7f69b8470ec54ea7a9649fc83833820ee2437a9ebf310d364825358fecb3abf",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/vat-vat-prove.k",
+      "hash": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/vat-vat-vacuity.k",
+      "hash": "e9aa1bdad52c93f2cb42334ab252ae721eee8997ea6f936264bdb4cdb36a4ec3",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls-osaka/wrong-slot.k",
+      "hash": "7ac32a6043076e8fb281b3f8f904eee5f31d7ef09e8bd51ed55955ede811a09b",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/cage-cage-discriminator.k",
+      "hash": "de86e33ae60746148dc2cb09b922dd563e0526d18b0a1e4ed38e20e3241195a0",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/cage-cage-prove.k",
+      "hash": "dfb1e6907c04e76d7833c2466a9b55e900a3c0be830a42ffa9ccc233adbfbde3",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/cage-cage-vacuity.k",
+      "hash": "86b2aa0960d1899c2b3c7f154e061fa5a7d4f6a6498586769276062ab765e23e",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/cagews-cagews-discriminator.k",
+      "hash": "bd0b8a8a0f8ceaf49aaa38ec6dac3a706ad79f3c0b9947be68f8acdd6bf84879",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/cagews-cagews-prove.k",
+      "hash": "6d04a51941ad9f589794684e9951ea7c32170575b4fad4ae3057fceea90a7c1c",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/cagews-cagews-vacuity.k",
+      "hash": "f89ad47c25252c3120d1db0f1d5e30eee24d46f4014071aaaf6c13e3dfdffb38",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/gem-gem-discriminator.k",
+      "hash": "6e6ed8d39eb4aad9bd1c5c83d373458b9bcc2c9f839672be80f735962c2e304c",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/gem-gem-prove.k",
+      "hash": "98b902b37d8a8b21839fac53ebe507e9846da5578f183add0757b6b3db2b8401",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/gem-gem-vacuity.k",
+      "hash": "28a6914d6cd55f2cf38987070b710edfd3c5859b269e1029df47b000ad98a506",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/ilk-ilk-discriminator.k",
+      "hash": "4a7d2538fa505869a4bcab2bd4998c48046b1bab0b300046c8f82a43ebf32305",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/ilk-ilk-prove.k",
+      "hash": "400c9bd93ab379aeb08c56ee779c40d9c8bb3ffa8d574dd5ebb66413568436d7",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/ilk-ilk-vacuity.k",
+      "hash": "8658c00f91b85bc39731f39a0e4e6cd9a20d7a89f94a6c09790141e7e1873eef",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/join-join-discriminator.k",
+      "hash": "7f43798b8d3f8ae90f86625e61d914248a78aae6e5f19ac2539c995b8d61aebf",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/join-join-prove.k",
+      "hash": "5daba21d52cd399329dd88eb588d03ef05d629362520a1b5d462300b54d54cdb",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/join-join-vacuity.k",
+      "hash": "0d44496bfa3ed32ff45d9a34e754c1f84dccd0788196e2404557169770ca4f50",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/joinempty-joinempty-discriminator.k",
+      "hash": "e9a4fe7d30a69229e9a7c279fd8c7fac5a31acf6e55757a76ad71f67b044fce8",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/joinempty-joinempty-prove.k",
+      "hash": "8e6c8049a835d7922a7f6d23ac6ace788833a1db49c61f6ea7f433d1430d6602",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/joinempty-joinempty-vacuity.k",
+      "hash": "1cd62c4cbf8631ba655e237845a36b131039272f749a71078355ffe316309f5a",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/joinsym-joinsym-discriminator.k",
+      "hash": "0693a66da1d1c950adba3c312d1f57c813d6590838ed77bbad08d5f695b447ec",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/joinsym-joinsym-prove.k",
+      "hash": "315d34bee5ea8e2160799b7de9a99cd75795aa096a90ef0f46b40744d896c926",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/joinsym-joinsym-vacuity.k",
+      "hash": "898a8fa59c779130abb5f7c09e0b7a54d880682abba74378371ce3ae1fbc1771",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/vat-vat-discriminator.k",
+      "hash": "0d1d6c88b169ae5dbf49270624013bf955ca0e06175fb064cdf2d6d50a867b67",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/vat-vat-prove.k",
+      "hash": "e5ae28025eabccceba17e94f9ab9bfefadbfbabcb44b1221173b870658b8f879",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/controls/vat-vat-vacuity.k",
+      "hash": "cc370b8b98d745614d10ce114b76fa077e9faebfb1840ea97833bec1f235e80e",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/approval_note.sh",
+      "hash": "ec43ebd027e5ae86056a2de0bc839423ce2141b45c8d785bc12aa339413f4e4d",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/bt_pair.py",
+      "hash": "6eba170b745c56530506aa81e04892555d3d380590b1eb42fe588684983fc87b",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/bt_prepare.py",
+      "hash": "ac841202937d20189d92978ed955e28e4f1a00dd99c9ac68e4694f7cf11c7092",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/bt_run.sh",
+      "hash": "455ba6d28f9ec82f71826f3fe1fd22667a6c311d53c741a7ce452486ffb22f89",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/bundle_tools.py",
+      "hash": "d321b0606aa6e652290feb7877594569c291990cd03126c0747aec3ebf692426",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/edit_annotations.py",
+      "hash": "b70212009ea4ad667868ec872c08eaf6608cf9b3dacff45f2b6723128c0fce0a",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/fix_expected.py",
+      "hash": "d5563c4f25a92330fd9829f30630288354788e655d6026ecdad3c191aa935d06",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/fix_replay.py",
+      "hash": "ca056fe822558d897f47e1dec1762341043d55460c6f790dcdb249bcf98cb101",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/fix_replay_comment.py",
+      "hash": "7791085bb3b4bbcd04b69942afa9afededd5801940a9d282bacea0f762e6cb1f",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/make_approval.py",
+      "hash": "affefe09cdb0ad81f22691f38d6d643441e140c17e237fe41ca984c958044a86",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/make_generators.py",
+      "hash": "10ebcfe6ec8b931d15e20d3906f93c59e60ea4b3cd1c7fbcf48fde20230a3797",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/make_iterations.py",
+      "hash": "655a15fe7b593891bb89c3b1a46acaf234e9ff949c85ab341c946016e74dfabc",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/make_phi_versions.py",
+      "hash": "78e6c885bfb2f7a3672b397865baad2b74eb0942f9ec7fabcbc72f298f6ea869",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/maptext.py",
+      "hash": "8fdde3494ac1eb754ecf5e07859d3c472bd188742903a6c9f71742a7c840bf06",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/patch_bt_versions.py",
+      "hash": "d51d129da1acd265574e9f525cfe78aaac3385d8337e124b94d678d4efcd6257",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/patch_phiv.py",
+      "hash": "d939589e8600e1b7d6e05135688a88b9e2c117b0b9a4782f03e22977a61549fb",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/rerun_current.sh",
+      "hash": "e14c3bf330b59083334bbe9027497a964fde5ec5af19e6563df79f28f9487cc7",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/rerun_hermetic.sh",
+      "hash": "913f462c9cd9f440d7dd45fd282c2644f418b36a3d5ffc01f02ef246babe6c00",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/edits/rpc_status.py",
+      "hash": "5fed76adf7d7f74abf123268ac4ab6ee7d4edca5ef27fb6adfb0f578234eb579",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/iface/cage.json",
+      "hash": "aa81332f88000e46689c8e19ee0a63ba7d44f7b63dd52bf74041c5e9cdb71ff1",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/iface/join.json",
+      "hash": "a755cf7d0f7416c5a4ad0397cc5d46f4118e71869822d62c5a6f4eaa1dd3bf69",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/iface/joinempty.json",
+      "hash": "9094a9c93efd72b8232525e68014d24e3dfbc6524fa9acc8917b94eee9ddad23",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/claim-02-config.json",
+      "hash": "7d5cca0bc42c5c191c1e919e66a9371bb6d177b0bc40baa2c36e3cc94029d46e",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/claim-02-instance.k",
+      "hash": "72436013da2d7e2a2713b3b2a718445db90a35b8ed81c755d1a0c1ab0d3dcccc",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/claim-02-vacuity.k",
+      "hash": "b612bdb926191e06810eac9fa6f9e5f54add620b1449acee4a9644cbabb9809e",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/claim-04-config.json",
+      "hash": "25729daa3c5a9addca667e0f5fe8ece5e98338333c7d736fff3caf2b2a46f55b",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/claim-04-instance.k",
+      "hash": "cbbbeed573e9c8c754b0621c2dd3e52beeef182b18b3aad7ece6d60fe8f2bf8e",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/claim-04-vacuity.k",
+      "hash": "bd2a8432e3d3236dfb82ef5664a258b14eb266e9b38f9b4e089a1d4a727ff163",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/claim-05-config.json",
+      "hash": "f1a9cd33c4aa0fe514ce5bebe6ff02b1576d17d8b39c63df2b8299c99b548bd0",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/claim-05-instance.k",
+      "hash": "272365e07c874930917312c2aa8075fd14552911adc11367229a65bd38b7955c",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/claim-05-vacuity.k",
+      "hash": "9b557cf55d8f0e7e7808dc5a7b3b714246eeacbf7ab72fc70aa9d50a6c352081",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/expected.json",
+      "hash": "4e6bf5903434694a7b2d46e9b3e7a253948763cae62ea5437bfde14678d72974",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/replay.out",
+      "hash": "d7ad4c9335eb624194b84292ff6dd7649b71ae941f7fa6f1904d1fbaaa4a73ba",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/pre_witness/replay.sh",
+      "hash": "1210303df2094dd7372edd2f89f9fec10eb04076647e57947cd7ec73416c9dde",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/empty-controls.tsv",
+      "hash": "4714b36caa6b59d034768a30d3a62af41f7d9ce5c7cd5fce29bd8e523b210858",
+      "class": "U",
+      "media": "text/tab-separated-values",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/getters.tsv",
+      "hash": "9dc2332f2da641d078b03e1b88960fb8beadef06c89f697d147a6b3e94da6a79",
+      "class": "U",
+      "media": "text/tab-separated-values",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGE-CAGE-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGE-CAGE-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGE-CAGE-VACUITY.log",
+      "hash": "26ed92de0078151c948aae5c26d96b441c4e88b30a6685a6c1c493b2c5337186",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGE-CAGE-VACUITY.log.err",
+      "hash": "7c9699036526258c536d65dbe40be47c3b274fe6b4a78d8af0dcbca09c5a02cc",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-DISCRIMINATOR.log",
+      "hash": "6c97c3ba817e0e1e31348054513fd920d3c2dec0469b99db5969fa7ead32f1c5",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-DISCRIMINATOR.log.err",
+      "hash": "62a17fad1fc30be587acbf6f0c015c60491f5787202477e9c16b6e083feb71a8",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-VACUITY.log",
+      "hash": "d7ccf38285e6b955bd52c1dff4e841a3d0d2cd97644ccdb7ce6aba99da5ff17a",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/CAGEWS-CAGEWS-VACUITY.log.err",
+      "hash": "8681fe0a0ab93f40ef9e7e295565ac0154260be1be7df7fbbcd88dfb20eddc39",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-DISCRIMINATOR.log",
+      "hash": "61815fe5eda1540a38b3af496892ae6e7ef974927e6baec6a49b313a69eb0c61",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-DISCRIMINATOR.log.err",
+      "hash": "5c7872fdbc73e4cf878aa78840879d7bcfd7e9003fcf550568b28e5dfe094ea1",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-VACUITY.log",
+      "hash": "556247c3ea14b79562123c2f8b7acaaff1500bab4a53c0e29fcbcf27eb4c9cd7",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/GEM-GEM-VACUITY.log.err",
+      "hash": "0b9cd55b6bc5533b6da9369745a6682c23529b986f45d0fa7a7d9e2e1f300806",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-DISCRIMINATOR.log",
+      "hash": "c5c742885c5a9a404789312f7b7c1880030ba545fa0fec9333136ea7ec2c5db5",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-DISCRIMINATOR.log.err",
+      "hash": "041a13a94ca0466bd6040d883bffee2d5932b4daa27ba6c8d9ca55050553cca0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-VACUITY.log",
+      "hash": "222c6172b5996a731d86ae896ee5865fc13b10b552df419485bb1d73d0b25a0a",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/ILK-ILK-VACUITY.log.err",
+      "hash": "1866b6f05756996195bb18a44dcce4c677bc45b3b9e8a538266041c20b83a831",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINEMPTY-JOINEMPTY-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINEMPTY-JOINEMPTY-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINEMPTY-JOINEMPTY-VACUITY.log",
+      "hash": "f3b5baeccfb0241edd4ba295796f41026d6a4ce450dd2f6da71126f262818c32",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINEMPTY-JOINEMPTY-VACUITY.log.err",
+      "hash": "e1714cb4684cb4e920bbb870af876b9ab7b7c6d9a81dc186d219d173dae1dcee",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-DISCRIMINATOR.log",
+      "hash": "7087457860f19a61cc8c3043a1c28998c240e26f0d2f5638bc0e94e11e3ac045",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-DISCRIMINATOR.log.err",
+      "hash": "2df4b25d82f6bb1ff6c9a0514eaf4af20bd733dffdf5046409fce874916506f9",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-VACUITY.log",
+      "hash": "fa48eca965c11da77cd1e3d00335770e772a1a454fa69a4e096504bf4d7f3543",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/JOINSYM-JOINSYM-VACUITY.log.err",
+      "hash": "14aac2abe1a82265ac5f4a80777bf2ce6fa722af98baa0698b1c081e8568da39",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-DISCRIMINATOR.log",
+      "hash": "263992333e6b12c8b2ec3fadcc7eb4b3ea4bc4d05ef49fe0f688fa59ce603295",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-DISCRIMINATOR.log.err",
+      "hash": "7fa2057b5db30b8d717301f77f2a0c635017339c3da7f27a8bcacd53ae3ec829",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-VACUITY.log",
+      "hash": "35bb7e229b903c65ae9ad5ebea43a16b76d4f8e2c66a2938912c59ad567f71f0",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/VAT-VAT-VACUITY.log.err",
+      "hash": "7bf0733bf885b24afc1b1a0290387d90d3bccf76c14eb3a3baee64f27ac56fdd",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-GEM-SPEC.log",
+      "hash": "ca2486524614336006f755484aa8a06d1538c985cf13c18107fc22bca9b2b1fb",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-GEM-SPEC.log.err",
+      "hash": "ff22ceb8e8fb2a3669c853a25b55796c1a5d7911bca8924db3fe4293ba55173e",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-ILK-SPEC.log",
+      "hash": "d9b4fb2bb57cb4f7a283c27ca387eb1d382894cb9a8880eab809415aea987309",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-ILK-SPEC.log.err",
+      "hash": "c2f21f113d3c1eed39e8931c12b2ca3fcb40154f7e879c15f757de42f8692dd0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-VAT-SPEC.log",
+      "hash": "190f94a846376943fb0dbfb36a3bd97be7f1bf924b009bd051d37cddae416a2c",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/logs/WRONG-SLOT-VAT-SPEC.log.err",
+      "hash": "4d641c54515c56b759c7246839225e4356616b07a79940ee16eaed3780f5f689",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-osaka/revert.tsv",
+      "hash": "ee601d1b3e87f5f6211246280896b31912c0ad000cb22f6748e31837193a615f",
+      "class": "U",
+      "media": "text/tab-separated-values",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/attempts.tsv",
+      "hash": "b7fcb239ebea6622b0268ebcd1aa24be51a5b96f76513fcf3885d0afc1933ac4",
+      "class": "U",
+      "media": "text/tab-separated-values",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/getters.tsv",
+      "hash": "b997792a0cdd220a0d36df98d6d14c9579cbf81fb53c0ad3c31c2b5779d865cf",
+      "class": "U",
+      "media": "text/tab-separated-values",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-DISCRIMINATOR.log",
+      "hash": "bfeb0e0810853afa0585d16849634343e5139f7dc0c79865090de9634ae2b3a7",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-DISCRIMINATOR.log.err",
+      "hash": "c7f318235b30ea9c8284b1fc40811444eb0632bbcbdc04f2ffc107c3f74fd46b",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-VACUITY.log",
+      "hash": "63f4a721d084e53b4cb914def75937322d55d8cf34ddac4640d0eac5cfef07f4",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/CAGEWS-CAGEWS-VACUITY.log.err",
+      "hash": "8e7e01aabac040de5de648faf4535a68167066016c70599d073a8cf9100346ac",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-DISCRIMINATOR.log",
+      "hash": "b17ffbfb6ea6a8fef405f6d357d7134f27680256c63c1cbc8d8a0c4c207825d5",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-DISCRIMINATOR.log.err",
+      "hash": "682f2817f5f063a4e8dc7909917425098f5cdb84b7d2440e3f0b6b351c9ad38d",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-VACUITY.log",
+      "hash": "afcff8b80482fd15250a53a16b384fce27e43d129d265e9164996727b4b7c007",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/GEM-GEM-VACUITY.log.err",
+      "hash": "7a5068cc398ba2baf2ba5cd9b7bd4df4d6b1259c86e1a589a789ba0130319e1f",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-DISCRIMINATOR.log",
+      "hash": "2f7e3889ee0dbd3a3bd4298313de0af1dfc0ee6af90a6137fb4f1760d11dddba",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-DISCRIMINATOR.log.err",
+      "hash": "0dae1d665ce8c06d12144a91b2288ce8bce2aef4d02610b765ae0230a87510aa",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-VACUITY.log",
+      "hash": "b2e29b191b7693909ca793dda5f0ccc468350103566631130161b9e4e816d64c",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/ILK-ILK-VACUITY.log.err",
+      "hash": "7756b064883f98766839cafff3896fa1918a7938d700ef969448229b8921b1e1",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-DISCRIMINATOR.log",
+      "hash": "a8daa5cc19db49fab88f8a75077809bba270cb69a080c6c28a8c44b3c8f4238c",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-DISCRIMINATOR.log.err",
+      "hash": "5d1471757715472ab5e3ca239b304c484fe00289ea6b22f2a761c7bd08261aba",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-VACUITY.log",
+      "hash": "40ac87471960e047343237d741e83d6ffb6f077e1a93dfe076914fed6ed46f17",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/JOINSYM-JOINSYM-VACUITY.log.err",
+      "hash": "b60b3cf9a41aeb14c81dd5ef1663ed140336fea6564efd50d3a04e3e861539f7",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-DISCRIMINATOR.log",
+      "hash": "deca504ab7603eed1127b19bcf7f13a3c08e1b6be074045610336696576c6354",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-DISCRIMINATOR.log.err",
+      "hash": "381e1ea77898cba547e8e88737865dd70ff6646bbdf311280360026c41c7980c",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-VACUITY.log",
+      "hash": "a303686c65cac4ffc33e058b58f6a2d113e5ea5d30a015d04766248c0aee7e02",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/matrix-shanghai/logs/VAT-VAT-VACUITY.log.err",
+      "hash": "df72c80a4f971866d5a1be67bafbc69e106a6b15e50af1b78a0c5748f527e52b",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/osaka/logs/ILK-ILK-PROVE.log",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/osaka/logs/ILK-ILK-PROVE.log.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/osaka/logs/VAT-VAT-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/osaka/logs/VAT-VAT-PROVE.log.err",
+      "hash": "d78d4c01236ca2ea441076adbaf4163b4b63e121bae2994fc650f05e29635ed0",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/osaka/results.tsv",
+      "hash": "1c33d14314946a424395c13a541f9f307ed35bafcc16d735ddefeb2b9e2c210c",
+      "class": "U",
+      "media": "text/tab-separated-values",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/round1/logs/CAGE-CAGE-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/round1/logs/JOIN-JOIN-PROVE.log",
+      "hash": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/round1/results.tsv",
+      "hash": "ab8ac2db9087f77cb4ffc0f0a3bddcb086dbb9615860342ef936ed535d5705e0",
+      "class": "U",
+      "media": "text/tab-separated-values",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/shanghai/logs/CAGE-CAGE-VACUITY.log",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/shanghai/logs/CAGE-CAGE-VACUITY.log.err",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/results/shanghai/results.tsv",
+      "hash": "e45c442bb9da401a8723b4f027650fcfb691d6705426049c9c47e3dacf3613ae",
+      "class": "U",
+      "media": "text/tab-separated-values",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/run-controls.sh",
+      "hash": "bcf6f76258818bc7d1b66701d7c83228a7508a832ce3a4d2d48bc86093278b64",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/src/cage/cage.k",
+      "hash": "c1e4e5558af6b23f508cf238035411453ac14b2159ba17b84e9bdedf2db66fb6",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/src/cage/cage_g.k",
+      "hash": "50af509db4df50d6a35b00b3bc39210e31ba36520e96dc5f6e5ee916d9f2a65c",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/src/join/join.k",
+      "hash": "ba40fee300003e26182c700b36aceb2c3673f2e827a729ef93b1c2f240ed6658",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/src/join/join_g.k",
+      "hash": "d8a780c64b4b25c51751db8d12f490e81076bbb4f7c9cecd13b403991d75bbc4",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/src/joinempty/joinempty.k",
+      "hash": "3c0f45c8e4a2dd7939296818245bc06c059662ecf6a7b9ded0676ef8e83c0ee7",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rebuild/src/joinempty/joinempty_g.k",
+      "hash": "1ae6d224aeba1d8212e2b52c75d630d708c1dfae130877208c7f1a1394800571",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rehash.out",
+      "hash": "59daa0633a10d74e9f3d57a72dad7164d9fcecc9ac74d4c07c4a825cdb1cd63e",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rpc_probe.json",
+      "hash": "7069831b6f96960db25a5935d65b713f83d2b49c5628753510740ff53bd8e01a",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/rpc_status.json",
+      "hash": "025e96b2124e2a4166f5a3728bfd8c7ad0a270b79df248b55826dded810c5c6c",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/backtranslation_prompt.md",
+      "hash": "9098fbfa7bc5529f52cbb1e8c97ba6d9219c46763b237b6e144008c6a6e4bce2",
+      "class": "U",
+      "media": "text/markdown",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-20261029T144536Z.env.txt",
+      "hash": "2678c99a2c727eec487441ac63323d49a0c43c59a8050b37d5cb47ca4f9c56f2",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-20261029T144536Z.listing-after.txt",
+      "hash": "3dcb827a1a8e4715e7ce929a35d52a8fbffe2deaceb92a81d3074d8f5d55d6eb",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-20261029T144536Z.listing-before.txt",
+      "hash": "9701cc246ae2e2c00443880a335bdbded05ccff2f880279f50411b4088f0ea54",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-20261029T144536Z.result.json",
+      "hash": "406e87036b0db9109027f477a86b6d293a3d5089f87028c4a3ca2dc5264e6460",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-20261029T144536Z.stderr",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-20261029T144536Z.stdin.txt",
+      "hash": "541a95ad96cbd4a2abaebc415205de1894a4cd2f62e393a2b93af8237a1435fd",
+      "class": "U",
+      "media": "text/plain",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-input.strip_record.json",
+      "hash": "3bbb63cfc4d1096b56de00821caaad0346d262afa78b254147930ba040b52b8c",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-input/claim-01.k",
+      "hash": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-input/claim-02.k",
+      "hash": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-input/claim-03.k",
+      "hash": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-input/claim-04.k",
+      "hash": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-input/claim-05.k",
+      "hash": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+      "class": "U",
+      "media": "text/x-k",
+      "role": "P"
+    },
+    {
+      "path": "provenance/sessions/bt-input/phi.json",
+      "hash": "73216aae6e524b6dc7949dc16db5af3bb813a52313e11d97e2df0b0345f7ae61",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/MAP.json",
+      "hash": "6cb286d4baf470ad5b212a383aa7a9efd1cf5415d4cc50f3285d3985aa47ae03",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/assemble_hard.py",
+      "hash": "5949a2ba45a16b087b2379229f422e9d791dbdf1b5d18e585e509787e432a575",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/coverage.py",
+      "hash": "47f52f76f9c4e5a9abf0a887e005d87bb456b125cff8225ec64946099d1cacd6",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/mutant_witness.py",
+      "hash": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/run-claim.sh",
+      "hash": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/run-controls.sh",
+      "hash": "bcf6f76258818bc7d1b66701d7c83228a7508a832ce3a4d2d48bc86093278b64",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/tcg/__init__.py",
+      "hash": "d747c6cce16cf6a40b69deec61ec125e3e298f7a33816540052c18531684c7c4",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/tcg/claims.py",
+      "hash": "780658865576ae62e2046ed0d75f86306f2709e239ca5a51877a4423ed24b276",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/tcg/keccak.py",
+      "hash": "93e3d696482439e6be1fe6be2cfcd7c0e200fc9998cdb268fd7140d5511aa354",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/tcg/verdict.py",
+      "hash": "915d7838ad38c5c95e75f2f1e00edbdd938a018d72efd81402f32db97f20191f",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/__init__-d747c6cce16c.py",
+      "hash": "d747c6cce16cf6a40b69deec61ec125e3e298f7a33816540052c18531684c7c4",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/assemble_hard-0af2e8b8118d.py",
+      "hash": "0af2e8b8118ddbf55cf79fc35df250cd03ce63b31f2c6c8087c0e18386e32ecb",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+      "hash": "f41c4cc37d5873edd471cc61f500421872163aa6530a2b07f2ebd653f4b206ab",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/claims-780658865576.py",
+      "hash": "780658865576ae62e2046ed0d75f86306f2709e239ca5a51877a4423ed24b276",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/coverage-47f52f76f9c4.py",
+      "hash": "47f52f76f9c4e5a9abf0a887e005d87bb456b125cff8225ec64946099d1cacd6",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/keccak-93e3d6964824.py",
+      "hash": "93e3d696482439e6be1fe6be2cfcd7c0e200fc9998cdb268fd7140d5511aa354",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/mutant_witness-57c51c7992de.py",
+      "hash": "57c51c7992dec881554e35e8be2111b38e4ee4bcfb8e4788d509a2efe0df60c5",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/run-claim-c5b93db53473.sh",
+      "hash": "c5b93db534732e01c85f3558a143b3b7b0be0dce36a3804d34cdf9bc75e62651",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/run-controls-bcf6f7625881.sh",
+      "hash": "bcf6f76258818bc7d1b66701d7c83228a7508a832ce3a4d2d48bc86093278b64",
+      "class": "U",
+      "media": "text/x-shellscript",
+      "role": "P"
+    },
+    {
+      "path": "provenance/tools/versions/verdict-915d7838ad38.py",
+      "hash": "915d7838ad38c5c95e75f2f1e00edbdd938a018d72efd81402f32db97f20191f",
+      "class": "U",
+      "media": "application/octet-stream",
+      "role": "P"
+    },
+    {
+      "path": "provenance/traces.json",
+      "hash": "f820dbc246a0e2bfef5342188c95dc1e721d06b9957e746c09d8bee1597e284e",
+      "class": "U",
+      "media": "application/json",
+      "role": "P"
+    },
+    {
+      "path": "trusted_base.json",
+      "hash": "9ef970e1e948bbd554e710e8b2d7170f4fddd11cff1fb3667e135825b28a3a5a",
+      "class": "T",
+      "media": "application/json",
+      "role": "T_hat"
+    }
+  ],
+  "not_claimed": [
+    "It does not claim the artifact is secure, only that it satisfies φ.",
+    "It does not claim φ is complete.",
+    "It does not claim the generator is good, or that its reasoning was sound, or that its traces are faithful.",
+    "It does not claim economic or game-theoretic properties of the system the artifact participates in.",
+    "It does not claim anything about an artifact whose identity differs from id(b) by one byte."
+  ],
+  "self_contained": false,
+  "self_contained_reason": "5 claim(s) without a proof object in the bundle, re-discharged by an external pinned checker: claim-01, claim-02, claim-03, claim-04, claim-05",
+  "root_hash": "ef3cab535e7a5858c178ee9bbea70e153e21e5d4af4e09b8254755ffb3d14126",
+  "producer_sig": {
+    "alg": "ed25519",
+    "pubkey": "80ff2d553b8481b647099e2a0224ecb25a6c9996cd5394b001ab4cf5755091fa",
+    "sig": "8907780446886dd8e55efd09279af3e70bd154da16e8135c97d506611a2cfe32d310044c2f7bacafa059177099532cc9adc7fed565c1d8140b8c0da968750404"
+  }
+}
