@@ -1,0 +1,178 @@
+{
+  "format": "tcg-bundle/0.1",
+  "domain": "evm-bytecode",
+  "self_contained": false,
+  "self_contained_reason": "KEVM claims re-discharged by a pinned external prover; no proof object",
+  "children": [
+    {
+      "path": "hard/artifact.bin",
+      "hash": "83c558e86cafe26c3d0267c270c4d2397ad16bdc4299bb074862ce8b4e050577",
+      "class": "T",
+      "media": "application/octet-stream",
+      "role": "b"
+    },
+    {
+      "path": "hard/spec/phi.json",
+      "hash": "23fe8d8d2816ab672bf0e3ebe4dda3df7d10516ecedc73e23e5b430d08bf510f",
+      "class": "T",
+      "media": "application/json",
+      "role": "phi"
+    },
+    {
+      "path": "hard/spec/requirements.md",
+      "hash": "281b85f364a4f293843d311349ce624d28b6267d8a36ad41b251958170b18ac9",
+      "class": "T",
+      "media": "text/markdown",
+      "role": "phi"
+    },
+    {
+      "path": "hard/spec/claim-01.k",
+      "hash": "8e903c3952908e222d3d40526c7434a047409ae708bbca8eb3357f3423d6a7da",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-01"
+    },
+    {
+      "path": "hard/spec/claim-02.k",
+      "hash": "60230e128f0bd6fd89b5eefffce93ca7432b01b6b64e186689907c75140a03e4",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-02"
+    },
+    {
+      "path": "hard/spec/claim-03.k",
+      "hash": "e41eb520c2a70b09c1c76514ffe795d4db887e1327681c030fb558842943d421",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-03"
+    },
+    {
+      "path": "hard/spec/claim-04.k",
+      "hash": "2542124d9ce3bd35b5f36bc822c72ac031f384c219995247b612788ab04c8982",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-04"
+    },
+    {
+      "path": "hard/spec/claim-05.k",
+      "hash": "e115334864c8f6d6e793f6ff0ef996faeeaf059fc592b08a4e71d49edf5cac82",
+      "class": "T",
+      "media": "text/x-k",
+      "role": "phi",
+      "claim": "claim-05"
+    },
+    {
+      "path": "hard/annotations.json",
+      "hash": "5a5d35c29c1193be367559da525fc75e410008d71fe86747ec05032800b261c5",
+      "class": "T",
+      "media": "application/json",
+      "role": "a"
+    },
+    {
+      "path": "hard/certs/claim-01.rediscuss.json",
+      "hash": "62218a02cb45d2c2b4d2d8e7320feea8c23be19e6403bb945ecb535236e02cb3",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-01"
+    },
+    {
+      "path": "hard/certs/claim-02.rediscuss.json",
+      "hash": "1edf06aa3fac9a23f2e325c19d4a9576f97305845d0e4622f621d19c8ef7f383",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-02"
+    },
+    {
+      "path": "hard/certs/claim-03.rediscuss.json",
+      "hash": "d16c9e231287d4e568365fb7a46c31add700b14f853233b42bdf52db1fbfc66d",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-03"
+    },
+    {
+      "path": "hard/certs/claim-04.rediscuss.json",
+      "hash": "25010aeedcb0ee6a1e4d9928b658af0b5047d06c2c3c52413943c33680b26039",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-04"
+    },
+    {
+      "path": "hard/certs/claim-05.rediscuss.json",
+      "hash": "e9c92dd77eaaee9b9fef899cb56161731a66ab250dba5edeca7341a95818b5c9",
+      "class": "T",
+      "media": "application/vnd.tcg.rediscuss+json",
+      "role": "c",
+      "claim": "claim-05"
+    },
+    {
+      "path": "trusted_base.json",
+      "hash": "8b0962be45d82d6d4e6c527dd2d13e075bc9026db79397ae9a0147e505d26aed",
+      "class": "T",
+      "media": "application/json",
+      "role": "T_hat"
+    },
+    {
+      "path": "checker/kevm-prove.image.json",
+      "hash": "bd741f7b9ed7fa5ccf572507ae5c3064a3c74fe0df5a25134f68d2085c2f4c5c",
+      "class": "T",
+      "media": "application/json",
+      "role": "checker"
+    },
+    {
+      "path": "evidence/coverage.json",
+      "hash": "b035ef66e238e0829f0ec98ece037d12cc535e6a1ff2dcac7c9aca6f4039cab6",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/approval.json",
+      "hash": "d6b5215b5cd9b2c384860b18997768d0a0f5dcefb4df9ad4de362bd4188a0fc4",
+      "class": "T*",
+      "media": "application/json",
+      "role": "V"
+    },
+    {
+      "path": "evidence/approval.sig",
+      "hash": "b13eb613886f2fc98dc87e2057e424a600f9bfc929891335f1971eb05fc55b4b",
+      "class": "T*",
+      "media": "application/octet-stream",
+      "role": "V"
+    },
+    {
+      "path": "provenance/ledger.jsonl",
+      "hash": "e78e76cbeaeaa9aedee7a866b84b4dda3532b81c284909cb8a0e73400a16b5fd",
+      "class": "U",
+      "media": "application/x-ndjson",
+      "role": "P"
+    },
+    {
+      "path": "provenance/DECISIONS.md",
+      "hash": "2333a97435c12569cf4b1d6059ef7d6f63c88b7e37c59e41aa27f6e619406017",
+      "class": "U",
+      "media": "text/markdown",
+      "role": "P"
+    }
+  ],
+  "not_claimed": [
+    "It does not claim the artifact is secure, only that it satisfies φ.",
+    "It does not claim φ is complete.",
+    "It does not claim the generator is good, or that its reasoning was sound, or that its traces are faithful.",
+    "It does not claim economic or game-theoretic properties of the system the artifact participates in.",
+    "It does not claim anything about an artifact whose identity differs from id(b) by one byte."
+  ],
+  "root_hash": "3b1ed5e2703a459b6ff8b6c67cb5c2c07014ee708d7b0f939941b21e46c9c8c4",
+  "producer_sig": {
+    "alg": "ed25519",
+    "pubkey": "bcbd49c795384179fa0fed1e273ddb3482bae8e055b2933c74b4f27f67bb07a9",
+    "sig": "a62767c064aa200953d863dab8d31b27a3796aba5e5f8da12087a514522fa88abbd9664aafcd85331d2c602cea30cf13413bf7622d8fbb13100d03563589d603"
+  }
+}
