@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""Fake `docker` for the verifier tests: a stub KEVM checker the tests control.
+
+  image inspect <ref>  -> [{"Id": $TCG_FAKE_DOCKER_ID, ...}] for any ref in
+                          {$TCG_FAKE_DOCKER_ID, "tcg/kevm-checker:toy"}, else exit 1
+  pull <ref>           -> always fails (no registry in tests)
+  run ... <id> kprove /claim/<file> ...
+                       -> reads the claim file from the -v <dir>:/claim:ro mount:
+                          "TOY-PROVABLE" -> prints "#Top", exit 0
+                          "TOY-STUCK"    -> prints a stuck configuration, exit 1
+                          otherwise      -> prints a residual implication, exit 1
+Every invocation is appended (one JSON argv per line) to $TCG_FAKE_DOCKER_LOG.
+"""
+import json
+import os
+import sys
+
+argv = sys.argv[1:]
+log = os.environ.get("TCG_FAKE_DOCKER_LOG")
+if log:
+    with open(log, "a") as f:
+        f.write(json.dumps(argv) + "\n")
+image_id = os.environ.get("TCG_FAKE_DOCKER_ID", "")
+if argv[:2] == ["image", "inspect"]:
+    if argv[2] in (image_id, "tcg/kevm-checker:toy"):
+        print(json.dumps([{"Id": image_id, "RepoDigests": []}]))
+        sys.exit(0)
+    print(f"Error: No such image: {argv[2]}", file=sys.stderr)
+    sys.exit(1)
+if argv[:1] == ["pull"]:
+    print("Error: pull access denied (fake docker)", file=sys.stderr)
+    sys.exit(1)
+if argv[:1] == ["run"]:
+    claim_dir = next(a.split(":")[0] for a in argv if a.endswith(":/claim:ro"))
+    claim = next(a for a in argv if a.startswith("/claim/"))
+    if argv[argv.index(claim) - 1] != "kprove" or argv[argv.index(claim) - 2] != image_id:
+        print("fake docker: unexpected run argv", file=sys.stderr)
+        sys.exit(125)
+    text = open(os.path.join(claim_dir, claim[len("/claim/"):]), errors="replace").read()
+    if "TOY-PROVABLE" in text:
+        print("#Top")
+        sys.exit(0)
+    if "TOY-STUCK" in text:
+        print("<k> #halt </k> ... Final configuration cannot be rewritten further")
+        sys.exit(1)
+    print("Claim unifies with the destination but the implication check has failed")
+    sys.exit(1)
+sys.exit(64)

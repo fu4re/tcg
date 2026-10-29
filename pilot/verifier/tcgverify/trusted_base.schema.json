@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sheaf.local/tcg/pilot/trusted_base.schema.json",
+  "title": "trusted_base.json (T_hat), the fields the verifier reads",
+  "description": "Task 03. Extra fields are allowed (WS-H owns the file); the ones below are required in this shape. 'hash' may be one string or a list of acceptable hashes (e.g. one Lean binary per platform). T_hat can only narrow the Lean axiom set (lean_axioms), never widen it.",
+  "type": "object",
+  "required": ["identity", "environment", "checker", "assumptions"],
+  "properties": {
+    "identity": {
+      "type": "object",
+      "required": ["function", "value", "address", "block", "constructor_and_immutables"],
+      "properties": {
+        "function": {"const": "keccak256(runtime_bytecode)"},
+        "value": {"type": "string", "pattern": "^0x[0-9a-fA-F]{64}$"},
+        "address": {"$ref": "#/$defs/address"},
+        "block": {"type": "integer", "minimum": 0},
+        "constructor_and_immutables": {"type": "string", "minLength": 1}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "required": ["chain_id", "fork", "fee_schedule", "external_code", "caller_assumptions", "precompiles", "resource_limits"],
+      "properties": {
+        "chain_id": {"type": "integer", "minimum": 1},
+        "fork": {"type": "string", "minLength": 1},
+        "external_code": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "address", "code_hash"],
+            "properties": {
+              "name": {"type": "string"},
+              "address": {"$ref": "#/$defs/address"},
+              "code_hash": {"type": "string", "pattern": "^0x[0-9a-fA-F]{64}$"}
+            }
+          }
+        }
+      }
+    },
+    "checker": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "hash"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "hash": {"anyOf": [{"type": "string", "minLength": 1}, {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}]},
+          "image": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "semantics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "hash"],
+        "properties": {"name": {"type": "string"}, "hash": {"type": "string"}, "path": {"type": "string"}}
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "status"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "name": {"type": "string"},
+          "status": {"type": "string"},
+          "covers": {"type": "array", "items": {"type": "string"}},
+          "risk_if_false": {"type": "string"}
+        }
+      }
+    },
+    "claims_without_certificate": {
+      "type": "array",
+      "items": {"type": "object", "required": ["claim", "reason"], "properties": {"claim": {"type": "string"}, "reason": {"type": "string", "minLength": 1}}}
+    },
+    "lean_axioms": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {"address": {"type": "string", "pattern": "^0x[0-9a-fA-F]{40}$"}}
+}

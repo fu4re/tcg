@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sheaf.local/tcg/pilot/rediscuss.schema.json",
+  "title": "hard/certs/claim-0N.rediscuss.json, KEVM re-discharge invocation (variant A)",
+  "description": "Not a proof object. The verifier builds the whole docker/kprove command line itself (pilot/checker/run-claim.sh shape: --network none, claim dir read-only at /claim, fixed --definition and -I paths) and takes only claim_file, spec_module and kprove_args from here; kprove_args containing --definition, --directory, -d, --output-file or -o are refused. The image is the one T_hat names (checker 'kevm-prove'), matched by digest. 'expected' is informational: the verifier's own judge (ported from tcg/verdict.py) decides. Optional record fields (argv, image_id, k_commit, evm_semantics_commit, claim_file_sha256, ledger_seq) describe the producer's run. argv is never executed. If image_id is present it must be one of the T_hat kevm-prove hashes, and claim_file_sha256 must equal the claim file's hash; otherwise the invocation is malformed. No verdict field: the bundle carries no verdict (v3 section 4). The producer's exit code lives in the ledger event referenced by ledger_seq.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claim",
+    "checker",
+    "claim_file",
+    "spec_module",
+    "kprove_args",
+    "kevm_version",
+    "k_version",
+    "expected"
+  ],
+  "properties": {
+    "claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checker": {
+      "const": "kevm-prove"
+    },
+    "claim_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "spec_module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kprove_args": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "kevm_version": {
+      "type": "string"
+    },
+    "k_version": {
+      "type": "string"
+    },
+    "semantics_hash": {
+      "type": "string"
+    },
+    "timeout_s": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "expected": {
+      "const": "accept"
+    },
+    "note": {
+      "type": "string"
+    },
+    "argv": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "exact command of the producer's recorded run; informational, never executed"
+    },
+    "image_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "k_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "evm_semantics_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "claim_file_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "ledger_seq": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "seq of the provenance/ledger.jsonl event that recorded the producer's run"
+    }
+  }
+}
