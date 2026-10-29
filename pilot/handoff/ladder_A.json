@@ -1,0 +1,2403 @@
+{
+  "bundle_root": "ef3cab535e7a5858c178ee9bbea70e153e21e5d4af4e09b8254755ffb3d14126",
+  "bundle_root_declared": "ef3cab535e7a5858c178ee9bbea70e153e21e5d4af4e09b8254755ffb3d14126",
+  "verifier_hash": "f7bde819d11db29babaf52cdf9fe4c3560651ff38ebfc9839ca679ed3321f364",
+  "variant": "A",
+  "self_contained": false,
+  "self_contained_declared": false,
+  "executed_bundle_supplied_commands": true,
+  "docker_limits": [
+    "--memory=6g",
+    "--cpus=2"
+  ],
+  "l4_skip_provers": false,
+  "wall_s": {
+    "L0": 0.53,
+    "L1": 828.866,
+    "L2": 4891.471,
+    "L3": 0.005,
+    "L4": 4.45
+  },
+  "L0": {
+    "status": "pass",
+    "checks": {
+      "manifest_schema": {
+        "ok": true,
+        "problems": []
+      },
+      "forbidden_keys": {
+        "ok": true,
+        "problems": []
+      },
+      "structure": {
+        "ok": true,
+        "problems": []
+      },
+      "root_hash": {
+        "ok": true,
+        "declared": "ef3cab535e7a5858c178ee9bbea70e153e21e5d4af4e09b8254755ffb3d14126",
+        "recomputed": "ef3cab535e7a5858c178ee9bbea70e153e21e5d4af4e09b8254755ffb3d14126"
+      },
+      "children": {
+        "ok": true,
+        "problems": [],
+        "unlisted_files_ignored": []
+      },
+      "producer_sig": {
+        "ok": true,
+        "signature_valid_under_supplied_key": true,
+        "manifest_pubkey_is_supplied_key": true
+      },
+      "trusted_base": {
+        "ok": true,
+        "problems": []
+      },
+      "identity": {
+        "declared": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "artifact_keccak": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "address": "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
+        "block": 26298481,
+        "chain_keccak": "0x8661c673677de206fda20eb1883063ea4a827c2ac1c7f232dd30e276d20874fa",
+        "chain_code_size": 3462,
+        "ok": true
+      },
+      "environment": {
+        "declared_not_checked": {
+          "fee_schedule": "not modelled: every claim runs with <useGas> false (Aasm-gas-abstraction); the KEVM OSAKA gas constants are present in the semantics but unused",
+          "caller_assumptions": "msg.sender arbitrary (any 160-bit address; claim-04 additionally: not a ward); GemJoin's code runs as the top-level frame under its own account; no DELEGATECALL into GemJoin; non-static; callvalue 0 (Aasm-toplevel-call)",
+          "precompiles": "KEVM OSAKA's precompile set (#precompiledAccountsUB(PRAGUE): no P256VERIFY at 0x100, MODEXP without EIP-7823/7883) differs from mainnet osaka; no proved path calls a precompile and GemJoin's CALL targets come from storage",
+          "resource_limits": "gas not modelled (<useGas> false): every claim holds for executions that do not run out of gas (Aasm-03). No claim guarantees termination within any gas limit; an out-of-gas halt is outside every claim. Within the gas-free semantics each all-path claim states that every path from Pre reaches #halt."
+        },
+        "block_hash": "0x21bc8ec3e7a3d67c7f387dcb076dd22f91545d9299c265e183cbc7dc13c684e0",
+        "chain_id": {
+          "declared": 1,
+          "chain": 1,
+          "ok": true
+        },
+        "fork": {
+          "declared": "osaka",
+          "derived_from_block": "osaka",
+          "snapshot_says": null,
+          "blob_param_fork": "bpo2",
+          "ok": true
+        },
+        "external_code": [
+          {
+            "name": "WETH9",
+            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "declared": "0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23",
+            "chain": "0xd0a06b12ac47863b5c7be4185c2deaad1c61557033f56c7d4ea74429cbb25e23",
+            "ok": true
+          },
+          {
+            "name": "MCD_Vat",
+            "address": "0x35D1b3F3D7966A1DFe207aa4514C12a259A0492B",
+            "declared": "0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59",
+            "chain": "0x808b98f6475736d56c978e4fb476175ecd9d7abdab0797017fc10c7f46311a59",
+            "ok": true
+          }
+        ],
+        "ok": true
+      }
+    }
+  },
+  "L1": {
+    "status": "pass",
+    "claims": [
+      {
+        "claim": "claim-01",
+        "checker": "kevm-prove",
+        "self_contained": false,
+        "invocation": "hard/certs/claim-01.rediscuss.json",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "result": "accept",
+        "exit": 0,
+        "timed_out": false,
+        "wall_s": 146.609,
+        "stdout_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "stderr_tail": "[Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name\nwith underscore if this is intentional.\n\tSource(/opt/kevm/evm-semantics-source/lemmas/bytes-simplification.k)\n\tLocation(301,25,301,27)\n\t301 |\t      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B1 [ I ]\n\t    .\t                        ^~\n",
+        "argv": [
+          "docker",
+          "run",
+          "--rm",
+          "--memory=6g",
+          "--cpus=2",
+          "--platform",
+          "linux/amd64",
+          "--network",
+          "none",
+          "--user",
+          "1001:1002",
+          "-e",
+          "HOME=/tmp",
+          "-v",
+          "/tmp/tmpx9hdksd6/claim:/claim:ro",
+          "-v",
+          "/tmp/tmpdixz7sxr:/work",
+          "-w",
+          "/work",
+          "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "kprove",
+          "/claim/claim-01.k",
+          "--definition",
+          "/opt/kevm/haskell",
+          "-I",
+          "/opt/kevm/evm-semantics-source",
+          "-I",
+          "/opt/kevm/plugin",
+          "--spec-module",
+          "VAT-VAT-PROVE"
+        ]
+      },
+      {
+        "claim": "claim-02",
+        "checker": "kevm-prove",
+        "self_contained": false,
+        "invocation": "hard/certs/claim-02.rediscuss.json",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "result": "accept",
+        "exit": 0,
+        "timed_out": false,
+        "wall_s": 110.313,
+        "stdout_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "stderr_tail": "[Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name\nwith underscore if this is intentional.\n\tSource(/opt/kevm/evm-semantics-source/lemmas/bytes-simplification.k)\n\tLocation(301,25,301,27)\n\t301 |\t      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B1 [ I ]\n\t    .\t                        ^~\n",
+        "argv": [
+          "docker",
+          "run",
+          "--rm",
+          "--memory=6g",
+          "--cpus=2",
+          "--platform",
+          "linux/amd64",
+          "--network",
+          "none",
+          "--user",
+          "1001:1002",
+          "-e",
+          "HOME=/tmp",
+          "-v",
+          "/tmp/tmpbs2p4c6m/claim:/claim:ro",
+          "-v",
+          "/tmp/tmpzw0bbe8w:/work",
+          "-w",
+          "/work",
+          "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "kprove",
+          "/claim/claim-02.k",
+          "--definition",
+          "/opt/kevm/haskell",
+          "-I",
+          "/opt/kevm/evm-semantics-source",
+          "-I",
+          "/opt/kevm/plugin",
+          "--spec-module",
+          "ILK-ILK-PROVE"
+        ]
+      },
+      {
+        "claim": "claim-03",
+        "checker": "kevm-prove",
+        "self_contained": false,
+        "invocation": "hard/certs/claim-03.rediscuss.json",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "result": "accept",
+        "exit": 0,
+        "timed_out": false,
+        "wall_s": 154.601,
+        "stdout_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "stderr_tail": "[Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name\nwith underscore if this is intentional.\n\tSource(/opt/kevm/evm-semantics-source/lemmas/bytes-simplification.k)\n\tLocation(301,25,301,27)\n\t301 |\t      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B1 [ I ]\n\t    .\t                        ^~\n",
+        "argv": [
+          "docker",
+          "run",
+          "--rm",
+          "--memory=6g",
+          "--cpus=2",
+          "--platform",
+          "linux/amd64",
+          "--network",
+          "none",
+          "--user",
+          "1001:1002",
+          "-e",
+          "HOME=/tmp",
+          "-v",
+          "/tmp/tmp8gyx6wiq/claim:/claim:ro",
+          "-v",
+          "/tmp/tmpbap9udgr:/work",
+          "-w",
+          "/work",
+          "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "kprove",
+          "/claim/claim-03.k",
+          "--definition",
+          "/opt/kevm/haskell",
+          "-I",
+          "/opt/kevm/evm-semantics-source",
+          "-I",
+          "/opt/kevm/plugin",
+          "--spec-module",
+          "GEM-GEM-PROVE"
+        ]
+      },
+      {
+        "claim": "claim-04",
+        "checker": "kevm-prove",
+        "self_contained": false,
+        "invocation": "hard/certs/claim-04.rediscuss.json",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "result": "accept",
+        "exit": 0,
+        "timed_out": false,
+        "wall_s": 257.004,
+        "stdout_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "stderr_tail": "[Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name\nwith underscore if this is intentional.\n\tSource(/opt/kevm/evm-semantics-source/lemmas/bytes-simplification.k)\n\tLocation(301,25,301,27)\n\t301 |\t      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B1 [ I ]\n\t    .\t                        ^~\n",
+        "argv": [
+          "docker",
+          "run",
+          "--rm",
+          "--memory=6g",
+          "--cpus=2",
+          "--platform",
+          "linux/amd64",
+          "--network",
+          "none",
+          "--user",
+          "1001:1002",
+          "-e",
+          "HOME=/tmp",
+          "-v",
+          "/tmp/tmpffwoolvs/claim:/claim:ro",
+          "-v",
+          "/tmp/tmpwplffbi3:/work",
+          "-w",
+          "/work",
+          "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "kprove",
+          "/claim/claim-04.k",
+          "--definition",
+          "/opt/kevm/haskell",
+          "-I",
+          "/opt/kevm/evm-semantics-source",
+          "-I",
+          "/opt/kevm/plugin",
+          "--spec-module",
+          "CAGEWS-CAGEWS-PROVE"
+        ]
+      },
+      {
+        "claim": "claim-05",
+        "checker": "kevm-prove",
+        "self_contained": false,
+        "invocation": "hard/certs/claim-05.rediscuss.json",
+        "image": "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+        "result": "accept",
+        "exit": 0,
+        "timed_out": false,
+        "wall_s": 160.152,
+        "stdout_sha256": "8d9586e84783045169f5b27f9ebc7c0fb2d175ef0c711d7f79ad224e70a1b45d",
+        "stderr_tail": "[Warning] Compiler: Variable 'B2' defined but not used. Prefix variable name\nwith underscore if this is intentional.\n\tSource(/opt/kevm/evm-semantics-source/lemmas/bytes-simplification.k)\n\tLocation(301,25,301,27)\n\t301 |\t      ( B1:Bytes +Bytes B2:Bytes ) [ I:Int ] => B1 [ I ]\n\t    .\t                        ^~\n",
+        "argv": [
+          "docker",
+          "run",
+          "--rm",
+          "--memory=6g",
+          "--cpus=2",
+          "--platform",
+          "linux/amd64",
+          "--network",
+          "none",
+          "--user",
+          "1001:1002",
+          "-e",
+          "HOME=/tmp",
+          "-v",
+          "/tmp/tmp594vcgtr/claim:/claim:ro",
+          "-v",
+          "/tmp/tmphpav0752:/work",
+          "-w",
+          "/work",
+          "sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465",
+          "kprove",
+          "/claim/claim-05.k",
+          "--definition",
+          "/opt/kevm/haskell",
+          "-I",
+          "/opt/kevm/evm-semantics-source",
+          "-I",
+          "/opt/kevm/plugin",
+          "--spec-module",
+          "JOINSYM-JOINSYM-PROVE"
+        ]
+      }
+    ],
+    "checks": {
+      "verifier_hash": {
+        "running": "f7bde819d11db29babaf52cdf9fe4c3560651ff38ebfc9839ca679ed3321f364",
+        "trusted_base": "f7bde819d11db29babaf52cdf9fe4c3560651ff38ebfc9839ca679ed3321f364",
+        "ok": true
+      },
+      "lean_axiom_whitelist": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "refused_reason": null
+  },
+  "L2": {
+    "coverage_total": false,
+    "coverage": {
+      "requirement_to_claims": {
+        "R1": [
+          "claim-01"
+        ],
+        "R2": [
+          "claim-02"
+        ],
+        "R3": [
+          "claim-03"
+        ],
+        "R4": [
+          "claim-04"
+        ],
+        "R5": [
+          "claim-05"
+        ],
+        "R6": [],
+        "R7": [],
+        "R8": [],
+        "R9": []
+      },
+      "claim_to_requirements": {
+        "claim-01": [
+          "R1"
+        ],
+        "claim-02": [
+          "R2"
+        ],
+        "claim-03": [
+          "R3"
+        ],
+        "claim-04": [
+          "R4"
+        ],
+        "claim-05": [
+          "R5"
+        ]
+      },
+      "requirement_state": {
+        "R1": "covered",
+        "R2": "covered",
+        "R3": "covered",
+        "R4": "partial",
+        "R5": "partial",
+        "R6": "blind",
+        "R7": "blind",
+        "R8": "blind",
+        "R9": "blind"
+      },
+      "covered": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "partial": [
+        "R4",
+        "R5"
+      ],
+      "blind": [
+        "R6",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "declared_blind_spots": {
+        "R4": {
+          "reason": "claim-04 proves cage() reverts for every non-ward caller (wards[caller] == 0) over every other storage. Not proved: rely/deny by a non-ward; a caller with wards[caller] not in {0, 1} (unreachable by bytecode inspection, not proved); cage/rely/deny success for a ward.",
+          "partial": true
+        },
+        "R5": {
+          "reason": "claim-05 proves join reverts with live == 0 for every caller, every storage and every 256-bit (usr, wad). Not proved: calldata longer than 68 bytes; callvalue > 0 (R9); a call from a non-top-level frame (Aasm-toplevel-call). 'Before any external call' is by bytecode inspection.",
+          "partial": true
+        },
+        "R6": {
+          "reason": "Not proved. join's value movement needs the external calls Vat.slip and WETH.transferFrom composed (assume-guarantee over unaudited callees); Stage C is open (Finding 0006 + correction). The overflow guard (wad >= 2^255 reverts, Finding 0003 row 6) is outside this claim set.",
+          "partial": false
+        },
+        "R7": {
+          "reason": "Not proved. exit's value movement needs Vat.slip and WETH.transfer composed; open (Finding 0006). The overflow guard (Finding 0003 row 5) is outside this claim set.",
+          "partial": false
+        },
+        "R8": {
+          "reason": "Not proved as stated. Claims 01-05 show storage is unchanged on the three getter paths and the two revert paths only; no success path of join/exit/cage/rely/deny is covered.",
+          "partial": false
+        },
+        "R9": {
+          "reason": "Not proved. Every claim fixes callvalue = 0; the non-payable guard (Finding 0003 row 7, cage only) is outside this claim set.",
+          "partial": false
+        }
+      },
+      "uncovered_undeclared": [],
+      "blind_spots_not_in_requirements": [],
+      "blind_spots_actually_covered": [],
+      "partial_without_claim": [],
+      "blind_spots_without_reason": [],
+      "unreferenced_clauses": [],
+      "unknown_requirement_refs": [],
+      "phi_file_hash_mismatch": [],
+      "manifest_claims_missing_from_phi": [],
+      "total": false,
+      "stored_coverage_matches": true
+    },
+    "backtranslation": [
+      {
+        "claim": "claim-01",
+        "claim_file": "hard/spec/claim-01.k",
+        "claim_sha256": "37c196d165cef163ce056f2fbd1940c41dec72642b5e396f2a439f6889b64426",
+        "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly the 4 bytes 0x36569e77, from any 160-bit caller to any 160-bit executing account whose storage slot 1 holds a value in [0, 2^256) (other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_SUCCESS. The output is the 32-byte big-endian encoding of storage[1] masked to its low 160 bits, and the account's storage is left unchanged.",
+        "referenced_requirement": [
+          {
+            "id": "R1",
+            "text": "`vat()` succeeds for every caller when sent with zero value, returns the address stored as `vat` (slot 1, low 160 bits), and changes no state."
+          }
+        ],
+        "agreement": "unclear",
+        "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+      },
+      {
+        "claim": "claim-02",
+        "claim_file": "hard/spec/claim-02.k",
+        "claim_sha256": "e6718350958592ec5af2d3658471b3a8eb222ef2fdbc8799b2ff34251e54ee06",
+        "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly the 4 bytes 0xc5ce281e, from any 160-bit caller to any 160-bit executing account whose storage slot 2 holds a value in [0, 2^256) (other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_SUCCESS. The output is the 32-byte big-endian encoding of storage[2], and the account's storage is left unchanged.",
+        "referenced_requirement": [
+          {
+            "id": "R2",
+            "text": "`ilk()` succeeds for every caller when sent with zero value, returns the `bytes32` stored as `ilk` (slot 2), and changes no state."
+          }
+        ],
+        "agreement": "unclear",
+        "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+      },
+      {
+        "claim": "claim-03",
+        "claim_file": "hard/spec/claim-03.k",
+        "claim_sha256": "4c39f548ae970468c3f109c82633d79b1a42caeef0bc893d814bc0dbf402d197",
+        "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly the 4 bytes 0x7bd2bea7, from any 160-bit caller to any 160-bit executing account whose storage slot 3 holds a value in [0, 2^256) (other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_SUCCESS. The output is the 32-byte big-endian encoding of storage[3] masked to its low 160 bits, and the account's storage is left unchanged.",
+        "referenced_requirement": [
+          {
+            "id": "R3",
+            "text": "`gem()` succeeds for every caller when sent with zero value, returns the address stored as `gem` (slot 3, low 160 bits), and changes no state."
+          }
+        ],
+        "agreement": "unclear",
+        "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+      },
+      {
+        "claim": "claim-04",
+        "claim_file": "hard/spec/claim-04.k",
+        "claim_sha256": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+        "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly the 4 bytes 0x69245009, from any 160-bit caller to any 160-bit executing account, restricted to storages where the slot at keccak(32-byte caller ++ 32-byte 0) holds 0 (all other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_REVERT. The output is unconstrained, and the account's storage is left unchanged.",
+        "referenced_requirement": [
+          {
+            "id": "R4",
+            "text": "Only a ward (`wards[msg.sender] == 1`) can call `cage()`, `rely(usr)` or `deny(usr)`. For any other caller the call reverts and changes no state."
+          }
+        ],
+        "agreement": "unclear",
+        "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+      },
+      {
+        "claim": "claim-05",
+        "claim_file": "hard/spec/claim-05.k",
+        "claim_sha256": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+        "translation": "For a top-level, non-static call with callvalue 0 and calldata exactly 0x3b4da69f followed by two 32-byte words USR and WAD (each any value in [0, 2^256)), from any 160-bit caller to any 160-bit executing account, restricted to storages where slot 5 holds 0 (all other slots arbitrary), every execution (OSAKA schedule, gas not modelled) halts with status EVMC_REVERT. The output is unconstrained, and the account's storage is left unchanged.",
+        "referenced_requirement": [
+          {
+            "id": "R5",
+            "text": "Once the adapter is caged (`live == 0`), `join(usr, wad)` reverts for every caller and every `usr`, `wad`, before making any external call and without changing any state."
+          }
+        ],
+        "agreement": "unclear",
+        "note": "not assessed by any tool or model; agree/disagree is H's judgement (task 04: disagreements are reported, not resolved)"
+      }
+    ],
+    "backtranslation_meta": {
+      "format": "tcg-pilot-backtranslation/0.1",
+      "class": "T*",
+      "translator": {
+        "model": "claude-opus-5-5",
+        "session_id": "82b08fb0-aeb5-42a0-a695-0f4d1f137754",
+        "cli": "2.1.312 (Claude Code)",
+        "transcript": {
+          "provenance/sessions/bt-20261029T144536Z.stdin.txt": "541a95ad96cbd4a2abaebc415205de1894a4cd2f62e393a2b93af8237a1435fd",
+          "provenance/sessions/bt-20261029T144536Z.result.json": "406e87036b0db9109027f477a86b6d293a3d5089f87028c4a3ca2dc5264e6460",
+          "provenance/sessions/bt-20261029T144536Z.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "provenance/sessions/bt-20261029T144536Z.env.txt": "2678c99a2c727eec487441ac63323d49a0c43c59a8050b37d5cb47ca4f9c56f2",
+          "provenance/sessions/bt-20261029T144536Z.listing-before.txt": "9701cc246ae2e2c00443880a335bdbded05ccff2f880279f50411b4088f0ea54",
+          "provenance/sessions/bt-20261029T144536Z.listing-after.txt": "3dcb827a1a8e4715e7ce929a35d52a8fbffe2deaceb92a81d3074d8f5d55d6eb"
+        },
+        "prompt": {
+          "provenance/sessions/backtranslation_prompt.md": "9098fbfa7bc5529f52cbb1e8c97ba6d9219c46763b237b6e144008c6a6e4bce2"
+        }
+      },
+      "requirements_withheld": {
+        "how": "translator ran as unix user agent, which cannot read /home/vladimir (checked in listing-before); its working directory held only claim-01..05.k and a stripped phi.json; all tools disabled (--tools \"\"), no MCP; its entire input is the recorded stdin file",
+        "strip_record": {
+          "provenance/sessions/bt-input.strip_record.json": "3bbb63cfc4d1096b56de00821caaad0346d262afa78b254147930ba040b52b8c"
+        },
+        "requirements_sha256_withheld": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14"
+      },
+      "pairing": {
+        "by": "provenance/rebuild/edits/bt_pair.py (script)",
+        "sha256": "6eba170b745c56530506aa81e04892555d3d380590b1eb42fe588684983fc87b"
+      },
+      "caveats": [
+        "The translator saw the producer's own English paraphrase of each claim (phi.json pre/post/quantifies_over); its sentences may echo that wording rather than reflect an independent reading of the K text. It checks that phi is readable and consistent, not that a second reader derives the same meaning from K alone.",
+        "The translator is the same model family as the producing agent (claude-opus-5-5); blind to n, not independent of the producer's model.",
+        "One sample, no repetition: no measure of translation variance."
+      ],
+      "claims_without_translation": [],
+      "quarantined_sentences": 0
+    },
+    "mutants": [
+      {
+        "dir": "evidence/mutants/claim-01/",
+        "claim": "claim-01",
+        "kind": "concrete_trace_violation",
+        "replayed": true,
+        "wall_s": 302.111,
+        "exit": 0,
+        "timed_out": false,
+        "output_sha256": "38180d24cf8a01a6dab58851fbf8b97a453a5a035a8d30011cd6c1234fa67814",
+        "checker_classification": "accept",
+        "reproduced": true,
+        "violation": "claim-01 vat() mutant returns 0x0000000000000000000000000000000000000000000000000000000000000000 where the claim requires 0x00000000000000000000000035d1b3f3d7966a1dfe207aa4514c12a259a0492b on the same concrete state",
+        "kind_rule_holds": true,
+        "outcome": "concrete_trace_violation"
+      },
+      {
+        "dir": "evidence/mutants/claim-01-mask/",
+        "claim": "claim-01",
+        "kind": "concrete_trace_violation",
+        "replayed": true,
+        "wall_s": 376.069,
+        "exit": 0,
+        "timed_out": false,
+        "output_sha256": "392bd3aa2dabcd550b66b3800e17afb72e37078de339784a0ee58c00bac0d23b",
+        "checker_classification": "accept",
+        "reproduced": true,
+        "violation": "claim-01 vat() mutant returns 0xa5000000000000000000000035d1b3f3d7966a1dfe207aa4514c12a259a0492b where the claim requires 0x00000000000000000000000035d1b3f3d7966a1dfe207aa4514c12a259a0492b on the same concrete state",
+        "kind_rule_holds": true,
+        "outcome": "concrete_trace_violation"
+      },
+      {
+        "dir": "evidence/mutants/claim-01-mask-symbolic/",
+        "claim": "claim-01",
+        "kind": "not_accept",
+        "replayed": true,
+        "wall_s": 158.312,
+        "exit": 1,
+        "timed_out": false,
+        "output_sha256": "0d2632f8877a51a5891a5e2a7265afe1c1dedcdac03b149e687168f360ff2dd0",
+        "checker_classification": "unknown",
+        "reproduced": true,
+        "kind_rule_holds": true,
+        "outcome": "not_accept"
+      },
+      {
+        "dir": "evidence/mutants/claim-01-symbolic/",
+        "claim": "claim-01",
+        "kind": "not_accept",
+        "replayed": true,
+        "wall_s": 148.998,
+        "exit": 1,
+        "timed_out": false,
+        "output_sha256": "eff30415427208cea826aa72810727ddd00ad2ac98ec13502306566447c456be",
+        "checker_classification": "unknown",
+        "reproduced": true,
+        "kind_rule_holds": true,
+        "outcome": "not_accept"
+      },
+      {
+        "dir": "evidence/mutants/claim-02/",
+        "claim": "claim-02",
+        "kind": "concrete_trace_violation",
+        "replayed": true,
+        "wall_s": 327.009,
+        "exit": 0,
+        "timed_out": false,
+        "output_sha256": "7d592dc647b962793857c8fc7f780c2519dedfcc484855c3b6aa221c0e442ace",
+        "checker_classification": "accept",
+        "reproduced": true,
+        "violation": "claim-02 ilk() mutant returns 0x000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2 where the claim requires 0x4554482d41000000000000000000000000000000000000000000000000000000 on the same concrete state",
+        "kind_rule_holds": true,
+        "outcome": "concrete_trace_violation"
+      },
+      {
+        "dir": "evidence/mutants/claim-02-symbolic/",
+        "claim": "claim-02",
+        "kind": "not_accept",
+        "replayed": true,
+        "wall_s": 130.953,
+        "exit": 1,
+        "timed_out": false,
+        "output_sha256": "63cc13e04c8a5f879f6f1ff6c2ef96fafa362ce9bb24d61b85d3a72726918c57",
+        "checker_classification": "unknown",
+        "reproduced": true,
+        "kind_rule_holds": true,
+        "outcome": "not_accept"
+      },
+      {
+        "dir": "evidence/mutants/claim-03/",
+        "claim": "claim-03",
+        "kind": "concrete_trace_violation",
+        "replayed": true,
+        "wall_s": 368.772,
+        "exit": 0,
+        "timed_out": false,
+        "output_sha256": "e9f4b63a4135b1e22866775a238025b62c09c1aa0d73b66b0da54ab7f75864c3",
+        "checker_classification": "accept",
+        "reproduced": true,
+        "violation": "claim-03 gem() mutant returns 0x00000000000000000000000035d1b3f3d7966a1dfe207aa4514c12a259a0492b where the claim requires 0x000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2 on the same concrete state",
+        "kind_rule_holds": true,
+        "outcome": "concrete_trace_violation"
+      },
+      {
+        "dir": "evidence/mutants/claim-03-symbolic/",
+        "claim": "claim-03",
+        "kind": "not_accept",
+        "replayed": true,
+        "wall_s": 165.006,
+        "exit": 1,
+        "timed_out": false,
+        "output_sha256": "27f47f8aa1c69630247ccd80e1ed852154ddd5b5374aca82f7c2fb2afd5864f3",
+        "checker_classification": "unknown",
+        "reproduced": true,
+        "kind_rule_holds": true,
+        "outcome": "not_accept"
+      },
+      {
+        "dir": "evidence/mutants/claim-04/",
+        "claim": "claim-04",
+        "kind": "concrete_trace_violation",
+        "replayed": true,
+        "wall_s": 379.425,
+        "exit": 0,
+        "timed_out": false,
+        "output_sha256": "779354a357720afc7f9911af17fdffa6cae7b1b66dc95a42fefdc95e9a5a1344",
+        "checker_classification": "accept",
+        "reproduced": true,
+        "violation": "claim-04 cage() mutant halts with EVMC_SUCCESS where the claim requires EVMC_REVERT on the same concrete state",
+        "kind_rule_holds": true,
+        "outcome": "concrete_trace_violation"
+      },
+      {
+        "dir": "evidence/mutants/claim-04-symbolic/",
+        "claim": "claim-04",
+        "kind": "refute",
+        "replayed": true,
+        "wall_s": 259.452,
+        "exit": 1,
+        "timed_out": false,
+        "output_sha256": "ed130b833b7b17b833aecf282d0ed543442167f0a014ff87b916915975bc4274",
+        "checker_classification": "refute",
+        "reproduced": true,
+        "kind_rule_holds": true,
+        "outcome": "refute"
+      },
+      {
+        "dir": "evidence/mutants/claim-05/",
+        "claim": "claim-05",
+        "kind": "concrete_trace_violation",
+        "replayed": true,
+        "wall_s": 793.057,
+        "exit": 0,
+        "timed_out": false,
+        "output_sha256": "d614758a44b1fe4c5c843593c00f85c34d9868938133985b28d75293bccfa73c",
+        "checker_classification": "accept",
+        "reproduced": true,
+        "violation": "claim-05 join() mutant halts with EVMC_SUCCESS where the claim requires EVMC_REVERT on the same concrete state",
+        "kind_rule_holds": true,
+        "outcome": "concrete_trace_violation"
+      },
+      {
+        "dir": "evidence/mutants/claim-05-symbolic/",
+        "claim": "claim-05",
+        "kind": "not_accept",
+        "replayed": true,
+        "wall_s": 938.206,
+        "exit": 1,
+        "timed_out": false,
+        "output_sha256": "a196639a0e50c6826d94973b30ad2ca9a6a50272c8d473fe0223664137fb4df5",
+        "checker_classification": "unknown",
+        "reproduced": true,
+        "kind_rule_holds": true,
+        "outcome": "not_accept"
+      }
+    ],
+    "no_witness": [],
+    "pre_witness_replays": true,
+    "pre_witness": {
+      "exit": 0,
+      "timed_out": false,
+      "output_sha256": "d7ad4c9335eb624194b84292ff6dd7649b71ae941f7fa6f1904d1fbaaa4a73ba",
+      "expected_sha256": "d7ad4c9335eb624194b84292ff6dd7649b71ae941f7fa6f1904d1fbaaa4a73ba",
+      "wall_s": 542.998
+    }
+  },
+  "L3": {
+    "status": "pass",
+    "approved_hash": "adf5371ed9ebaddff2409d2e46c2ca0f05ffbd5958350f8591c04b43b73790e9",
+    "proven_hash": "adf5371ed9ebaddff2409d2e46c2ca0f05ffbd5958350f8591c04b43b73790e9",
+    "requirements_hash": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14",
+    "approved_requirements_hash": "94c93ab3150839b1155027506d01da6a62dca68665d440448dd9436227d64e14",
+    "signer": "oracle",
+    "reason": null
+  },
+  "L4": {
+    "status": "fail",
+    "chain_intact": true,
+    "events_total": 151,
+    "deterministic_total": 136,
+    "events_replayed": 20,
+    "mismatches": [
+      {
+        "exit": {
+          "recorded": 0,
+          "replayed": 1,
+          "timed_out": false
+        },
+        "outputs": [
+          {
+            "path": "provenance/rebuild/pre_witness/replay.out",
+            "recorded": "d7ad4c9335eb624194b84292ff6dd7649b71ae941f7fa6f1904d1fbaaa4a73ba",
+            "replayed": "4e0ce864d9c7c74b1dc081e18119d90d4b8e1a6d0bc2fcfaa604c2ed520fdea7"
+          }
+        ],
+        "replay_stderr_tail": "",
+        "seq": 63,
+        "used_stand_ins": false
+      },
+      {
+        "exit": {
+          "recorded": 0,
+          "replayed": 1,
+          "timed_out": false
+        },
+        "outputs": [
+          {
+            "path": "provenance/rebuild/controls/cagews-cagews-prove.k",
+            "recorded": "6d04a51941ad9f589794684e9951ea7c32170575b4fad4ae3057fceea90a7c1c",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/controls/cagews-cagews-vacuity.k",
+            "recorded": "f89ad47c25252c3120d1db0f1d5e30eee24d46f4014071aaaf6c13e3dfdffb38",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/controls/cagews-cagews-discriminator.k",
+            "recorded": "bd0b8a8a0f8ceaf49aaa38ec6dac3a706ad79f3c0b9947be68f8acdd6bf84879",
+            "replayed": null
+          }
+        ],
+        "replay_stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/tmptk9q7mmm/up0/up1/up2/bundle/../tools/assemble_hard.py\", line 35, in <module>\n    from tcg.keccak import keccak256_hex  # noqa: E402  (pure-Python, vector-tested)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'tcg'\n",
+        "seq": 82,
+        "used_stand_ins": true
+      },
+      {
+        "exit": {
+          "recorded": 0,
+          "replayed": 1,
+          "timed_out": false
+        },
+        "outputs": [
+          {
+            "path": "provenance/rebuild/controls/joinsym-joinsym-prove.k",
+            "recorded": "315d34bee5ea8e2160799b7de9a99cd75795aa096a90ef0f46b40744d896c926",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/controls/joinsym-joinsym-vacuity.k",
+            "recorded": "898a8fa59c779130abb5f7c09e0b7a54d880682abba74378371ce3ae1fbc1771",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/controls/joinsym-joinsym-discriminator.k",
+            "recorded": "0693a66da1d1c950adba3c312d1f57c813d6590838ed77bbad08d5f695b447ec",
+            "replayed": null
+          }
+        ],
+        "replay_stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/tmpd2x4bx3t/up0/up1/up2/bundle/../tools/assemble_hard.py\", line 35, in <module>\n    from tcg.keccak import keccak256_hex  # noqa: E402  (pure-Python, vector-tested)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'tcg'\n",
+        "seq": 83,
+        "used_stand_ins": true
+      },
+      {
+        "exit": {
+          "recorded": 0,
+          "replayed": 1,
+          "timed_out": false
+        },
+        "outputs": [
+          {
+            "path": "provenance/rebuild/controls-osaka/cagews-cagews-prove.k",
+            "recorded": "ae6dedd42b1ce82f2c2dc2290fd06ef15130b94245b82e2fa9daa6760058e470",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/controls-osaka/cagews-cagews-vacuity.k",
+            "recorded": "62da2164d905a524bd1c811d42ea970ba60cc94c8670860e078a4af47b64e149",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/controls-osaka/cagews-cagews-discriminator.k",
+            "recorded": "b73a1e16f11f08a8a91001b0273b2494ca6f56867c8abb744fe41c949fc62102",
+            "replayed": null
+          }
+        ],
+        "replay_stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/tmppv5ikivx/up0/up1/up2/bundle/../tools/assemble_hard.py\", line 35, in <module>\n    from tcg.keccak import keccak256_hex  # noqa: E402  (pure-Python, vector-tested)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'tcg'\n",
+        "seq": 84,
+        "used_stand_ins": true
+      },
+      {
+        "exit": {
+          "recorded": 0,
+          "replayed": 1,
+          "timed_out": false
+        },
+        "outputs": [
+          {
+            "path": "provenance/rebuild/controls-osaka/joinsym-joinsym-prove.k",
+            "recorded": "eee8b49f663ced8d5f7363e406f1747aa925187c1e78b497b7bb68f108435afd",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/controls-osaka/joinsym-joinsym-vacuity.k",
+            "recorded": "8083741c1f624e2cc8b9507edf975b383332d68fe1c6d35b051bf3d8dc2666b2",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/controls-osaka/joinsym-joinsym-discriminator.k",
+            "recorded": "003ffb3e7cc7f8446f8566b63586655e29371e024f082b3feb0e8566aab402aa",
+            "replayed": null
+          }
+        ],
+        "replay_stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/tmpj7bhh_wu/up0/up1/up2/bundle/../tools/assemble_hard.py\", line 35, in <module>\n    from tcg.keccak import keccak256_hex  # noqa: E402  (pure-Python, vector-tested)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'tcg'\n",
+        "seq": 85,
+        "used_stand_ins": true
+      },
+      {
+        "exit": {
+          "recorded": 0,
+          "replayed": 1,
+          "timed_out": false
+        },
+        "outputs": [
+          {
+            "path": "provenance/opscan.json",
+            "recorded": "f2c512f9bd3fea3f1fa33605f007a984722f8bc06108c76d6ecd03982988c776",
+            "replayed": null
+          }
+        ],
+        "replay_stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/tmpxr5h4_np/up0/up1/up2/bundle/../tools/assemble_hard.py\", line 35, in <module>\n    from tcg.keccak import keccak256_hex  # noqa: E402  (pure-Python, vector-tested)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'tcg'\n",
+        "seq": 86,
+        "used_stand_ins": true
+      },
+      {
+        "exit": {
+          "recorded": 0,
+          "replayed": 1,
+          "timed_out": false
+        },
+        "outputs": [
+          {
+            "path": "provenance/rebuild/pre_witness/claim-02-instance.k",
+            "recorded": "72436013da2d7e2a2713b3b2a718445db90a35b8ed81c755d1a0c1ab0d3dcccc",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/pre_witness/claim-02-vacuity.k",
+            "recorded": "b612bdb926191e06810eac9fa6f9e5f54add620b1449acee4a9644cbabb9809e",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/pre_witness/claim-02-config.json",
+            "recorded": "7d5cca0bc42c5c191c1e919e66a9371bb6d177b0bc40baa2c36e3cc94029d46e",
+            "replayed": null
+          }
+        ],
+        "replay_stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/tmpih1wepps/up0/up1/up2/bundle/../tools/assemble_hard.py\", line 35, in <module>\n    from tcg.keccak import keccak256_hex  # noqa: E402  (pure-Python, vector-tested)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'tcg'\n",
+        "seq": 88,
+        "used_stand_ins": true
+      },
+      {
+        "exit": {
+          "recorded": 0,
+          "replayed": 1,
+          "timed_out": false
+        },
+        "outputs": [
+          {
+            "path": "provenance/rebuild/pre_witness/claim-04-instance.k",
+            "recorded": "cbbbeed573e9c8c754b0621c2dd3e52beeef182b18b3aad7ece6d60fe8f2bf8e",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/pre_witness/claim-04-vacuity.k",
+            "recorded": "bd2a8432e3d3236dfb82ef5664a258b14eb266e9b38f9b4e089a1d4a727ff163",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/pre_witness/claim-04-config.json",
+            "recorded": "25729daa3c5a9addca667e0f5fe8ece5e98338333c7d736fff3caf2b2a46f55b",
+            "replayed": null
+          }
+        ],
+        "replay_stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/tmpks9i2djk/up0/up1/up2/bundle/../tools/assemble_hard.py\", line 35, in <module>\n    from tcg.keccak import keccak256_hex  # noqa: E402  (pure-Python, vector-tested)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'tcg'\n",
+        "seq": 89,
+        "used_stand_ins": true
+      },
+      {
+        "exit": {
+          "recorded": 0,
+          "replayed": 1,
+          "timed_out": false
+        },
+        "outputs": [
+          {
+            "path": "provenance/rebuild/pre_witness/claim-05-instance.k",
+            "recorded": "272365e07c874930917312c2aa8075fd14552911adc11367229a65bd38b7955c",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/pre_witness/claim-05-vacuity.k",
+            "recorded": "9b557cf55d8f0e7e7808dc5a7b3b714246eeacbf7ab72fc70aa9d50a6c352081",
+            "replayed": null
+          },
+          {
+            "path": "provenance/rebuild/pre_witness/claim-05-config.json",
+            "recorded": "f1a9cd33c4aa0fe514ce5bebe6ff02b1576d17d8b39c63df2b8299c99b548bd0",
+            "replayed": null
+          }
+        ],
+        "replay_stderr_tail": "Traceback (most recent call last):\n  File \"/tmp/tmp2z89i128/up0/up1/up2/bundle/../tools/assemble_hard.py\", line 35, in <module>\n    from tcg.keccak import keccak256_hex  # noqa: E402  (pure-Python, vector-tested)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'tcg'\n",
+        "seq": 90,
+        "used_stand_ins": true
+      }
+    ],
+    "not_replayable_outside_bundle": [
+      {
+        "seq": 4,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "outputs": [
+            "../../../../pilot-hard/round1/logs/CAGE-CAGE-PROVE.log",
+            "../../../../pilot-hard/round1/logs/CAGE-CAGE-PROVE.log"
+          ],
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../../../../pilot-hard/round1/logs/CAGE-CAGE-PROVE.log": "output outside the bundle",
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 5,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "outputs": [
+            "../../../../pilot-hard/round1/logs/JOIN-JOIN-PROVE.log",
+            "../../../../pilot-hard/round1/logs/JOIN-JOIN-PROVE.log"
+          ],
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../../../../pilot-hard/round1/logs/JOIN-JOIN-PROVE.log": "output outside the bundle",
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 6,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 8,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 9,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 10,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 11,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 12,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 13,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 14,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../../../../pilot-hard/kevm-inputs/evm-semantics.tar.gz",
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py",
+            "/home/vladimir/pilot-hard/kevm-inputs/evm-semantics.tar.gz"
+          ]
+        },
+        "why": {
+          "../../../../pilot-hard/kevm-inputs/evm-semantics.tar.gz": "no bundle child has the recorded sha256",
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256",
+          "/home/vladimir/pilot-hard/kevm-inputs/evm-semantics.tar.gz": "absolute path"
+        }
+      },
+      {
+        "seq": 15,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../../../../pilot-hard/kevm-inputs/evm-semantics.tar.gz",
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py",
+            "/home/vladimir/pilot-hard/kevm-inputs/evm-semantics.tar.gz"
+          ]
+        },
+        "why": {
+          "../../../../pilot-hard/kevm-inputs/evm-semantics.tar.gz": "no bundle child has the recorded sha256",
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256",
+          "/home/vladimir/pilot-hard/kevm-inputs/evm-semantics.tar.gz": "absolute path"
+        }
+      },
+      {
+        "seq": 16,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 17,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 18,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 19,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 20,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 21,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 22,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 23,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/pilot-hard/edit_annotations.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/pilot-hard/edit_annotations.py": "absolute path"
+        }
+      },
+      {
+        "seq": 25,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 26,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 27,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 28,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 29,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 30,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 31,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 32,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 33,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 34,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 35,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 36,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 37,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 38,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 39,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 40,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 41,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 42,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 43,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 44,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 45,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 46,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 47,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 48,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 49,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 50,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 51,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 52,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 53,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 54,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 55,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 56,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 57,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 58,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../checker/run-claim.sh"
+          ]
+        },
+        "why": {
+          "../checker/run-claim.sh": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 59,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py",
+            "../../../../pilot-checker/pins.json"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256",
+          "../../../../pilot-checker/pins.json": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 60,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py",
+            "/home/vladimir/pilot-hard/kevm-src/evm-semantics-source"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256",
+          "/home/vladimir/pilot-hard/kevm-src/evm-semantics-source": "absolute path"
+        }
+      },
+      {
+        "seq": 61,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py",
+            "/home/vladimir/pilot-hard/kevm-src/evm-semantics-source"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256",
+          "/home/vladimir/pilot-hard/kevm-src/evm-semantics-source": "absolute path"
+        }
+      },
+      {
+        "seq": 62,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 65,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py",
+            "../../../../pilot-checker/pins.json"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256",
+          "../../../../pilot-checker/pins.json": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 66,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 67,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 68,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../tools/coverage.py"
+          ]
+        },
+        "why": {
+          "../tools/coverage.py": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 70,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py",
+            "../../../../pilot-checker/pins.json"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256",
+          "../../../../pilot-checker/pins.json": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 71,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/assemble_hard.py"
+          ],
+          "argv": [
+            "../tools/assemble_hard.py"
+          ]
+        },
+        "why": {
+          "../tools/assemble_hard.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 75,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 79,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../../../../pilot-checker/pins.json"
+          ]
+        },
+        "why": {
+          "../../../../pilot-checker/pins.json": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 81,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/coverage.py"
+          ]
+        },
+        "why": {
+          "../tools/coverage.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 87,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../../../../pilot-hard/kevm-inputs/evm-semantics.tar.gz"
+          ],
+          "argv": [
+            "/home/vladimir/pilot-hard/kevm-inputs/evm-semantics.tar.gz"
+          ]
+        },
+        "why": {
+          "../../../../pilot-hard/kevm-inputs/evm-semantics.tar.gz": "no bundle child has the recorded sha256",
+          "/home/vladimir/pilot-hard/kevm-inputs/evm-semantics.tar.gz": "absolute path"
+        }
+      },
+      {
+        "seq": 91,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../../../../pilot-checker/pins.json"
+          ]
+        },
+        "why": {
+          "../../../../pilot-checker/pins.json": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 92,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/pilot-hard/kevm-src/evm-semantics-source"
+          ]
+        },
+        "why": {
+          "/home/vladimir/pilot-hard/kevm-src/evm-semantics-source": "absolute path"
+        }
+      },
+      {
+        "seq": 93,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../../../../pilot-checker/pins.json"
+          ]
+        },
+        "why": {
+          "../../../../pilot-checker/pins.json": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 95,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../tools/coverage.py"
+          ]
+        },
+        "why": {
+          "../tools/coverage.py": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 98,
+        "reason": "not_replayable: output outside bundle",
+        "paths": {
+          "outputs": [
+            "../../../../pilot-keys/oracle.pub.pem",
+            "../../../../pilot-keys/approval.msg"
+          ]
+        },
+        "why": {
+          "../../../../pilot-keys/oracle.pub.pem": "output outside the bundle",
+          "../../../../pilot-keys/approval.msg": "output outside the bundle"
+        }
+      },
+      {
+        "seq": 101,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 103,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "outputs": [
+            "../HARD_STATUS.md"
+          ],
+          "argv": [
+            "../HARD_STATUS.md"
+          ]
+        },
+        "why": {
+          "../HARD_STATUS.md": "output outside the bundle"
+        }
+      },
+      {
+        "seq": 107,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "../tools/coverage.py"
+          ]
+        },
+        "why": {
+          "../tools/coverage.py": "not a recorded input with a stand-in"
+        }
+      },
+      {
+        "seq": 109,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 111,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 113,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 115,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 116,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 117,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 119,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 131,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "argv": [
+            "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py"
+          ]
+        },
+        "why": {
+          "/home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py": "absolute path"
+        }
+      },
+      {
+        "seq": 132,
+        "reason": "not_replayable: output outside bundle",
+        "paths": {
+          "outputs": [
+            "../../../../../../tmp/wsh_replay.out",
+            "../../../../../../tmp/wsh_replay.out"
+          ]
+        },
+        "why": {
+          "../../../../../../tmp/wsh_replay.out": "output outside the bundle"
+        }
+      },
+      {
+        "seq": 135,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../../../../pilot-checker/pins.json"
+          ]
+        },
+        "why": {
+          "../../../../pilot-checker/pins.json": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 146,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../../../../pilot-checker/pins.json"
+          ]
+        },
+        "why": {
+          "../../../../pilot-checker/pins.json": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 149,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../verifier/verify.py",
+            "../../../../pilot-checker/pins.json"
+          ]
+        },
+        "why": {
+          "../verifier/verify.py": "no bundle child has the recorded sha256",
+          "../../../../pilot-checker/pins.json": "no bundle child has the recorded sha256"
+        }
+      },
+      {
+        "seq": 150,
+        "reason": "not_replayable: input outside bundle",
+        "paths": {
+          "inputs": [
+            "../verifier/verify.py"
+          ]
+        },
+        "why": {
+          "../verifier/verify.py": "no bundle child has the recorded sha256"
+        }
+      }
+    ],
+    "skipped_by_consumer": [],
+    "replayed_with_stand_ins": [
+      {
+        "seq": 82,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py"
+        }
+      },
+      {
+        "seq": 83,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py"
+        }
+      },
+      {
+        "seq": 84,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py"
+        }
+      },
+      {
+        "seq": 85,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py"
+        }
+      },
+      {
+        "seq": 86,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py"
+        }
+      },
+      {
+        "seq": 88,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py"
+        }
+      },
+      {
+        "seq": 89,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py"
+        }
+      },
+      {
+        "seq": 90,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py"
+        }
+      },
+      {
+        "seq": 124,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+          "../../tcg/__init__.py": "provenance/tools/tcg/__init__.py",
+          "../../tcg/keccak.py": "provenance/tools/tcg/keccak.py",
+          "../../tcg/claims.py": "provenance/tools/tcg/claims.py"
+        }
+      },
+      {
+        "seq": 125,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+          "../../tcg/__init__.py": "provenance/tools/tcg/__init__.py",
+          "../../tcg/keccak.py": "provenance/tools/tcg/keccak.py",
+          "../../tcg/claims.py": "provenance/tools/tcg/claims.py"
+        }
+      },
+      {
+        "seq": 126,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+          "../../tcg/__init__.py": "provenance/tools/tcg/__init__.py",
+          "../../tcg/keccak.py": "provenance/tools/tcg/keccak.py",
+          "../../tcg/claims.py": "provenance/tools/tcg/claims.py"
+        }
+      },
+      {
+        "seq": 127,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+          "../../tcg/__init__.py": "provenance/tools/tcg/__init__.py",
+          "../../tcg/keccak.py": "provenance/tools/tcg/keccak.py",
+          "../../tcg/claims.py": "provenance/tools/tcg/claims.py"
+        }
+      },
+      {
+        "seq": 128,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+          "../../tcg/__init__.py": "provenance/tools/tcg/__init__.py",
+          "../../tcg/keccak.py": "provenance/tools/tcg/keccak.py",
+          "../../tcg/claims.py": "provenance/tools/tcg/claims.py"
+        }
+      },
+      {
+        "seq": 129,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+          "../../tcg/__init__.py": "provenance/tools/tcg/__init__.py",
+          "../../tcg/keccak.py": "provenance/tools/tcg/keccak.py",
+          "../../tcg/claims.py": "provenance/tools/tcg/claims.py"
+        }
+      },
+      {
+        "seq": 130,
+        "stand_ins": {
+          "../tools/assemble_hard.py": "provenance/tools/versions/assemble_hard-f41c4cc37d58.py",
+          "../../tcg/__init__.py": "provenance/tools/tcg/__init__.py",
+          "../../tcg/keccak.py": "provenance/tools/tcg/keccak.py",
+          "../../tcg/claims.py": "provenance/tools/tcg/claims.py"
+        }
+      }
+    ],
+    "not_replayed": [
+      {
+        "seq": 72,
+        "reason": "input provenance/rebuild/edits/make_phi_versions.py not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 77,
+        "reason": "input provenance/ledger.jsonl not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 78,
+        "reason": "input provenance/rebuild/edits/make_generators.py not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 80,
+        "reason": "input trusted_base.json not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 94,
+        "reason": "input trusted_base.json not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 100,
+        "reason": "input provenance/ledger.jsonl not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 102,
+        "reason": "tool 'sh' not available by hash sha256:2a0915e9ea9740a89734b120565e895ef73ca10996da84f5f72458b2d0b376cc"
+      },
+      {
+        "seq": 106,
+        "reason": "input provenance/rebuild/edits/bundle_tools.py not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 108,
+        "reason": "input provenance/rebuild/edits/bundle_tools.py not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 110,
+        "reason": "tool 'sh' not available by hash sha256:85d2c26e7b27461443571c7794acbd7841ee394962fd73744353fae1b05c5c65"
+      },
+      {
+        "seq": 112,
+        "reason": "tool 'sh' not available by hash sha256:83ff601b06041adb8b8a12a4ed1c45896fad17b8866c801d8481ab8104b198d1"
+      },
+      {
+        "seq": 114,
+        "reason": "tool 'sh' not available by hash sha256:b3eb90f0934960e8abbe0449cdf168aa6726c695f45fd906df525adc1b96408e"
+      },
+      {
+        "seq": 118,
+        "reason": "tool 'sh' not available by hash sha256:9414a4972c461a73443f7b5f82c471b85783bb39e8ea2181da18a0e27c83244a"
+      },
+      {
+        "seq": 120,
+        "reason": "tool 'sh' not available by hash sha256:94f73d884482afe00c24c7e17c2d75a28e51ae096e66fe4caa9f23c7ed8ce512"
+      },
+      {
+        "seq": 121,
+        "reason": "input evidence/pre_witness/replay.sh not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 122,
+        "reason": "input evidence/pre_witness/replay.sh not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 123,
+        "reason": "input provenance/rebuild/edits/bundle_tools.py not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 133,
+        "reason": "input evidence/pre_witness/expected.json not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 136,
+        "reason": "input trusted_base.json not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 137,
+        "reason": "input trusted_base.json not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 138,
+        "reason": "input provenance/rebuild/edits/bundle_tools.py not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 139,
+        "reason": "input trusted_base.json not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 140,
+        "reason": "input provenance/rebuild/edits/bundle_tools.py not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 141,
+        "reason": "input trusted_base.json not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 142,
+        "reason": "input provenance/rebuild/edits/bundle_tools.py not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 147,
+        "reason": "input trusted_base.json not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 148,
+        "reason": "input provenance/ledger.jsonl not in the bundle with the recorded hash"
+      },
+      {
+        "seq": 151,
+        "reason": "input provenance/ledger.jsonl not in the bundle with the recorded hash"
+      }
+    ],
+    "inconsistent_outputs": [],
+    "chain_errors": [],
+    "counts": {
+      "replayed_matched": 11,
+      "replayed_mismatched": 9,
+      "not_replayable_outside_bundle": 88,
+      "skipped_by_consumer": 0,
+      "not_replayed_other": 28
+    }
+  },
+  "outside_bundle": [
+    "JSON-RPC https://eth.drpc.org (eth_getCode / eth_chainId / eth_getBlockByNumber at block 26298481)",
+    "KEVM checker docker image sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465 (T_hat checker kevm-prove)",
+    "/usr/bin/sh (sha256 86d31f6fb799e91fa21bad341484564510ca287703a16e9e46c53338776f4f42) used to run bundle-supplied scripts",
+    "docker image sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465 (tool of replayed ledger events)",
+    "/usr/bin/dash (sha256 sha256:7d4a35bc05dfdad97b244da3c75bb3c3e710be73713cac3ca1c5bb6226cdc465) used to replay ledger events",
+    "/usr/bin/dash (sha256 86d31f6fb799e91fa21bad341484564510ca287703a16e9e46c53338776f4f42) used to replay ledger events",
+    "/usr/bin/python3.12 (sha256 ac841202937d20189d92978ed955e28e4f1a00dd99c9ac68e4694f7cf11c7092) used to replay ledger events",
+    "/usr/bin/python3.12 (sha256 6eba170b745c56530506aa81e04892555d3d380590b1eb42fe588684983fc87b) used to replay ledger events",
+    "/usr/bin/python3.12 (sha256 e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f) used to replay ledger events",
+    "/usr/bin/python3.12 (sha256 10ebcfe6ec8b931d15e20d3906f93c59e60ea4b3cd1c7fbcf48fde20230a3797) used to replay ledger events",
+    "ledger events [132] depend on ../../../../../../tmp/wsh_replay.out, outside the bundle (not replayed)",
+    "ledger events [59, 65, 70, 79, 91, 93, 135, 146, 149] depend on ../../../../pilot-checker/pins.json, outside the bundle (not replayed)",
+    "ledger events [14, 15, 87] depend on ../../../../pilot-hard/kevm-inputs/evm-semantics.tar.gz, outside the bundle (not replayed)",
+    "ledger events [4] depend on ../../../../pilot-hard/round1/logs/CAGE-CAGE-PROVE.log, outside the bundle (not replayed)",
+    "ledger events [5] depend on ../../../../pilot-hard/round1/logs/JOIN-JOIN-PROVE.log, outside the bundle (not replayed)",
+    "ledger events [98] depend on ../../../../pilot-keys/approval.msg, outside the bundle (not replayed)",
+    "ledger events [98] depend on ../../../../pilot-keys/oracle.pub.pem, outside the bundle (not replayed)",
+    "ledger events [103] depend on ../HARD_STATUS.md, outside the bundle (not replayed)",
+    "ledger events [4, 5, 6, 12, 16, 17, 18, 19, 20, 21, 22, 25, 26, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 58] depend on ../checker/run-claim.sh, outside the bundle (not replayed)",
+    "ledger events [8, 9, 10, 11, 13, 14, 15, 27, 28, 29, 59, 60, 61, 62, 65, 67, 70, 71] depend on ../tools/assemble_hard.py, outside the bundle (not replayed)",
+    "ledger events [68, 81, 95, 107] depend on ../tools/coverage.py, outside the bundle (not replayed)",
+    "ledger events [149, 150] depend on ../verifier/verify.py, outside the bundle (not replayed)",
+    "ledger events [23] depend on /home/vladimir/pilot-hard/edit_annotations.py, outside the bundle (not replayed)",
+    "ledger events [14, 15, 87] depend on /home/vladimir/pilot-hard/kevm-inputs/evm-semantics.tar.gz, outside the bundle (not replayed)",
+    "ledger events [60, 61, 92] depend on /home/vladimir/pilot-hard/kevm-src/evm-semantics-source, outside the bundle (not replayed)",
+    "ledger events [46, 57, 66, 75, 101, 109, 111, 113, 115, 116, 117, 119, 131] depend on /home/vladimir/sheaf/tcg/pilot/tools/mutant_witness.py, outside the bundle (not replayed)"
+  ]
+}
