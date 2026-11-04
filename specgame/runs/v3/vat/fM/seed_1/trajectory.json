@@ -1,0 +1,334 @@
+{
+ "anthropic_version_header": "2026-10-21",
+ "calls": [
+  {
+   "cand": 1,
+   "id": "msg_011CghJ4vh8EV8sqFPJDYqvd",
+   "input_tokens": 8745,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 24548,
+   "round": 1,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 13431,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 8745,
+    "output_tokens": 24548,
+    "output_tokens_details": {
+     "thinking_tokens": 13431
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 149.892
+  },
+  {
+   "cand": 2,
+   "id": "msg_011CghLfhkxgCvGihXukKMJZ",
+   "input_tokens": 8745,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 21335,
+   "round": 1,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 11174,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 8745,
+    "output_tokens": 21335,
+    "output_tokens_details": {
+     "thinking_tokens": 11174
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 129.867
+  },
+  {
+   "cand": 1,
+   "id": "msg_011CghLqHi92qM6we4Gnapvf",
+   "input_tokens": 36103,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 19718,
+   "round": 2,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 10578,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 36103,
+    "output_tokens": 19718,
+    "output_tokens_details": {
+     "thinking_tokens": 10578
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 128.371
+  },
+  {
+   "cand": 2,
+   "id": "msg_011CghPSxJoV3ZTLCNydGbnm",
+   "input_tokens": 36103,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 20551,
+   "round": 2,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 11225,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 36103,
+    "output_tokens": 20551,
+    "output_tokens_details": {
+     "thinking_tokens": 11225
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 134.383
+  },
+  {
+   "cand": 1,
+   "id": "msg_011CghRPiG7481w6gLR7oJen",
+   "input_tokens": 56981,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 9003,
+   "round": 3,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 198,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 56981,
+    "output_tokens": 9003,
+    "output_tokens_details": {
+     "thinking_tokens": 198
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 41.897
+  },
+  {
+   "cand": 2,
+   "id": "msg_011CghTethKYW9dmyvTTsdFn",
+   "input_tokens": 56981,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 8992,
+   "round": 3,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 207,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 56981,
+    "output_tokens": 8992,
+    "output_tokens_details": {
+     "thinking_tokens": 207
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 41.508
+  }
+ ],
+ "condition": "fM",
+ "fallbacks": "none (a refusal is a failed candidate)",
+ "frozen": {
+  "B_A": 2000,
+  "effort": "high",
+  "k": 2,
+  "max_tokens": 64000,
+  "max_txs": 6,
+  "model": "claude-sonnet-5-5",
+  "per_mutant": 1,
+  "rounds": 3,
+  "seed_A": 0,
+  "timeout_ms": 60000,
+  "wall_timeout_s": 600.0
+ },
+ "k": 2,
+ "model_requested": "claude-sonnet-5-5",
+ "model_returned": "claude-sonnet-5-5",
+ "prompt_sha256": {
+  "feedback_f0.md": "0044d327cc58966ada3797c50835ad058cec94540f164e15dd9297a13e542700",
+  "feedback_fM.md": "3e22dc0e896d07e8d89f272fddfe8e96e2c5f2236ca1beaf0cadb16dd4d468dd",
+  "feedback_fMplus.md": "21b6574b733ebbf918384b0a7f0e398806ac198fad8563f90a584a401b820dde",
+  "round_1.md": "4a875318c1a8d8a4ac88ab58be1c419798b62a2819336daf6bfc7ad62d691f3b",
+  "system.md": "8afcd74c44fcc2558575f072dc385146ad1a6e358ffe9ba3c81943be0d4b17ac"
+ },
+ "prompts_sha256": "fbd52777f1a512821d7964339f9b931c42c62b92c48b4739df0995e3c6adc74c",
+ "result": {
+  "W_star": {
+   "sha256": "8e694a52835839294b9489a8653aac9e8f1083439298677da029575afe10e717",
+   "size": 21
+  },
+  "bundle": {
+   "exit": 0,
+   "stderr_tail": []
+  },
+  "events": [
+   {
+    "acc_t": "Unknown",
+    "kind": "unchanged",
+    "t": 1
+   },
+   {
+    "acc_t": "Unknown",
+    "kind": "weakening",
+    "t": 2
+   }
+  ],
+  "final": {
+   "acc": "Accept",
+   "cand": 1,
+   "round": 3
+  },
+  "kappa": {
+   "asserts": 134,
+   "determined": true,
+   "kappa": 134,
+   "unproved_over_H": 134,
+   "wall_s": 1590.099
+  },
+  "status": "bundle_holds",
+  "vacuity_a": {
+   "flagged": [],
+   "unknown": [
+    "check_rely_needs_ward",
+    "check_rely_effect",
+    "check_rely_needs_live",
+    "check_deny_needs_ward",
+    "check_deny_effect",
+    "check_deny_needs_live",
+    "check_hope_effect",
+    "check_nope_effect",
+    "check_init_effect",
+    "check_init_twice",
+    "check_init_needs_ward",
+    "check_frob_needs_init",
+    "check_file_sets_line",
+    "check_file_needs_ward",
+    "check_file_needs_live",
+    "check_file_unknown",
+    "check_file_spot",
+    "check_file_line",
+    "check_file_dust",
+    "check_file_ilk_needs_ward",
+    "check_file_ilk_needs_live",
+    "check_cage_effect",
+    "check_cage_needs_ward",
+    "check_dead_stays_dead_frob",
+    "check_dead_stays_dead_cage",
+    "check_slip_effect",
+    "check_slip_monotone",
+    "check_slip_frame_ilk",
+    "check_slip_frame_addr",
+    "check_slip_needs_ward",
+    "check_slip_underflow",
+    "check_flux_effect",
+    "check_flux_self",
+    "check_flux_needs_consent",
+    "check_flux_ilk",
+    "check_move_effect",
+    "check_move_self",
+    "check_move_needs_consent",
+    "check_frob_collateral",
+    "check_frob_debt_units",
+    "check_frob_dai_zero",
+    "check_frob_dai_up",
+    "check_frob_dai_down",
+    "check_frob_frame",
+    "check_frob_roles_up",
+    "check_frob_roles_down",
+    "check_frob_safe_after",
+    "check_frob_ceiling_after",
+    "check_frob_dust_after",
+    "check_frob_ilk_ceiling",
+    "check_frob_unsafe",
+    "check_frob_needs_consent_u",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_fork_totals",
+    "check_fork_needs_consent_src",
+    "check_fork_needs_consent_dst",
+    "check_grab_collateral",
+    "check_grab_frame",
+    "check_grab_roles",
+    "check_grab_needs_ward",
+    "check_heal_effect",
+    "check_heal_frame",
+    "check_suck_effect",
+    "check_suck_roles",
+    "check_suck_needs_ward",
+    "check_fold_frame",
+    "check_fold_needs_ward",
+    "check_fold_needs_live"
+   ],
+   "wall_s": 800.287
+  },
+  "verify": {
+   "exit": 0,
+   "ms_cert": {
+    "killed": 5,
+    "total": 8
+   },
+   "summary": [
+    "label (T*, affects no verdict): mutant 7a3cae9442cf operator=remove-require fault_class=missing-bound-check",
+    "label (T*, affects no verdict): mutant f23fd9948544 operator=remove-statement fault_class=accounting",
+    "verdict: HOLDS, exit 0"
+   ],
+   "verdict": "HOLDS"
+  }
+ },
+ "rounds": 3,
+ "sdk_version": "2.3.0",
+ "seed": 1,
+ "seed_param": "not supported by the Messages API (SDK has no seed parameter); the trajectory seed is recorded only",
+ "temperature_note": "API default; non-default values rejected by this model; not sent",
+ "temperature_recorded": 1.0,
+ "tokens": {
+  "input": 203658,
+  "output": 104147,
+  "thinking": 46813,
+  "total": 307805
+ }
+}

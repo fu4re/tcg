@@ -1,0 +1,229 @@
+{
+ "artifact": "/home/vladimir/sheaf/tcg-specgames/specgame/contracts/CappedToken.sol",
+ "asserts": 19,
+ "check_over_H": {
+  "cpu_s": 380.883,
+  "duration_s": 67.896,
+  "reason": "determined"
+ },
+ "checks_over_H": [
+  {
+   "cached": false,
+   "check": "check_supply_within_cap",
+   "duration_s": 5.2,
+   "reason": "counterexample",
+   "solc_input_sha256": "faf7897311b16db7f009139b4ad535a7cd36030fedbdae17d83d9df1e5d97acf",
+   "verdict": "Refute"
+  },
+  {
+   "cached": false,
+   "check": "check_mint_respects_cap",
+   "duration_s": 6.979,
+   "reason": "counterexample",
+   "solc_input_sha256": "57929c4fcbefeb11d54b72bd63d618bd6482cbe917d9e82bcc52f3b765a65958",
+   "verdict": "Refute"
+  },
+  {
+   "cached": true,
+   "check": "check_mint_over_cap_reverts",
+   "duration_s": 3.033,
+   "reason": "counterexample",
+   "solc_input_sha256": "a2e2717b0fc3b39788917132bc357ef4c9dc708c12523cb26c1d9dcf4d49920f",
+   "verdict": "Refute"
+  },
+  {
+   "cached": true,
+   "check": "check_only_owner_mints",
+   "duration_s": 3.7,
+   "reason": "counterexample",
+   "solc_input_sha256": "96e3aa952479e10e774e87ab903748aadf161b54b0b78ccbb53dc00cbbfe48a4",
+   "verdict": "Refute"
+  },
+  {
+   "cached": false,
+   "check": "check_mint_exact",
+   "duration_s": 15.532,
+   "reason": "counterexample",
+   "solc_input_sha256": "42c0cdf3000377c2d223ad195b70890512fc85b66cb9c6e0bf9751b425a0d009",
+   "verdict": "Refute"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_ok_and_supply",
+   "duration_s": 43.401,
+   "reason": "counterexample",
+   "solc_input_sha256": "9c1f2ac7227c54e42198604bfb7f6fd6ec11bf33851266a54c158e2ad24f3498",
+   "verdict": "Refute"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_moves_exact",
+   "duration_s": 3.644,
+   "reason": "unproved",
+   "solc_input_sha256": "df4ea9aa158b5312e2a6b6254423e0ad6e1c658a9323c5616db0856cae377d1e",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_self",
+   "duration_s": 60.279,
+   "reason": "unproved",
+   "solc_input_sha256": "6ec25d65dfa0f364712ce5092ca2e0b409a6e8348924b8dab29e12c3497d9632",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_others_unchanged",
+   "duration_s": 6.972,
+   "reason": "unproved",
+   "solc_input_sha256": "ddb55a5d869f6ad1232b83eecb5246dc694cee2d68b1038f2a93386807c02fdb",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": true,
+   "check": "check_no_overdraft",
+   "duration_s": 3.656,
+   "reason": "counterexample",
+   "solc_input_sha256": "999a948b47dd0a12364062e3e11d80e389852510230ff76bc61150cb8a3dde02",
+   "verdict": "Refute"
+  },
+  {
+   "cached": true,
+   "check": "check_mint_keeps_owner_cap",
+   "duration_s": 128.413,
+   "reason": "violation_without_counterexample",
+   "solc_input_sha256": "c2864f0e39da21d915a64edafc5716164eda91ee53efeb3cf51da1ed63a57216",
+   "verdict": "Refute"
+  },
+  {
+   "cached": true,
+   "check": "check_transfer_keeps_owner_cap",
+   "duration_s": 100.074,
+   "reason": "violation_without_counterexample",
+   "solc_input_sha256": "5c35e31772964634c79c5e7351e9eb42ad43d10bb9672be4536be01ad2484c61",
+   "verdict": "Refute"
+  }
+ ],
+ "determined": true,
+ "havoc_sha256": "d3a684d8efd02f86a5b945026dbaace20a759b7f57c392985e28edecfa871425",
+ "kappa": 19,
+ "mode": "isolated",
+ "non_tautological_unproved": 6,
+ "rows": [
+  {
+   "function": "check_supply_within_cap",
+   "line": 10,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_mint_respects_cap",
+   "line": 11,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_mint_over_cap_reverts",
+   "line": 12,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_only_owner_mints",
+   "line": 12,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_mint_exact",
+   "line": 14,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_mint_exact",
+   "line": 15,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_mint_exact",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_mint_exact",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_transfer_ok_and_supply",
+   "line": 12,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_transfer_ok_and_supply",
+   "line": 13,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_transfer_moves_exact",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_transfer_moves_exact",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_transfer_self",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_transfer_others_unchanged",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_no_overdraft",
+   "line": 12,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_mint_keeps_owner_cap",
+   "line": 13,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_mint_keeps_owner_cap",
+   "line": 14,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_transfer_keeps_owner_cap",
+   "line": 13,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_transfer_keeps_owner_cap",
+   "line": 14,
+   "status_over_H": "violated",
+   "tautological": false
+  }
+ ],
+ "spec": "/home/vladimir/sheaf/tcg-specgames/specgame/runs/v2/f0/seed_0/round_3/cand_1/Spec.sol"
+}

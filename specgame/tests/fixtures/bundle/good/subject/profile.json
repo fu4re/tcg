@@ -1,0 +1,85 @@
+{
+ "version": 1,
+ "name": "capped_token",
+ "contract": {
+  "file": "CappedToken.sol",
+  "name": "CappedToken"
+ },
+ "constructor": {
+  "params": [
+   {
+    "name": "cap",
+    "type": "uint256"
+   }
+  ]
+ },
+ "spec": {
+  "constructor": "constructor(uint256 cap_) CappedToken(cap_) {}",
+  "probes": [
+   [
+    {
+     "name": "a",
+     "type": "address"
+    },
+    {
+     "name": "b",
+     "type": "address"
+    },
+    {
+     "name": "x",
+     "type": "uint256"
+    },
+    {
+     "name": "y",
+     "type": "uint256"
+    }
+   ]
+  ]
+ },
+ "senders": [
+  "alice",
+  "bob",
+  "carol"
+ ],
+ "pools": {
+  "address": {
+   "alice": "0x1111111111111111111111111111111111111111",
+   "bob": "0x2222222222222222222222222222222222222222",
+   "carol": "0x3333333333333333333333333333333333333333",
+   "zero": "0x0000000000000000000000000000000000000000"
+  }
+ },
+ "generator": {
+  "kind": "capped-v1"
+ },
+ "functions": [
+  "mint(address,uint256)",
+  "transfer(address,uint256)"
+ ],
+ "setup": [],
+ "observation": [
+  {
+   "getter": "owner()",
+   "keys": []
+  },
+  {
+   "getter": "cap()",
+   "keys": []
+  },
+  {
+   "getter": "totalSupply()",
+   "keys": []
+  },
+  {
+   "getter": "balanceOf(address)",
+   "keys": [
+    [
+     "alice",
+     "bob",
+     "carol",
+     "zero"
+    ]
+   ]
+  }
+ ]
+}

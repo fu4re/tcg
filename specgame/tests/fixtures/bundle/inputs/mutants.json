@@ -1,0 +1,108 @@
+{
+ "base": {
+  "path": "inputs/CappedToken.sol",
+  "runtime_sha256": "c7761d01ada538f5a478bce8861f9812b5c29a81de9c80cbbcce91f42abc063c",
+  "source_sha256": "56036495fb2e6e35de9977cec3cbd40c27433256a96b0e875e36aaae6c5c5bc9"
+ },
+ "mutants": [
+  {
+   "behavioural_duplicate_of": [],
+   "fault_class": "missing_state_update",
+   "id": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+   "operator": "statement_deletion",
+   "path": "inputs/m01_mint_no_supply.sol",
+   "properness": {
+    "obs_base_sha256": "0988437d2faf29999125b61b40649a26b2bb550710cfc12077f4d3ea06cb7070",
+    "obs_mutant_sha256": "e2a3b183bfec7d95c9ec1e12b59f89f193877e4ad835cedc836025d378e1842f",
+    "sigma": {
+     "ctor": {
+      "cap": "100"
+     },
+     "deployer": "alice",
+     "txs": [
+      {
+       "args": [
+        "alice",
+        "50"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "alice"
+      }
+     ],
+     "version": 1
+    }
+   },
+   "source_sha256": "9709177cacec8de5629d4451ad1558520bbe955b5acfa565c78c6ff09c56024d",
+   "status": "included"
+  },
+  {
+   "behavioural_duplicate_of": [],
+   "fault_class": "missing_bound_check",
+   "id": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+   "operator": "require_deletion",
+   "path": "inputs/m02_no_cap_check.sol",
+   "properness": {
+    "obs_base_sha256": "94c37f4bcfd6624c73a73bcca9e84ad61ef442e7e983b07b1d50d8db13d79d10",
+    "obs_mutant_sha256": "8ef1a9d9280682398175207aa12624040bd5cf2653adc029d87789f2ea40f175",
+    "sigma": {
+     "ctor": {
+      "cap": "100"
+     },
+     "deployer": "carol",
+     "txs": [
+      {
+       "args": [
+        "zero",
+        "101"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      }
+     ],
+     "version": 1
+    }
+   },
+   "source_sha256": "e2bd43a1481b2f5edd082b05464f0e115a42d1a3317227a4a60d88bfab5a4ec9",
+   "status": "included"
+  },
+  {
+   "behavioural_duplicate_of": [],
+   "fault_class": "missing_state_update",
+   "id": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+   "operator": "statement_deletion",
+   "path": "inputs/m03_transfer_no_debit.sol",
+   "properness": {
+    "obs_base_sha256": "9ba088c094b7ec89d2a533e1d2a067f22917846a4c941e18c4465497dbb8c333",
+    "obs_mutant_sha256": "83c54fe8b819185e0d63d34cbeda0379ffcc73ffc1c542813be72369529661be",
+    "sigma": {
+     "ctor": {
+      "cap": "100"
+     },
+     "deployer": "alice",
+     "txs": [
+      {
+       "args": [
+        "alice",
+        "7"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "alice",
+        "1"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "alice"
+      }
+     ],
+     "version": 1
+    }
+   },
+   "source_sha256": "33a2a8c082d96342a10abcb3692680130cac7ba17b2f63afd45a23b1af45833e",
+   "status": "included"
+  }
+ ],
+ "version": 1
+}

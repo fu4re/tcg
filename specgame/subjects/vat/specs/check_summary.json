@@ -1,0 +1,653 @@
+{
+ "checks": {
+  "check_cage_needs_auth": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.78,
+   "harness_sha256": "d239d09c25301c06fc6cc3ba699b23d448a53d53fe1948c15847161b1fbb7f37",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "c8669c084509f98a8eb4df68ec0d9368a2da38707d73e3dd40a1bbb081ce5e47",
+   "verdict": "Accept"
+  },
+  "check_deny_needs_auth": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.536,
+   "harness_sha256": "613402e24e64ff75e9689534c457e655b5b447e6733eb50333331ea2b1c0c312",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "c51d148819317405e34091ffe2479ce1aafb38e0bc6c6351b667fe930d22cf0f",
+   "verdict": "Accept"
+  },
+  "check_file_global_needs_auth": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.944,
+   "harness_sha256": "bb0f5b478f4dc827bb76a59c6151cd13dc0784d5864c35272d0ba9dcf8f12ba9",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "ac6244fc30c79302e43d97f210466d4ad2e7ffc01c294d518aea7d23e5c0023e",
+   "verdict": "Accept"
+  },
+  "check_file_ilk_needs_auth": {
+   "asserts": [
+    "unproved"
+   ],
+   "duration_s": 63.063,
+   "harness_sha256": "0aaff7a13f0f06f4195b99fb7af0a4c617298cb23376eff136af03822d0cf659",
+   "reason": "unproved",
+   "solc_input_sha256": "b78430f1a49a346e8db1e325974a2e4be20c8d7643065ffb0254e8b5f8cb0e6b",
+   "verdict": "Unknown"
+  },
+  "check_flux_exact": {
+   "asserts": [
+    "unproved",
+    "safe"
+   ],
+   "duration_s": 66.934,
+   "harness_sha256": "23f6e0390259428a5dd02d65b2c9aea068aac1d15c8276f5f794b35f64483be4",
+   "reason": "unproved",
+   "solc_input_sha256": "f237ca8c97a4c0c9ad6f9b5f497a5b98d14dd1b0e7f76f66f1ed9b8bc9f50fed",
+   "verdict": "Unknown"
+  },
+  "check_flux_needs_consent": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 6.449,
+   "harness_sha256": "7737a5800b7c3458ce7c31c0342bab4b3183eafd3ba4fe4c9bb7173057fcd4af",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "7bfe6cef14de80025f01770f880f9666af931427ab704fb9a64da6ef3b76f5dc",
+   "verdict": "Accept"
+  },
+  "check_fold_dai_debt_exact": {
+   "asserts": [
+    "unproved",
+    "unproved"
+   ],
+   "duration_s": 125.241,
+   "harness_sha256": "3b15beadbcdd1f60c7d5f62bb3753ebfc0cc1effbc8d74d104ae9ed9a05e3ba6",
+   "reason": "unproved",
+   "solc_input_sha256": "08c142546a91e369f1c9675b4d0d97e2f8ea4798fcfa192facd0d4ac6d575c13",
+   "verdict": "Unknown"
+  },
+  "check_fold_needs_auth": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.625,
+   "harness_sha256": "0874fac85a1e556bb1751eaa8d147686f5874c80a287f7095ae8fe9c5625c14a",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "288782ebc85d2d60fcdda4269680f386978451eba230c892aca72a08bbaecffe",
+   "verdict": "Accept"
+  },
+  "check_fold_needs_live": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.197,
+   "harness_sha256": "623b6b2f218856b753a2d5cb5d15e6220de83ceffc19122650247e417eaa2b55",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "0a616ebaab10aa6e72ec556fdc616f46a0ce5917f8e1e2e5d1fe5470e287888a",
+   "verdict": "Accept"
+  },
+  "check_fold_rate_exact": {
+   "asserts": [
+    "unproved",
+    "unproved"
+   ],
+   "duration_s": 125.156,
+   "harness_sha256": "b09f5830afde4ea619b7378e3b207a619cf5338c83465e2438a1c0b741d709e7",
+   "reason": "unproved",
+   "solc_input_sha256": "cff6cb3d75c0319940b5f5c34f24129d2cf741afe5964af42d01647c647a1a06",
+   "verdict": "Unknown"
+  },
+  "check_fork_needs_dst_consent": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 7.255,
+   "harness_sha256": "b64c9a65a86b902bb1863c3f024454e6865e7b3cf20f0cd7fb41601af242c3b7",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "8ebd6f13f8dc18bf562303d377327e84c195ea6c7982343ce34cb48fb8527ef1",
+   "verdict": "Accept"
+  },
+  "check_fork_needs_src_consent": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 6.466,
+   "harness_sha256": "6fec769c9eb93addb94e59972f596e8dd53547fae6d0498fb4dbfb2caa73c069",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "3b66013252cfa18eda947d863b3e0a67a3a4402fa2bcdd49d34f2ff4b55eed76",
+   "verdict": "Accept"
+  },
+  "check_frob_dai_debt_exact": {
+   "asserts": [
+    "unproved",
+    "unproved"
+   ],
+   "duration_s": 124.637,
+   "harness_sha256": "8a27dcb183487ed9a506b5f184fc58e1385a9052c594af0c00c81b66964e783a",
+   "reason": "unproved",
+   "solc_input_sha256": "faa179df44f986cd0658277f3d068a2ca70c1872d0986f3b9d27e867691e4b2d",
+   "verdict": "Unknown"
+  },
+  "check_frob_gem_exact": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 4.471,
+   "harness_sha256": "a083b8f143b2913baf5bead4af61327df75e46cd779859b458117c356873d0c6",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "cde374dec73cf35ab558334bf4cc3afc2f7caf5f4d50e033b039531185aaed47",
+   "verdict": "Accept"
+  },
+  "check_frob_ilk_exact": {
+   "asserts": [
+    "unproved",
+    "safe"
+   ],
+   "duration_s": 67.237,
+   "harness_sha256": "f9f141fe1f9a24e29bbe7e88d3108462f7f1505246676586060eb746a3a5c9fe",
+   "reason": "unproved",
+   "solc_input_sha256": "79fe8dfb348d817977bf4ae979da2c99d6fb9925be5a20e1a12be93a948af902",
+   "verdict": "Unknown"
+  },
+  "check_frob_needs_live": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 6.375,
+   "harness_sha256": "03675e9a016dd3c404810b2e72b3a557897088bdd8d0a5dc2c3c2795ed4e77e1",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "4a68a654fe6d381182eb77b2f5a05023e5e277f19086c1ba281bac5b4843653e",
+   "verdict": "Accept"
+  },
+  "check_frob_needs_u_consent": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.704,
+   "harness_sha256": "8d07144a969c647ebcdcc65dd8de2b18586a2a9f7a8ae6b11d5c64c0d3abe1a8",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "97a1c169f4e2efcb92ca11844d46d6d5cc7a64ce02a1e73ff6d04bca36adac2b",
+   "verdict": "Accept"
+  },
+  "check_frob_needs_v_consent": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 6.565,
+   "harness_sha256": "190bbeab40ed20efb611589da67ee80cb3bc27e9491af82bc091edcd2cbf0a3d",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "4f58978993344654cc496240fd3e9b64d7f2d6e6b8858569a95a03cd06b47460",
+   "verdict": "Accept"
+  },
+  "check_frob_needs_w_consent": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 6.99,
+   "harness_sha256": "cec0953d0426a6563074261f8bd2b5136373efe55ffe248a548da961cf80f254",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "0e0bac904b1b6b63ccc74121c4ba8876ec4da7e5be37a839b873fbb8e7cb1714",
+   "verdict": "Accept"
+  },
+  "check_frob_not_dusty": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.986,
+   "harness_sha256": "966ebea1a171cf72cb6e9eeb4c6351e7968e183941d4ac6ec835b3d97633d6c7",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "f21b93b4892cdc28354cda42740a9e6f16eb6ab982ce9bfdd94c51f1eabec739",
+   "verdict": "Accept"
+  },
+  "check_frob_riskier_is_safe": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.844,
+   "harness_sha256": "aa23e8b2ae3a094a6a43fd1d565993bcdac3a961e890e051536773e6fd801dfd",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "35095ecd987f46dec505eb3f90884280a09b6d9f89c04cec7d38d52e0df80883",
+   "verdict": "Accept"
+  },
+  "check_frob_urn_exact": {
+   "asserts": [
+    "unproved",
+    "unproved"
+   ],
+   "duration_s": 126.021,
+   "harness_sha256": "8811ae88f5efb693eb6a887abc3fb12e1dcbd44cfab2a1e4778ddc0b00decb5b",
+   "reason": "unproved",
+   "solc_input_sha256": "84d1048b17cec77c2cb87ea102ee1dac25f50450a2c2f1d2a7dc91e14d971075",
+   "verdict": "Unknown"
+  },
+  "check_frob_within_ceilings": {
+   "asserts": [
+    "safe",
+    "safe"
+   ],
+   "duration_s": 9.014,
+   "harness_sha256": "d3071d1682a0db8a0780f1a667b51c3e3877192b034b128c9d93bd3b213c9833",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "496766240164e881e4358e332ee9e603e49ffd3259e1cd5a2f266f56c1d2e34e",
+   "verdict": "Accept"
+  },
+  "check_grab_gem_exact": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.824,
+   "harness_sha256": "aa2b04e5fcfc79be6f39bf297e1ab21ee1454ef4b62ff0b8ffec965588e124d1",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "26b0e056857fb110476864394c332212a811cf96bf7a0885c7517efcd9ac6bc1",
+   "verdict": "Accept"
+  },
+  "check_grab_needs_auth": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 6.169,
+   "harness_sha256": "1ecf1d8e035f7bb83e78b13a3212a5f7b10209592802507b3e6a35b0045229c9",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "32069859f58ec3b455791371960308fb0150cde9de7b4469d915c6df66863367",
+   "verdict": "Accept"
+  },
+  "check_grab_sin_vice_exact": {
+   "asserts": [
+    "unproved",
+    "unproved",
+    "safe"
+   ],
+   "duration_s": 127.856,
+   "harness_sha256": "0b5ede31d15a3facf66b502af3e1e27db64c6e0ba9f4cdbea78dab017c241657",
+   "reason": "unproved",
+   "solc_input_sha256": "96d3986a2f716d26cfe54eee892cb45d8aaf6d8f8c7d6a9388299651ddc6fb10",
+   "verdict": "Unknown"
+  },
+  "check_grab_urn_ilk_exact": {
+   "asserts": [
+    "unproved",
+    "unproved",
+    "unproved"
+   ],
+   "duration_s": 186.451,
+   "harness_sha256": "329d406eefa98424002f9fa81292d436aa847a291979e143eb662d859c3f1528",
+   "reason": "unproved",
+   "solc_input_sha256": "aeb15e1707ebd3eec13a5a52fdf23bd96335f907e5d2872a310d941ed7b08d26",
+   "verdict": "Unknown"
+  },
+  "check_heal_exact": {
+   "asserts": [
+    "safe",
+    "safe",
+    "safe",
+    "safe"
+   ],
+   "duration_s": 18.418,
+   "harness_sha256": "3bec912db4eb954b5ce9cc7346fa01c5f84c1b1b3dc03700ec992c893f13e665",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "36181940f20a2505e4f97dfb716f08dd7f5000010f98f002f6bc29a58620bd54",
+   "verdict": "Accept"
+  },
+  "check_hope_own_only": {
+   "asserts": [
+    "safe",
+    "safe"
+   ],
+   "duration_s": 11.399,
+   "harness_sha256": "ce9b3c91e9db00d4157ebd8ca72c17de2c1f849b7b33bbc6a0a639c1d9309518",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "041c077f7e2cc3008fe83c99be7facbe9cb5f24a5fbe258c031f7af944347627",
+   "verdict": "Accept"
+  },
+  "check_init_needs_auth": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.72,
+   "harness_sha256": "807f9a672aa29eaba6d4e8eb955dacc3932996ccd54ab2fc93456d076596588a",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "cf56c38c24ee6c1552900ba1efa86805a9c37f32c0789268dddd8fbdaf0edcd2",
+   "verdict": "Accept"
+  },
+  "check_move_exact": {
+   "asserts": [
+    "unproved",
+    "safe"
+   ],
+   "duration_s": 67.218,
+   "harness_sha256": "6a84d5b3c2daabbfb2040ad8a16e094ff138dceab8af60035240256eb0b0eb4b",
+   "reason": "unproved",
+   "solc_input_sha256": "4784cfdb79ff2630a7d9c0595995b9b1b5b88845082342b64ac419d8a4536e84",
+   "verdict": "Unknown"
+  },
+  "check_move_needs_consent": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 6.749,
+   "harness_sha256": "138a770c0799c827db6bfda508469457102c6ed8680194299bcb093e10626e50",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "29cd366a732d0f628a29f720b6a1d999c4093257614feb87566f9c8578ee2f9d",
+   "verdict": "Accept"
+  },
+  "check_move_others_and_debt_unchanged": {
+   "asserts": [
+    "safe",
+    "safe"
+   ],
+   "duration_s": 9.69,
+   "harness_sha256": "609298633dcb5a7d5e710d8f70aee2eb22eff5a51b12ade7061e3b7ebce0987d",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "fe78cbb5a796ae706aceb6316e791408f43d059b046df1744e5dbbf593fd62fc",
+   "verdict": "Accept"
+  },
+  "check_move_self_unchanged": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.487,
+   "harness_sha256": "daa016715b23153b43ca8145bcf322849d1eb4b7ab78ad7f6f3cebd39afb9cb1",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "efece358fd14b006efad3b441923c004dc061f3a0629a75d38cf107493915e70",
+   "verdict": "Accept"
+  },
+  "check_nope_own_only": {
+   "asserts": [
+    "safe",
+    "safe"
+   ],
+   "duration_s": 11.325,
+   "harness_sha256": "a53019d493c3df0734ec31dfa003cb86ba8b2f1e702812de1f59fa2800b93cf9",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "5e3f262f93bc8754a675ef34caa3c7ebc45f930fa15dc166b90c2edbb5c44a9c",
+   "verdict": "Accept"
+  },
+  "check_rely_needs_auth": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 6.031,
+   "harness_sha256": "893567d035fde3f16a006930e563869f3929f3f034ba5071ed29b7b3bdd2e191",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "3e82e283ccdd3ac04ac86d48ebe78aa90cbcb94739e02536c1be3decfae63e50",
+   "verdict": "Accept"
+  },
+  "check_slip_needs_auth": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 6.092,
+   "harness_sha256": "776e1072e37f4f60f2c31cd5cd10016eb3294f5d282ca0de99efae7ffc47e817",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "a57e3d6f8c4da93ef30bd5aa30e0a03928547e18784af4285f32482d2ddd083e",
+   "verdict": "Accept"
+  },
+  "check_suck_exact": {
+   "asserts": [
+    "safe",
+    "safe",
+    "safe",
+    "safe"
+   ],
+   "duration_s": 19.499,
+   "harness_sha256": "81c69150a74a83e5eff6053cc2b2c63af27387f86211de55e579bc5540c68c83",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "fcd908b4e76cae95f4fb68e6476a0fe915bd21c2f1a823365d8845e360bdfe22",
+   "verdict": "Accept"
+  },
+  "check_suck_needs_auth": {
+   "asserts": [
+    "safe"
+   ],
+   "duration_s": 5.462,
+   "harness_sha256": "5821caa3c5bf14645026d843a418a5ef15120ca75fc08465775adee6370aad8d",
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "35070af0c5ef97842f584e143c80e1899b789cb452949387497549b507bc4ff0",
+   "verdict": "Accept"
+  },
+  "check_two_dai_within_debt": {
+   "asserts": [
+    "unproved"
+   ],
+   "duration_s": 63.07,
+   "harness_sha256": "720ce4cf8be008cd7cf4a1ffd600cd8aee4926b92abd0cca1a5425405ca979c9",
+   "reason": "unproved",
+   "solc_input_sha256": "436eb6b0f82c9cde202de62932bc1fe991067b3a9c1798769ac9d99cb3beb5d9",
+   "verdict": "Unknown"
+  },
+  "check_two_sin_within_vice": {
+   "asserts": [
+    "unproved"
+   ],
+   "duration_s": 62.898,
+   "harness_sha256": "cf516f982a4c1bb62b00c9b38844cb7ef893cfecfa821025cf01b9bdbc5a786f",
+   "reason": "unproved",
+   "solc_input_sha256": "e550c0c0fe7cc88bcea6409a9a6b0a68f711804bf395cae664e752d41007a7f5",
+   "verdict": "Unknown"
+  },
+  "check_vice_within_debt": {
+   "asserts": [
+    "unproved"
+   ],
+   "duration_s": 62.838,
+   "harness_sha256": "e39436e15a0447db58d74ee5db1ecb52a265dae1e22c7af88ab18b3641246fda",
+   "reason": "unproved",
+   "solc_input_sha256": "d44271d58941e67ef603ab8c724703768582b377cc02ef03b77aeafd2979c1aa",
+   "verdict": "Unknown"
+  }
+ },
+ "command": "python tools/check.py subjects/vat/specs/<phi>.sol --subject vat --json <out>",
+ "specs": {
+  "phi_auth": {
+   "checks": [
+    "check_rely_needs_auth",
+    "check_deny_needs_auth",
+    "check_init_needs_auth",
+    "check_file_global_needs_auth",
+    "check_file_ilk_needs_auth",
+    "check_slip_needs_auth",
+    "check_grab_needs_auth",
+    "check_suck_needs_auth",
+    "check_fold_needs_auth",
+    "check_cage_needs_auth"
+   ],
+   "reason": "unproved",
+   "spec_source_sha256": "dc5e819ed6ece0d5965693092d03c94b191b7407faa5a2ab5365c6ebb70c1343",
+   "unknown": [
+    "check_file_ilk_needs_auth"
+   ],
+   "verdict": "Unknown"
+  },
+  "phi_books": {
+   "checks": [
+    "check_two_dai_within_debt",
+    "check_two_sin_within_vice",
+    "check_vice_within_debt"
+   ],
+   "reason": "unproved",
+   "spec_source_sha256": "6e1a746727460d0ef45ef4fc24e0433f67a3ad5fca642bbab4a2a9e5557a47f6",
+   "unknown": [
+    "check_two_dai_within_debt",
+    "check_two_sin_within_vice",
+    "check_vice_within_debt"
+   ],
+   "verdict": "Unknown"
+  },
+  "phi_consent": {
+   "checks": [
+    "check_frob_needs_u_consent",
+    "check_frob_needs_v_consent",
+    "check_frob_needs_w_consent",
+    "check_fork_needs_src_consent",
+    "check_fork_needs_dst_consent",
+    "check_flux_needs_consent",
+    "check_move_needs_consent",
+    "check_hope_own_only",
+    "check_nope_own_only"
+   ],
+   "reason": "all_checks_safe",
+   "spec_source_sha256": "fc287a22f8713184dd766f04de8f3f4286265ba2648733e9b57bd365d0bee157",
+   "unknown": [],
+   "verdict": "Accept"
+  },
+  "phi_fold": {
+   "checks": [
+    "check_fold_rate_exact",
+    "check_fold_dai_debt_exact",
+    "check_fold_needs_live"
+   ],
+   "reason": "unproved",
+   "spec_source_sha256": "77955717c83c77b22db2f70649369b2b33ba4d6336f0af0b9ff4c8177ab83d51",
+   "unknown": [
+    "check_fold_rate_exact",
+    "check_fold_dai_debt_exact"
+   ],
+   "verdict": "Unknown"
+  },
+  "phi_frob": {
+   "checks": [
+    "check_frob_urn_exact",
+    "check_frob_ilk_exact",
+    "check_frob_gem_exact",
+    "check_frob_dai_debt_exact"
+   ],
+   "reason": "unproved",
+   "spec_source_sha256": "cbfb72a63c2670cad72eb2135a6a4936f10cba52f355dc7c4d4d68cc54ff7747",
+   "unknown": [
+    "check_frob_urn_exact",
+    "check_frob_ilk_exact",
+    "check_frob_dai_debt_exact"
+   ],
+   "verdict": "Unknown"
+  },
+  "phi_frob_guards": {
+   "checks": [
+    "check_frob_within_ceilings",
+    "check_frob_riskier_is_safe",
+    "check_frob_not_dusty",
+    "check_frob_needs_live"
+   ],
+   "reason": "all_checks_safe",
+   "spec_source_sha256": "b83d51709341ad327486d086c767b5c6e40a4b54950b6377a89a18c7d7fa5e25",
+   "unknown": [],
+   "verdict": "Accept"
+  },
+  "phi_full": {
+   "checks": [
+    "check_rely_needs_auth",
+    "check_deny_needs_auth",
+    "check_init_needs_auth",
+    "check_file_global_needs_auth",
+    "check_file_ilk_needs_auth",
+    "check_slip_needs_auth",
+    "check_grab_needs_auth",
+    "check_suck_needs_auth",
+    "check_fold_needs_auth",
+    "check_cage_needs_auth",
+    "check_frob_needs_u_consent",
+    "check_frob_needs_v_consent",
+    "check_frob_needs_w_consent",
+    "check_fork_needs_src_consent",
+    "check_fork_needs_dst_consent",
+    "check_flux_needs_consent",
+    "check_move_needs_consent",
+    "check_hope_own_only",
+    "check_nope_own_only",
+    "check_frob_urn_exact",
+    "check_frob_ilk_exact",
+    "check_frob_gem_exact",
+    "check_frob_dai_debt_exact",
+    "check_frob_within_ceilings",
+    "check_frob_riskier_is_safe",
+    "check_frob_not_dusty",
+    "check_frob_needs_live",
+    "check_fold_rate_exact",
+    "check_fold_dai_debt_exact",
+    "check_fold_needs_live",
+    "check_move_exact",
+    "check_move_self_unchanged",
+    "check_move_others_and_debt_unchanged",
+    "check_flux_exact",
+    "check_grab_urn_ilk_exact",
+    "check_grab_gem_exact",
+    "check_grab_sin_vice_exact",
+    "check_heal_exact",
+    "check_suck_exact",
+    "check_two_dai_within_debt",
+    "check_two_sin_within_vice",
+    "check_vice_within_debt"
+   ],
+   "reason": "unproved",
+   "solc_total_s": 1485.686,
+   "spec_source_sha256": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac",
+   "unknown": [
+    "check_file_ilk_needs_auth",
+    "check_frob_urn_exact",
+    "check_frob_ilk_exact",
+    "check_frob_dai_debt_exact",
+    "check_fold_rate_exact",
+    "check_fold_dai_debt_exact",
+    "check_move_exact",
+    "check_flux_exact",
+    "check_grab_urn_ilk_exact",
+    "check_grab_sin_vice_exact",
+    "check_two_dai_within_debt",
+    "check_two_sin_within_vice",
+    "check_vice_within_debt"
+   ],
+   "verdict": "Unknown",
+   "wall_s": 410.946
+  },
+  "phi_grab_heal_suck": {
+   "checks": [
+    "check_grab_urn_ilk_exact",
+    "check_grab_gem_exact",
+    "check_grab_sin_vice_exact",
+    "check_heal_exact",
+    "check_suck_exact"
+   ],
+   "reason": "unproved",
+   "spec_source_sha256": "abbc339c7121fbd6145f05bc0578ad11e6de981ea4e42c29f9edf5f3152316e6",
+   "unknown": [
+    "check_grab_urn_ilk_exact",
+    "check_grab_sin_vice_exact"
+   ],
+   "verdict": "Unknown"
+  },
+  "phi_move_flux": {
+   "checks": [
+    "check_move_exact",
+    "check_move_self_unchanged",
+    "check_move_others_and_debt_unchanged",
+    "check_flux_exact"
+   ],
+   "reason": "unproved",
+   "spec_source_sha256": "c35bf94b1b7e609199a66cc196ef53fcebcc5b2a8e5c041bf2d5e753d29c423a",
+   "unknown": [
+    "check_move_exact",
+    "check_flux_exact"
+   ],
+   "verdict": "Unknown"
+  },
+  "phi_top": {
+   "checks": [
+    "check_top"
+   ],
+   "reason": "all_checks_safe",
+   "spec_source_sha256": "02971fc2659b1775c51f917a73af1d392c226d31ed4122f7f274b0b815294ae0",
+   "unknown": [],
+   "verdict": "Accept"
+  }
+ },
+ "subject": "vat",
+ "timeout_ms": 60000,
+ "version": 1,
+ "wall_timeout_s": 600.0,
+ "workers": 4
+}

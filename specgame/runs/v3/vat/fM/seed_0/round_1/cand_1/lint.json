@@ -1,0 +1,16 @@
+{
+ "extracted": true,
+ "problems": [
+  "S9 line 257: check_flux_moves: require only in the leading block (Pre)",
+  "S9 line 258: check_flux_moves: require only in the leading block (Pre)",
+  "S9 line 270: check_flux_other_ilk: require only in the leading block (Pre)",
+  "S9 line 271: check_flux_other_ilk: require only in the leading block (Pre)",
+  "S9 line 281: check_flux_self: require only in the leading block (Pre)",
+  "S9 line 296: check_flux_underflow: require only in the leading block (Pre)",
+  "S9 line 297: check_flux_underflow: require only in the leading block (Pre)",
+  "S9 line 304: check_flux_overflow: require only in the leading block (Pre)",
+  "S9 line 305: check_flux_overflow: require only in the leading block (Pre)",
+  "S9 line 306: check_flux_overflow: require only in the leading block (Pre)",
+  "S9 line 307: check_flux_overflow: require only in the leading block (Pre)"
+ ]
+}

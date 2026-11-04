@@ -1,0 +1,298 @@
+{
+ "adversary_id": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+ "adversary_source_sha256": "b105a00768af4210c83e76bd70cdcd9829a3b4cfa0c4fa39380ca06b9f444346",
+ "discarded": [],
+ "kill_set": [
+  "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+  "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+  "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+  "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+  "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+  "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+  "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+ ],
+ "ms_cert_on_own_W": {
+  "killed": 7,
+  "total": 8
+ },
+ "mutants": [
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 14,
+    "success": 5,
+    "violation": 1
+   },
+   "checks": [
+    "check_cap_invariant",
+    "check_mint_exact",
+    "check_mint_keeps_owner_cap",
+    "check_mint_over_cap_reverts",
+    "check_mint_to_cap_exact",
+    "check_no_overdraft",
+    "check_non_owner_cannot_mint",
+    "check_transfer_exact",
+    "check_transfer_keeps_owner_cap",
+    "check_transfer_self"
+   ],
+   "killed": true,
+   "mutant": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+   "name": "m01_mint_no_owner",
+   "pair_runtime_sha256": "598034caa56f559c891a245d6ea792c633c6b8968dc058fa340849a80ca6fbc7",
+   "sigmas_tried": 2,
+   "wall_s": 0.131,
+   "witness_sigma_indices": [
+    1
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 29,
+    "success": 10,
+    "violation": 1
+   },
+   "checks": [
+    "check_cap_invariant",
+    "check_mint_exact",
+    "check_mint_keeps_owner_cap",
+    "check_mint_over_cap_reverts",
+    "check_mint_to_cap_exact",
+    "check_no_overdraft",
+    "check_non_owner_cannot_mint",
+    "check_transfer_exact",
+    "check_transfer_keeps_owner_cap",
+    "check_transfer_self"
+   ],
+   "killed": true,
+   "mutant": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+   "name": "m02_mint_no_cap",
+   "pair_runtime_sha256": "ba9adc5c78117c83df9cea92cf357b5648a40b94af70ef53f4969b6a57f3e908",
+   "sigmas_tried": 4,
+   "wall_s": 0.144,
+   "witness_sigma_indices": [
+    3
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 52,
+    "success": 17,
+    "violation": 1
+   },
+   "checks": [
+    "check_cap_invariant",
+    "check_mint_exact",
+    "check_mint_keeps_owner_cap",
+    "check_mint_over_cap_reverts",
+    "check_mint_to_cap_exact",
+    "check_no_overdraft",
+    "check_non_owner_cannot_mint",
+    "check_transfer_exact",
+    "check_transfer_keeps_owner_cap",
+    "check_transfer_self"
+   ],
+   "killed": true,
+   "mutant": "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+   "name": "m03_mint_cap_off_by_one",
+   "pair_runtime_sha256": "088194816e1e427f95b319ba9f758a845f7abf9c5722ed8f2e4aff0543a8363f",
+   "sigmas_tried": 7,
+   "wall_s": 0.184,
+   "witness_sigma_indices": [
+    6
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 7,
+    "success": 2,
+    "violation": 1
+   },
+   "checks": [
+    "check_cap_invariant",
+    "check_mint_exact",
+    "check_mint_keeps_owner_cap",
+    "check_mint_over_cap_reverts",
+    "check_mint_to_cap_exact",
+    "check_no_overdraft",
+    "check_non_owner_cannot_mint",
+    "check_transfer_exact",
+    "check_transfer_keeps_owner_cap",
+    "check_transfer_self"
+   ],
+   "killed": true,
+   "mutant": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+   "name": "m04_mint_no_supply",
+   "pair_runtime_sha256": "e44525a5211b79ded4f37d472db4943f5c9d3dde42ddcece0823707b8a8b3775",
+   "sigmas_tried": 1,
+   "wall_s": 0.16,
+   "witness_sigma_indices": [
+    0
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "other": 20,
+    "pre_unmet": 563,
+    "success": 186,
+    "violation": 1
+   },
+   "checks": [
+    "check_cap_invariant",
+    "check_mint_exact",
+    "check_mint_keeps_owner_cap",
+    "check_mint_over_cap_reverts",
+    "check_mint_to_cap_exact",
+    "check_no_overdraft",
+    "check_non_owner_cannot_mint",
+    "check_transfer_exact",
+    "check_transfer_keeps_owner_cap",
+    "check_transfer_self"
+   ],
+   "killed": true,
+   "mutant": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+   "name": "m05_transfer_no_debit",
+   "pair_runtime_sha256": "6854f25662f729a0ecd0cac30a5797cabf8506bb3394ee1e74d6ea2972496bc6",
+   "sigmas_tried": 77,
+   "wall_s": 0.658,
+   "witness_sigma_indices": [
+    76
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "other": 19,
+    "pre_unmet": 563,
+    "success": 187,
+    "violation": 1
+   },
+   "checks": [
+    "check_cap_invariant",
+    "check_mint_exact",
+    "check_mint_keeps_owner_cap",
+    "check_mint_over_cap_reverts",
+    "check_mint_to_cap_exact",
+    "check_no_overdraft",
+    "check_non_owner_cannot_mint",
+    "check_transfer_exact",
+    "check_transfer_keeps_owner_cap",
+    "check_transfer_self"
+   ],
+   "killed": true,
+   "mutant": "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+   "name": "m06_transfer_credits_sender",
+   "pair_runtime_sha256": "1c920f47bef94ac4ab95c4a92b956b9e7e14c97de4578b8e55d1cddc924963da",
+   "sigmas_tried": 77,
+   "wall_s": 0.632,
+   "witness_sigma_indices": [
+    76
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "other": 19,
+    "pre_unmet": 563,
+    "success": 186,
+    "violation": 2
+   },
+   "checks": [
+    "check_cap_invariant",
+    "check_mint_exact",
+    "check_mint_keeps_owner_cap",
+    "check_mint_over_cap_reverts",
+    "check_mint_to_cap_exact",
+    "check_no_overdraft",
+    "check_non_owner_cannot_mint",
+    "check_transfer_exact",
+    "check_transfer_keeps_owner_cap",
+    "check_transfer_self"
+   ],
+   "killed": true,
+   "mutant": "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+   "name": "m07_transfer_no_credit",
+   "pair_runtime_sha256": "7eb8431fd5ba724aa43d8590b1b6ea05f7d128eacf86cb793bcd97c91239fae4",
+   "sigmas_tried": 77,
+   "wall_s": 0.617,
+   "witness_sigma_indices": [
+    76
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 17274,
+    "success": 2726
+   },
+   "checks": [
+    "check_cap_invariant",
+    "check_mint_exact",
+    "check_mint_keeps_owner_cap",
+    "check_mint_over_cap_reverts",
+    "check_mint_to_cap_exact",
+    "check_no_overdraft",
+    "check_non_owner_cannot_mint",
+    "check_transfer_exact",
+    "check_transfer_keeps_owner_cap",
+    "check_transfer_self"
+   ],
+   "killed": false,
+   "mutant": "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df",
+   "name": "m08_mint_always_reverts",
+   "pair_runtime_sha256": "0e94605c0779c5ef5783b8b5ff6036397c05c3e7720e71926b0a400c5975b768",
+   "sigmas_tried": 2000,
+   "wall_s": 12.706,
+   "witness_sigma_indices": []
+  }
+ ],
+ "params": {
+  "B_A": 2000,
+  "distribution": {
+   "cap_kinds": [
+    "0",
+    "1",
+    "2",
+    "small",
+    "half",
+    "max-1",
+    "max",
+    "random"
+   ],
+   "dist_version": 1,
+   "fns": [
+    "mint(address,uint256)",
+    "transfer(address,uint256)"
+   ],
+   "max_txs": 6,
+   "name": "specgame-seqgen",
+   "pool": [
+    "alice",
+    "bob",
+    "carol",
+    "zero"
+   ],
+   "senders": [
+    "alice",
+    "bob",
+    "carol"
+   ],
+   "source_sha256": "bb9308fedaf10076679092f055da0c2b9cd7a58d674acc6c89bb9d5a0d1d9100",
+   "uint_kinds": [
+    "0",
+    "1",
+    "2",
+    "cap-1",
+    "cap",
+    "cap+1",
+    "half_cap",
+    "small",
+    "max-1",
+    "max",
+    "random"
+   ]
+  },
+  "max_txs": 6,
+  "per_mutant": 1,
+  "seed": 0
+ },
+ "spec": "/home/vladimir/sheaf/tcg-specgames/specgame/runs/v2/fM/seed_0/round_1/cand_2/Spec.sol",
+ "spec_source_sha256": "e509077479eb097ddea52f16427f8d6afd595b01e51171f77a7742f65183db34",
+ "version": 1,
+ "wall_s": 15.233
+}

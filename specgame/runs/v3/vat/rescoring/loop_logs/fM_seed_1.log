@@ -1,0 +1,8 @@
+round 1 cand 1: Unknown (unproved), own ms_cert 7/8
+round 1 cand 2: lint_rejected (None), own ms_cert 0/8
+round 2 cand 1: Unknown (unproved), own ms_cert 6/8
+round 2 cand 2: Unknown (unproved), own ms_cert 7/8
+round 3 cand 1: Accept (all_checks_safe), own ms_cert 5/8
+round 3 cand 2: Accept (all_checks_safe), own ms_cert 5/8
+WALL 11885.63 s
+LOOP_EXIT 0

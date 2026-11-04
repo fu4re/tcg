@@ -1,0 +1,6 @@
+{
+ "extracted": false,
+ "problems": [
+  "reply has 0 `solidity` code blocks, exactly 1 required (stop_reason max_tokens)"
+ ]
+}

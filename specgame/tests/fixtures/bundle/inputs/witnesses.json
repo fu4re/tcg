@@ -1,0 +1,89 @@
+[
+ {
+  "mutant": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+  "observed": {
+   "check": "check_mint_adds",
+   "outcome": "violation",
+   "pair_runtime_sha256": "4c57300e86194c79a28e7a8f9a4b821b4df10b910ef39789a653b2c6059db6bc",
+   "spec_source_sha256": "99381393438645c2ad4456f712df4f32e68d9477ab13e453df5d51d95730a405"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "100"
+   },
+   "deployer": "alice",
+   "probe": {
+    "a": "alice",
+    "b": "zero",
+    "check": "check_mint_adds",
+    "sender": "alice",
+    "x": "100",
+    "y": "1"
+   },
+   "txs": [],
+   "version": 1
+  },
+  "version": 1
+ },
+ {
+  "mutant": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+  "observed": {
+   "check": "check_cap",
+   "outcome": "violation",
+   "pair_runtime_sha256": "ef05d7f162ff999c78e8e5bd66183ef957797ee01c4b565c8a06d9cf00ed8cec",
+   "spec_source_sha256": "99381393438645c2ad4456f712df4f32e68d9477ab13e453df5d51d95730a405"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "100"
+   },
+   "deployer": "carol",
+   "probe": {
+    "a": "zero",
+    "b": "alice",
+    "check": "check_cap",
+    "sender": "alice",
+    "x": "50",
+    "y": "0"
+   },
+   "txs": [
+    {
+     "args": [
+      "alice",
+      "101"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    }
+   ],
+   "version": 1
+  },
+  "version": 1
+ },
+ {
+  "mutant": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+  "observed": {
+   "check": "check_mint_adds",
+   "outcome": "violation",
+   "pair_runtime_sha256": "56159804c9b39d32371b0ddaaec3925b9743a3316c4e639fccdd536dad99f813",
+   "spec_source_sha256": "99381393438645c2ad4456f712df4f32e68d9477ab13e453df5d51d95730a405"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "100"
+   },
+   "deployer": "alice",
+   "probe": {
+    "a": "alice",
+    "b": "zero",
+    "check": "check_mint_adds",
+    "sender": "alice",
+    "x": "100",
+    "y": "1"
+   },
+   "txs": [],
+   "version": 1
+  },
+  "version": 1
+ }
+]

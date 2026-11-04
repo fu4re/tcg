@@ -1,0 +1,762 @@
+{
+ "calls_per_function": {
+  "cage()": 895,
+  "deny(address)": 865,
+  "file(bytes32,bytes32,uint256)": 850,
+  "file(bytes32,uint256)": 899,
+  "flux(bytes32,address,address,uint256)": 899,
+  "fold(bytes32,address,int256)": 814,
+  "fork(bytes32,address,address,int256,int256)": 845,
+  "frob(bytes32,address,address,address,int256,int256)": 846,
+  "grab(bytes32,address,address,address,int256,int256)": 911,
+  "heal(uint256)": 885,
+  "hope(address)": 834,
+  "init(bytes32)": 912,
+  "move(address,address,uint256)": 872,
+  "nope(address)": 905,
+  "rely(address)": 927,
+  "slip(bytes32,address,int256)": 865,
+  "suck(address,address,uint256)": 899
+ },
+ "divergence": null,
+ "equal": true,
+ "modified": {
+  "path": "/home/vladimir/sheaf/tcg-specgames/specgame/subjects/vat/Vat.sol",
+  "runtime_sha256": "cf975b5a6b4f6d6781cb7d7ac369110b740db17bef918bc97c86188cf985deba",
+  "source_sha256": "7a86385849359362580286f8d428512ba37653154301bfcbeae16cecf5860748"
+ },
+ "original": {
+  "path": "/home/vladimir/sheaf/cycle/ground_truth/dss_vat/src/Vat.sol",
+  "runtime_sha256": "cf975b5a6b4f6d6781cb7d7ac369110b740db17bef918bc97c86188cf985deba",
+  "source_sha256": "6da8363c5a87c3e76cfd49e56c9dda0f596a28a61db7deafd010163966ba6658"
+ },
+ "params": {
+  "distribution": {
+   "fns": [
+    "cage()",
+    "deny(address)",
+    "file(bytes32,bytes32,uint256)",
+    "file(bytes32,uint256)",
+    "flux(bytes32,address,address,uint256)",
+    "fold(bytes32,address,int256)",
+    "fork(bytes32,address,address,int256,int256)",
+    "frob(bytes32,address,address,address,int256,int256)",
+    "grab(bytes32,address,address,address,int256,int256)",
+    "heal(uint256)",
+    "hope(address)",
+    "init(bytes32)",
+    "move(address,address,uint256)",
+    "nope(address)",
+    "rely(address)",
+    "slip(bytes32,address,int256)",
+    "suck(address,address,uint256)"
+   ],
+   "generator": {
+    "address": [
+     "any"
+    ],
+    "bytes32": [
+     "any"
+    ],
+    "calls": {
+     "cage()": {
+      "sender": [
+       "any"
+      ]
+     },
+     "deny(address)": {
+      "sender": [
+       "deployer",
+       "any"
+      ]
+     },
+     "file(bytes32,bytes32,uint256)": {
+      "args": [
+       [
+        "GOLD",
+        "SILVER",
+        "any"
+       ],
+       [
+        "spot",
+        "line",
+        "dust",
+        "any"
+       ],
+       [
+        "ray_le_2",
+        "rad_le_1000000",
+        "rad_le_10",
+        "repeat",
+        "0"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "file(bytes32,uint256)": {
+      "args": [
+       [
+        "Line",
+        "Line",
+        "Line",
+        "any"
+       ],
+       [
+        "rad_le_1000000",
+        "rad_le_1000",
+        "repeat",
+        "0"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "flux(bytes32,address,address,uint256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "any"
+       ],
+       [
+        "wad_le_900",
+        "wad_le_900",
+        "wad_le_900",
+        "repeat",
+        "small"
+       ]
+      ]
+     },
+     "fold(bytes32,address,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "any"
+       ],
+       [
+        "+mray_le_100",
+        "+mray_le_100",
+        "+mray_le_100",
+        "+mray_le_100",
+        "-mray_le_10",
+        "negate"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "fork(bytes32,address,address,int256,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "self",
+        "hoped",
+        "hoped",
+        "any"
+       ],
+       [
+        "+wad_le_50",
+        "+wad_le_50",
+        "+wad_le_50",
+        "negate",
+        "repeat"
+       ],
+       [
+        "frac_prev",
+        "frac_prev",
+        "frac_prev",
+        "0"
+       ]
+      ]
+     },
+     "frob(bytes32,address,address,address,int256,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "+wad_le_500",
+        "+wad_le_500",
+        "+wad_le_500",
+        "-wad_le_50",
+        "repeat",
+        "negate",
+        "0"
+       ],
+       [
+        "frac_prev",
+        "frac_prev",
+        "frac_prev",
+        "-wad_le_50",
+        "repeat",
+        "negate",
+        "0"
+       ]
+      ]
+     },
+     "grab(bytes32,address,address,address,int256,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "alice",
+        "bob",
+        "carol"
+       ],
+       [
+        "any"
+       ],
+       [
+        "any"
+       ],
+       [
+        "-wad_le_100",
+        "-wad_le_100",
+        "-wad_le_100",
+        "+wad_le_100",
+        "negate"
+       ],
+       [
+        "-wad_le_50",
+        "-wad_le_50",
+        "-wad_le_50",
+        "frac_prev",
+        "+wad_le_50"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "heal(uint256)": {
+      "args": [
+       [
+        "rad_le_50",
+        "rad_le_50",
+        "repeat",
+        "small"
+       ]
+      ]
+     },
+     "init(bytes32)": {
+      "args": [
+       [
+        "GOLD",
+        "SILVER",
+        "bogus",
+        "any"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "move(address,address,uint256)": {
+      "args": [
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "any"
+       ],
+       [
+        "rad_le_50",
+        "rad_le_50",
+        "rad_le_50",
+        "repeat",
+        "small"
+       ]
+      ]
+     },
+     "rely(address)": {
+      "sender": [
+       "deployer",
+       "any"
+      ]
+     },
+     "slip(bytes32,address,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "any"
+       ],
+       [
+        "+wad_le_1000",
+        "+wad_le_1000",
+        "+wad_le_1000",
+        "-wad_le_100",
+        "negate"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "suck(address,address,uint256)": {
+      "args": [
+       [
+        "any"
+       ],
+       [
+        "any"
+       ],
+       [
+        "rad_le_1000",
+        "rad_le_1000",
+        "repeat"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     }
+    },
+    "int256": [
+     "0",
+     "1",
+     "-1",
+     "small",
+     "wad",
+     "ray",
+     "rad",
+     "random",
+     "repeat",
+     "negate"
+    ],
+    "kind": "typed-v2",
+    "uint256": [
+     "0",
+     "1",
+     "small",
+     "wad",
+     "ray",
+     "rad",
+     "random",
+     "repeat",
+     "negate"
+    ]
+   },
+   "kind": "typed-v2",
+   "max_txs": 6,
+   "name": "specgame-seqgen",
+   "pools": {
+    "address": {
+     "alice": "0x1111111111111111111111111111111111111111",
+     "bob": "0x2222222222222222222222222222222222222222",
+     "carol": "0x3333333333333333333333333333333333333333",
+     "zero": "0x0000000000000000000000000000000000000000"
+    },
+    "bytes32": {
+     "GOLD": "0x474f4c4400000000000000000000000000000000000000000000000000000000",
+     "Line": "0x4c696e6500000000000000000000000000000000000000000000000000000000",
+     "SILVER": "0x53494c5645520000000000000000000000000000000000000000000000000000",
+     "bogus": "0x626f677573000000000000000000000000000000000000000000000000000000",
+     "dust": "0x6475737400000000000000000000000000000000000000000000000000000000",
+     "line": "0x6c696e6500000000000000000000000000000000000000000000000000000000",
+     "spot": "0x73706f7400000000000000000000000000000000000000000000000000000000"
+    }
+   },
+   "probes": [
+    [
+     {
+      "name": "a",
+      "type": "address"
+     },
+     {
+      "name": "b",
+      "type": "address"
+     },
+     {
+      "name": "x",
+      "type": "uint256"
+     },
+     {
+      "name": "y",
+      "type": "uint256"
+     }
+    ],
+    [
+     {
+      "name": "i",
+      "type": "bytes32"
+     },
+     {
+      "name": "u",
+      "type": "address"
+     },
+     {
+      "name": "dx",
+      "type": "int256"
+     },
+     {
+      "name": "dy",
+      "type": "int256"
+     }
+    ]
+   ],
+   "senders": [
+    "alice",
+    "bob",
+    "carol"
+   ],
+   "setup": [
+    {
+     "args": [
+      "GOLD"
+     ],
+     "fn": "init(bytes32)"
+    },
+    {
+     "args": [
+      "SILVER"
+     ],
+     "fn": "init(bytes32)"
+    },
+    {
+     "args": [
+      "Line",
+      "1000000000000000000000000000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,uint256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "spot",
+      "1000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,bytes32,uint256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "line",
+      "1000000000000000000000000000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,bytes32,uint256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "spot",
+      "2000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,bytes32,uint256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "line",
+      "1000000000000000000000000000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,bytes32,uint256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "alice",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "bob",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "carol",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "alice",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "bob",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "carol",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "bob"
+     ],
+     "fn": "hope(address)",
+     "sender": "alice"
+    },
+    {
+     "args": [
+      "carol"
+     ],
+     "fn": "hope(address)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "GOLD",
+      "alice",
+      "alice",
+      "alice",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "alice"
+    },
+    {
+     "args": [
+      "GOLD",
+      "bob",
+      "bob",
+      "bob",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "GOLD",
+      "carol",
+      "carol",
+      "carol",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "SILVER",
+      "alice",
+      "alice",
+      "alice",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "alice"
+    },
+    {
+     "args": [
+      "SILVER",
+      "bob",
+      "bob",
+      "bob",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "SILVER",
+      "carol",
+      "carol",
+      "carol",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "carol"
+    }
+   ],
+   "source_sha256": "abefef123036f5779c667d5ee9fc4e5269c2ceae77ed0b0952df39ec205af5a7",
+   "subject": "vat"
+  },
+  "max_txs": 6,
+  "n": 5000,
+  "seed": 0
+ },
+ "same_runtime_bytecode": true,
+ "sigmas_run": 5000,
+ "subject": "vat",
+ "successes_per_function": {
+  "cage()": 314,
+  "deny(address)": 542,
+  "file(bytes32,bytes32,uint256)": 565,
+  "file(bytes32,uint256)": 532,
+  "flux(bytes32,address,address,uint256)": 649,
+  "fold(bytes32,address,int256)": 572,
+  "fork(bytes32,address,address,int256,int256)": 470,
+  "frob(bytes32,address,address,address,int256,int256)": 399,
+  "grab(bytes32,address,address,address,int256,int256)": 430,
+  "heal(uint256)": 37,
+  "hope(address)": 834,
+  "init(bytes32)": 281,
+  "move(address,address,uint256)": 769,
+  "nope(address)": 905,
+  "rely(address)": 611,
+  "slip(bytes32,address,int256)": 585,
+  "suck(address,address,uint256)": 744
+ },
+ "toolchain": {
+  "block_env": {
+   "basefee": 0,
+   "coinbase": "0x0000000000000000000000000000000000000000",
+   "gas_limit": 30000000,
+   "number": 1,
+   "prevrandao": "0000000000000000000000000000000000000000000000000000000000000000",
+   "timestamp": 1
+  },
+  "chain_id": 1,
+  "core_sha256": "021b15363718a8b895fd2b2bb070bd5d418ccd4e5cde269d7e863760654a693c",
+  "core_version": 1,
+  "evm_version": "cancun",
+  "pyrevm": "0.3.7",
+  "python": "3.12.3",
+  "solc": {
+   "sha256": "fa8ac9a32d301ad023a36ee5a29f8e291fe3200c60244e43c142539e82a617f4",
+   "version": "0.8.35+commit.47b9dedd.Linux.g++"
+  },
+  "spec_id": "CANCUN",
+  "tx_gas": 10000000,
+  "z3": {
+   "sha256": "e583c4186a45e72411fa2cb2048401eed03f0f8e5f24694676a8f6271a50b765",
+   "version": "Z3 version 4.16.0 - 64 bit"
+  }
+ },
+ "version": 1
+}

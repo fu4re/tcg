@@ -1,0 +1,146 @@
+{
+ "artifact": "/home/vladimir/sheaf/tcg-specgames/specgame/contracts/CappedToken.sol",
+ "cpu_s": 28.08,
+ "duration_s": 8.26,
+ "flagged": [],
+ "mode": "isolated",
+ "rows": [
+  {
+   "cached": true,
+   "check": "check_cap_invariant",
+   "duration_s": 1.667,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "68c4f0c804fbf50f29d387385f003004a8bcf535b1fd326c420e27d4145a1f18"
+  },
+  {
+   "cached": false,
+   "check": "check_only_owner_mints",
+   "duration_s": 1.687,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "3ec63d3f055e9cad31a07d5f3b16dd47d390d9117326abfc48746b02149dbb22"
+  },
+  {
+   "cached": false,
+   "check": "check_only_owner_mints_small",
+   "duration_s": 1.734,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "479e1cd65b17f65c5f4db8e16ddc02e52d132b6f86578a081ed6dda10f7adf57"
+  },
+  {
+   "cached": false,
+   "check": "check_mint_over_cap_reverts",
+   "duration_s": 1.622,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "dcc42a29ce0279dc0331dd00a266404f80b1fc2167240c0df66d09c7f90d03e7"
+  },
+  {
+   "cached": true,
+   "check": "check_cap_after_mint",
+   "duration_s": 0.951,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "8399e914c1dba1ec13917545e7411730e0707f43ec5f8ae68a210ce627fc4a1c"
+  },
+  {
+   "cached": false,
+   "check": "check_cap_after_transfer",
+   "duration_s": 1.763,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "9b134fb1d61460412fb0b75ffb1c46afc695ebbb6528dbb14bdce70331230bcb"
+  },
+  {
+   "cached": false,
+   "check": "check_mint_exact",
+   "duration_s": 2.31,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "4ba5f54bb2b4d14fe9c10a0059262782d36c52cee6b1bd3850550a0a87b36966"
+  },
+  {
+   "cached": false,
+   "check": "check_mint_to_caller",
+   "duration_s": 2.262,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "75d290dc6d2cec308f52d9dadaa8a58e3042cf1c243e1243d24b5f79f5a405fc"
+  },
+  {
+   "cached": false,
+   "check": "check_mint_keeps_owner_cap",
+   "duration_s": 1.908,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "3ce603a1ea132b2721a003369364b44b8df79fd950940e5407164b5c53ad5b8a"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_exact",
+   "duration_s": 3.02,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "30dd5382dcde29b4ba774c76abdc6523a0798f9238a040315e2f6a6c7d9c7ebc"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_self",
+   "duration_s": 2.658,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "0351b9acdebb2fba839fddec7b298d54071c7fdea6fdb656daf12d9523ae4203"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_other_is_owner",
+   "duration_s": 2.001,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "85533dd5191a17f83338af568f4d9152b4e141ab747ea7d111675c14cfa5876d"
+  },
+  {
+   "cached": false,
+   "check": "check_no_overdraft",
+   "duration_s": 1.878,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "ffa0e914246559246113077685b0f7f5227044a35e4c9f6cf37afe16f138ee38"
+  },
+  {
+   "cached": false,
+   "check": "check_no_overdraft_by_one",
+   "duration_s": 1.469,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "44dbda5a26522e5fd1b5c8ae3722be1a0d7dea69d8f8b29d3b90fe8499cca914"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_keeps_owner_cap",
+   "duration_s": 1.15,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "f2241074bc6d206d7fcfac001ce0a36a567b21163c98f7fad272cb31f75ffa64"
+  }
+ ],
+ "spec": "/home/vladimir/sheaf/tcg-specgames/specgame/runs/v2/fM/seed_0/round_3/cand_1/Spec.sol",
+ "unknown": []
+}

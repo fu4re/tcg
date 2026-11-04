@@ -1,0 +1,306 @@
+{
+ "bundle": "runs/v3/vat/f0/seed_1/bundle",
+ "discarded": [],
+ "exit_code": 0,
+ "failing_steps": [],
+ "first_failing_step": null,
+ "kill_set": [
+  "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+  "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+  "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+  "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+  "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b"
+ ],
+ "labels": [
+  {
+   "fault_class": "missing-bound-check",
+   "id": "0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884",
+   "operator": "remove-require"
+  },
+  {
+   "fault_class": "missing-bound-check",
+   "id": "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+   "operator": "remove-require"
+  },
+  {
+   "fault_class": "accounting",
+   "id": "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+   "operator": "remove-statement"
+  },
+  {
+   "fault_class": "accounting",
+   "id": "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+   "operator": "remove-statement"
+  },
+  {
+   "fault_class": "access-control",
+   "id": "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+   "operator": "remove-modifier"
+  },
+  {
+   "fault_class": "consent",
+   "id": "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+   "operator": "remove-require"
+  },
+  {
+   "fault_class": "missing-bound-check",
+   "id": "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b",
+   "operator": "remove-require"
+  },
+  {
+   "fault_class": "accounting",
+   "id": "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762",
+   "operator": "remove-statement"
+  }
+ ],
+ "ms_cert": {
+  "killed": 5,
+  "total": 8
+ },
+ "mutants_without_valid_witness": [
+  "0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884",
+  "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+  "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762"
+ ],
+ "steps": [
+  {
+   "details": [
+    "manifest.json validates against schemas/manifest.schema.json (+ validate_sigma against subject vat on every sigma)"
+   ],
+   "name": "manifest",
+   "status": "pass",
+   "step": 0
+  },
+  {
+   "details": [
+    "120 files, every sha256 matches, no unlisted file",
+    "core sha256 25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f (running = bundled copy = provenance)",
+    "verifier sha256 dea0af01cf27221bba31a15d59a735c789d520750e5a22baa7bed7bb18e1e489",
+    "protocol.json sha256 42efecba54d47bc27bbb5b7c9da369819a67f6758a8b54f019c6d8f8a4e2ada7",
+    "protocol.md sha256 4b0316a2f3b52f1cb2787a8c9c7a2f9d39177d78d13eb689f360021b8ec44b80 (recorded, not compared)",
+    "subject vat: bundled profile subject/profile.json = protocol.json pin (66e8b6203a073d7e\u2026)",
+    "semantics version matches: solc 0.8.35+commit.47b9dedd.Linux.g++, Z3 version 4.16.0 - 64 bit, python 3.12.3, pyrevm 0.3.7, CANCUN"
+   ],
+   "name": "hashes",
+   "status": "pass",
+   "step": 1
+  },
+  {
+   "details": [
+    "54 isolated-harness solc inputs re-derived from b + phi + timeout_ms=60000 (= bundled)",
+    "b runtime sha256 cf975b5a6b4f6d6781cb7d7ac369110b740db17bef918bc97c86188cf985deba",
+    "Spec over b runtime sha256 54e7954ce87829b13bbec36ca26708f544d9f6a797df51eb793da1ff6a9728ef, checks ['check_cage_effect', 'check_cage_needs_ward', 'check_deny_effect', 'check_deny_needs_ward', 'check_file_dust', 'check_file_ilk_needs_ward', 'check_file_ilk_unknown', 'check_file_line', 'check_file_line_ilk', 'check_file_needs_ward', 'check_file_spot', 'check_file_unknown', 'check_flux_effect', 'check_flux_needs_consent', 'check_fold_needs_ward', 'check_fork_needs_consent_dst', 'check_fork_needs_consent_src', 'check_fork_totals', 'check_frob_ceiling', 'check_frob_draw_balances', 'check_frob_draw_urn', 'check_frob_dust', 'check_frob_needs_consent_u_collateral', 'check_frob_needs_consent_u_debt', 'check_frob_needs_consent_v', 'check_frob_needs_consent_w', 'check_frob_no_consent_at_all', 'check_frob_not_init', 'check_frob_safe', 'check_frob_wipe_balances', 'check_grab_down', 'check_grab_needs_ward', 'check_grab_up', 'check_heal_effect', 'check_hope_effect', 'check_init_effect', 'check_init_needs_ward', 'check_init_twice', 'check_move_effect', 'check_move_needs_consent', 'check_move_others', 'check_nope_effect', 'check_not_live_deny', 'check_not_live_file', 'check_not_live_file_ilk', 'check_not_live_fold', 'check_not_live_frob', 'check_not_live_rely', 'check_rely_effect', 'check_rely_needs_ward', 'check_slip_effect', 'check_slip_needs_ward', 'check_suck_effect', 'check_suck_needs_ward']",
+    "54 checks re-run in 4 workers (102.245 s wall, 387.045 s solc): Accept (all_checks_safe)",
+    "  check_rely_needs_ward: Accept (all_targets_safe, 4.669 s); raw output identical to the bundled one",
+    "  check_deny_needs_ward: Accept (all_targets_safe, 4.628 s); raw output identical to the bundled one",
+    "  check_init_needs_ward: Accept (all_targets_safe, 4.611 s); raw output identical to the bundled one",
+    "  check_file_needs_ward: Accept (all_targets_safe, 4.711 s); raw output identical to the bundled one",
+    "  check_file_ilk_needs_ward: Accept (all_targets_safe, 4.67 s); raw output identical to the bundled one",
+    "  check_cage_needs_ward: Accept (all_targets_safe, 4.665 s); raw output identical to the bundled one",
+    "  check_slip_needs_ward: Accept (all_targets_safe, 4.964 s); raw output identical to the bundled one",
+    "  check_grab_needs_ward: Accept (all_targets_safe, 4.921 s); raw output identical to the bundled one",
+    "  check_suck_needs_ward: Accept (all_targets_safe, 4.693 s); raw output identical to the bundled one",
+    "  check_fold_needs_ward: Accept (all_targets_safe, 4.756 s); raw output identical to the bundled one",
+    "  check_rely_effect: Accept (all_targets_safe, 8.358 s); raw output identical to the bundled one",
+    "  check_deny_effect: Accept (all_targets_safe, 8.295 s); raw output identical to the bundled one",
+    "  check_hope_effect: Accept (all_targets_safe, 8.043 s); raw output identical to the bundled one",
+    "  check_nope_effect: Accept (all_targets_safe, 8.144 s); raw output identical to the bundled one",
+    "  check_cage_effect: Accept (all_targets_safe, 4.549 s); raw output identical to the bundled one",
+    "  check_not_live_rely: Accept (all_targets_safe, 4.451 s); raw output identical to the bundled one",
+    "  check_not_live_deny: Accept (all_targets_safe, 4.488 s); raw output identical to the bundled one",
+    "  check_not_live_file: Accept (all_targets_safe, 4.51 s); raw output identical to the bundled one",
+    "  check_not_live_file_ilk: Accept (all_targets_safe, 4.507 s); raw output identical to the bundled one",
+    "  check_not_live_fold: Accept (all_targets_safe, 4.603 s); raw output identical to the bundled one",
+    "  check_not_live_frob: Accept (all_targets_safe, 4.694 s); raw output identical to the bundled one",
+    "  check_init_effect: Accept (all_targets_safe, 11.795 s); raw output identical to the bundled one",
+    "  check_init_twice: Accept (all_targets_safe, 4.691 s); raw output identical to the bundled one",
+    "  check_frob_not_init: Accept (all_targets_safe, 4.9 s); raw output identical to the bundled one",
+    "  check_file_line: Accept (all_targets_safe, 4.501 s); raw output identical to the bundled one",
+    "  check_file_unknown: Accept (all_targets_safe, 4.549 s); raw output identical to the bundled one",
+    "  check_file_spot: Accept (all_targets_safe, 15.529 s); raw output identical to the bundled one",
+    "  check_file_line_ilk: Accept (all_targets_safe, 15.295 s); raw output identical to the bundled one",
+    "  check_file_dust: Accept (all_targets_safe, 15.398 s); raw output identical to the bundled one",
+    "  check_file_ilk_unknown: Accept (all_targets_safe, 4.507 s); raw output identical to the bundled one",
+    "  check_move_effect: Accept (all_targets_safe, 11.889 s); raw output identical to the bundled one",
+    "  check_move_others: Accept (all_targets_safe, 11.945 s); raw output identical to the bundled one",
+    "  check_move_needs_consent: Accept (all_targets_safe, 4.617 s); raw output identical to the bundled one",
+    "  check_flux_effect: Accept (all_targets_safe, 12.376 s); raw output identical to the bundled one",
+    "  check_flux_needs_consent: Accept (all_targets_safe, 4.775 s); raw output identical to the bundled one",
+    "  check_slip_effect: Accept (all_targets_safe, 8.208 s); raw output identical to the bundled one",
+    "  check_frob_ceiling: Accept (all_targets_safe, 8.407 s); raw output identical to the bundled one",
+    "  check_frob_safe: Accept (all_targets_safe, 5.132 s); raw output identical to the bundled one",
+    "  check_frob_dust: Accept (all_targets_safe, 4.776 s); raw output identical to the bundled one",
+    "  check_frob_no_consent_at_all: Accept (all_targets_safe, 4.795 s); raw output identical to the bundled one",
+    "  check_frob_needs_consent_v: Accept (all_targets_safe, 4.685 s); raw output identical to the bundled one",
+    "  check_frob_needs_consent_w: Accept (all_targets_safe, 4.859 s); raw output identical to the bundled one",
+    "  check_frob_needs_consent_u_debt: Accept (all_targets_safe, 4.839 s); raw output identical to the bundled one",
+    "  check_frob_needs_consent_u_collateral: Accept (all_targets_safe, 4.82 s); raw output identical to the bundled one",
+    "  check_frob_draw_urn: Accept (all_targets_safe, 13.452 s); raw output identical to the bundled one",
+    "  check_frob_draw_balances: Accept (all_targets_safe, 13.592 s); raw output identical to the bundled one",
+    "  check_frob_wipe_balances: Accept (all_targets_safe, 13.681 s); raw output identical to the bundled one",
+    "  check_fork_needs_consent_src: Accept (all_targets_safe, 4.659 s); raw output identical to the bundled one",
+    "  check_fork_needs_consent_dst: Accept (all_targets_safe, 4.743 s); raw output identical to the bundled one",
+    "  check_fork_totals: Accept (all_targets_safe, 8.488 s); raw output identical to the bundled one",
+    "  check_grab_up: Accept (all_targets_safe, 8.75 s); raw output identical to the bundled one",
+    "  check_grab_down: Accept (all_targets_safe, 7.914 s); raw output identical to the bundled one",
+    "  check_heal_effect: Accept (all_targets_safe, 12.005 s); raw output identical to the bundled one",
+    "  check_suck_effect: Accept (all_targets_safe, 10.543 s); raw output identical to the bundled one"
+   ],
+   "name": "check",
+   "status": "pass",
+   "step": 2
+  },
+  {
+   "details": [
+    "mutant 0b16a3ae4f99: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 0d256aef3845: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 1a63e0033ca6: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 3d19cd9060a9: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 4f38b3220282: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 652a40501289: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 7a3cae9442cf: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant f23fd9948544: id recomputed = listed; properness sigma[0] gives run(b) != run(m)"
+   ],
+   "mutants": [
+    {
+     "id": "0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "da0c79bef56bf4f725b32f12f46cb1bf226569c8e49961aeb8ef81591f626206",
+       "obs_m_sha256": "2176d2b349adbab894daa7618b8f23a7c8a576d7cbe9bcce91159f9f392be2fe"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "1b2ee15c3f17d02ce583f576398315208b5069ebaa24953527ad04f8508f4c4d",
+       "obs_m_sha256": "56563fc5279a15855d6a6b708e3197742066d6b128ab0b65ccf1b237dcde8f49"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "09a62cb8d36a3b83c1794de852f3247e707a8f78a876a987a50b86b914dfbd98",
+       "obs_m_sha256": "e6d3a16d6a0751dae18aea60f5736587e3cb65c1f66ebeecce457eacff17b6a2"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "6da8605453fd313fe622c7d9e1f11c282bb616d29ed280a72af271981707822d",
+       "obs_m_sha256": "88f16a01f5c7414711f4246376440f887cfb28cc5088e0c0fda04847b635f6b7"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "86a244d05bbe9c3ad2e4e3b6113fcc5a34071bfa8a1d12e78bce045ac2fe5653",
+       "obs_m_sha256": "e26281cb398e63978fa501993cbc5c17bb14d953ebf49b929f8012b9236f9e1c"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "929faba0feea544311d119e29ce9ea5f13ad683e9e240a924e45f1ebce1cf938",
+       "obs_m_sha256": "ebafd30e472bc374380e7c68a1ebdd837ac952d566f59a5ac61bfd85fdc491c9"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "718fcaf9f767e4209fdd491b94cc727e548a61501acba60d5800715b78276f90",
+       "obs_m_sha256": "505dc73ad8f4fd46f1bab83fb822b51345a475555c2bf3e7c469cef7a81b7a44"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "283a8af4bd9fdcbdc0e8ecaecaa9cdbb4ce9127b2433d27718003c5a315c91b8",
+       "obs_m_sha256": "a6a0b28ff4b634643a30d68754027587e9306fa914ce97855a2259e5406f2da1"
+      }
+     ],
+     "properness": true
+    }
+   ],
+   "name": "M",
+   "status": "pass",
+   "step": 3
+  },
+  {
+   "details": [
+    "5 of 5 witnesses replay to a violation; 0 discarded (discarding is not a refusal)",
+    "W[0] mutant 0d256aef3845: violation in ['check_frob_ceiling']",
+    "W[1] mutant 1a63e0033ca6: violation in ['check_move_effect']",
+    "W[2] mutant 4f38b3220282: violation in ['check_slip_needs_ward']",
+    "W[3] mutant 652a40501289: violation in ['check_frob_needs_consent_v']",
+    "W[4] mutant 7a3cae9442cf: violation in ['check_frob_safe']"
+   ],
+   "name": "W",
+   "status": "pass",
+   "step": 4
+  },
+  {
+   "details": [
+    "recomputed ms_cert = 5/8, kill set ['0d256aef3845', '1a63e0033ca6', '4f38b3220282', '652a40501289', '7a3cae9442cf']"
+   ],
+   "name": "score",
+   "status": "pass",
+   "step": 5
+  },
+  {
+   "details": [
+    "no V-completeness claim; named in not_claimed"
+   ],
+   "name": "V-completeness",
+   "status": "pass",
+   "step": 6
+  }
+ ],
+ "verdict": "HOLDS",
+ "version": 1
+}

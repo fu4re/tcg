@@ -1,0 +1,8 @@
+{
+ "condition": "f0",
+ "model": "claude-sonnet-5-5",
+ "prompts_sha256": "fbd52777f1a512821d7964339f9b931c42c62b92c48b4739df0995e3c6adc74c",
+ "round": 3,
+ "seed": 1,
+ "temperature": 1.0
+}

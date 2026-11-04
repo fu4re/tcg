@@ -1,0 +1,176 @@
+{
+ "acc": "Unknown",
+ "adversary_id": "da221ec5557e073f4a51a96eed7d44c758c8cbcf05e7d8f8517f13c20b010047",
+ "check_cache_hits": 52,
+ "check_cpu_s": 2038.897,
+ "check_reason": "unproved",
+ "durations_s": {
+  "adversary": 1399.757,
+  "check": 454.188
+ },
+ "errors": [],
+ "kill_set": [
+  "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+  "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+  "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+  "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+  "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b",
+  "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762"
+ ],
+ "ms_cert": {
+  "killed": 6,
+  "total": 8
+ },
+ "not_proved": [
+  {
+   "function": "check_flux_monotone",
+   "line": 314,
+   "status": "unproved",
+   "text": "assert(gem[k][a] <= ga);"
+  },
+  {
+   "function": "check_flux_monotone",
+   "line": 315,
+   "status": "unproved",
+   "text": "assert(gem[k][b] >= gb);"
+  },
+  {
+   "function": "check_move_monotone",
+   "line": 361,
+   "status": "unproved",
+   "text": "assert(dai[a] <= da);"
+  },
+  {
+   "function": "check_move_monotone",
+   "line": 362,
+   "status": "unproved",
+   "text": "assert(dai[b] >= db);"
+  },
+  {
+   "function": "check_frob_collateral_neg",
+   "line": 416,
+   "status": "unproved",
+   "text": "assert(urns[i][u].ink == ink0 - uint256(-dx));"
+  },
+  {
+   "function": "check_frob_debt_neg_art",
+   "line": 464,
+   "status": "unproved",
+   "text": "assert(urns[i][u].art == art0 - uint256(-dy));"
+  },
+  {
+   "function": "check_frob_debt_neg_art",
+   "line": 465,
+   "status": "unproved",
+   "text": "assert(ilks[i].Art == tot0 - uint256(-dy));"
+  },
+  {
+   "function": "check_frob_debt_neg_dai",
+   "line": 477,
+   "status": "unproved",
+   "text": "assert(dai[msg.sender] == d0 - r0 * uint256(-dy));"
+  },
+  {
+   "function": "check_frob_debt_neg_dai",
+   "line": 478,
+   "status": "unproved",
+   "text": "assert(debt == debt0 - r0 * uint256(-dy));"
+  },
+  {
+   "function": "check_fork_dst_add",
+   "line": 553,
+   "status": "unproved",
+   "text": "assert(urns[i][msg.sender].ink >= inkv);"
+  },
+  {
+   "function": "check_fork_dst_add",
+   "line": 554,
+   "status": "unproved",
+   "text": "assert(urns[i][msg.sender].art >= artv);"
+  },
+  {
+   "function": "check_fork_dst_add",
+   "line": 555,
+   "status": "unproved",
+   "text": "assert(urns[i][msg.sender].ink == inkv + uint256(dx));"
+  },
+  {
+   "function": "check_fork_dst_add",
+   "line": 556,
+   "status": "unproved",
+   "text": "assert(urns[i][msg.sender].art == artv + uint256(dy));"
+  },
+  {
+   "function": "check_fork_src_sub",
+   "line": 567,
+   "status": "unproved",
+   "text": "assert(urns[i][u].ink == inku - uint256(dx));"
+  },
+  {
+   "function": "check_fork_src_sub",
+   "line": 568,
+   "status": "unproved",
+   "text": "assert(urns[i][u].art == artu - uint256(dy));"
+  },
+  {
+   "function": "check_fork_src_safe",
+   "line": 577,
+   "status": "unproved",
+   "text": "assert(urns[i][u].art * ilks[i].rate <= urns[i][u].ink * ilks[i].spot);"
+  },
+  {
+   "function": "check_fork_dst_safe",
+   "line": 587,
+   "status": "unproved",
+   "text": "assert(urns[i][msg.sender].art * ilks[i].rate <= urns[i][msg.sender].ink * ilks[i].spot);"
+  },
+  {
+   "function": "check_grab_sin_vice",
+   "line": 615,
+   "status": "unproved",
+   "text": "assert(sin[msg.sender] == s0 + r0 * uint256(-dy));"
+  },
+  {
+   "function": "check_grab_sin_vice",
+   "line": 616,
+   "status": "unproved",
+   "text": "assert(vice == v0 + r0 * uint256(-dy));"
+  },
+  {
+   "function": "check_grab_ink_art",
+   "line": 625,
+   "status": "unproved",
+   "text": "assert(urns[i][u].ink == ink0 + uint256(dx));"
+  },
+  {
+   "function": "check_grab_ink_art",
+   "line": 626,
+   "status": "unproved",
+   "text": "assert(urns[i][u].art == art0 + uint256(dy));"
+  },
+  {
+   "function": "check_grab_ink_art",
+   "line": 627,
+   "status": "unproved",
+   "text": "assert(ilks[i].Art == tot0 + uint256(dy));"
+  },
+  {
+   "function": "check_fold_rate",
+   "line": 695,
+   "status": "unproved",
+   "text": "assert(ilks[i].rate == r0 + uint256(dx));"
+  },
+  {
+   "function": "check_fold_art_frame",
+   "line": 701,
+   "status": "unproved",
+   "text": "assert(ilks[i].Art == tot0);"
+  }
+ ],
+ "spec_source_sha256": "602088287e0c7c92b6520edd5e6af9aa96aa6d9ed3e1f43a17c0b03e08752796",
+ "stop_reason": "end_turn",
+ "survivors": [
+  "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+  "0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884"
+ ]
+}

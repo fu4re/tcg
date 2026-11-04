@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "specgame/schemas/profile.schema.json",
+  "title": "Subject profile (subjects/<name>/profile.json; protocol.md, Protocol v3)",
+  "description": "constructor.params names are the sigma.ctor keys (not necessarily the Solidity parameter names). Everything subject-specific the judge path and the adversary need: the contract, the spec harness header and probe signatures, the value pools, the callable ABI subset, the fixed setup and the observation. Its sha256 is pinned in protocol.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "name", "contract", "constructor", "spec", "senders", "pools", "generator", "functions", "setup", "observation"],
+  "properties": {
+    "version": {"const": 1},
+    "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+    "contract": {
+      "type": "object", "additionalProperties": false, "required": ["file", "name"],
+      "properties": {
+        "file": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*\\.sol$", "description": "File in subjects/<name>/; also the solc unit name and the spec's import."},
+        "name": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"}
+      }
+    },
+    "constructor": {
+      "type": "object", "additionalProperties": false, "required": ["params"],
+      "properties": {"params": {"$ref": "#/$defs/params"}}
+    },
+    "spec": {
+      "type": "object", "additionalProperties": false, "required": ["constructor", "probes"],
+      "properties": {
+        "constructor": {"type": "string", "description": "The exact constructor every spec must declare (lint S4)."},
+        "probes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/params"},
+                   "description": "Allowed check_* parameter lists; parameter names are disjoint across signatures. sigma.probe carries the arguments of all of them."}
+      }
+    },
+    "senders": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "Names in pools.address that may send transactions and deploy."},
+    "pools": {
+      "type": "object", "additionalProperties": false, "required": ["address"],
+      "properties": {
+        "address": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^0x[0-9a-fA-F]{40}$"}},
+        "bytes32": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^0x[0-9a-fA-F]{64}$"}}
+      }
+    },
+    "generator": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "capped-v1"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind", "uint256", "int256"],
+         "properties": {"kind": {"const": "typed-v2"},
+                        "uint256": {"$ref": "#/$defs/kinds"},
+                        "int256": {"$ref": "#/$defs/kinds"},
+                        "address": {"$ref": "#/$defs/kinds"},
+                        "bytes32": {"$ref": "#/$defs/kinds"},
+                        "calls": {"type": "object",
+                                  "description": "Per-function overrides: sender kinds and one kinds list per parameter (tools/seqgen.py docstring).",
+                                  "additionalProperties": {"type": "object", "additionalProperties": false,
+                                                           "properties": {"sender": {"$ref": "#/$defs/kinds"},
+                                                                          "args": {"type": "array", "items": {"$ref": "#/$defs/kinds"}}}}}}}
+      ]
+    },
+    "functions": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/signature"}, "description": "The callable ABI subset the adversary and properness search draw from."},
+    "setup": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false, "required": ["fn", "args"],
+                "properties": {"fn": {"$ref": "#/$defs/signature"}, "args": {"type": "array", "items": {"type": "string"}},
+                               "sender": {"type": "string", "description": "A sender pool name; default: the sigma's deployer."}}},
+      "description": "Fixed transactions sent by the deployer right after deployment. They are part of every sigma's canonical form and hash: sigma.setup carries them verbatim (validated to equal this list with sender = sigma.deployer), so witnesses and properness pairs in a bundle's evidence layer carry them and the verifier replays them."
+    },
+    "observation": {
+      "type": "array", "minItems": 1,
+      "items": {"type": "object", "additionalProperties": false, "required": ["getter", "keys"],
+                "properties": {"getter": {"$ref": "#/$defs/signature"},
+                               "keys": {"type": "array", "items": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+                                        "description": "One list of pool names per getter parameter; the getter is read for every combination."}}}
+    }
+  },
+  "$defs": {
+    "type": {"enum": ["address", "bytes32", "uint256", "int256"]},
+    "params": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["name", "type"],
+                                          "properties": {"name": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"}, "type": {"$ref": "#/$defs/type"}}}},
+    "signature": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*\\(((address|bytes32|uint256|int256)(,(address|bytes32|uint256|int256))*)?\\)$"},
+    "kinds": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^(-?(0|[1-9][0-9]*)|small|wad|ray|rad|random|repeat|negate|frac_prev|self|hoped|any|deployer|[+-]?(raw|wad|ray|rad|mray)_le_[0-9]+|[A-Za-z_][A-Za-z0-9_]*)$"},
+              "description": "typed-v2 kinds (tools/seqgen.py docstring), picked uniformly from the list (repeat an entry to weight it). Numbers: decimal literals, small, wad, ray, rad, random, [+-]unit_le_N, frac_prev, repeat, negate. Addresses: pool names, self, hoped, any. bytes32: pool names, any. Senders: sender names, deployer, any. Part of the distribution id."}
+  }
+}

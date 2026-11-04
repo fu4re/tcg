@@ -1,0 +1,16 @@
+{
+ "extracted": true,
+ "problems": [
+  "S9 line 292: check_frob_urn_effect: require only in the leading block (Pre)",
+  "S9 line 303: check_frob_gem_effect: require only in the leading block (Pre)",
+  "S9 line 314: check_frob_dai_effect: require only in the leading block (Pre)",
+  "S9 line 336: check_frob_distinct_dai: require only in the leading block (Pre)",
+  "S9 line 337: check_frob_distinct_dai: require only in the leading block (Pre)",
+  "S9 line 523: check_grab_urn_effect: require only in the leading block (Pre)",
+  "S9 line 536: check_grab_gem_sin_effect: require only in the leading block (Pre)",
+  "S9 line 548: check_grab_totals: require only in the leading block (Pre)",
+  "S9 line 562: check_grab_distinct: require only in the leading block (Pre)",
+  "S9 line 627: check_fold_rate: require only in the leading block (Pre)",
+  "S9 line 639: check_fold_dai_debt: require only in the leading block (Pre)"
+ ]
+}

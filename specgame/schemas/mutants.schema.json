@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "specgame/schemas/mutants.schema.json",
+  "title": "Mutation class M (mutants/mutants.json; protocol.md section 10)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "base", "mutants"],
+  "properties": {
+    "version": {"const": 1},
+    "base": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "source_sha256", "runtime_sha256"],
+      "properties": {
+        "path": {"type": "string"},
+        "source_sha256": {"$ref": "#/$defs/sha256"},
+        "runtime_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "mutants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "source_sha256", "operator", "fault_class", "status", "properness", "behavioural_duplicate_of"],
+        "properties": {
+          "id": {"$ref": "#/$defs/sha256", "description": "sha256 of the runtime bytecode of bare CappedToken compiled from this source. Unique in the file and different from base.runtime_sha256."},
+          "path": {"type": "string"},
+          "source_sha256": {"$ref": "#/$defs/sha256"},
+          "operator": {"type": "string", "description": "T* label; affects no verdict."},
+          "fault_class": {"type": "string", "description": "T* label; affects no verdict."},
+          "status": {"enum": ["included", "excluded"]},
+          "exclusion_reason": {"enum": ["no_properness_pair", "does_not_compile", "does_not_deploy", "abi_differs", "lint"]},
+          "properness": {
+            "description": "Required (non-null) when included: a sigma with run(base, sigma) != run(mutant, sigma), re-checked by replay.",
+            "oneOf": [
+              {"type": "null"},
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["sigma", "obs_base_sha256", "obs_mutant_sha256"],
+                "properties": {
+                  "sigma": {"$ref": "sigma.schema.json"},
+                  "obs_base_sha256": {"$ref": "#/$defs/sha256"},
+                  "obs_mutant_sha256": {"$ref": "#/$defs/sha256"}
+                }
+              }
+            ]
+          },
+          "behavioural_duplicate_of": {
+            "type": "array",
+            "items": {"$ref": "#/$defs/sha256"},
+            "description": "Ids of other mutants with equal observations on every properness sigma of both. Marked, not merged."
+          }
+        },
+        "if": {"properties": {"status": {"const": "included"}}},
+        "then": {"properties": {"properness": {"type": "object"}}},
+        "else": {"required": ["exclusion_reason"]}
+      }
+    }
+  },
+  "$defs": {"sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

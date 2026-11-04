@@ -1,0 +1,25 @@
+{
+ "condition": "fM",
+ "selected": 2,
+ "rule": "protocol.md 16.3",
+ "candidates": [
+  {
+   "cand": 1,
+   "acc": "Unknown",
+   "errors": 0,
+   "ms_cert": {
+    "killed": 7,
+    "total": 8
+   }
+  },
+  {
+   "cand": 2,
+   "acc": "Accept",
+   "errors": 0,
+   "ms_cert": {
+    "killed": 6,
+    "total": 8
+   }
+  }
+ ]
+}

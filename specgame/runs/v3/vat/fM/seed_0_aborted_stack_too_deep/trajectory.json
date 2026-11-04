@@ -1,0 +1,72 @@
+{
+ "anthropic_version_header": "2026-10-21",
+ "calls": [
+  {
+   "cand": 1,
+   "id": "msg_011Cgfum3WakB47u2FfD1Czx",
+   "input_tokens": 8745,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 31345,
+   "round": 1,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 18848,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 8745,
+    "output_tokens": 31345,
+    "output_tokens_details": {
+     "thinking_tokens": 18848
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 201.494
+  }
+ ],
+ "condition": "fM",
+ "error": "CompileError: Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON) while enabling the optimizer. Otherwise, try removing local variables.",
+ "fallbacks": "none (a refusal is a failed candidate)",
+ "frozen": {
+  "B_A": 2000,
+  "effort": "high",
+  "k": 2,
+  "max_tokens": 64000,
+  "max_txs": 6,
+  "model": "claude-sonnet-5-5",
+  "per_mutant": 1,
+  "rounds": 3,
+  "seed_A": 0,
+  "timeout_ms": 60000,
+  "wall_timeout_s": 600.0
+ },
+ "k": 2,
+ "model_requested": "claude-sonnet-5-5",
+ "model_returned": "claude-sonnet-5-5",
+ "prompt_sha256": {
+  "feedback_f0.md": "0044d327cc58966ada3797c50835ad058cec94540f164e15dd9297a13e542700",
+  "feedback_fM.md": "3e22dc0e896d07e8d89f272fddfe8e96e2c5f2236ca1beaf0cadb16dd4d468dd",
+  "feedback_fMplus.md": "21b6574b733ebbf918384b0a7f0e398806ac198fad8563f90a584a401b820dde",
+  "round_1.md": "4a875318c1a8d8a4ac88ab58be1c419798b62a2819336daf6bfc7ad62d691f3b",
+  "system.md": "8afcd74c44fcc2558575f072dc385146ad1a6e358ffe9ba3c81943be0d4b17ac"
+ },
+ "prompts_sha256": "fbd52777f1a512821d7964339f9b931c42c62b92c48b4739df0995e3c6adc74c",
+ "rounds": 3,
+ "sdk_version": "2.3.0",
+ "seed": 0,
+ "seed_param": "not supported by the Messages API (SDK has no seed parameter); the trajectory seed is recorded only",
+ "temperature_note": "API default; non-default values rejected by this model; not sent",
+ "temperature_recorded": 1.0,
+ "tokens": {
+  "input": 8745,
+  "output": 31345,
+  "thinking": 18848,
+  "total": 40090
+ }
+}

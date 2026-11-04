@@ -1,0 +1,4361 @@
+{
+ "claimed": {
+  "kill_set": [
+   "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+   "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+   "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+   "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+   "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+   "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b",
+   "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762"
+  ],
+  "ms_cert": {
+   "killed": 7,
+   "total": 8
+  }
+ },
+ "evidence": {
+  "M": [
+   {
+    "id": "0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884",
+    "path": "mutants/0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884.sol",
+    "properness_sigma": [
+     {
+      "ctor": {},
+      "deployer": "bob",
+      "setup": [
+       {
+        "args": [
+         "GOLD"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "Line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "spot",
+         "1000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "spot",
+         "2000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "hope(address)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "carol"
+        ],
+        "fn": "hope(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       }
+      ],
+      "txs": [
+       {
+        "args": [
+         "SILVER",
+         "dust",
+         "101505000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "bob",
+         "bob",
+         "-35000000000000000000",
+         "12000000000000000000"
+        ],
+        "fn": "grab(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "-1000000000000000000000000"
+        ],
+        "fn": "fold(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "alice",
+         "alice",
+         "-31000000000000000000",
+         "0"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+    "path": "mutants/0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5.sol",
+    "properness_sigma": [
+     {
+      "ctor": {},
+      "deployer": "bob",
+      "setup": [
+       {
+        "args": [
+         "GOLD"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "Line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "spot",
+         "1000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "spot",
+         "2000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "hope(address)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "carol"
+        ],
+        "fn": "hope(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       }
+      ],
+      "txs": [
+       {
+        "args": [
+         "bogus"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "rely(address)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "Line",
+         "0"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "bob",
+         "bob",
+         "280000000000000000000",
+         "103600000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "zero",
+         "2000000000000000000000000"
+        ],
+        "fn": "fold(bytes32,address,int256)",
+        "sender": "bob"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+    "path": "mutants/1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d.sol",
+    "properness_sigma": [
+     {
+      "ctor": {},
+      "deployer": "bob",
+      "setup": [
+       {
+        "args": [
+         "GOLD"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "Line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "spot",
+         "1000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "spot",
+         "2000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "hope(address)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "carol"
+        ],
+        "fn": "hope(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       }
+      ],
+      "txs": [
+       {
+        "args": [
+         "alice"
+        ],
+        "fn": "deny(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "404"
+        ],
+        "fn": "heal(uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "alice",
+         "alice",
+         "49000000000000000000000000000000000000000000000"
+        ],
+        "fn": "move(address,address,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "carol",
+         "carol",
+         "0",
+         "0"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "50000000000000000000",
+         "2500000000000000000"
+        ],
+        "fn": "fork(bytes32,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "bogus"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "bob"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+    "path": "mutants/3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb.sol",
+    "properness_sigma": [
+     {
+      "ctor": {},
+      "deployer": "carol",
+      "setup": [
+       {
+        "args": [
+         "GOLD"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "Line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "spot",
+         "1000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "spot",
+         "2000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "hope(address)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "carol"
+        ],
+        "fn": "hope(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       }
+      ],
+      "txs": [
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "1000000000000000000000000"
+        ],
+        "fn": "fold(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "carol"
+        ],
+        "fn": "rely(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "zero",
+         "22000000000000000000000000"
+        ],
+        "fn": "fold(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "carol",
+         "471000000000000000000"
+        ],
+        "fn": "flux(bytes32,address,address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "bob",
+         "alice",
+         "0",
+         "0"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+    "path": "mutants/4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04.sol",
+    "properness_sigma": [
+     {
+      "ctor": {},
+      "deployer": "alice",
+      "setup": [
+       {
+        "args": [
+         "GOLD"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "Line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "spot",
+         "1000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "spot",
+         "2000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "hope(address)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "carol"
+        ],
+        "fn": "hope(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       }
+      ],
+      "txs": [
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "-50000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+    "path": "mutants/652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df.sol",
+    "properness_sigma": [
+     {
+      "ctor": {},
+      "deployer": "alice",
+      "setup": [
+       {
+        "args": [
+         "GOLD"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "Line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "spot",
+         "1000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "spot",
+         "2000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "hope(address)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "carol"
+        ],
+        "fn": "hope(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       }
+      ],
+      "txs": [
+       {
+        "args": [
+         "zero"
+        ],
+        "fn": "deny(address)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "bogus",
+         "zero",
+         "52000000000000000000000000"
+        ],
+        "fn": "fold(bytes32,address,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "alice",
+         "30000000000000000000",
+         "23700000000000000000"
+        ],
+        "fn": "fork(bytes32,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "bob",
+         "alice",
+         "381000000000000000000",
+         "38100000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "zero"
+        ],
+        "fn": "rely(address)",
+        "sender": "alice"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b",
+    "path": "mutants/7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b.sol",
+    "properness_sigma": [
+     {
+      "ctor": {},
+      "deployer": "bob",
+      "setup": [
+       {
+        "args": [
+         "GOLD"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "Line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "spot",
+         "1000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "spot",
+         "2000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "hope(address)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "carol"
+        ],
+        "fn": "hope(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       }
+      ],
+      "txs": [
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "alice",
+         "-50000000000000000000",
+         "1000000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "spot",
+         "423036000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [],
+        "fn": "cage()",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "Line",
+         "443324000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "alice",
+         "alice",
+         "-42000000000000000000",
+         "-24360000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "nope(address)",
+        "sender": "bob"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762",
+    "path": "mutants/f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762.sol",
+    "properness_sigma": [
+     {
+      "ctor": {},
+      "deployer": "carol",
+      "setup": [
+       {
+        "args": [
+         "GOLD"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER"
+        ],
+        "fn": "init(bytes32)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "Line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "spot",
+         "1000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "spot",
+         "2000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "line",
+         "1000000000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "1000000000000000000000"
+        ],
+        "fn": "slip(bytes32,address,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "hope(address)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "carol"
+        ],
+        "fn": "hope(address)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "GOLD",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "GOLD",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "alice",
+         "alice",
+         "alice",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "bob",
+         "bob",
+         "bob",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "carol",
+         "carol",
+         "100000000000000000000",
+         "50000000000000000000"
+        ],
+        "fn": "frob(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       }
+      ],
+      "txs": [
+       {
+        "args": [
+         "zero"
+        ],
+        "fn": "hope(address)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "SILVER",
+         "carol",
+         "alice",
+         "carol",
+         "86000000000000000000",
+         "-24000000000000000000"
+        ],
+        "fn": "grab(bytes32,address,address,address,int256,int256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "bob"
+        ],
+        "fn": "rely(address)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "SILVER",
+         "615000000000000000000000000000000000000000000000"
+        ],
+        "fn": "file(bytes32,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "carol",
+         "zero",
+         "50000000000000000000"
+        ],
+        "fn": "suck(address,address,uint256)",
+        "sender": "carol"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   }
+  ],
+  "W": [
+   {
+    "mutant": "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+    "observed": {
+     "check": "check_frob_within_ceilings",
+     "outcome": "violation",
+     "pair_runtime_sha256": "115c7f327995da2ce665867a9886899993d5a71e9d07370408447681e7c09222",
+     "spec_source_sha256": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac"
+    },
+    "sigma": {
+     "ctor": {},
+     "deployer": "alice",
+     "probe": {
+      "a": "bob",
+      "b": "bob",
+      "check": "check_frob_within_ceilings",
+      "dx": "0",
+      "dy": "1",
+      "i": "SILVER",
+      "sender": "bob",
+      "u": "bob",
+      "x": "1",
+      "y": "968"
+     },
+     "setup": [
+      {
+       "args": [
+        "GOLD"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "Line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "spot",
+        "1000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "spot",
+        "2000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "bob"
+       ],
+       "fn": "hope(address)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "carol"
+       ],
+       "fn": "hope(address)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      }
+     ],
+     "txs": [
+      {
+       "args": [
+        "carol",
+        "bob",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "suck(address,address,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "zero"
+       ],
+       "fn": "deny(address)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "-100000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "zero",
+        "zero",
+        "0",
+        "9000000000000000000"
+       ],
+       "fn": "grab(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "20000000000000000000000000000000000000000000000"
+       ],
+       "fn": "heal(uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "alice",
+        "46000000000000000000",
+        "8740000000000000000"
+       ],
+       "fn": "fork(bytes32,address,address,int256,int256)",
+       "sender": "bob"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+    "observed": {
+     "check": "check_move_exact",
+     "outcome": "violation",
+     "pair_runtime_sha256": "38d5400c97c2cecc8c122fd9b6f323197ddba8b154bc0c3ae6a0a7d2b24b8e0e",
+     "spec_source_sha256": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac"
+    },
+    "sigma": {
+     "ctor": {},
+     "deployer": "alice",
+     "probe": {
+      "a": "bob",
+      "b": "carol",
+      "check": "check_move_exact",
+      "dx": "1",
+      "dy": "-1",
+      "i": "GOLD",
+      "sender": "bob",
+      "u": "bob",
+      "x": "1000000000000000000000",
+      "y": "374"
+     },
+     "setup": [
+      {
+       "args": [
+        "GOLD"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "Line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "spot",
+        "1000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "spot",
+        "2000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "bob"
+       ],
+       "fn": "hope(address)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "carol"
+       ],
+       "fn": "hope(address)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      }
+     ],
+     "txs": [],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+    "observed": {
+     "check": "check_fold_dai_debt_exact",
+     "outcome": "violation",
+     "pair_runtime_sha256": "6f803efe88b1b8e26c10caa07970caa9e50cc28e1eee8b2fabc7c37cd7611132",
+     "spec_source_sha256": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac"
+    },
+    "sigma": {
+     "ctor": {},
+     "deployer": "carol",
+     "probe": {
+      "a": "zero",
+      "b": "bob",
+      "check": "check_fold_dai_debt_exact",
+      "dx": "-283000000000000000000",
+      "dy": "1000000000000000000000000000000000000000000000000000",
+      "i": "SILVER",
+      "sender": "carol",
+      "u": "bob",
+      "x": "14554774949832679960259329175988036744673364499428596550033216266877366192230",
+      "y": "631000000000000000000000000000"
+     },
+     "setup": [
+      {
+       "args": [
+        "GOLD"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "Line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "GOLD",
+        "spot",
+        "1000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "GOLD",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "spot",
+        "2000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "bob"
+       ],
+       "fn": "hope(address)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "carol"
+       ],
+       "fn": "hope(address)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      }
+     ],
+     "txs": [],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+    "observed": {
+     "check": "check_slip_needs_auth",
+     "outcome": "violation",
+     "pair_runtime_sha256": "06f9bb3ea2745facf20b699b0be0fcbd21690123a75278eb7c87d5c3afc5dbed",
+     "spec_source_sha256": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac"
+    },
+    "sigma": {
+     "ctor": {},
+     "deployer": "alice",
+     "probe": {
+      "a": "bob",
+      "b": "carol",
+      "check": "check_slip_needs_auth",
+      "dx": "1",
+      "dy": "-1",
+      "i": "GOLD",
+      "sender": "bob",
+      "u": "bob",
+      "x": "1000000000000000000000",
+      "y": "374"
+     },
+     "setup": [
+      {
+       "args": [
+        "GOLD"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "Line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "spot",
+        "1000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "spot",
+        "2000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "bob"
+       ],
+       "fn": "hope(address)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "carol"
+       ],
+       "fn": "hope(address)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      }
+     ],
+     "txs": [],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+    "observed": {
+     "check": "check_frob_needs_v_consent",
+     "outcome": "violation",
+     "pair_runtime_sha256": "f84578e9e63ac4181d74f6ce90f4e93c2aae5c6df00a50b576e6bf6f20de33b9",
+     "spec_source_sha256": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac"
+    },
+    "sigma": {
+     "ctor": {},
+     "deployer": "bob",
+     "probe": {
+      "a": "alice",
+      "b": "carol",
+      "check": "check_frob_needs_v_consent",
+      "dx": "1",
+      "dy": "-1",
+      "i": "SILVER",
+      "sender": "bob",
+      "u": "carol",
+      "x": "1",
+      "y": "390000000000000000000000000000"
+     },
+     "setup": [
+      {
+       "args": [
+        "GOLD"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "Line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "spot",
+        "1000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "spot",
+        "2000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "bob"
+       ],
+       "fn": "hope(address)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "carol"
+       ],
+       "fn": "hope(address)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      }
+     ],
+     "txs": [],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b",
+    "observed": {
+     "check": "check_frob_riskier_is_safe",
+     "outcome": "violation",
+     "pair_runtime_sha256": "34b093becbb597a9d09ab9a2e5bcc3ec6e66efaf7f273e97ae08e309a2213110",
+     "spec_source_sha256": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac"
+    },
+    "sigma": {
+     "ctor": {},
+     "deployer": "bob",
+     "probe": {
+      "a": "bob",
+      "b": "bob",
+      "check": "check_frob_riskier_is_safe",
+      "dx": "1",
+      "dy": "90000000000000000000",
+      "i": "GOLD",
+      "sender": "carol",
+      "u": "carol",
+      "x": "32366983594643433722246794460506513710967873137375113925061534502811771535264",
+      "y": "1000000000000000000000"
+     },
+     "setup": [
+      {
+       "args": [
+        "GOLD"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "Line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "spot",
+        "1000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "spot",
+        "2000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "bob"
+       ],
+       "fn": "hope(address)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "carol"
+       ],
+       "fn": "hope(address)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      }
+     ],
+     "txs": [
+      {
+       "args": [
+        "bob",
+        "zero",
+        "15000000000000000000000000000000000000000000000"
+       ],
+       "fn": "move(address,address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "alice"
+       ],
+       "fn": "nope(address)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "zero",
+        "bob",
+        "15000000000000000000000000000000000000000000000"
+       ],
+       "fn": "suck(address,address,uint256)",
+       "sender": "bob"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762",
+    "observed": {
+     "check": "check_two_sin_within_vice",
+     "outcome": "violation",
+     "pair_runtime_sha256": "fbd420990f016bb6031852fb8a1ce9569034fed520c846adcf8141e4a19ef20f",
+     "spec_source_sha256": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac"
+    },
+    "sigma": {
+     "ctor": {},
+     "deployer": "bob",
+     "probe": {
+      "a": "alice",
+      "b": "carol",
+      "check": "check_two_sin_within_vice",
+      "dx": "65000000000000000000",
+      "dy": "-1000000000000000000000000000000000000000000000000000",
+      "i": "line",
+      "sender": "bob",
+      "u": "carol",
+      "x": "816000000000000000000000000000",
+      "y": "336"
+     },
+     "setup": [
+      {
+       "args": [
+        "GOLD"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "Line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "spot",
+        "1000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "spot",
+        "2000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "line",
+        "1000000000000000000000000000000000000000000000000000"
+       ],
+       "fn": "file(bytes32,bytes32,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "1000000000000000000000"
+       ],
+       "fn": "slip(bytes32,address,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "bob"
+       ],
+       "fn": "hope(address)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "carol"
+       ],
+       "fn": "hope(address)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "GOLD",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "SILVER",
+        "alice",
+        "alice",
+        "alice",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "SILVER",
+        "bob",
+        "bob",
+        "bob",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "SILVER",
+        "carol",
+        "carol",
+        "carol",
+        "100000000000000000000",
+        "50000000000000000000"
+       ],
+       "fn": "frob(bytes32,address,address,address,int256,int256)",
+       "sender": "carol"
+      }
+     ],
+     "txs": [
+      {
+       "args": [
+        "bogus"
+       ],
+       "fn": "init(bytes32)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "GOLD",
+        "carol",
+        "zero",
+        "carol",
+        "-65000000000000000000",
+        "-37000000000000000000"
+       ],
+       "fn": "grab(bytes32,address,address,address,int256,int256)",
+       "sender": "bob"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   }
+  ],
+  "adversary": {
+   "B_A": 2000,
+   "id": "da221ec5557e073f4a51a96eed7d44c758c8cbcf05e7d8f8517f13c20b010047",
+   "seed": 0,
+   "source_sha256": "629e48f09a4e8508d93dfb7221769cbf82278c33fee23642967624b1ef6fdc1c"
+  },
+  "discarded": []
+ },
+ "files": {
+  "b/Vat.sol": "7a86385849359362580286f8d428512ba37653154301bfcbeae16cecf5860748",
+  "c/check_cage_needs_auth/solc_input.json": "c8669c084509f98a8eb4df68ec0d9368a2da38707d73e3dd40a1bbb081ce5e47",
+  "c/check_cage_needs_auth/solc_output.json": "4d2ded9617f7b41b3a16cc52c3c239f2e53f08173db0e1afbf7f3bddc7ba5188",
+  "c/check_deny_needs_auth/solc_input.json": "c51d148819317405e34091ffe2479ce1aafb38e0bc6c6351b667fe930d22cf0f",
+  "c/check_deny_needs_auth/solc_output.json": "2a9edfd88371d09441b0ccee6c3cfe5c41b85c05b48f38b0b86e58be863beba3",
+  "c/check_file_global_needs_auth/solc_input.json": "ac6244fc30c79302e43d97f210466d4ad2e7ffc01c294d518aea7d23e5c0023e",
+  "c/check_file_global_needs_auth/solc_output.json": "90a2929bac6cc1fb11dbedafb231dab34b180c37db30bfed1163fa4a26fbea42",
+  "c/check_file_ilk_needs_auth/solc_input.json": "b78430f1a49a346e8db1e325974a2e4be20c8d7643065ffb0254e8b5f8cb0e6b",
+  "c/check_file_ilk_needs_auth/solc_output.json": "bf5f78bc4fc561a78bf40fc7dfec4d4d8bc5488c84bb4d235ef5580487a17499",
+  "c/check_flux_exact/solc_input.json": "f237ca8c97a4c0c9ad6f9b5f497a5b98d14dd1b0e7f76f66f1ed9b8bc9f50fed",
+  "c/check_flux_exact/solc_output.json": "05fd5c9759069a64dbfd4ebcc098e61ed9cbb7ffdde15025afca433f0f0b8e6c",
+  "c/check_flux_needs_consent/solc_input.json": "7bfe6cef14de80025f01770f880f9666af931427ab704fb9a64da6ef3b76f5dc",
+  "c/check_flux_needs_consent/solc_output.json": "ab04f4ff0c3e3fcf606e29248dfd42ce684cacf484bd3754475c8585f846248a",
+  "c/check_fold_dai_debt_exact/solc_input.json": "08c142546a91e369f1c9675b4d0d97e2f8ea4798fcfa192facd0d4ac6d575c13",
+  "c/check_fold_dai_debt_exact/solc_output.json": "12828172614f0b9252088a221b4251b4b818ec0c49e460fd543ae718bed842fb",
+  "c/check_fold_needs_auth/solc_input.json": "288782ebc85d2d60fcdda4269680f386978451eba230c892aca72a08bbaecffe",
+  "c/check_fold_needs_auth/solc_output.json": "28664ca5a7d07c4219235bd5ef03185b8d82b45a786764158a0e4c47479e4d4d",
+  "c/check_fold_needs_live/solc_input.json": "0a616ebaab10aa6e72ec556fdc616f46a0ce5917f8e1e2e5d1fe5470e287888a",
+  "c/check_fold_needs_live/solc_output.json": "ff2b9ba278a694b47edf5c41974b31275937984fd115c91d5ce0737cb5e76f02",
+  "c/check_fold_rate_exact/solc_input.json": "cff6cb3d75c0319940b5f5c34f24129d2cf741afe5964af42d01647c647a1a06",
+  "c/check_fold_rate_exact/solc_output.json": "6e6dbf110d8ca3c21815f682b68a1e3bd3edd3b5594c8dc29e0aeb5e1b8c2de2",
+  "c/check_fork_needs_dst_consent/solc_input.json": "8ebd6f13f8dc18bf562303d377327e84c195ea6c7982343ce34cb48fb8527ef1",
+  "c/check_fork_needs_dst_consent/solc_output.json": "e09460690e5b2e546fabc6b3e7c276cfcebe9938aff3f8384837571f835a6659",
+  "c/check_fork_needs_src_consent/solc_input.json": "3b66013252cfa18eda947d863b3e0a67a3a4402fa2bcdd49d34f2ff4b55eed76",
+  "c/check_fork_needs_src_consent/solc_output.json": "c6da41725f92fc0a311e8660785548f0b0a14c9aecb477e865fb8fb27a2c3f3c",
+  "c/check_frob_dai_debt_exact/solc_input.json": "faa179df44f986cd0658277f3d068a2ca70c1872d0986f3b9d27e867691e4b2d",
+  "c/check_frob_dai_debt_exact/solc_output.json": "5c38d911ebf03d2cbac902bafacd8c446cc82ad0f211ee27293f7854ea955d85",
+  "c/check_frob_gem_exact/solc_input.json": "cde374dec73cf35ab558334bf4cc3afc2f7caf5f4d50e033b039531185aaed47",
+  "c/check_frob_gem_exact/solc_output.json": "6601f032d2d7943a95f48755c04b4d967eb53977dc171290ecc6f75ac260d2ec",
+  "c/check_frob_ilk_exact/solc_input.json": "79fe8dfb348d817977bf4ae979da2c99d6fb9925be5a20e1a12be93a948af902",
+  "c/check_frob_ilk_exact/solc_output.json": "46d37af99143fb7d2f539d1e04e2faaf247c92d20b6fd889baefc7aef0e8fc45",
+  "c/check_frob_needs_live/solc_input.json": "4a68a654fe6d381182eb77b2f5a05023e5e277f19086c1ba281bac5b4843653e",
+  "c/check_frob_needs_live/solc_output.json": "64636cea64768bed4e399468cc85155a8d1861a1447da57802a6568dfab43073",
+  "c/check_frob_needs_u_consent/solc_input.json": "97a1c169f4e2efcb92ca11844d46d6d5cc7a64ce02a1e73ff6d04bca36adac2b",
+  "c/check_frob_needs_u_consent/solc_output.json": "6a8b053c1aae65bb80f45ba3080172099cc6a6e66d166d774dfe956e0561a6e1",
+  "c/check_frob_needs_v_consent/solc_input.json": "4f58978993344654cc496240fd3e9b64d7f2d6e6b8858569a95a03cd06b47460",
+  "c/check_frob_needs_v_consent/solc_output.json": "9e5f6514c68d01f666f4ef8ced335879bc79e09b377d194b612181a82ed5dfd8",
+  "c/check_frob_needs_w_consent/solc_input.json": "0e0bac904b1b6b63ccc74121c4ba8876ec4da7e5be37a839b873fbb8e7cb1714",
+  "c/check_frob_needs_w_consent/solc_output.json": "548b0d4bcd8e0179d2d5bcae9d08e29487ab8b270db603db3ae38d8767ad7a44",
+  "c/check_frob_not_dusty/solc_input.json": "f21b93b4892cdc28354cda42740a9e6f16eb6ab982ce9bfdd94c51f1eabec739",
+  "c/check_frob_not_dusty/solc_output.json": "fbda74107af776832001737793833638da1c074cec945119d620dd32f765517a",
+  "c/check_frob_riskier_is_safe/solc_input.json": "35095ecd987f46dec505eb3f90884280a09b6d9f89c04cec7d38d52e0df80883",
+  "c/check_frob_riskier_is_safe/solc_output.json": "eb05c5ae1cef117534c8e41b180f573a11af860f258f26266294242a46c65f75",
+  "c/check_frob_urn_exact/solc_input.json": "84d1048b17cec77c2cb87ea102ee1dac25f50450a2c2f1d2a7dc91e14d971075",
+  "c/check_frob_urn_exact/solc_output.json": "657627eaa2ffc09fd95de83ff50f8c8c5bc10321e6bbf4203e8ffaf7b67a6f32",
+  "c/check_frob_within_ceilings/solc_input.json": "496766240164e881e4358e332ee9e603e49ffd3259e1cd5a2f266f56c1d2e34e",
+  "c/check_frob_within_ceilings/solc_output.json": "5785d4aea204c6bfaf121acfa2103ea5caf5d4a328d4ca9237a4c5ea453508a1",
+  "c/check_grab_gem_exact/solc_input.json": "26b0e056857fb110476864394c332212a811cf96bf7a0885c7517efcd9ac6bc1",
+  "c/check_grab_gem_exact/solc_output.json": "e75f6d6f2861f7cc5552ab16b2585eb9b883fef407c5e960284d66699b7128f0",
+  "c/check_grab_needs_auth/solc_input.json": "32069859f58ec3b455791371960308fb0150cde9de7b4469d915c6df66863367",
+  "c/check_grab_needs_auth/solc_output.json": "a52862d8d9836eac9b37d95de80c5f472805cc2184389f41aff5ac91ea06f2b7",
+  "c/check_grab_sin_vice_exact/solc_input.json": "96d3986a2f716d26cfe54eee892cb45d8aaf6d8f8c7d6a9388299651ddc6fb10",
+  "c/check_grab_sin_vice_exact/solc_output.json": "def2cd0da0e62ba0b38b88023c1742879656cf0f7a766333943ea429d7f73034",
+  "c/check_grab_urn_ilk_exact/solc_input.json": "aeb15e1707ebd3eec13a5a52fdf23bd96335f907e5d2872a310d941ed7b08d26",
+  "c/check_grab_urn_ilk_exact/solc_output.json": "3c98d789d3f034ad696b7343457cfc51bd0d5a790a5bee0825f047e7c258f9d7",
+  "c/check_heal_exact/solc_input.json": "36181940f20a2505e4f97dfb716f08dd7f5000010f98f002f6bc29a58620bd54",
+  "c/check_heal_exact/solc_output.json": "ff442510152e639b96c61869f1a8c57cefeda89869a9331f860822d502511bfc",
+  "c/check_hope_own_only/solc_input.json": "041c077f7e2cc3008fe83c99be7facbe9cb5f24a5fbe258c031f7af944347627",
+  "c/check_hope_own_only/solc_output.json": "78d260dabd7c27db7d6ec87a817a53fecb76504c87e45ea89f4e7520983e68f2",
+  "c/check_init_needs_auth/solc_input.json": "cf56c38c24ee6c1552900ba1efa86805a9c37f32c0789268dddd8fbdaf0edcd2",
+  "c/check_init_needs_auth/solc_output.json": "d111885cbd432b0d1a7e801d5bc65867c593efffcd13d569c98b4f5464ca5560",
+  "c/check_move_exact/solc_input.json": "4784cfdb79ff2630a7d9c0595995b9b1b5b88845082342b64ac419d8a4536e84",
+  "c/check_move_exact/solc_output.json": "fc8cd219617aebf7030fc94a806f5fe53d85aa84ffb35e7471122f087d7fd1e7",
+  "c/check_move_needs_consent/solc_input.json": "29cd366a732d0f628a29f720b6a1d999c4093257614feb87566f9c8578ee2f9d",
+  "c/check_move_needs_consent/solc_output.json": "7d66aab992b923b007705893a363c4dd2ef47ab909b3d4b9898494532dd0c6a2",
+  "c/check_move_others_and_debt_unchanged/solc_input.json": "fe78cbb5a796ae706aceb6316e791408f43d059b046df1744e5dbbf593fd62fc",
+  "c/check_move_others_and_debt_unchanged/solc_output.json": "869a8474aef033c6fa4d554d70aef61757987f26421690fd50274aa8bf5809bc",
+  "c/check_move_self_unchanged/solc_input.json": "efece358fd14b006efad3b441923c004dc061f3a0629a75d38cf107493915e70",
+  "c/check_move_self_unchanged/solc_output.json": "b6586fe12345f08ecf13dc598fc02b2a7d07afbaee944faa712d996ebc76cac5",
+  "c/check_nope_own_only/solc_input.json": "5e3f262f93bc8754a675ef34caa3c7ebc45f930fa15dc166b90c2edbb5c44a9c",
+  "c/check_nope_own_only/solc_output.json": "4a0360a92e66ac48ccf4ba204e6c87ef8dc2500a64a47e77c6fdbc72d08cf0b6",
+  "c/check_rely_needs_auth/solc_input.json": "3e82e283ccdd3ac04ac86d48ebe78aa90cbcb94739e02536c1be3decfae63e50",
+  "c/check_rely_needs_auth/solc_output.json": "e686ea9f29fd33d8af361887324e0cc9eb9a099aa984429c3b92e5fb3f87cc2d",
+  "c/check_slip_needs_auth/solc_input.json": "a57e3d6f8c4da93ef30bd5aa30e0a03928547e18784af4285f32482d2ddd083e",
+  "c/check_slip_needs_auth/solc_output.json": "5eb16211a20097134710ae216516c8097988c55f5a8c79f0934924b7cd4ab915",
+  "c/check_suck_exact/solc_input.json": "fcd908b4e76cae95f4fb68e6476a0fe915bd21c2f1a823365d8845e360bdfe22",
+  "c/check_suck_exact/solc_output.json": "2b332f5d02febffd22cde9fabfdae0919d1b8e34a36d8be46813346cd9ceeaf0",
+  "c/check_suck_needs_auth/solc_input.json": "35070af0c5ef97842f584e143c80e1899b789cb452949387497549b507bc4ff0",
+  "c/check_suck_needs_auth/solc_output.json": "570b9c5afab1d08f1b3281b5c317603da444825b9f26d6be5439555391b61091",
+  "c/check_two_dai_within_debt/solc_input.json": "436eb6b0f82c9cde202de62932bc1fe991067b3a9c1798769ac9d99cb3beb5d9",
+  "c/check_two_dai_within_debt/solc_output.json": "c4aadb220896514a1afd1f21c1750c41d4e8a67ad99f4d6400ad7031d3dc1bde",
+  "c/check_two_sin_within_vice/solc_input.json": "e550c0c0fe7cc88bcea6409a9a6b0a68f711804bf395cae664e752d41007a7f5",
+  "c/check_two_sin_within_vice/solc_output.json": "70e9e78c0bee55544011af6bdb726cb0534898feadbfe0929e103798f52e7b74",
+  "c/check_vice_within_debt/solc_input.json": "d44271d58941e67ef603ab8c724703768582b377cc02ef03b77aeafd2979c1aa",
+  "c/check_vice_within_debt/solc_output.json": "ddafcbd577897c4c6f627481cb60b660087d13736ef59e2a01bc57f4918a1ced",
+  "core/specgame_core.py": "25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f",
+  "mutants/0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884.sol": "cb3b41794cfc2f38b8185d6c75cd0bdc148b953dacdf953db3553614b369ea04",
+  "mutants/0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5.sol": "9b30a33f0ead1c443ece6eb76ae471db27f9159df22c03428eca4f0c5bf3f7e1",
+  "mutants/1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d.sol": "4d9fef11c2d33bae4b18c3e7a39df17d4565d80b6780de56e0302c27d2c041ad",
+  "mutants/3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb.sol": "0cb101abdc9b31dfbc8ab1c58b51e0b241beb708985a31d88474be9193f272ac",
+  "mutants/4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04.sol": "50e800220fa0d5e0455a6d0232360daa6601cd7229e0586adae406952dac069c",
+  "mutants/652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df.sol": "2eb25edba6c7a881e1c2c8d6395d57d7e71f546fbf31d46dafb6b521b553502b",
+  "mutants/7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b.sol": "0a0caa2aef39b882956b1cf4632eafdc36d3f37848acfc9440c9d54098394a8b",
+  "mutants/f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762.sol": "35182af1876b7eb1aad1a1e702d8a076cf7f4a5569eb5980ab57521cc12683a4",
+  "phi/Spec.sol": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac",
+  "subject/profile.json": "66e8b6203a073d7e9baf93353460e2a1461e3960f0d894607cd4e85357efeb0c"
+ },
+ "hard": {
+  "b": {
+   "path": "b/Vat.sol",
+   "runtime_sha256": "cf975b5a6b4f6d6781cb7d7ac369110b740db17bef918bc97c86188cf985deba",
+   "source_sha256": "7a86385849359362580286f8d428512ba37653154301bfcbeae16cecf5860748"
+  },
+  "c": {
+   "checks": [
+    {
+     "check": "check_rely_needs_auth",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_rely_needs_auth/solc_input.json",
+     "solc_input_sha256": "3e82e283ccdd3ac04ac86d48ebe78aa90cbcb94739e02536c1be3decfae63e50",
+     "solc_output_path": "c/check_rely_needs_auth/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_deny_needs_auth",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_deny_needs_auth/solc_input.json",
+     "solc_input_sha256": "c51d148819317405e34091ffe2479ce1aafb38e0bc6c6351b667fe930d22cf0f",
+     "solc_output_path": "c/check_deny_needs_auth/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_init_needs_auth",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_init_needs_auth/solc_input.json",
+     "solc_input_sha256": "cf56c38c24ee6c1552900ba1efa86805a9c37f32c0789268dddd8fbdaf0edcd2",
+     "solc_output_path": "c/check_init_needs_auth/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_file_global_needs_auth",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_file_global_needs_auth/solc_input.json",
+     "solc_input_sha256": "ac6244fc30c79302e43d97f210466d4ad2e7ffc01c294d518aea7d23e5c0023e",
+     "solc_output_path": "c/check_file_global_needs_auth/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_file_ilk_needs_auth",
+     "reason": "unproved",
+     "solc_input_path": "c/check_file_ilk_needs_auth/solc_input.json",
+     "solc_input_sha256": "b78430f1a49a346e8db1e325974a2e4be20c8d7643065ffb0254e8b5f8cb0e6b",
+     "solc_output_path": "c/check_file_ilk_needs_auth/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_slip_needs_auth",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_slip_needs_auth/solc_input.json",
+     "solc_input_sha256": "a57e3d6f8c4da93ef30bd5aa30e0a03928547e18784af4285f32482d2ddd083e",
+     "solc_output_path": "c/check_slip_needs_auth/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_grab_needs_auth",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_grab_needs_auth/solc_input.json",
+     "solc_input_sha256": "32069859f58ec3b455791371960308fb0150cde9de7b4469d915c6df66863367",
+     "solc_output_path": "c/check_grab_needs_auth/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_suck_needs_auth",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_suck_needs_auth/solc_input.json",
+     "solc_input_sha256": "35070af0c5ef97842f584e143c80e1899b789cb452949387497549b507bc4ff0",
+     "solc_output_path": "c/check_suck_needs_auth/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_fold_needs_auth",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_fold_needs_auth/solc_input.json",
+     "solc_input_sha256": "288782ebc85d2d60fcdda4269680f386978451eba230c892aca72a08bbaecffe",
+     "solc_output_path": "c/check_fold_needs_auth/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_cage_needs_auth",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_cage_needs_auth/solc_input.json",
+     "solc_input_sha256": "c8669c084509f98a8eb4df68ec0d9368a2da38707d73e3dd40a1bbb081ce5e47",
+     "solc_output_path": "c/check_cage_needs_auth/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_frob_needs_u_consent",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_frob_needs_u_consent/solc_input.json",
+     "solc_input_sha256": "97a1c169f4e2efcb92ca11844d46d6d5cc7a64ce02a1e73ff6d04bca36adac2b",
+     "solc_output_path": "c/check_frob_needs_u_consent/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_frob_needs_v_consent",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_frob_needs_v_consent/solc_input.json",
+     "solc_input_sha256": "4f58978993344654cc496240fd3e9b64d7f2d6e6b8858569a95a03cd06b47460",
+     "solc_output_path": "c/check_frob_needs_v_consent/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_frob_needs_w_consent",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_frob_needs_w_consent/solc_input.json",
+     "solc_input_sha256": "0e0bac904b1b6b63ccc74121c4ba8876ec4da7e5be37a839b873fbb8e7cb1714",
+     "solc_output_path": "c/check_frob_needs_w_consent/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_fork_needs_src_consent",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_fork_needs_src_consent/solc_input.json",
+     "solc_input_sha256": "3b66013252cfa18eda947d863b3e0a67a3a4402fa2bcdd49d34f2ff4b55eed76",
+     "solc_output_path": "c/check_fork_needs_src_consent/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_fork_needs_dst_consent",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_fork_needs_dst_consent/solc_input.json",
+     "solc_input_sha256": "8ebd6f13f8dc18bf562303d377327e84c195ea6c7982343ce34cb48fb8527ef1",
+     "solc_output_path": "c/check_fork_needs_dst_consent/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_flux_needs_consent",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_flux_needs_consent/solc_input.json",
+     "solc_input_sha256": "7bfe6cef14de80025f01770f880f9666af931427ab704fb9a64da6ef3b76f5dc",
+     "solc_output_path": "c/check_flux_needs_consent/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_move_needs_consent",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_move_needs_consent/solc_input.json",
+     "solc_input_sha256": "29cd366a732d0f628a29f720b6a1d999c4093257614feb87566f9c8578ee2f9d",
+     "solc_output_path": "c/check_move_needs_consent/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_hope_own_only",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_hope_own_only/solc_input.json",
+     "solc_input_sha256": "041c077f7e2cc3008fe83c99be7facbe9cb5f24a5fbe258c031f7af944347627",
+     "solc_output_path": "c/check_hope_own_only/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_nope_own_only",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_nope_own_only/solc_input.json",
+     "solc_input_sha256": "5e3f262f93bc8754a675ef34caa3c7ebc45f930fa15dc166b90c2edbb5c44a9c",
+     "solc_output_path": "c/check_nope_own_only/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_frob_urn_exact",
+     "reason": "unproved",
+     "solc_input_path": "c/check_frob_urn_exact/solc_input.json",
+     "solc_input_sha256": "84d1048b17cec77c2cb87ea102ee1dac25f50450a2c2f1d2a7dc91e14d971075",
+     "solc_output_path": "c/check_frob_urn_exact/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_frob_ilk_exact",
+     "reason": "unproved",
+     "solc_input_path": "c/check_frob_ilk_exact/solc_input.json",
+     "solc_input_sha256": "79fe8dfb348d817977bf4ae979da2c99d6fb9925be5a20e1a12be93a948af902",
+     "solc_output_path": "c/check_frob_ilk_exact/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_frob_gem_exact",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_frob_gem_exact/solc_input.json",
+     "solc_input_sha256": "cde374dec73cf35ab558334bf4cc3afc2f7caf5f4d50e033b039531185aaed47",
+     "solc_output_path": "c/check_frob_gem_exact/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_frob_dai_debt_exact",
+     "reason": "unproved",
+     "solc_input_path": "c/check_frob_dai_debt_exact/solc_input.json",
+     "solc_input_sha256": "faa179df44f986cd0658277f3d068a2ca70c1872d0986f3b9d27e867691e4b2d",
+     "solc_output_path": "c/check_frob_dai_debt_exact/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_frob_within_ceilings",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_frob_within_ceilings/solc_input.json",
+     "solc_input_sha256": "496766240164e881e4358e332ee9e603e49ffd3259e1cd5a2f266f56c1d2e34e",
+     "solc_output_path": "c/check_frob_within_ceilings/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_frob_riskier_is_safe",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_frob_riskier_is_safe/solc_input.json",
+     "solc_input_sha256": "35095ecd987f46dec505eb3f90884280a09b6d9f89c04cec7d38d52e0df80883",
+     "solc_output_path": "c/check_frob_riskier_is_safe/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_frob_not_dusty",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_frob_not_dusty/solc_input.json",
+     "solc_input_sha256": "f21b93b4892cdc28354cda42740a9e6f16eb6ab982ce9bfdd94c51f1eabec739",
+     "solc_output_path": "c/check_frob_not_dusty/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_frob_needs_live",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_frob_needs_live/solc_input.json",
+     "solc_input_sha256": "4a68a654fe6d381182eb77b2f5a05023e5e277f19086c1ba281bac5b4843653e",
+     "solc_output_path": "c/check_frob_needs_live/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_fold_rate_exact",
+     "reason": "unproved",
+     "solc_input_path": "c/check_fold_rate_exact/solc_input.json",
+     "solc_input_sha256": "cff6cb3d75c0319940b5f5c34f24129d2cf741afe5964af42d01647c647a1a06",
+     "solc_output_path": "c/check_fold_rate_exact/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_fold_dai_debt_exact",
+     "reason": "unproved",
+     "solc_input_path": "c/check_fold_dai_debt_exact/solc_input.json",
+     "solc_input_sha256": "08c142546a91e369f1c9675b4d0d97e2f8ea4798fcfa192facd0d4ac6d575c13",
+     "solc_output_path": "c/check_fold_dai_debt_exact/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_fold_needs_live",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_fold_needs_live/solc_input.json",
+     "solc_input_sha256": "0a616ebaab10aa6e72ec556fdc616f46a0ce5917f8e1e2e5d1fe5470e287888a",
+     "solc_output_path": "c/check_fold_needs_live/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_move_exact",
+     "reason": "unproved",
+     "solc_input_path": "c/check_move_exact/solc_input.json",
+     "solc_input_sha256": "4784cfdb79ff2630a7d9c0595995b9b1b5b88845082342b64ac419d8a4536e84",
+     "solc_output_path": "c/check_move_exact/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_move_self_unchanged",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_move_self_unchanged/solc_input.json",
+     "solc_input_sha256": "efece358fd14b006efad3b441923c004dc061f3a0629a75d38cf107493915e70",
+     "solc_output_path": "c/check_move_self_unchanged/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_move_others_and_debt_unchanged",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_move_others_and_debt_unchanged/solc_input.json",
+     "solc_input_sha256": "fe78cbb5a796ae706aceb6316e791408f43d059b046df1744e5dbbf593fd62fc",
+     "solc_output_path": "c/check_move_others_and_debt_unchanged/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_flux_exact",
+     "reason": "unproved",
+     "solc_input_path": "c/check_flux_exact/solc_input.json",
+     "solc_input_sha256": "f237ca8c97a4c0c9ad6f9b5f497a5b98d14dd1b0e7f76f66f1ed9b8bc9f50fed",
+     "solc_output_path": "c/check_flux_exact/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_grab_urn_ilk_exact",
+     "reason": "unproved",
+     "solc_input_path": "c/check_grab_urn_ilk_exact/solc_input.json",
+     "solc_input_sha256": "aeb15e1707ebd3eec13a5a52fdf23bd96335f907e5d2872a310d941ed7b08d26",
+     "solc_output_path": "c/check_grab_urn_ilk_exact/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_grab_gem_exact",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_grab_gem_exact/solc_input.json",
+     "solc_input_sha256": "26b0e056857fb110476864394c332212a811cf96bf7a0885c7517efcd9ac6bc1",
+     "solc_output_path": "c/check_grab_gem_exact/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_grab_sin_vice_exact",
+     "reason": "unproved",
+     "solc_input_path": "c/check_grab_sin_vice_exact/solc_input.json",
+     "solc_input_sha256": "96d3986a2f716d26cfe54eee892cb45d8aaf6d8f8c7d6a9388299651ddc6fb10",
+     "solc_output_path": "c/check_grab_sin_vice_exact/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_heal_exact",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_heal_exact/solc_input.json",
+     "solc_input_sha256": "36181940f20a2505e4f97dfb716f08dd7f5000010f98f002f6bc29a58620bd54",
+     "solc_output_path": "c/check_heal_exact/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_suck_exact",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_suck_exact/solc_input.json",
+     "solc_input_sha256": "fcd908b4e76cae95f4fb68e6476a0fe915bd21c2f1a823365d8845e360bdfe22",
+     "solc_output_path": "c/check_suck_exact/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_two_dai_within_debt",
+     "reason": "unproved",
+     "solc_input_path": "c/check_two_dai_within_debt/solc_input.json",
+     "solc_input_sha256": "436eb6b0f82c9cde202de62932bc1fe991067b3a9c1798769ac9d99cb3beb5d9",
+     "solc_output_path": "c/check_two_dai_within_debt/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_two_sin_within_vice",
+     "reason": "unproved",
+     "solc_input_path": "c/check_two_sin_within_vice/solc_input.json",
+     "solc_input_sha256": "e550c0c0fe7cc88bcea6409a9a6b0a68f711804bf395cae664e752d41007a7f5",
+     "solc_output_path": "c/check_two_sin_within_vice/solc_output.json",
+     "verdict": "Unknown"
+    },
+    {
+     "check": "check_vice_within_debt",
+     "reason": "unproved",
+     "solc_input_path": "c/check_vice_within_debt/solc_input.json",
+     "solc_input_sha256": "d44271d58941e67ef603ab8c724703768582b377cc02ef03b77aeafd2979c1aa",
+     "solc_output_path": "c/check_vice_within_debt/solc_output.json",
+     "verdict": "Unknown"
+    }
+   ],
+   "command": [
+    "solc",
+    "--standard-json"
+   ],
+   "mode": "isolated",
+   "reason": "unproved",
+   "timeout_ms": 60000,
+   "verdict": "Unknown",
+   "wall_timeout_s": 600.0
+  },
+  "phi": {
+   "checks": [
+    "check_cage_needs_auth",
+    "check_deny_needs_auth",
+    "check_file_global_needs_auth",
+    "check_file_ilk_needs_auth",
+    "check_flux_exact",
+    "check_flux_needs_consent",
+    "check_fold_dai_debt_exact",
+    "check_fold_needs_auth",
+    "check_fold_needs_live",
+    "check_fold_rate_exact",
+    "check_fork_needs_dst_consent",
+    "check_fork_needs_src_consent",
+    "check_frob_dai_debt_exact",
+    "check_frob_gem_exact",
+    "check_frob_ilk_exact",
+    "check_frob_needs_live",
+    "check_frob_needs_u_consent",
+    "check_frob_needs_v_consent",
+    "check_frob_needs_w_consent",
+    "check_frob_not_dusty",
+    "check_frob_riskier_is_safe",
+    "check_frob_urn_exact",
+    "check_frob_within_ceilings",
+    "check_grab_gem_exact",
+    "check_grab_needs_auth",
+    "check_grab_sin_vice_exact",
+    "check_grab_urn_ilk_exact",
+    "check_heal_exact",
+    "check_hope_own_only",
+    "check_init_needs_auth",
+    "check_move_exact",
+    "check_move_needs_consent",
+    "check_move_others_and_debt_unchanged",
+    "check_move_self_unchanged",
+    "check_nope_own_only",
+    "check_rely_needs_auth",
+    "check_slip_needs_auth",
+    "check_suck_exact",
+    "check_suck_needs_auth",
+    "check_two_dai_within_debt",
+    "check_two_sin_within_vice",
+    "check_vice_within_debt"
+   ],
+   "pair_runtime_sha256": "f0306ea2d9e5204ac454199a21a3463f7f3c49e7e301a378bd4a0811d9103ae1",
+   "path": "phi/Spec.sol",
+   "source_sha256": "bc0580fedfc0260db2de234211b4fe4149dd94a4df0913fb3df3dd87d56fa8ac"
+  }
+ },
+ "metadata": {
+  "mutants": [
+   {
+    "fault_class": "missing-bound-check",
+    "id": "0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884",
+    "operator": "remove-require"
+   },
+   {
+    "fault_class": "missing-bound-check",
+    "id": "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+    "operator": "remove-require"
+   },
+   {
+    "fault_class": "accounting",
+    "id": "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+    "operator": "remove-statement"
+   },
+   {
+    "fault_class": "accounting",
+    "id": "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+    "operator": "remove-statement"
+   },
+   {
+    "fault_class": "access-control",
+    "id": "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+    "operator": "remove-modifier"
+   },
+   {
+    "fault_class": "consent",
+    "id": "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+    "operator": "remove-require"
+   },
+   {
+    "fault_class": "missing-bound-check",
+    "id": "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b",
+    "operator": "remove-require"
+   },
+   {
+    "fault_class": "accounting",
+    "id": "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762",
+    "operator": "remove-statement"
+   }
+  ]
+ },
+ "not_claimed": [
+  "V-completeness"
+ ],
+ "provenance": {
+  "core_path": "core/specgame_core.py",
+  "core_sha256": "25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f",
+  "feedback": null,
+  "protocol_json_sha256": "42efecba54d47bc27bbb5b7c9da369819a67f6758a8b54f019c6d8f8a4e2ada7",
+  "protocol_md_sha256": "32fae875bb501cc2deeb1f67bb01780f553adbb7238b108bb18f9dce865176f7",
+  "subject": "vat",
+  "subject_profile_path": "subject/profile.json",
+  "toolchain": {
+   "block_env": {
+    "basefee": 0,
+    "coinbase": "0x0000000000000000000000000000000000000000",
+    "gas_limit": 30000000,
+    "number": 1,
+    "prevrandao": "0000000000000000000000000000000000000000000000000000000000000000",
+    "timestamp": 1
+   },
+   "chain_id": 1,
+   "core_sha256": "25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f",
+   "core_version": 2,
+   "evm_version": "cancun",
+   "executor_limits": {
+    "contract_code_size_limit": 1048576,
+    "deploy_gas": 30000000,
+    "initcode_size_limit": 2097152,
+    "subject_runtime_limit": 24576
+   },
+   "pyrevm": "0.3.7",
+   "python": "3.12.3",
+   "solc": {
+    "sha256": "fa8ac9a32d301ad023a36ee5a29f8e291fe3200c60244e43c142539e82a617f4",
+    "version": "0.8.35+commit.47b9dedd.Linux.g++"
+   },
+   "spec_id": "CANCUN",
+   "tx_gas": 10000000,
+   "z3": {
+    "sha256": "e583c4186a45e72411fa2cb2048401eed03f0f8e5f24694676a8f6271a50b765",
+    "version": "Z3 version 4.16.0 - 64 bit"
+   }
+  },
+  "verifier_sha256": "dea0af01cf27221bba31a15d59a735c789d520750e5a22baa7bed7bb18e1e489"
+ },
+ "version": 1
+}

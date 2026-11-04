@@ -1,0 +1,447 @@
+[
+ {
+  "mutant": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+  "observed": {
+   "check": "check_non_owner_mint_reverts",
+   "outcome": "violation",
+   "pair_runtime_sha256": "9e7e73503df5efe20fcadb4dcb8fecebb1b863da6ae86dc5203105201098e2b2",
+   "spec_source_sha256": "a320adefa42dcade47554f3cfc49d46d1650ea95adcfb968b9018354c6d2ecf7"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "42372389024961475244423108693441457323373937829021418614692490586246964534332"
+   },
+   "deployer": "bob",
+   "probe": {
+    "a": "alice",
+    "b": "alice",
+    "check": "check_non_owner_mint_reverts",
+    "sender": "carol",
+    "x": "2",
+    "y": "42372389024961475244423108693441457323373937829021418614692490586246964534333"
+   },
+   "txs": [
+    {
+     "args": [
+      "alice",
+      "42372389024961475244423108693441457323373937829021418614692490586246964534332"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "alice"
+    },
+    {
+     "args": [
+      "carol",
+      "42372389024961475244423108693441457323373937829021418614692490586246964534331"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "bob",
+      "2"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "alice",
+      "42372389024961475244423108693441457323373937829021418614692490586246964534333"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "carol"
+    }
+   ],
+   "version": 1
+  },
+  "version": 1
+ },
+ {
+  "mutant": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+  "observed": {
+   "check": "check_mint_over_cap_reverts",
+   "outcome": "violation",
+   "pair_runtime_sha256": "ef83df525481bf4e17be8a388ad4e81ab13a6d48078357084dbf283dcd12d02d",
+   "spec_source_sha256": "a320adefa42dcade47554f3cfc49d46d1650ea95adcfb968b9018354c6d2ecf7"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "0"
+   },
+   "deployer": "bob",
+   "probe": {
+    "a": "alice",
+    "b": "carol",
+    "check": "check_mint_over_cap_reverts",
+    "sender": "bob",
+    "x": "99764528317747437028581436711983132691959940744377622942459626499715613689979",
+    "y": "2"
+   },
+   "txs": [
+    {
+     "args": [
+      "zero",
+      "1"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "alice",
+      "115038922775861315503782491605108490703178803905912683428075562000911446074503"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "bob",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "carol"
+    }
+   ],
+   "version": 1
+  },
+  "version": 1
+ },
+ {
+  "mutant": "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+  "observed": {
+   "check": "check_cap_invariant",
+   "outcome": "violation",
+   "pair_runtime_sha256": "6df228f89e9472656a072f208de223587f6ee80057a5d988eb5b78c1510dbb97",
+   "spec_source_sha256": "a320adefa42dcade47554f3cfc49d46d1650ea95adcfb968b9018354c6d2ecf7"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "0"
+   },
+   "deployer": "bob",
+   "probe": {
+    "a": "carol",
+    "b": "bob",
+    "check": "check_cap_invariant",
+    "sender": "alice",
+    "x": "0",
+    "y": "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+   },
+   "txs": [
+    {
+     "args": [
+      "zero",
+      "1"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "carol",
+      "0"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "alice",
+      "0"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "bob",
+      "1"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "alice"
+    },
+    {
+     "args": [
+      "bob",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "carol"
+    }
+   ],
+   "version": 1
+  },
+  "version": 1
+ },
+ {
+  "mutant": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+  "observed": {
+   "check": "check_mint_exact",
+   "outcome": "violation",
+   "pair_runtime_sha256": "7236e0b5a6f59474affaa682e52ff770d341f8566fbde2cf9e4432d888d050ce",
+   "spec_source_sha256": "a320adefa42dcade47554f3cfc49d46d1650ea95adcfb968b9018354c6d2ecf7"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "2"
+   },
+   "deployer": "alice",
+   "probe": {
+    "a": "zero",
+    "b": "alice",
+    "check": "check_mint_exact",
+    "sender": "alice",
+    "x": "1",
+    "y": "2"
+   },
+   "txs": [
+    {
+     "args": [
+      "alice",
+      "1"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "bob",
+      "0"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    }
+   ],
+   "version": 1
+  },
+  "version": 1
+ },
+ {
+  "mutant": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+  "observed": {
+   "check": "check_transfer_exact",
+   "outcome": "violation",
+   "pair_runtime_sha256": "ebb99a18eae3a262b461ddf954ae7c6064fc2a0216bd52acb0c81462c63e6fac",
+   "spec_source_sha256": "a320adefa42dcade47554f3cfc49d46d1650ea95adcfb968b9018354c6d2ecf7"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+   },
+   "deployer": "bob",
+   "probe": {
+    "a": "carol",
+    "b": "bob",
+    "check": "check_transfer_exact",
+    "sender": "alice",
+    "x": "998925628131591855",
+    "y": "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+   },
+   "txs": [
+    {
+     "args": [
+      "alice",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "zero",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "carol",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "carol",
+      "5442324770048225742"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "alice",
+      "1"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "bob",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    }
+   ],
+   "version": 1
+  },
+  "version": 1
+ },
+ {
+  "mutant": "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+  "observed": {
+   "check": "check_transfer_exact",
+   "outcome": "violation",
+   "pair_runtime_sha256": "02625b08a31605cab16b8d4c86c4a7a4f98942ecbde241ef11e9352ce50887a9",
+   "spec_source_sha256": "a320adefa42dcade47554f3cfc49d46d1650ea95adcfb968b9018354c6d2ecf7"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+   },
+   "deployer": "bob",
+   "probe": {
+    "a": "carol",
+    "b": "bob",
+    "check": "check_transfer_exact",
+    "sender": "alice",
+    "x": "998925628131591855",
+    "y": "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+   },
+   "txs": [
+    {
+     "args": [
+      "alice",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "zero",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "carol",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "carol",
+      "5442324770048225742"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "alice",
+      "1"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "bob",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    }
+   ],
+   "version": 1
+  },
+  "version": 1
+ },
+ {
+  "mutant": "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+  "observed": {
+   "check": "check_transfer_exact",
+   "outcome": "violation",
+   "pair_runtime_sha256": "7724e3527e1828c15c4d3b13a879c9226f295d1d45054b49c95a5a7d59bf4f6c",
+   "spec_source_sha256": "a320adefa42dcade47554f3cfc49d46d1650ea95adcfb968b9018354c6d2ecf7"
+  },
+  "sigma": {
+   "ctor": {
+    "cap": "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+   },
+   "deployer": "bob",
+   "probe": {
+    "a": "carol",
+    "b": "bob",
+    "check": "check_transfer_exact",
+    "sender": "alice",
+    "x": "998925628131591855",
+    "y": "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+   },
+   "txs": [
+    {
+     "args": [
+      "alice",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "zero",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "carol",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     ],
+     "fn": "transfer(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "carol",
+      "5442324770048225742"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "alice",
+      "1"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "bob",
+      "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+     ],
+     "fn": "mint(address,uint256)",
+     "sender": "carol"
+    }
+   ],
+   "version": 1
+  },
+  "version": 1
+ }
+]

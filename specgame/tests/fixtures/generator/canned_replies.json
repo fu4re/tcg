@@ -1,0 +1,93 @@
+{
+ "description": "Canned Messages API replies for tests/test_generator.py (no network). Round 1: a lint-rejected spec, then a valid one; round 2: no code block, then two code blocks (both rejected).",
+ "replies": [
+  {
+   "id": "msg_canned",
+   "model": "claude-sonnet-5-5",
+   "role": "assistant",
+   "type": "message",
+   "stop_reason": "end_turn",
+   "usage": {
+    "input_tokens": 100,
+    "output_tokens": 50
+   },
+   "content": [
+    {
+     "type": "thinking",
+     "thinking": "",
+     "signature": "sig-canned"
+    },
+    {
+     "type": "text",
+     "text": "Here it is:\n```solidity\n// SPDX-License-Identifier: MIT\npragma solidity 0.8.35;\n\nimport \"./CappedToken.sol\";\n\ncontract Spec is CappedToken {\n    constructor(uint256 cap_) CappedToken(cap_) {}\n\n    uint256 shadow;\n\n    function check_x(address a, address b, uint256 x, uint256 y) external {\n        totalSupply = 0;\n        assert(totalSupply == 0);\n    }\n}\n```\n"
+    }
+   ]
+  },
+  {
+   "id": "msg_canned",
+   "model": "claude-sonnet-5-5",
+   "role": "assistant",
+   "type": "message",
+   "stop_reason": "end_turn",
+   "usage": {
+    "input_tokens": 100,
+    "output_tokens": 50
+   },
+   "content": [
+    {
+     "type": "thinking",
+     "thinking": "",
+     "signature": "sig-canned"
+    },
+    {
+     "type": "text",
+     "text": "```solidity\n// SPDX-License-Identifier: MIT\npragma solidity 0.8.35;\n\nimport \"./CappedToken.sol\";\n\ncontract Spec is CappedToken {\n    constructor(uint256 cap_) CappedToken(cap_) {}\n\n    function check_mint_keeps_owner(address a, address b, uint256 x, uint256 y) external {\n        address o0 = owner;\n        mint(a, x);\n        assert(owner == o0);\n    }\n}\n```"
+    }
+   ]
+  },
+  {
+   "id": "msg_canned",
+   "model": "claude-sonnet-5-5",
+   "role": "assistant",
+   "type": "message",
+   "stop_reason": "end_turn",
+   "usage": {
+    "input_tokens": 100,
+    "output_tokens": 50
+   },
+   "content": [
+    {
+     "type": "thinking",
+     "thinking": "",
+     "signature": "sig-canned"
+    },
+    {
+     "type": "text",
+     "text": "I cannot write that."
+    }
+   ]
+  },
+  {
+   "id": "msg_canned",
+   "model": "claude-sonnet-5-5",
+   "role": "assistant",
+   "type": "message",
+   "stop_reason": "max_tokens",
+   "usage": {
+    "input_tokens": 100,
+    "output_tokens": 50
+   },
+   "content": [
+    {
+     "type": "thinking",
+     "thinking": "",
+     "signature": "sig-canned"
+    },
+    {
+     "type": "text",
+     "text": "```solidity\n// SPDX-License-Identifier: MIT\npragma solidity 0.8.35;\n\nimport \"./CappedToken.sol\";\n\ncontract Spec is CappedToken {\n    constructor(uint256 cap_) CappedToken(cap_) {}\n\n    function check_mint_keeps_owner(address a, address b, uint256 x, uint256 y) external {\n        address o0 = owner;\n        mint(a, x);\n        assert(owner == o0);\n    }\n}\n```\nand also\n```solidity\n// SPDX-License-Identifier: MIT\npragma solidity 0.8.35;\n\nimport \"./CappedToken.sol\";\n\ncontract Spec is CappedToken {\n    constructor(uint256 cap_) CappedToken(cap_) {}\n\n    function check_mint_keeps_owner(address a, address b, uint256 x, uint256 y) external {\n        address o0 = owner;\n        mint(a, x);\n        assert(owner == o0);\n    }\n}\n```"
+    }
+   ]
+  }
+ ]
+}

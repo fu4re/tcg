@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "specgame/schemas/manifest.schema.json",
+  "title": "Bundle manifest (bundles/<phi>/manifest.json; protocol.md section 14)",
+  "description": "Layers follow note Table 2. Every path is relative to the bundle directory and is listed in `files` with its sha256 (verifier step 1).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "files", "hard", "evidence", "metadata", "provenance", "claimed", "not_claimed"],
+  "properties": {
+    "version": {"const": 1},
+    "files": {
+      "type": "object",
+      "description": "path -> sha256 of the file bytes, for every file in the bundle except manifest.json.",
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    },
+    "hard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["b", "phi", "c"],
+      "properties": {
+        "b": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "source_sha256", "runtime_sha256"],
+          "properties": {"path": {"type": "string"}, "source_sha256": {"$ref": "#/$defs/sha256"}, "runtime_sha256": {"$ref": "#/$defs/sha256"}}
+        },
+        "phi": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "source_sha256", "pair_runtime_sha256", "checks"],
+          "properties": {
+            "path": {"type": "string"},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "pair_runtime_sha256": {"$ref": "#/$defs/sha256", "description": "Spec compiled over b."},
+            "checks": {"type": "array", "items": {"type": "string", "pattern": "^check_[A-Za-z0-9_]+$"}}
+          }
+        },
+        "c": {
+          "type": "object",
+          "description": "Check v2 (protocol.md, Protocol v2): one certificate per check_* of phi, each an isolated harness (fixed header + that check) checked over b.",
+          "additionalProperties": false,
+          "required": ["mode", "command", "verdict", "reason", "timeout_ms", "wall_timeout_s", "checks"],
+          "properties": {
+            "mode": {"const": "isolated"},
+            "command": {"const": ["solc", "--standard-json"]},
+            "verdict": {"enum": ["Accept", "Refute", "Unknown"], "description": "Combined: Accept iff every check is Accept."},
+            "reason": {"type": "string"},
+            "timeout_ms": {"type": "integer", "minimum": 1},
+            "wall_timeout_s": {"type": "number", "exclusiveMinimum": 0},
+            "checks": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["check", "solc_input_path", "solc_input_sha256", "solc_output_path", "verdict", "reason"],
+                "properties": {
+                  "check": {"type": "string", "pattern": "^check_[A-Za-z0-9_]+$"},
+                  "solc_input_path": {"type": "string"},
+                  "solc_input_sha256": {"$ref": "#/$defs/sha256", "description": "sha256 of the canonical JSON of the exact standard-JSON input of this check's isolated harness."},
+                  "solc_output_path": {"type": "string", "description": "Raw solc stdout, verbatim."},
+                  "verdict": {"enum": ["Accept", "Refute", "Unknown"]},
+                  "reason": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["M", "W", "adversary", "discarded"],
+      "properties": {
+        "M": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "path", "properness_sigma"],
+            "properties": {
+              "id": {"$ref": "#/$defs/sha256"},
+              "path": {"type": "string", "description": "Mutant source; the verifier recompiles it and compares the runtime sha256 with id."},
+              "properness_sigma": {"type": "array", "minItems": 1, "items": {"$ref": "sigma.schema.json"}}
+            }
+          }
+        },
+        "W": {"type": "array", "items": {"$ref": "witness.schema.json"}},
+        "adversary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "source_sha256", "seed", "B_A"],
+          "properties": {
+            "id": {"type": "string"},
+            "source_sha256": {"$ref": "#/$defs/sha256"},
+            "seed": {"type": "integer", "minimum": 0},
+            "B_A": {"type": "integer", "minimum": 0, "description": "Sequences tried per (mutant, phi)."}
+          }
+        },
+        "discarded": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["witness", "reason"],
+            "properties": {"witness": {"$ref": "witness.schema.json"}, "reason": {"type": "string"}}
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "T*: labels only, affect no verdict.",
+      "additionalProperties": false,
+      "required": ["mutants"],
+      "properties": {
+        "mutants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "operator", "fault_class"],
+            "properties": {"id": {"$ref": "#/$defs/sha256"}, "operator": {"type": "string"}, "fault_class": {"type": "string"}}
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["toolchain", "core_path", "core_sha256", "verifier_sha256", "protocol_json_sha256", "protocol_md_sha256", "subject", "subject_profile_path", "feedback"],
+      "properties": {
+        "toolchain": {"type": "object", "description": "specgame_core.toolchain_fingerprint(): solc and z3 version + sha256, python, pyrevm, evm_version, spec_id, tx_gas, block_env, chain_id."},
+        "core_path": {"type": "string"},
+        "core_sha256": {"$ref": "#/$defs/sha256"},
+        "verifier_sha256": {"$ref": "#/$defs/sha256"},
+        "protocol_json_sha256": {"$ref": "#/$defs/sha256", "description": "sha256 of protocol.json (the frozen values); compared by verifier step 1, a mismatch is refused."},
+        "protocol_md_sha256": {"$ref": "#/$defs/sha256", "description": "sha256 of protocol.md (narrative); recorded only, never compared."},
+        "subject": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$", "description": "Subject profile (subjects/<name>/profile.json, pinned in protocol.json) the bundle was produced for."},
+        "subject_profile_path": {"type": "string", "description": "The subject's profile carried by the bundle; the verifier uses this copy, accepted only if its sha256 is protocol.json's pin for the subject."},
+        "feedback": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["condition", "round", "seed", "model", "temperature", "prompts_sha256"],
+              "properties": {
+                "condition": {"enum": ["f0", "fM", "fMplus"]},
+                "round": {"type": "integer", "minimum": 0},
+                "seed": {"type": "integer", "minimum": 0},
+                "model": {"type": "string"},
+                "temperature": {"type": "number"},
+                "prompts_sha256": {"$ref": "#/$defs/sha256"}
+              }
+            }
+          ]
+        }
+      }
+    },
+    "claimed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ms_cert", "kill_set"],
+      "properties": {
+        "ms_cert": {"$ref": "#/$defs/score"},
+        "kill_set": {"type": "array", "items": {"$ref": "#/$defs/sha256"}, "description": "Sorted ids of mutants with a witness that passes verifier step 4."}
+      }
+    },
+    "not_claimed": {"type": "array", "contains": {"const": "V-completeness"}, "items": {"type": "string"}}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["killed", "total"],
+      "properties": {"killed": {"type": "integer", "minimum": 0}, "total": {"type": "integer", "minimum": 1}}
+    }
+  }
+}

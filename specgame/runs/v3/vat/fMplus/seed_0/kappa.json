@@ -1,0 +1,1619 @@
+{
+ "artifact": "/home/vladimir/sheaf/tcg-specgames/specgame/subjects/vat/Vat.sol",
+ "asserts": 160,
+ "check_over_H": {
+  "cpu_s": 9777.802,
+  "duration_s": 2372.877,
+  "reason": "determined"
+ },
+ "checks_over_H": [
+  {
+   "cached": false,
+   "check": "check_rely_needs_ward",
+   "duration_s": 61.006,
+   "reason": "unproved",
+   "solc_input_sha256": "a6cded581e78721ad3adab93520d617e36380d68197bfab14c9676586a064406",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_rely_sets",
+   "duration_s": 121.588,
+   "reason": "unproved",
+   "solc_input_sha256": "39653a0199385092fa2c30280a1676e05118e57653376f40c31b630fd6494bc9",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_rely_needs_live",
+   "duration_s": 61.068,
+   "reason": "unproved",
+   "solc_input_sha256": "262bad43f71c01bb631bc87d8644da9851654d2ef4d2f11f6c64343702418286",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_deny_needs_ward",
+   "duration_s": 61.043,
+   "reason": "unproved",
+   "solc_input_sha256": "67755a97e5105decbdfe57d97677e1c7ce2d5231b8af7d2b0495a5f30ccd0a15",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_deny_sets",
+   "duration_s": 121.725,
+   "reason": "unproved",
+   "solc_input_sha256": "96aefd5b70fc064af37183f3b2bd0b8639944d73bf9ae5be55e2bfaa05d0e994",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_deny_needs_live",
+   "duration_s": 61.041,
+   "reason": "unproved",
+   "solc_input_sha256": "8b8273fad27bd28ce9d19a5a73e3fec3863110b83b883793b320ba692727fe34",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_init_needs_ward",
+   "duration_s": 61.036,
+   "reason": "unproved",
+   "solc_input_sha256": "3c060e206660d8d7a0e052f2fe92e5a01edd322c60731603016c835ed5e104ae",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_init_once",
+   "duration_s": 60.948,
+   "reason": "unproved",
+   "solc_input_sha256": "c6667c0e0fea5b2eedc862f3d0b0e10641cdc4974f70cc55b49b31650e84ced3",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_init_sets_rate",
+   "duration_s": 303.495,
+   "reason": "unproved",
+   "solc_input_sha256": "c4d9bb36c09ade7cfda8e9deb69d500e070134c91d6b5135af6b8b10cc313877",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_cage_needs_ward",
+   "duration_s": 60.993,
+   "reason": "unproved",
+   "solc_input_sha256": "4ad93dab128bccb0760003987ac6ceb979bf6f2fda08ed8dd6c4448371062629",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_cage_sets_not_live",
+   "duration_s": 60.924,
+   "reason": "unproved",
+   "solc_input_sha256": "8dcd3c221660aed772b38f3ba67fe58ff43beb82343a3fd2ea65c286e278e0eb",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_dead_stays_dead_rely",
+   "duration_s": 60.994,
+   "reason": "unproved",
+   "solc_input_sha256": "ba5ce1705650ed798a1356e62d8b669b6f75df55fd7b843e7f2862961c433326",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_dead_no_frob",
+   "duration_s": 60.994,
+   "reason": "unproved",
+   "solc_input_sha256": "ff19b0ad5a921b2423f5500b811eb076881c4a0aa059c90d1433160259accaef",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_dead_no_fold",
+   "duration_s": 60.979,
+   "reason": "unproved",
+   "solc_input_sha256": "9e52b65bd1ef17b6864f63903da392e7320e13018b37fcfc5c65fb5a17079e01",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_dead_no_file",
+   "duration_s": 60.951,
+   "reason": "unproved",
+   "solc_input_sha256": "b5fcdf9f8ede5be5b89e464004684168688658af36ecea5e9cad13745130e7fa",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_slip_needs_ward",
+   "duration_s": 60.902,
+   "reason": "unproved",
+   "solc_input_sha256": "fc307e8e4143b683c547706ff11eb8f9ec363d7077af2cbac626f7d9e6400438",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_grab_needs_ward",
+   "duration_s": 60.968,
+   "reason": "unproved",
+   "solc_input_sha256": "a1dbeccef2b7f52d14a0f9531e051e63d8c5af7763e370733fd005de8790e883",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_suck_needs_ward",
+   "duration_s": 60.961,
+   "reason": "unproved",
+   "solc_input_sha256": "261b72c157bdcdaac58f9e10396bf307b88cc4494a04a70ebb8f0ce3562a9982",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_fold_needs_ward",
+   "duration_s": 60.932,
+   "reason": "unproved",
+   "solc_input_sha256": "38dbec2bd7d1c353fceddc26ac29810bebea4aef4fd75e52a062b26ba51bd959",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_file_needs_ward",
+   "duration_s": 60.968,
+   "reason": "unproved",
+   "solc_input_sha256": "9bcc9103895a933e1b14245a6b1bcf2f7fdc4611028a0b506cad59ea67500824",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_file_ilk_needs_ward",
+   "duration_s": 60.9,
+   "reason": "unproved",
+   "solc_input_sha256": "3ba88d0922b3ee02d9c6d485bb2ffb509a1daccdcb8b57d2ea75131a9643d662",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": true,
+   "check": "check_file_sets_line",
+   "duration_s": 61.014,
+   "reason": "unproved",
+   "solc_input_sha256": "64b9676d6753935cf177d764db1b934314e746af51b98a0303cefb8a6948b1c6",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": true,
+   "check": "check_file_unknown",
+   "duration_s": 61.061,
+   "reason": "unproved",
+   "solc_input_sha256": "2ae2372e37ca997d4a4b43979111ffbc7fff8e6c3de191f5cef162f18ed5b328",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_file_ilk_spot",
+   "duration_s": 303.709,
+   "reason": "unproved",
+   "solc_input_sha256": "ffaf1e0ea995bddcc64ac84e75a64417698c7aabed58bcb5773c76ce6b39676d",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_file_ilk_line",
+   "duration_s": 303.369,
+   "reason": "unproved",
+   "solc_input_sha256": "4fd1768b45cd6e68b0522c4bed61ed40eb008b708e83ccb2242b5e8e101da462",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_file_ilk_dust",
+   "duration_s": 303.396,
+   "reason": "unproved",
+   "solc_input_sha256": "a1813fd23a9ead8c5d094c8ef2bf9a9ec936c07bb12ab74ba573d3fd5dab0031",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_file_ilk_unknown",
+   "duration_s": 60.977,
+   "reason": "unproved",
+   "solc_input_sha256": "67621d499a8aad3ba8b9a3155fe1c7c002823abafde67e4aa760774096067c41",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_file_ilk_needs_live",
+   "duration_s": 60.905,
+   "reason": "unproved",
+   "solc_input_sha256": "25cfe4c83ebc109236b92e32fa382c94813ee19b4ec07887291756d00a4f98e8",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_hope",
+   "duration_s": 182.311,
+   "reason": "unproved",
+   "solc_input_sha256": "f5d19dafce1e6aa38e4b211e701f5cd1acb70102f355866553115bdc7a275518",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_nope",
+   "duration_s": 182.22,
+   "reason": "unproved",
+   "solc_input_sha256": "36951bbbcb2528894492a8b70003d9d0ce6cfc8fd6d00699865024f50c6030a9",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_flux_needs_consent",
+   "duration_s": 60.917,
+   "reason": "unproved",
+   "solc_input_sha256": "25ea7095d03644ed96917f8e385728c6c219cc1471870c275f91fb704bf1136a",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_flux_underflow",
+   "duration_s": 60.925,
+   "reason": "unproved",
+   "solc_input_sha256": "604c3eb47c87a46c7c7fc89c86a8b0b5c5d0f4fc2904763443a5e6a963d361b6",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_flux_overflow",
+   "duration_s": 60.967,
+   "reason": "unproved",
+   "solc_input_sha256": "0da8029153150afeedc635f9a7f46384f13ec635886df3c35db43dece6f085eb",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_flux_effect",
+   "duration_s": 303.437,
+   "reason": "unproved",
+   "solc_input_sha256": "9eba2674484f4ca8b1e8784a956083154ed7ac48b67d49b26cc90840b49fd9f0",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_flux_self",
+   "duration_s": 61.015,
+   "reason": "unproved",
+   "solc_input_sha256": "674ac608e935cba28b1df9f6573b2d83fad592d961f4b4dd57e932d3b278b82d",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_move_needs_consent",
+   "duration_s": 60.983,
+   "reason": "unproved",
+   "solc_input_sha256": "0342e199f9dbd46c20048e0f93b1c0cb041d4dde43d9e3686af1727b470dd27f",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_move_underflow",
+   "duration_s": 60.939,
+   "reason": "unproved",
+   "solc_input_sha256": "62ebf651c83b206d205240c194133d88b25f4db277a38dc12dc4a4932e896448",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_move_overflow",
+   "duration_s": 60.983,
+   "reason": "unproved",
+   "solc_input_sha256": "2549ba51b0eaf85910ae3b74b295574ab2fb8ecd60676c83b82be7f72811c178",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_move_effect",
+   "duration_s": 303.446,
+   "reason": "unproved",
+   "solc_input_sha256": "cd926aab4c18fedc84fd3ba84237d96da70dc858d91529129645585cd42c3f14",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_move_self",
+   "duration_s": 61.009,
+   "reason": "unproved",
+   "solc_input_sha256": "23d0234b50abdac99b1ff676b7c45a92e404a7aa2401528e95f8c05d625f6a5e",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_slip_up",
+   "duration_s": 121.636,
+   "reason": "unproved",
+   "solc_input_sha256": "b373d3ce0dc5ad7b26dd75b587de33afac2b633721e793d1c0ee9e85b4915d88",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_slip_down",
+   "duration_s": 61.015,
+   "reason": "unproved",
+   "solc_input_sha256": "f8e0ae3c18f74a212cf94e24941961bfb3e557079e420a39494659b5366971aa",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_slip_overflow",
+   "duration_s": 61.037,
+   "reason": "unproved",
+   "solc_input_sha256": "5247eeee7ebf26fd8f114f9cd5b20d73872dd976c1e5ce41fb8112dac2f8f206",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_slip_underflow",
+   "duration_s": 60.966,
+   "reason": "unproved",
+   "solc_input_sha256": "c1e47e7e58c903b7a4d3541553150fb4dfd34663f9a588b3a6464699d5e419fe",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": true,
+   "check": "check_frob_needs_init",
+   "duration_s": 61.033,
+   "reason": "unproved",
+   "solc_input_sha256": "83bd0d00131416dad899e1c12439b9a4b0cdab1c61be401aaa02cdfb9e43f2c9",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_needs_live",
+   "duration_s": 60.865,
+   "reason": "unproved",
+   "solc_input_sha256": "837a4142b30ee11349aa4402fcc209b9f840b87d9fb573979d35a7843f818dd3",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_ceilings",
+   "duration_s": 121.585,
+   "reason": "unproved",
+   "solc_input_sha256": "42376ecef249ec6cb34bb31332fba67affa932e3d69651b08971791f5711e045",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": true,
+   "check": "check_frob_safe",
+   "duration_s": 60.886,
+   "reason": "unproved",
+   "solc_input_sha256": "6e0c406379112b576da78b2ae0060c971975b14f37418450b42028fa7ef38636",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_dust",
+   "duration_s": 61.002,
+   "reason": "unproved",
+   "solc_input_sha256": "f19ca9f6ff36482a6516422c6ac5052e9a9c7f5ba8bc2b795dd45a9d8d416713",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_needs_owner_consent",
+   "duration_s": 60.938,
+   "reason": "unproved",
+   "solc_input_sha256": "540eea11b88e7aa96bb3b37fc12f194c7bf12658555449942c58423e78cc7ab2",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_needs_collateral_consent",
+   "duration_s": 60.895,
+   "reason": "unproved",
+   "solc_input_sha256": "8a8b50ee7bf8a9bd584fadc38aab1b4c24f4007f69ad4a4d769c3894a257f565",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_needs_debt_consent",
+   "duration_s": 60.987,
+   "reason": "unproved",
+   "solc_input_sha256": "67dd36def55207a002c55be869ce8de50893d9ce70da9e1fc60e8853acb09079",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_collateral_up_vault",
+   "duration_s": 182.146,
+   "reason": "unproved",
+   "solc_input_sha256": "5fa8c57c75d25cca5836ddaac8396e3665e4d5f565df421ef426bc6c4725cd78",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_collateral_up_balances",
+   "duration_s": 182.169,
+   "reason": "unproved",
+   "solc_input_sha256": "d0052f5bc70ea620a62c5083c98f3d7b5883dfb0dbbfcf5ae3bc4b0450d9abe5",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_collateral_down",
+   "duration_s": 242.847,
+   "reason": "unproved",
+   "solc_input_sha256": "9881276dbd2532f54bde5d658adc04a47446daa0ade43e0131c02cd4df4fe46b",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_debt_up_vault",
+   "duration_s": 242.975,
+   "reason": "unproved",
+   "solc_input_sha256": "c9fc751bbc6d5c8258adc3cc4565a7bf566a4c20011b46bf98bba5d05ab750e1",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_debt_up_balances",
+   "duration_s": 182.108,
+   "reason": "unproved",
+   "solc_input_sha256": "bcbe2a3bc49be480705a2157368d521343ef4da4b2122ef0dfeb3e03f1fba336",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_full_vault",
+   "duration_s": 243.001,
+   "reason": "unproved",
+   "solc_input_sha256": "8fe8588ef1066e4cbe53710b29cca5f4b0749590828a98b1abf4600d63d8d78e",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_full_gem",
+   "duration_s": 121.523,
+   "reason": "unproved",
+   "solc_input_sha256": "38436866ff62c7548ca1dffd3a4b92a4c08a28a913b46d4044c756df7bbd5bf7",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_full_dai",
+   "duration_s": 182.248,
+   "reason": "unproved",
+   "solc_input_sha256": "d612653f9bbfbf4c547f0a422fbb845f2932b4bf64149e4f9999a6a78dcf8aca",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_close_vault",
+   "duration_s": 182.125,
+   "reason": "unproved",
+   "solc_input_sha256": "12657c9bc9f74106f5d948d5d8c84c9cac1a5ee0b194f3514304c6b5a219c6ba",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_close_gem",
+   "duration_s": 121.473,
+   "reason": "unproved",
+   "solc_input_sha256": "e0ee1560b603176107695f3a1deb063df4aeb9b8a8224bbc73437eaa817d84f5",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_frob_close_dai",
+   "duration_s": 121.457,
+   "reason": "unproved",
+   "solc_input_sha256": "ca0a36309f1166a941ca27569d46348f397a0d2f3aabbf1fa9a39fad32688759",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_fork_needs_src_consent",
+   "duration_s": 60.921,
+   "reason": "unproved",
+   "solc_input_sha256": "ea1ca1c93decf368ce8804a1d4802585edda452fa6c1a02b26b706faabfd13d6",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_fork_needs_dst_consent",
+   "duration_s": 60.895,
+   "reason": "unproved",
+   "solc_input_sha256": "80caa2da062346be71f87b5219f2bd4438e408a6a6f3a572a91ee08a6f62de7a",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_fork_safe_dust",
+   "duration_s": 242.837,
+   "reason": "unproved",
+   "solc_input_sha256": "89ad16a9ef3b943ea99aa796f72867725aca45c4260e84a084f77680678e711c",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_fork_effect_ink",
+   "duration_s": 121.617,
+   "reason": "unproved",
+   "solc_input_sha256": "c0fed92ba289544ee556a3e1fa2058e3f9deb8bf4633757a96f3e08e23332451",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_fork_effect_art",
+   "duration_s": 121.503,
+   "reason": "unproved",
+   "solc_input_sha256": "8a2634e41bca7bf29ff7bf04a7046362cc4fdc666b9219d3416174eccca8a2f5",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_fork_effect_totals",
+   "duration_s": 182.366,
+   "reason": "unproved",
+   "solc_input_sha256": "b9e998935b8fe61a5668e310bd685f84926157817c0466a6328024ee83b2c188",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_grab_effect_vault",
+   "duration_s": 242.761,
+   "reason": "unproved",
+   "solc_input_sha256": "ed67ef24ef53b118bffef75cbf7f0ec0549a8ceb83368040fc2881d9a30f2156",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_grab_effect_debt",
+   "duration_s": 303.655,
+   "reason": "unproved",
+   "solc_input_sha256": "c3fb69236537d04dd80941a8ee895dc23043e0c087fbf3ede6bc5556af630724",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": true,
+   "check": "check_heal_effect",
+   "duration_s": 242.713,
+   "reason": "unproved",
+   "solc_input_sha256": "df3cdd6c44c2a841c64a6044537bc2210eb1d1f75cbeba9229f1429fac2bb11e",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_heal_needs_dai",
+   "duration_s": 61.033,
+   "reason": "unproved",
+   "solc_input_sha256": "8dfb40c52d33a0e74831826cda6aa7ff136981cb8c719797673de3f5318a744a",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_heal_needs_sin",
+   "duration_s": 60.915,
+   "reason": "unproved",
+   "solc_input_sha256": "c8d85be574a0c9502ac9d673a4b587dd860d5901ef22e7e6198608e8265c2ac5",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": true,
+   "check": "check_suck_effect",
+   "duration_s": 293.629,
+   "reason": "violation_without_counterexample",
+   "solc_input_sha256": "a3346b4129f4215d21fe6ebc1b086cf00a3b181f52b0dc25791720250f4da788",
+   "verdict": "Refute"
+  },
+  {
+   "cached": false,
+   "check": "check_suck_overflow_dai",
+   "duration_s": 60.97,
+   "reason": "unproved",
+   "solc_input_sha256": "1f986dbac4577466ebc3ac114a368798178aa277dc755c7ba99201d6f47721b3",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_suck_overflow_debt",
+   "duration_s": 60.919,
+   "reason": "unproved",
+   "solc_input_sha256": "299a0ba5256447fbd706329a806789e2bdede8ee1c384ca089f1f0b8a489ea1e",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_suck_overflow_vice",
+   "duration_s": 60.869,
+   "reason": "unproved",
+   "solc_input_sha256": "fe6d19bed297340f4a0063cb84f5d2b809149c7ecb55ef04aa796fcc2bed9c31",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_fold_up",
+   "duration_s": 242.817,
+   "reason": "unproved",
+   "solc_input_sha256": "1f476506996d1ca3034aaab37a6dac140d186b682d02a7d5490b7bae353892e3",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_fold_down",
+   "duration_s": 242.466,
+   "reason": "unproved",
+   "solc_input_sha256": "932fd07180ae91950066a96d042c2c4d2001c86df04ac312776af2135254fbce",
+   "verdict": "Unknown"
+  }
+ ],
+ "determined": true,
+ "havoc_sha256": "59a858e42f7833d361e79f50bd338da01c7855f4e64a53026f5b572dcbc462f7",
+ "kappa": 160,
+ "mode": "isolated",
+ "non_tautological_unproved": 159,
+ "rows": [
+  {
+   "function": "check_rely_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_rely_sets",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_rely_sets",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_rely_needs_live",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_deny_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_deny_sets",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_deny_sets",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_deny_needs_live",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_init_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_init_once",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_init_sets_rate",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_init_sets_rate",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_init_sets_rate",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_init_sets_rate",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_init_sets_rate",
+   "line": 20,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_cage_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_cage_sets_not_live",
+   "line": 11,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_dead_stays_dead_rely",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_dead_no_frob",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_dead_no_fold",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_dead_no_file",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_slip_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_suck_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fold_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_needs_ward",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_sets_line",
+   "line": 11,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_unknown",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_spot",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_spot",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_spot",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_spot",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_spot",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_line",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_line",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_line",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_line",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_line",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_dust",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_dust",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_dust",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_dust",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_dust",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_unknown",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_file_ilk_needs_live",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_hope",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_hope",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_hope",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_nope",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_nope",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_nope",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_flux_needs_consent",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_flux_underflow",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_flux_overflow",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_flux_effect",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_flux_effect",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_flux_effect",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_flux_effect",
+   "line": 20,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_flux_effect",
+   "line": 21,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_flux_self",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_move_needs_consent",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_move_underflow",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_move_overflow",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_move_effect",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_move_effect",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_move_effect",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_move_effect",
+   "line": 20,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_move_effect",
+   "line": 21,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_move_self",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_slip_up",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_slip_up",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_slip_down",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_slip_overflow",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_slip_underflow",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_needs_init",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_needs_live",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_ceilings",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_ceilings",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_safe",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_dust",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_needs_owner_consent",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_needs_collateral_consent",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_needs_debt_consent",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_up_vault",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_up_vault",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_up_vault",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_up_balances",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_up_balances",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_up_balances",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_down",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_down",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_down",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_collateral_down",
+   "line": 20,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_debt_up_vault",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_debt_up_vault",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_debt_up_vault",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_debt_up_vault",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_debt_up_balances",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_debt_up_balances",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_debt_up_balances",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_full_vault",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_full_vault",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_full_vault",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_full_vault",
+   "line": 20,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_full_gem",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_full_gem",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_full_dai",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_full_dai",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_full_dai",
+   "line": 20,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_close_vault",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_close_vault",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_close_vault",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_close_gem",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_close_gem",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_close_dai",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_close_dai",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_needs_src_consent",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_needs_dst_consent",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_safe_dust",
+   "line": 11,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_safe_dust",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_safe_dust",
+   "line": 13,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_safe_dust",
+   "line": 14,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_effect_ink",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_effect_ink",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_effect_art",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_effect_art",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_effect_totals",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_effect_totals",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fork_effect_totals",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_effect_vault",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_effect_vault",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_effect_vault",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_effect_vault",
+   "line": 20,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_effect_debt",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_effect_debt",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_effect_debt",
+   "line": 20,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_effect_debt",
+   "line": 21,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_grab_effect_debt",
+   "line": 22,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_heal_effect",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_heal_effect",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_heal_effect",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_heal_effect",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_heal_needs_dai",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_heal_needs_sin",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_suck_effect",
+   "line": 15,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_suck_effect",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_suck_effect",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_suck_effect",
+   "line": 18,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_suck_overflow_dai",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_suck_overflow_debt",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_suck_overflow_vice",
+   "line": 12,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fold_up",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fold_up",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fold_up",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fold_up",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fold_down",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fold_down",
+   "line": 18,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fold_down",
+   "line": 19,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_fold_down",
+   "line": 20,
+   "status_over_H": "unproved",
+   "tautological": false
+  }
+ ],
+ "spec": "runs/v3/vat/fMplus/seed_0/round_3/cand_1/Spec.sol"
+}

@@ -1,0 +1,4 @@
+loop: CompileError: Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON) while enabling the optimizer. Otherwise, try removing local variables.
+Command exited with non-zero status 2
+WALL 2011.12 s
+LOOP_EXIT 2

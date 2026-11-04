@@ -1,0 +1,25 @@
+{
+ "condition": "fMplus",
+ "selected": 1,
+ "rule": "protocol.md 16.3",
+ "candidates": [
+  {
+   "cand": 1,
+   "acc": "lint_rejected",
+   "errors": 3,
+   "ms_cert": {
+    "killed": 0,
+    "total": 8
+   }
+  },
+  {
+   "cand": 2,
+   "acc": "lint_rejected",
+   "errors": 11,
+   "ms_cert": {
+    "killed": 0,
+    "total": 8
+   }
+  }
+ ]
+}

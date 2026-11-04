@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "specgame/schemas/events.schema.json",
+  "title": "Per-trajectory event table (runs/<condition>/<seed>/events.json; protocol.md section 13)",
+  "description": "Every round's kill set is computed on the final pool W* of the trajectory. event[t] compares K(phi_t) and K(phi_{t+1}).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "condition", "seed", "M", "pool", "rounds", "events"],
+  "properties": {
+    "version": {"const": 1},
+    "condition": {"enum": ["f0", "fM", "fMplus", "ladder"]},
+    "seed": {"type": "integer", "minimum": 0},
+    "M": {"type": "array", "items": {"$ref": "#/$defs/sha256"}, "description": "Included mutant ids, sorted."},
+    "pool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["size", "sha256"],
+      "properties": {
+        "size": {"type": "integer", "minimum": 0},
+        "sha256": {"$ref": "#/$defs/sha256", "description": "sha256 of the canonical JSON list of (mutant, sigma) pairs in W*, sorted by canonical JSON."}
+      }
+    },
+    "rounds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["t", "phi_source_sha256", "acc", "kill_set", "ms_cert"],
+        "properties": {
+          "t": {"type": "integer", "minimum": 0},
+          "phi_source_sha256": {"$ref": "#/$defs/sha256"},
+          "acc": {"enum": ["Accept", "Refute", "Unknown", "lint_rejected"]},
+          "kill_set": {"type": "array", "items": {"$ref": "#/$defs/sha256"}},
+          "ms_cert": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["killed", "total"],
+            "properties": {"killed": {"type": "integer", "minimum": 0}, "total": {"type": "integer", "minimum": 1}}
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["t", "kind", "lost", "gained", "acc_t"],
+        "properties": {
+          "t": {"type": "integer", "minimum": 0},
+          "kind": {"enum": ["weakening", "strengthening", "shift", "unchanged"]},
+          "lost": {"type": "array", "items": {"$ref": "#/$defs/sha256"}, "description": "K_t minus K_{t+1}"},
+          "gained": {"type": "array", "items": {"$ref": "#/$defs/sha256"}, "description": "K_{t+1} minus K_t"},
+          "acc_t": {"enum": ["Accept", "Refute", "Unknown", "lint_rejected"], "description": "Check verdict of phi_t, so 'weakening after a non-Accept' is visible."}
+        }
+      }
+    }
+  },
+  "$defs": {"sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

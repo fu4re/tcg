@@ -1,0 +1,119 @@
+{
+ "artifact": "/home/vladimir/sheaf/tcg-specgames/specgame/contracts/CappedToken.sol",
+ "cpu_s": 29.887,
+ "duration_s": 6.974,
+ "flagged": [],
+ "mode": "isolated",
+ "rows": [
+  {
+   "cached": false,
+   "check": "check_non_owner_cannot_mint",
+   "duration_s": 1.701,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "52a578c2908572c49d86656955f6143d5eea401eea84785e30a12c364363ea9c"
+  },
+  {
+   "cached": true,
+   "check": "check_supply_within_cap",
+   "duration_s": 1.661,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "696a231eab5c0a123cb1b51c8e398692239e11098fc96528b00aad2ebc0e4772"
+  },
+  {
+   "cached": false,
+   "check": "check_mint_past_cap_has_no_effect",
+   "duration_s": 1.682,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "9620e5854e5d4bafb7c9296991a41b25d297c4b92596564f10ef4f6abfc23027"
+  },
+  {
+   "cached": true,
+   "check": "check_mint_respects_cap",
+   "duration_s": 1.619,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "ef42d88b295a1459a9647f9d665af4d2261eaf347155f457b9a62d73b57935bf"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_respects_cap",
+   "duration_s": 2.12,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "1f07f4f044bdec6edf4def14ec5ec2f7e912efaed077b9da6a7fc46e8bec759a"
+  },
+  {
+   "cached": false,
+   "check": "check_mint_exact",
+   "duration_s": 4.507,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "97a564628e4fe015cea6cfc9c39e7a5576bb2e59b87c06c6044abe3d525859d0"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_exact",
+   "duration_s": 4.578,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "b6e428297fc0e5c754c36db099b016f0dea1db556ed233c903be66ab4875f256"
+  },
+  {
+   "cached": false,
+   "check": "check_transfer_to_self",
+   "duration_s": 4.607,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "fd55eb3b69364d9eb6e8a79d300daa11329fb3ebaa1f9c7becd9a120641e4d94"
+  },
+  {
+   "cached": true,
+   "check": "check_no_overdraft",
+   "duration_s": 1.878,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "ffa0e914246559246113077685b0f7f5227044a35e4c9f6cf37afe16f138ee38"
+  },
+  {
+   "cached": false,
+   "check": "check_overdraft_keeps_sender_balance",
+   "duration_s": 1.996,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "edbfc57ac5db8e9d75e52ff980ffadee50491b948baca4306d9f175dfccdad05"
+  },
+  {
+   "cached": true,
+   "check": "check_transfer_keeps_owner_and_cap",
+   "duration_s": 1.713,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "4c653a15cdde280281ef5fdce4f57ed2aba610204f2d17cc012a0d01b858bd42"
+  },
+  {
+   "cached": true,
+   "check": "check_mint_keeps_owner_and_cap",
+   "duration_s": 1.825,
+   "pre": "satisfiable",
+   "probe_status": "violated",
+   "reason": "counterexample",
+   "solc_input_sha256": "fb98a66160f7c06995ce5b44ab01f3ad4b7f23e0404cb05be0605c5b8ef83b7c"
+  }
+ ],
+ "spec": "/home/vladimir/sheaf/tcg-specgames/specgame/runs/v2/fM/seed_1/round_3/cand_1/Spec.sol",
+ "unknown": []
+}

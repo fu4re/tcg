@@ -1,0 +1,319 @@
+{
+ "anthropic_version_header": "2026-10-21",
+ "calls": [
+  {
+   "cand": 1,
+   "id": "msg_011CggZZU5YBK8mBxffnkfRw",
+   "input_tokens": 8745,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 26040,
+   "round": 1,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 17078,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 8745,
+    "output_tokens": 26040,
+    "output_tokens_details": {
+     "thinking_tokens": 17078
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 166.196
+  },
+  {
+   "cand": 2,
+   "id": "msg_011CggbitRjHd2bk3Hc2PYcT",
+   "input_tokens": 8745,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 26438,
+   "round": 1,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 16368,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 8745,
+    "output_tokens": 26438,
+    "output_tokens_details": {
+     "thinking_tokens": 16368
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 165.711
+  },
+  {
+   "cand": 1,
+   "id": "msg_011Cggbw8yBg7Udk1QaMwocn",
+   "input_tokens": 36793,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 16808,
+   "round": 2,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 6756,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 36793,
+    "output_tokens": 16808,
+    "output_tokens_details": {
+     "thinking_tokens": 6756
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 100.5
+  },
+  {
+   "cand": 2,
+   "id": "msg_011CggdaFvn62RdRK1L1cp3T",
+   "input_tokens": 36793,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 10081,
+   "round": 2,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 3350,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 36793,
+    "output_tokens": 10081,
+    "output_tokens_details": {
+     "thinking_tokens": 3350
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 61.268
+  },
+  {
+   "cand": 1,
+   "id": "msg_011CggfSxhUgCdjiDWN5GtoV",
+   "input_tokens": 55222,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 13051,
+   "round": 3,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 3284,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 55222,
+    "output_tokens": 13051,
+    "output_tokens_details": {
+     "thinking_tokens": 3284
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 71.916
+  },
+  {
+   "cand": 2,
+   "id": "msg_011Cggh2MCsBUyDWJwSz1hGj",
+   "input_tokens": 55222,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 8552,
+   "round": 3,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 1644,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 55222,
+    "output_tokens": 8552,
+    "output_tokens_details": {
+     "thinking_tokens": 1644
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 46.721
+  }
+ ],
+ "condition": "f0",
+ "fallbacks": "none (a refusal is a failed candidate)",
+ "frozen": {
+  "B_A": 2000,
+  "effort": "high",
+  "k": 2,
+  "max_tokens": 64000,
+  "max_txs": 6,
+  "model": "claude-sonnet-5-5",
+  "per_mutant": 1,
+  "rounds": 3,
+  "seed_A": 0,
+  "timeout_ms": 60000,
+  "wall_timeout_s": 600.0
+ },
+ "k": 2,
+ "model_requested": "claude-sonnet-5-5",
+ "model_returned": "claude-sonnet-5-5",
+ "prompt_sha256": {
+  "feedback_f0.md": "0044d327cc58966ada3797c50835ad058cec94540f164e15dd9297a13e542700",
+  "feedback_fM.md": "3e22dc0e896d07e8d89f272fddfe8e96e2c5f2236ca1beaf0cadb16dd4d468dd",
+  "feedback_fMplus.md": "21b6574b733ebbf918384b0a7f0e398806ac198fad8563f90a584a401b820dde",
+  "round_1.md": "4a875318c1a8d8a4ac88ab58be1c419798b62a2819336daf6bfc7ad62d691f3b",
+  "system.md": "8afcd74c44fcc2558575f072dc385146ad1a6e358ffe9ba3c81943be0d4b17ac"
+ },
+ "prompts_sha256": "fbd52777f1a512821d7964339f9b931c42c62b92c48b4739df0995e3c6adc74c",
+ "result": {
+  "W_star": {
+   "sha256": "0e06bea28edd3817f4562005984b0a12177d7bafacf7e6f5c4a4b2ad2008144c",
+   "size": 19
+  },
+  "bundle": {
+   "exit": 0,
+   "stderr_tail": []
+  },
+  "events": [
+   {
+    "acc_t": "Unknown",
+    "kind": "unchanged",
+    "t": 1
+   },
+   {
+    "acc_t": "Unknown",
+    "kind": "weakening",
+    "t": 2
+   }
+  ],
+  "final": {
+   "acc": "Accept",
+   "cand": 2,
+   "round": 3
+  },
+  "kappa": {
+   "asserts": 92,
+   "determined": true,
+   "kappa": 92,
+   "unproved_over_H": 91,
+   "wall_s": 1281.296
+  },
+  "status": "bundle_holds",
+  "vacuity_a": {
+   "flagged": [],
+   "unknown": [
+    "check_rely_needs_ward",
+    "check_deny_needs_ward",
+    "check_init_needs_ward",
+    "check_file_needs_ward",
+    "check_file_ilk_needs_ward",
+    "check_cage_needs_ward",
+    "check_slip_needs_ward",
+    "check_grab_needs_ward",
+    "check_suck_needs_ward",
+    "check_fold_needs_ward",
+    "check_rely_effect",
+    "check_deny_effect",
+    "check_hope_effect",
+    "check_nope_effect",
+    "check_cage_effect",
+    "check_not_live_rely",
+    "check_not_live_deny",
+    "check_not_live_file",
+    "check_not_live_file_ilk",
+    "check_not_live_fold",
+    "check_not_live_frob",
+    "check_init_effect",
+    "check_init_twice",
+    "check_frob_not_init",
+    "check_file_line",
+    "check_file_unknown",
+    "check_file_spot",
+    "check_file_line_ilk",
+    "check_file_dust",
+    "check_file_ilk_unknown",
+    "check_move_effect",
+    "check_move_others",
+    "check_move_needs_consent",
+    "check_flux_effect",
+    "check_flux_needs_consent",
+    "check_slip_effect",
+    "check_frob_ceiling",
+    "check_frob_safe",
+    "check_frob_dust",
+    "check_frob_no_consent_at_all",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_frob_needs_consent_u_debt",
+    "check_frob_needs_consent_u_collateral",
+    "check_frob_draw_urn",
+    "check_frob_draw_balances",
+    "check_frob_wipe_balances",
+    "check_fork_needs_consent_src",
+    "check_fork_needs_consent_dst",
+    "check_fork_totals",
+    "check_grab_up",
+    "check_grab_down",
+    "check_heal_effect",
+    "check_suck_effect"
+   ],
+   "wall_s": 878.216
+  },
+  "verify": {
+   "exit": 0,
+   "ms_cert": {
+    "killed": 5,
+    "total": 8
+   },
+   "summary": [
+    "label (T*, affects no verdict): mutant 7a3cae9442cf operator=remove-require fault_class=missing-bound-check",
+    "label (T*, affects no verdict): mutant f23fd9948544 operator=remove-statement fault_class=accounting",
+    "verdict: HOLDS, exit 0"
+   ],
+   "verdict": "HOLDS"
+  }
+ },
+ "rounds": 3,
+ "sdk_version": "2.3.0",
+ "seed": 1,
+ "seed_param": "not supported by the Messages API (SDK has no seed parameter); the trajectory seed is recorded only",
+ "temperature_note": "API default; non-default values rejected by this model; not sent",
+ "temperature_recorded": 1.0,
+ "tokens": {
+  "input": 201520,
+  "output": 100970,
+  "thinking": 48480,
+  "total": 302490
+ }
+}

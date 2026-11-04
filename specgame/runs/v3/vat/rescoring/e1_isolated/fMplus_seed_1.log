@@ -1,0 +1,21 @@
+== fMplus/seed_1
+[PASS            ] (0) manifest
+[PASS            ] (1) hashes
+[PASS            ] (2) check
+[PASS            ] (3) M
+[PASS            ] (4) W
+[PASS            ] (5) score
+       recomputed ms_cert = 4/8, kill set ['0d256aef3845', '1a63e0033ca6', '4f38b3220282', '7a3cae9442cf']
+[PASS            ] (6) V-completeness
+ms_cert = 4/8  kill set ['0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5', '1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d', '4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04', '7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b']
+label (T*, affects no verdict): mutant 0b16a3ae4f99 operator=remove-require fault_class=missing-bound-check
+label (T*, affects no verdict): mutant 0d256aef3845 operator=remove-require fault_class=missing-bound-check
+label (T*, affects no verdict): mutant 1a63e0033ca6 operator=remove-statement fault_class=accounting
+label (T*, affects no verdict): mutant 3d19cd9060a9 operator=remove-statement fault_class=accounting
+label (T*, affects no verdict): mutant 4f38b3220282 operator=remove-modifier fault_class=access-control
+label (T*, affects no verdict): mutant 652a40501289 operator=remove-require fault_class=consent
+label (T*, affects no verdict): mutant 7a3cae9442cf operator=remove-require fault_class=missing-bound-check
+label (T*, affects no verdict): mutant f23fd9948544 operator=remove-statement fault_class=accounting
+verdict: HOLDS, exit 0
+real	3m4.115s
+exit=0

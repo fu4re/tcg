@@ -1,0 +1,289 @@
+{
+ "acc": "Unknown",
+ "adversary_id": "da221ec5557e073f4a51a96eed7d44c758c8cbcf05e7d8f8517f13c20b010047",
+ "check_cache_hits": 0,
+ "check_cpu_s": 3073.652,
+ "check_reason": "unproved",
+ "durations_s": {
+  "adversary": 1465.348,
+  "check": 805.499
+ },
+ "errors": [],
+ "kill_set": [],
+ "ms_cert": {
+  "killed": 0,
+  "total": 8
+ },
+ "not_proved": [
+  {
+   "function": "check_file_ilk_unrecognized",
+   "line": 162,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_slip_overflow",
+   "line": 236,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_flux_effect",
+   "line": 250,
+   "status": "unproved",
+   "text": "assert(ga0 - gem[\"GOLD\"][a] == x);"
+  },
+  {
+   "function": "check_flux_effect",
+   "line": 251,
+   "status": "unproved",
+   "text": "assert(gem[\"GOLD\"][b] - gb0 == x);"
+  },
+  {
+   "function": "check_flux_underflow",
+   "line": 273,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_move_effect",
+   "line": 289,
+   "status": "unproved",
+   "text": "assert(da0 - dai[a] == x);"
+  },
+  {
+   "function": "check_move_effect",
+   "line": 290,
+   "status": "unproved",
+   "text": "assert(dai[b] - db0 == x);"
+  },
+  {
+   "function": "check_move_underflow",
+   "line": 312,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_frob_effect_up",
+   "line": 340,
+   "status": "unproved",
+   "text": "assert(urns[i][u].ink - ink0 == uint256(dx));"
+  },
+  {
+   "function": "check_frob_effect_up",
+   "line": 341,
+   "status": "unproved",
+   "text": "assert(urns[i][u].art - art0 == uint256(dy));"
+  },
+  {
+   "function": "check_frob_effect_up",
+   "line": 342,
+   "status": "unproved",
+   "text": "assert(ilks[i].Art - ta0 == uint256(dy));"
+  },
+  {
+   "function": "check_frob_effect_down",
+   "line": 361,
+   "status": "unproved",
+   "text": "assert(ink0 - urns[i][u].ink == uint256(-dx));"
+  },
+  {
+   "function": "check_frob_effect_down",
+   "line": 362,
+   "status": "unproved",
+   "text": "assert(art0 - urns[i][u].art == uint256(-dy));"
+  },
+  {
+   "function": "check_frob_effect_down",
+   "line": 363,
+   "status": "unproved",
+   "text": "assert(ta0 - ilks[i].Art == uint256(-dy));"
+  },
+  {
+   "function": "check_frob_rate_factor",
+   "line": 376,
+   "status": "unproved",
+   "text": "assert(dai[u] - dai0 == uint256(dy) * 10 ** 27);"
+  },
+  {
+   "function": "check_frob_rate_factor",
+   "line": 377,
+   "status": "unproved",
+   "text": "assert(debt - d0 == uint256(dy) * 10 ** 27);"
+  },
+  {
+   "function": "check_frob_v_consent",
+   "line": 433,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_frob_w_consent",
+   "line": 442,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_frob_ink_overflow",
+   "line": 449,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_fork_effect",
+   "line": 467,
+   "status": "unproved",
+   "text": "assert(ia0 - urns[\"GOLD\"][a].ink == x);"
+  },
+  {
+   "function": "check_fork_effect",
+   "line": 468,
+   "status": "unproved",
+   "text": "assert(urns[\"GOLD\"][b].ink - ib0 == x);"
+  },
+  {
+   "function": "check_fork_effect",
+   "line": 469,
+   "status": "unproved",
+   "text": "assert(aa0 - urns[\"GOLD\"][a].art == y);"
+  },
+  {
+   "function": "check_fork_effect",
+   "line": 470,
+   "status": "unproved",
+   "text": "assert(urns[\"GOLD\"][b].art - ab0 == y);"
+  },
+  {
+   "function": "check_fork_src_unsafe",
+   "line": 504,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_grab_effect_down",
+   "line": 528,
+   "status": "unproved",
+   "text": "assert(ink0 - urns[i][u].ink == uint256(-dx));"
+  },
+  {
+   "function": "check_grab_effect_down",
+   "line": 529,
+   "status": "unproved",
+   "text": "assert(art0 - urns[i][u].art == uint256(-dy));"
+  },
+  {
+   "function": "check_grab_effect_down",
+   "line": 530,
+   "status": "unproved",
+   "text": "assert(ta0 - ilks[i].Art == uint256(-dy));"
+  },
+  {
+   "function": "check_grab_effect_up",
+   "line": 547,
+   "status": "unproved",
+   "text": "assert(urns[i][u].ink - ink0 == uint256(dx));"
+  },
+  {
+   "function": "check_grab_effect_up",
+   "line": 548,
+   "status": "unproved",
+   "text": "assert(urns[i][u].art - art0 == uint256(dy));"
+  },
+  {
+   "function": "check_grab_effect_up",
+   "line": 549,
+   "status": "unproved",
+   "text": "assert(ilks[i].Art - ta0 == uint256(dy));"
+  },
+  {
+   "function": "check_grab_rate_factor",
+   "line": 562,
+   "status": "unproved",
+   "text": "assert(sin[u] - s0 == uint256(-dy) * 10 ** 27);"
+  },
+  {
+   "function": "check_grab_rate_factor",
+   "line": 563,
+   "status": "unproved",
+   "text": "assert(vice - v0 == uint256(-dy) * 10 ** 27);"
+  },
+  {
+   "function": "check_heal_dai_underflow",
+   "line": 588,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_heal_sin_underflow",
+   "line": 594,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_suck_overflow",
+   "line": 618,
+   "status": "unproved",
+   "text": "assert(false);"
+  },
+  {
+   "function": "check_fold_up",
+   "line": 643,
+   "status": "unproved",
+   "text": "assert(ilks[i].rate - r0 == uint256(dx));"
+  },
+  {
+   "function": "check_fold_up",
+   "line": 644,
+   "status": "unproved",
+   "text": "assert(ilks[i].Art == ta0);"
+  },
+  {
+   "function": "check_fold_up",
+   "line": 645,
+   "status": "unproved",
+   "text": "assert(ilks[i].spot == s0);"
+  },
+  {
+   "function": "check_fold_down",
+   "line": 657,
+   "status": "unproved",
+   "text": "assert(r0 - ilks[i].rate == uint256(-dx));"
+  },
+  {
+   "function": "check_fold_down",
+   "line": 658,
+   "status": "unproved",
+   "text": "assert(ilks[i].Art == ta0);"
+  },
+  {
+   "function": "check_fold_factor",
+   "line": 669,
+   "status": "unproved",
+   "text": "assert(dai[u] - dai0 == uint256(dx) * 10 ** 18);"
+  },
+  {
+   "function": "check_fold_factor",
+   "line": 670,
+   "status": "unproved",
+   "text": "assert(debt - d0 == uint256(dx) * 10 ** 18);"
+  },
+  {
+   "function": "check_fold_overflow",
+   "line": 686,
+   "status": "unproved",
+   "text": "assert(false);"
+  }
+ ],
+ "spec_source_sha256": "a86fe9c23a5207f3a89662ec25aa44bdef8f74a2cd6e86594f6676d27c7b4fec",
+ "stop_reason": "end_turn",
+ "survivors": [
+  "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+  "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+  "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+  "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b",
+  "0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884",
+  "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+  "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+  "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762"
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "artifact": "/home/vladimir/sheaf/tcg-specgames/specgame/subjects/vat/Vat.sol",
+ "asserts": 4,
+ "check_over_H": {
+  "cpu_s": 242.243,
+  "duration_s": 121.581,
+  "reason": "determined"
+ },
+ "checks_over_H": [
+  {
+   "cached": false,
+   "check": "check_frob_conserves_collateral",
+   "duration_s": 121.357,
+   "reason": "unproved",
+   "solc_input_sha256": "df8840e30de73f599625a028f1aff8dc825d17b55ff80cb2aad8fcfec8311e54",
+   "verdict": "Unknown"
+  },
+  {
+   "cached": false,
+   "check": "check_suck_needs_auth",
+   "duration_s": 60.009,
+   "reason": "counterexample",
+   "solc_input_sha256": "3029502c5a09f2f02852da1332c2530297a427511e6da6ede7bb323ffa56a423",
+   "verdict": "Refute"
+  },
+  {
+   "cached": false,
+   "check": "check_two_dai_balances_within_debt",
+   "duration_s": 60.877,
+   "reason": "unproved",
+   "solc_input_sha256": "dcc56c5d5530b0bc1d6a8d1b42a5a3dc94f4b61777e4fa5ea9bbfa6c27596144",
+   "verdict": "Unknown"
+  }
+ ],
+ "determined": true,
+ "havoc_sha256": "59a858e42f7833d361e79f50bd338da01c7855f4e64a53026f5b572dcbc462f7",
+ "kappa": 4,
+ "mode": "isolated",
+ "non_tautological_unproved": 3,
+ "rows": [
+  {
+   "function": "check_frob_conserves_collateral",
+   "line": 16,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_frob_conserves_collateral",
+   "line": 17,
+   "status_over_H": "unproved",
+   "tautological": false
+  },
+  {
+   "function": "check_suck_needs_auth",
+   "line": 12,
+   "status_over_H": "violated",
+   "tautological": false
+  },
+  {
+   "function": "check_two_dai_balances_within_debt",
+   "line": 11,
+   "status_over_H": "unproved",
+   "tautological": false
+  }
+ ],
+ "spec": "subjects/vat/specs/measurement/vat_measure.sol"
+}

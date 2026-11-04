@@ -1,0 +1,115 @@
+run_isolated: build context ./Dockerfile ./protocol.json ./requirements.lock ./schemas/events.schema.json ./schemas/manifest.schema.json ./schemas/mutants.schema.json ./schemas/profile.schema.json ./schemas/sigma.schema.json ./schemas/witness.schema.json ./setup.sh ./subjects/capped_token/profile.json ./subjects/vat/profile.json ./tools/specgame_core.py ./tools/verify.py 
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+sha256:65d3230f92c5ee57993ae32b620a5d9b496b5310ac35f380e99edcb9f16e8b81
+run_isolated: docker run specgame-verifier:bc130efb2ba1 (network none, read-only rootfs, bundle /home/vladimir/sheaf/tcg-specgames/specgame/runs/v3/vat/f0/seed_0/bundle -> /bundle:ro)
+verify /bundle
+[PASS            ] (0) manifest
+       manifest.json validates against schemas/manifest.schema.json (+ validate_sigma against subject vat on every sigma)
+[PASS            ] (1) hashes
+       118 files, every sha256 matches, no unlisted file
+       core sha256 25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f (running = bundled copy = provenance)
+       verifier sha256 dea0af01cf27221bba31a15d59a735c789d520750e5a22baa7bed7bb18e1e489
+       protocol.json sha256 42efecba54d47bc27bbb5b7c9da369819a67f6758a8b54f019c6d8f8a4e2ada7
+       protocol.md sha256 e14e1442a902a42445a76adbdf4cf8783e0907af93180da87d42b5d898a8bf9a (recorded, not compared)
+       subject vat: bundled profile subject/profile.json = protocol.json pin (66e8b6203a073d7e…)
+       semantics version matches: solc 0.8.35+commit.47b9dedd.Linux.g++, Z3 version 4.16.0 - 64 bit, python 3.12.3, pyrevm 0.3.7, CANCUN
+[NOT_CERTIFIED   ] (2) check
+       Check(check_frob_repay) = Unknown, recorded and reproduced (re-run reason unproved, recorded unproved)
+       Check(check_grab_vault_up) = Unknown, recorded and reproduced (re-run reason unproved, recorded unproved)
+       Check(check_grab_sin_up) = Unknown, recorded and reproduced (re-run reason unproved, recorded unproved)
+       Check(check_fold_rate_up) = Unknown, recorded and reproduced (re-run reason unproved, recorded unproved)
+       bundle records Check verdict Unknown: not certified (Def. 5.3); steps 3-6 still run and report ms_cert
+       53 isolated-harness solc inputs re-derived from b + phi + timeout_ms=60000 (= bundled)
+       b runtime sha256 cf975b5a6b4f6d6781cb7d7ac369110b740db17bef918bc97c86188cf985deba
+       Spec over b runtime sha256 220b299ff4ed63f0dd0dc6edc7a0e764461fedf426d4a6a65ec99d367fbc5db6, checks ['check_cage_effect', 'check_cage_unauth', 'check_deny_effect', 'check_deny_not_live', 'check_deny_unauth', 'check_file_ilk_dust', 'check_file_ilk_line', 'check_file_ilk_not_live', 'check_file_ilk_spot', 'check_file_ilk_unauth', 'check_file_line', 'check_file_line_not_live', 'check_file_unauth', 'check_file_unrecognized', 'check_flux_effect', 'check_flux_not_allowed', 'check_flux_src_le', 'check_fold_credit_up', 'check_fold_not_live', 'check_fold_rate_up', 'check_fold_unauth', 'check_fork_conserves', 'check_fork_dst_not_allowed', 'check_fork_src_not_allowed', 'check_frob_dai_up', 'check_frob_dust', 'check_frob_global_ceiling', 'check_frob_ilk_ceiling', 'check_frob_needs_init', 'check_frob_not_allowed', 'check_frob_not_live', 'check_frob_repay', 'check_frob_unsafe', 'check_frob_vault_up', 'check_grab_sin_up', 'check_grab_unauth', 'check_grab_vault_up', 'check_heal_effect', 'check_hope_effect', 'check_init_effect', 'check_init_twice', 'check_init_unauth', 'check_move_effect', 'check_move_not_allowed', 'check_move_src_le', 'check_nope_effect', 'check_rely_effect', 'check_rely_not_live', 'check_rely_unauth', 'check_slip_effect', 'check_slip_unauth', 'check_suck_effect', 'check_suck_unauth']
+       53 checks re-run in 4 workers (274.627 s wall, 964.503 s solc): Unknown (unproved)
+         check_rely_effect: Accept (all_targets_safe, 8.703 s); raw output identical to the bundled one
+         check_deny_effect: Accept (all_targets_safe, 8.528 s); raw output identical to the bundled one
+         check_rely_unauth: Accept (all_targets_safe, 4.798 s); raw output identical to the bundled one
+         check_deny_unauth: Accept (all_targets_safe, 4.773 s); raw output identical to the bundled one
+         check_rely_not_live: Accept (all_targets_safe, 4.854 s); raw output identical to the bundled one
+         check_deny_not_live: Accept (all_targets_safe, 4.762 s); raw output identical to the bundled one
+         check_hope_effect: Accept (all_targets_safe, 8.168 s); raw output identical to the bundled one
+         check_nope_effect: Accept (all_targets_safe, 8.347 s); raw output identical to the bundled one
+         check_init_effect: Accept (all_targets_safe, 19.399 s); raw output identical to the bundled one
+         check_init_twice: Accept (all_targets_safe, 4.642 s); raw output identical to the bundled one
+         check_init_unauth: Accept (all_targets_safe, 4.654 s); raw output identical to the bundled one
+         check_frob_needs_init: Accept (all_targets_safe, 4.802 s); raw output identical to the bundled one
+         check_file_line: Accept (all_targets_safe, 4.626 s); raw output identical to the bundled one
+         check_file_line_not_live: Accept (all_targets_safe, 4.762 s); raw output identical to the bundled one
+         check_file_unauth: Accept (all_targets_safe, 4.725 s); raw output identical to the bundled one
+         check_file_unrecognized: Accept (all_targets_safe, 4.763 s); raw output identical to the bundled one
+         check_file_ilk_spot: Accept (all_targets_safe, 23.472 s); raw output identical to the bundled one
+         check_file_ilk_line: Accept (all_targets_safe, 20.042 s); raw output identical to the bundled one
+         check_file_ilk_dust: Accept (all_targets_safe, 20.114 s); raw output identical to the bundled one
+         check_file_ilk_not_live: Accept (all_targets_safe, 4.833 s); raw output identical to the bundled one
+         check_file_ilk_unauth: Accept (all_targets_safe, 5.114 s); raw output identical to the bundled one
+         check_cage_effect: Accept (all_targets_safe, 4.594 s); raw output identical to the bundled one
+         check_cage_unauth: Accept (all_targets_safe, 4.599 s); raw output identical to the bundled one
+         check_slip_effect: Accept (all_targets_safe, 4.747 s); raw output identical to the bundled one
+         check_slip_unauth: Accept (all_targets_safe, 4.719 s); raw output identical to the bundled one
+         check_flux_effect: Accept (all_targets_safe, 4.645 s); raw output identical to the bundled one
+         check_flux_src_le: Accept (all_targets_safe, 4.687 s); raw output identical to the bundled one
+         check_flux_not_allowed: Accept (all_targets_safe, 4.766 s); raw output identical to the bundled one
+         check_move_effect: Accept (all_targets_safe, 12.622 s); raw output identical to the bundled one
+         check_move_src_le: Accept (all_targets_safe, 4.75 s); raw output identical to the bundled one
+         check_move_not_allowed: Accept (all_targets_safe, 4.632 s); raw output identical to the bundled one
+         check_frob_vault_up: Accept (all_targets_safe, 16.825 s); raw output identical to the bundled one
+         check_frob_repay: Unknown (unproved, 125.604 s); raw output identical to the bundled one
+         check_frob_dai_up: Accept (all_targets_safe, 12.113 s); raw output identical to the bundled one
+         check_frob_not_live: Accept (all_targets_safe, 4.587 s); raw output identical to the bundled one
+         check_frob_global_ceiling: Accept (all_targets_safe, 5.992 s); raw output identical to the bundled one
+         check_frob_ilk_ceiling: Accept (all_targets_safe, 5.073 s); raw output identical to the bundled one
+         check_frob_unsafe: Accept (all_targets_safe, 6.132 s); raw output identical to the bundled one
+         check_frob_not_allowed: Accept (all_targets_safe, 4.815 s); raw output identical to the bundled one
+         check_frob_dust: Accept (all_targets_safe, 5.072 s); raw output identical to the bundled one
+         check_fork_conserves: Accept (all_targets_safe, 8.678 s); raw output identical to the bundled one
+         check_fork_src_not_allowed: Accept (all_targets_safe, 4.815 s); raw output identical to the bundled one
+         check_fork_dst_not_allowed: Accept (all_targets_safe, 4.05 s); raw output identical to the bundled one
+         check_grab_vault_up: Unknown (unproved, 190.602 s); raw output identical to the bundled one
+         check_grab_sin_up: Unknown (unproved, 133.521 s); raw output identical to the bundled one
+         check_grab_unauth: Accept (all_targets_safe, 4.624 s); raw output identical to the bundled one
+         check_heal_effect: Accept (all_targets_safe, 14.29 s); raw output identical to the bundled one
+         check_suck_effect: Accept (all_targets_safe, 13.888 s); raw output identical to the bundled one
+         check_suck_unauth: Accept (all_targets_safe, 9.044 s); raw output identical to the bundled one
+         check_fold_rate_up: Unknown (unproved, 127.332 s); raw output identical to the bundled one
+         check_fold_credit_up: Accept (all_targets_safe, 17.587 s); raw output identical to the bundled one
+         check_fold_not_live: Accept (all_targets_safe, 7.597 s); raw output identical to the bundled one
+         check_fold_unauth: Accept (all_targets_safe, 8.62 s); raw output identical to the bundled one
+[PASS            ] (3) M
+       mutant 0b16a3ae4f99: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 0d256aef3845: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 1a63e0033ca6: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 3d19cd9060a9: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 4f38b3220282: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 652a40501289: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 7a3cae9442cf: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant f23fd9948544: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+[PASS            ] (4) W
+       3 of 3 witnesses replay to a violation; 0 discarded (discarding is not a refusal)
+       W[0] mutant 4f38b3220282: violation in ['check_slip_unauth']
+       W[1] mutant 652a40501289: violation in ['check_frob_not_allowed']
+       W[2] mutant 7a3cae9442cf: violation in ['check_frob_unsafe']
+[PASS            ] (5) score
+       recomputed ms_cert = 3/8, kill set ['4f38b3220282', '652a40501289', '7a3cae9442cf']
+[PASS            ] (6) V-completeness
+       no V-completeness claim; named in not_claimed
+ms_cert = 3/8  kill set ['4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04', '652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df', '7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b']
+mutants without a valid witness: ['0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884', '0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5', '1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d', '3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb', 'f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762']
+label (T*, affects no verdict): mutant 0b16a3ae4f99 operator=remove-require fault_class=missing-bound-check
+label (T*, affects no verdict): mutant 0d256aef3845 operator=remove-require fault_class=missing-bound-check
+label (T*, affects no verdict): mutant 1a63e0033ca6 operator=remove-statement fault_class=accounting
+label (T*, affects no verdict): mutant 3d19cd9060a9 operator=remove-statement fault_class=accounting
+label (T*, affects no verdict): mutant 4f38b3220282 operator=remove-modifier fault_class=access-control
+label (T*, affects no verdict): mutant 652a40501289 operator=remove-require fault_class=consent
+label (T*, affects no verdict): mutant 7a3cae9442cf operator=remove-require fault_class=missing-bound-check
+label (T*, affects no verdict): mutant f23fd9948544 operator=remove-statement fault_class=accounting
+verdict: NOT_CERTIFIED at step 2 (check), exit 2
+
+real	4m40.492s
+user	0m0.084s
+sys	0m0.092s
+exit=2

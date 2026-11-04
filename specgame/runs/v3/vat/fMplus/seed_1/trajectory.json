@@ -1,0 +1,331 @@
+{
+ "anthropic_version_header": "2026-10-21",
+ "calls": [
+  {
+   "cand": 1,
+   "id": "msg_011CggyHueGUgFr7Wsu9cqeh",
+   "input_tokens": 8745,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 23182,
+   "round": 1,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 13318,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 8745,
+    "output_tokens": 23182,
+    "output_tokens_details": {
+     "thinking_tokens": 13318
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 143.964
+  },
+  {
+   "cand": 2,
+   "id": "msg_011Cgh23T9Hk7Zy9S8qWGw1q",
+   "input_tokens": 8745,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 23102,
+   "round": 1,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 13325,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 8745,
+    "output_tokens": 23102,
+    "output_tokens_details": {
+     "thinking_tokens": 13325
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 141.512
+  },
+  {
+   "cand": 1,
+   "id": "msg_011Cgh2DvBGKzPHQ4mkwNKGZ",
+   "input_tokens": 33558,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 25302,
+   "round": 2,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 14013,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 33558,
+    "output_tokens": 25302,
+    "output_tokens_details": {
+     "thinking_tokens": 14013
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 164.204
+  },
+  {
+   "cand": 2,
+   "id": "msg_011Cgh4znxfRmnPunmACfm66",
+   "input_tokens": 33558,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 29021,
+   "round": 2,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 17566,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 33558,
+    "output_tokens": 29021,
+    "output_tokens_details": {
+     "thinking_tokens": 17566
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 198.363
+  },
+  {
+   "cand": 1,
+   "id": "msg_011Cgh7cLHnB9U3UGhyCn3uz",
+   "input_tokens": 60772,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 18196,
+   "round": 3,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 8366,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 60772,
+    "output_tokens": 18196,
+    "output_tokens_details": {
+     "thinking_tokens": 8366
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 111.036
+  },
+  {
+   "cand": 2,
+   "id": "msg_011CghAUijXhQfNZGiudBCet",
+   "input_tokens": 60772,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 16416,
+   "round": 3,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 6658,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 60772,
+    "output_tokens": 16416,
+    "output_tokens_details": {
+     "thinking_tokens": 6658
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 97.425
+  }
+ ],
+ "condition": "fMplus",
+ "fallbacks": "none (a refusal is a failed candidate)",
+ "frozen": {
+  "B_A": 2000,
+  "effort": "high",
+  "k": 2,
+  "max_tokens": 64000,
+  "max_txs": 6,
+  "model": "claude-sonnet-5-5",
+  "per_mutant": 1,
+  "rounds": 3,
+  "seed_A": 0,
+  "timeout_ms": 60000,
+  "wall_timeout_s": 600.0
+ },
+ "k": 2,
+ "model_requested": "claude-sonnet-5-5",
+ "model_returned": "claude-sonnet-5-5",
+ "prompt_sha256": {
+  "feedback_f0.md": "0044d327cc58966ada3797c50835ad058cec94540f164e15dd9297a13e542700",
+  "feedback_fM.md": "3e22dc0e896d07e8d89f272fddfe8e96e2c5f2236ca1beaf0cadb16dd4d468dd",
+  "feedback_fMplus.md": "21b6574b733ebbf918384b0a7f0e398806ac198fad8563f90a584a401b820dde",
+  "round_1.md": "4a875318c1a8d8a4ac88ab58be1c419798b62a2819336daf6bfc7ad62d691f3b",
+  "system.md": "8afcd74c44fcc2558575f072dc385146ad1a6e358ffe9ba3c81943be0d4b17ac"
+ },
+ "prompts_sha256": "fbd52777f1a512821d7964339f9b931c42c62b92c48b4739df0995e3c6adc74c",
+ "result": {
+  "W_star": {
+   "sha256": "93c9c0004c11daea5cc5f8a4964eb43dd218302142618ea2465a0aded83dbf97",
+   "size": 21
+  },
+  "bundle": {
+   "exit": 0,
+   "stderr_tail": []
+  },
+  "events": [
+   {
+    "acc_t": "Unknown",
+    "kind": "unchanged",
+    "t": 1
+   },
+   {
+    "acc_t": "Unknown",
+    "kind": "weakening",
+    "t": 2
+   }
+  ],
+  "final": {
+   "acc": "Accept",
+   "cand": 1,
+   "round": 3
+  },
+  "kappa": {
+   "asserts": 139,
+   "determined": false,
+   "kappa": null,
+   "unproved_over_H": 138,
+   "wall_s": 2375.75
+  },
+  "status": "bundle_holds",
+  "vacuity_a": {
+   "flagged": [],
+   "unknown": [
+    "check_rely_effect",
+    "check_deny_effect",
+    "check_rely_not_auth",
+    "check_deny_not_auth",
+    "check_rely_not_live",
+    "check_deny_not_live",
+    "check_init_not_auth",
+    "check_file_global_not_auth",
+    "check_file_ilk_not_auth",
+    "check_file_ilk_line_not_auth",
+    "check_file_ilk_dust_not_auth",
+    "check_cage_not_auth",
+    "check_slip_not_auth",
+    "check_grab_not_auth",
+    "check_suck_not_auth",
+    "check_fold_not_auth",
+    "check_hope_effect",
+    "check_nope_effect",
+    "check_init_effect",
+    "check_init_twice",
+    "check_frob_needs_init",
+    "check_file_line_effect",
+    "check_file_global_unknown",
+    "check_file_global_not_live",
+    "check_file_spot_effect",
+    "check_file_line_ilk_effect",
+    "check_file_dust_effect",
+    "check_file_ilk_not_live",
+    "check_cage_effect",
+    "check_stays_caged_frob",
+    "check_stays_caged_fold",
+    "check_slip_add",
+    "check_slip_sub",
+    "check_slip_frame",
+    "check_flux_effect",
+    "check_flux_self",
+    "check_flux_other_ilk",
+    "check_flux_no_consent",
+    "check_move_effect",
+    "check_move_self",
+    "check_move_no_consent",
+    "check_frob_collateral_pos",
+    "check_frob_collateral_neg",
+    "check_frob_debt_pos",
+    "check_frob_debt_neg",
+    "check_frob_not_live",
+    "check_frob_ilk_ceiling",
+    "check_frob_global_ceiling",
+    "check_frob_unsafe",
+    "check_frob_no_consent_u_debt",
+    "check_frob_no_consent_u_ink",
+    "check_frob_no_consent_v",
+    "check_frob_no_consent_w",
+    "check_frob_dust",
+    "check_fork_no_consent_src",
+    "check_fork_no_consent_dst",
+    "check_fork_no_consent_empty_src",
+    "check_fork_no_consent_empty_dst",
+    "check_grab_collateral",
+    "check_grab_debt",
+    "check_heal_effect",
+    "check_heal_frame",
+    "check_suck_effect",
+    "check_suck_frame",
+    "check_fold_pos",
+    "check_fold_neg"
+   ],
+   "wall_s": 1081.461
+  },
+  "verify": {
+   "exit": 0,
+   "ms_cert": {
+    "killed": 4,
+    "total": 8
+   },
+   "summary": [
+    "label (T*, affects no verdict): mutant 7a3cae9442cf operator=remove-require fault_class=missing-bound-check",
+    "label (T*, affects no verdict): mutant f23fd9948544 operator=remove-statement fault_class=accounting",
+    "verdict: HOLDS, exit 0"
+   ],
+   "verdict": "HOLDS"
+  }
+ },
+ "rounds": 3,
+ "sdk_version": "2.3.0",
+ "seed": 1,
+ "seed_param": "not supported by the Messages API (SDK has no seed parameter); the trajectory seed is recorded only",
+ "temperature_note": "API default; non-default values rejected by this model; not sent",
+ "temperature_recorded": 1.0,
+ "tokens": {
+  "input": 206150,
+  "output": 135219,
+  "thinking": 73246,
+  "total": 341369
+ }
+}

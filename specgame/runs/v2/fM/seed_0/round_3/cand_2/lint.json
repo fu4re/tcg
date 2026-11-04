@@ -1,0 +1,6 @@
+{
+ "extracted": true,
+ "problems": [
+  "S9 line 39: check_second_mint_over_cap_reverts: require only in the leading block (Pre)"
+ ]
+}

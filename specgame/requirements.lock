@@ -1,0 +1,4 @@
+# Pinned Python dependencies for specgame/.venv (installed by setup.sh with
+# --require-hashes --only-binary=:all:). pyrevm has no runtime dependencies.
+# Wheel: pyrevm-0.3.7-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+pyrevm==0.3.7 --hash=sha256:d055860c3352d6bc180b80255d8563f0b3c0fe6ce62b5c2a52e1bc7ecc4fad4f

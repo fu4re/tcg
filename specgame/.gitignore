@@ -1,0 +1,5 @@
+# Project-local toolchain (setup.sh) and build outputs
+.venv/
+.toolchain/
+build/
+__pycache__/

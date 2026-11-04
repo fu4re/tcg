@@ -1,0 +1,316 @@
+{
+ "claimed": {
+  "kill_set": [
+   "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+   "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+  ],
+  "ms_cert": {
+   "killed": 2,
+   "total": 3
+  }
+ },
+ "evidence": {
+  "M": [
+   {
+    "id": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "path": "mutants/8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "100"
+      },
+      "deployer": "alice",
+      "txs": [
+       {
+        "args": [
+         "alice",
+         "50"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "alice"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "path": "mutants/94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "100"
+      },
+      "deployer": "alice",
+      "txs": [
+       {
+        "args": [
+         "alice",
+         "7"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "alice",
+         "1"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "alice"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "path": "mutants/cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "100"
+      },
+      "deployer": "carol",
+      "txs": [
+       {
+        "args": [
+         "zero",
+         "101"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "carol"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   }
+  ],
+  "W": [
+   {
+    "mutant": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "observed": {
+     "check": "check_mint_adds",
+     "outcome": "violation",
+     "pair_runtime_sha256": "4c57300e86194c79a28e7a8f9a4b821b4df10b910ef39789a653b2c6059db6bc",
+     "spec_source_sha256": "99381393438645c2ad4456f712df4f32e68d9477ab13e453df5d51d95730a405"
+    },
+    "sigma": {
+     "ctor": {
+      "cap": "100"
+     },
+     "deployer": "alice",
+     "probe": {
+      "a": "alice",
+      "b": "zero",
+      "check": "check_mint_adds",
+      "sender": "alice",
+      "x": "100",
+      "y": "1"
+     },
+     "txs": [],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "observed": {
+     "check": "check_cap",
+     "outcome": "violation",
+     "pair_runtime_sha256": "ef05d7f162ff999c78e8e5bd66183ef957797ee01c4b565c8a06d9cf00ed8cec",
+     "spec_source_sha256": "99381393438645c2ad4456f712df4f32e68d9477ab13e453df5d51d95730a405"
+    },
+    "sigma": {
+     "ctor": {
+      "cap": "100"
+     },
+     "deployer": "carol",
+     "probe": {
+      "a": "zero",
+      "b": "alice",
+      "check": "check_cap",
+      "sender": "alice",
+      "x": "50",
+      "y": "0"
+     },
+     "txs": [
+      {
+       "args": [
+        "alice",
+        "101"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   }
+  ],
+  "adversary": {
+   "B_A": 400,
+   "id": "wp5-fixture-search-v1",
+   "seed": 1,
+   "source_sha256": "a9fbf9215d9c63e5353f5ab560c0e7874c1bc54629ee410e2574a88896938762"
+  },
+  "discarded": [
+   {
+    "reason": "no check ends in violation: check_cap=success, check_mint_adds=success [alice.check_cap(alice,zero,100,1): success -> success; alice.check_mint_adds(alice,zero,100,1): success -> success]",
+    "witness": {
+     "mutant": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+     "observed": {
+      "check": "check_mint_adds",
+      "outcome": "violation",
+      "pair_runtime_sha256": "56159804c9b39d32371b0ddaaec3925b9743a3316c4e639fccdd536dad99f813",
+      "spec_source_sha256": "99381393438645c2ad4456f712df4f32e68d9477ab13e453df5d51d95730a405"
+     },
+     "sigma": {
+      "ctor": {
+       "cap": "100"
+      },
+      "deployer": "alice",
+      "probe": {
+       "a": "alice",
+       "b": "zero",
+       "check": "check_mint_adds",
+       "sender": "alice",
+       "x": "100",
+       "y": "1"
+      },
+      "txs": [],
+      "version": 1
+     },
+     "version": 1
+    }
+   }
+  ]
+ },
+ "files": {
+  "b/CappedToken.sol": "56036495fb2e6e35de9977cec3cbd40c27433256a96b0e875e36aaae6c5c5bc9",
+  "c/check_cap/solc_input.json": "ff866aea83d360589b6a483e76b54aeccd792d54905adf7f5e21d1cfc66badb6",
+  "c/check_cap/solc_output.json": "18787236011e7e214638f99a47fbbe9a0def83b77d5f7846fe852df6888c3f84",
+  "c/check_mint_adds/solc_input.json": "dd6b3105d6684ad103a3d5d6dd2f6b1022c2af8c2629c9978e5cf2e8c846e535",
+  "c/check_mint_adds/solc_output.json": "f5a03abe90d6e70b0d927be4e635c0db1390d6bbf37711dffdfce1b8769584ef",
+  "core/specgame_core.py": "25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f",
+  "mutants/8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9.sol": "9709177cacec8de5629d4451ad1558520bbe955b5acfa565c78c6ff09c56024d",
+  "mutants/94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3.sol": "33a2a8c082d96342a10abcb3692680130cac7ba17b2f63afd45a23b1af45833e",
+  "mutants/cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed.sol": "e2bd43a1481b2f5edd082b05464f0e115a42d1a3317227a4a60d88bfab5a4ec9",
+  "phi/Spec.sol": "99381393438645c2ad4456f712df4f32e68d9477ab13e453df5d51d95730a405",
+  "subject/profile.json": "04b386f2213754b73654f6c543183f276addcad9d63bae796aa500988ba49a84"
+ },
+ "hard": {
+  "b": {
+   "path": "b/CappedToken.sol",
+   "runtime_sha256": "c7761d01ada538f5a478bce8861f9812b5c29a81de9c80cbbcce91f42abc063c",
+   "source_sha256": "56036495fb2e6e35de9977cec3cbd40c27433256a96b0e875e36aaae6c5c5bc9"
+  },
+  "c": {
+   "checks": [
+    {
+     "check": "check_mint_adds",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_mint_adds/solc_input.json",
+     "solc_input_sha256": "dd6b3105d6684ad103a3d5d6dd2f6b1022c2af8c2629c9978e5cf2e8c846e535",
+     "solc_output_path": "c/check_mint_adds/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_cap",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_cap/solc_input.json",
+     "solc_input_sha256": "ff866aea83d360589b6a483e76b54aeccd792d54905adf7f5e21d1cfc66badb6",
+     "solc_output_path": "c/check_cap/solc_output.json",
+     "verdict": "Accept"
+    }
+   ],
+   "command": [
+    "solc",
+    "--standard-json"
+   ],
+   "mode": "isolated",
+   "reason": "all_checks_safe",
+   "timeout_ms": 60000,
+   "verdict": "Accept",
+   "wall_timeout_s": 600.0
+  },
+  "phi": {
+   "checks": [
+    "check_cap",
+    "check_mint_adds"
+   ],
+   "pair_runtime_sha256": "8ff8409ea85e933b62acad9a4c08e3f2b907a130c8d87f22a880ee153f062091",
+   "path": "phi/Spec.sol",
+   "source_sha256": "99381393438645c2ad4456f712df4f32e68d9477ab13e453df5d51d95730a405"
+  }
+ },
+ "metadata": {
+  "mutants": [
+   {
+    "fault_class": "missing_state_update",
+    "id": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "operator": "statement_deletion"
+   },
+   {
+    "fault_class": "missing_state_update",
+    "id": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "operator": "statement_deletion"
+   },
+   {
+    "fault_class": "missing_bound_check",
+    "id": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "operator": "require_deletion"
+   }
+  ]
+ },
+ "not_claimed": [
+  "V-completeness"
+ ],
+ "provenance": {
+  "core_path": "core/specgame_core.py",
+  "core_sha256": "25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f",
+  "feedback": null,
+  "protocol_json_sha256": "42efecba54d47bc27bbb5b7c9da369819a67f6758a8b54f019c6d8f8a4e2ada7",
+  "protocol_md_sha256": "4b0316a2f3b52f1cb2787a8c9c7a2f9d39177d78d13eb689f360021b8ec44b80",
+  "subject": "capped_token",
+  "subject_profile_path": "subject/profile.json",
+  "toolchain": {
+   "block_env": {
+    "basefee": 0,
+    "coinbase": "0x0000000000000000000000000000000000000000",
+    "gas_limit": 30000000,
+    "number": 1,
+    "prevrandao": "0000000000000000000000000000000000000000000000000000000000000000",
+    "timestamp": 1
+   },
+   "chain_id": 1,
+   "core_sha256": "25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f",
+   "core_version": 2,
+   "evm_version": "cancun",
+   "executor_limits": {
+    "contract_code_size_limit": 1048576,
+    "deploy_gas": 30000000,
+    "initcode_size_limit": 2097152,
+    "subject_runtime_limit": 24576
+   },
+   "pyrevm": "0.3.7",
+   "python": "3.12.3",
+   "solc": {
+    "sha256": "fa8ac9a32d301ad023a36ee5a29f8e291fe3200c60244e43c142539e82a617f4",
+    "version": "0.8.35+commit.47b9dedd.Linux.g++"
+   },
+   "spec_id": "CANCUN",
+   "tx_gas": 10000000,
+   "z3": {
+    "sha256": "e583c4186a45e72411fa2cb2048401eed03f0f8e5f24694676a8f6271a50b765",
+    "version": "Z3 version 4.16.0 - 64 bit"
+   }
+  },
+  "verifier_sha256": "dea0af01cf27221bba31a15d59a735c789d520750e5a22baa7bed7bb18e1e489"
+ },
+ "version": 1
+}

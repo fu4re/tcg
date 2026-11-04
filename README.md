@@ -14,7 +14,7 @@ The format is specified in [docs/bundle-spec.md](docs/bundle-spec.md).
 The agent-facing audit workflow (driving tcg end-to-end on a subject) is packaged as the [tcg-evm-audit skill](.claude/skills/tcg-evm-audit/SKILL.md).
 The research record lives in [docs/findings/](docs/findings/) (numbered, immutable, negative results included) and in the companion repository of the June 2026 source-level pilots (`sheaf`, SMTChecker + Lean).
 
-## What has been established (as of 2026-08-28)
+## What has been established (as of 2026-11-04)
 
 Every "proved" below is a prover verdict reproduced from committed sources; see the Finding for the exact command, the honest caveats and what remains open.
 
@@ -27,8 +27,11 @@ Every "proved" below is a prover verdict reproduced from committed sources; see 
 | [0004](docs/findings/0004_simplification_lemmas.md) | KEVM's own 287 `[simplification]` rules vendored as `theory/patches/lemmas.diff`; a mandatory consistency control (known-false identities must not prove); named in the trust ledger as not provably closed |
 | [0005](docs/findings/0005_callsite_summary_probe.md) | Raw `kprove` applies an injected callee summary at an unresolved `CALL`; no driver migration needed |
 | [0006](docs/findings/0006_callsite_composition_frontier.md) | Call-site composition: bridge `S ⟸ D` with anti-proxy binding (7/7 tampers refuse); WETH9 `transfer`/`transferFrom` and `Vat.slip` proved over the real mainnet bytecode (on branches `p1-c-weth`, `p1-b-vat-slip`); §4's "substrate ceiling" corrected to a claim-shape bug |
+| [0007](docs/findings/0007_specification_games_vat.md) | Specification Games prototype (`specgame/`): a solver-judged spec generator (SMTChecker CHC + pyrevm, no LLM in any verdict) on MakerDAO Vat; with Accept ranked above Unknown it weakened its spec in 5/5 trajectories, the certified mutation score recorded the loss (best 6/8 vs 2/8 for the hand ladder), all six bundles re-verify offline; κ/vacuity uninformative on Vat, no condition-level claim with two seeds |
 
 Cross-bundle reuse (REUSE) and typed callee assumptions (STUB, surfaced by `verify` as `⚠` and refused under `--strict`) landed on 2026-08-20; see bundle-spec §5b–5c and `tests/reference/composition/`.
+
+The Specification Games prototype (Finding 0007) lives in [specgame/](specgame/) with its own toolchain pin, protocol, verifier and run records; the full report is [specgame/REPORT.md](specgame/REPORT.md).
 
 Not done, honestly: the `join`/`exit` caller composition over the proved callee legs; vendoring the semantics into the bundle (today it is pinned by version and patch hash); proof objects (verify re-proves every claim, ~28 s each); a load-bearing (weak-postcondition) vacuity probe.
 

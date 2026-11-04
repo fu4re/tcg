@@ -1,0 +1,10 @@
+{
+ "extracted": true,
+ "problems": [
+  "S9 line 40: check_mint_exact: require only in the leading block (Pre)",
+  "S9 line 41: check_mint_exact: require only in the leading block (Pre)",
+  "S9 line 57: check_transfer_exact: require only in the leading block (Pre)",
+  "S9 line 58: check_transfer_exact: require only in the leading block (Pre)",
+  "S9 line 72: check_transfer_self: require only in the leading block (Pre)"
+ ]
+}

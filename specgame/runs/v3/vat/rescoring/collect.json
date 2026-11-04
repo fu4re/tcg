@@ -1,0 +1,3311 @@
+{
+ "aborted": [
+  {
+   "attempt": "seed_0_aborted_max_tokens",
+   "candidates": [
+    {
+     "acc": "lint_rejected",
+     "adversary_s": null,
+     "cand": 1,
+     "check_reason": null,
+     "check_s": null,
+     "failure": "max_tokens (no text)",
+     "first_error": "reply has 0 `solidity` code blocks, exactly 1 required (stop_reason max_tokens)",
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 1,
+     "output_tokens": 16000,
+     "path": "runs/v3/vat/fM/seed_0_aborted_max_tokens/round_1/cand_1",
+     "round": 1,
+     "selected": true,
+     "stop_reason": "max_tokens",
+     "thinking_tokens": 16000
+    },
+    {
+     "acc": "lint_rejected",
+     "adversary_s": null,
+     "cand": 2,
+     "check_reason": null,
+     "check_s": null,
+     "failure": "max_tokens (no text)",
+     "first_error": "reply has 0 `solidity` code blocks, exactly 1 required (stop_reason max_tokens)",
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 1,
+     "output_tokens": 16000,
+     "path": "runs/v3/vat/fM/seed_0_aborted_max_tokens/round_1/cand_2",
+     "round": 1,
+     "selected": false,
+     "stop_reason": "max_tokens",
+     "thinking_tokens": 16000
+    },
+    {
+     "acc": null,
+     "cand": 1,
+     "failure": "not scored (attempt stopped)",
+     "path": "runs/v3/vat/fM/seed_0_aborted_max_tokens/round_2/cand_1",
+     "round": 2,
+     "selected": false
+    }
+   ],
+   "cost_usd_received": 0.355,
+   "path": "runs/v3/vat/fM/seed_0_aborted_max_tokens",
+   "tokens_received": {
+    "input": 17490,
+    "output": 32000
+   },
+   "wall_s": null
+  },
+  {
+   "attempt": "seed_0_aborted_code_size",
+   "candidates": [
+    {
+     "acc": "Unknown",
+     "adversary_s": 1465.348,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 49,
+      "Unknown/unproved": 24
+     },
+     "check_reason": "unproved",
+     "check_s": 805.499,
+     "check_wall_s": 805.499,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_checks": 73,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unrecognized",
+       "unproved"
+      ],
+      [
+       "check_slip_overflow",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_flux_underflow",
+       "unproved"
+      ],
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_move_underflow",
+       "unproved"
+      ],
+      [
+       "check_frob_effect_up",
+       "unproved"
+      ],
+      [
+       "check_frob_effect_down",
+       "unproved"
+      ],
+      [
+       "check_frob_rate_factor",
+       "unproved"
+      ],
+      [
+       "check_frob_v_consent",
+       "unproved"
+      ],
+      [
+       "check_frob_w_consent",
+       "unproved"
+      ],
+      [
+       "check_frob_ink_overflow",
+       "unproved"
+      ],
+      [
+       "check_fork_effect",
+       "unproved"
+      ],
+      [
+       "check_fork_src_unsafe",
+       "unproved"
+      ],
+      [
+       "check_grab_effect_down",
+       "unproved"
+      ],
+      [
+       "check_grab_effect_up",
+       "unproved"
+      ],
+      [
+       "check_grab_rate_factor",
+       "unproved"
+      ],
+      [
+       "check_heal_dai_underflow",
+       "unproved"
+      ],
+      [
+       "check_heal_sin_underflow",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow",
+       "unproved"
+      ],
+      [
+       "check_fold_up",
+       "unproved"
+      ],
+      [
+       "check_fold_down",
+       "unproved"
+      ],
+      [
+       "check_fold_factor",
+       "unproved"
+      ],
+      [
+       "check_fold_overflow",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 30892,
+     "path": "runs/v3/vat/fM/seed_0_aborted_code_size/round_1/cand_1",
+     "round": 1,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 21014
+    },
+    {
+     "acc": null,
+     "cand": 2,
+     "failure": "not scored (attempt stopped)",
+     "path": "runs/v3/vat/fM/seed_0_aborted_code_size/round_1/cand_2",
+     "round": 1,
+     "selected": false
+    }
+   ],
+   "cost_usd_received": 0.3264,
+   "path": "runs/v3/vat/fM/seed_0_aborted_code_size",
+   "tokens_received": {
+    "input": 8745,
+    "output": 30892
+   },
+   "wall_s": 2558.46
+  },
+  {
+   "attempt": "seed_0_aborted_stack_too_deep",
+   "candidates": [
+    {
+     "acc": null,
+     "api_wall_s": 201.494,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 53,
+      "Unknown/unproved": 25,
+      "Unknown/wall_timeout": 4
+     },
+     "check_wall_s": 1805.527,
+     "failure": "not scored (attempt stopped)",
+     "input_tokens": 8745,
+     "n_checks": 82,
+     "non_accept": [
+      [
+       "check_flux_moves",
+       "unproved"
+      ],
+      [
+       "check_flux_underflow",
+       "unproved"
+      ],
+      [
+       "check_flux_overflow",
+       "unproved"
+      ],
+      [
+       "check_move_moves",
+       "unproved"
+      ],
+      [
+       "check_move_underflow",
+       "unproved"
+      ],
+      [
+       "check_move_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_effects_src_self",
+       "wall_timeout"
+      ],
+      [
+       "check_frob_effects_dst_self",
+       "wall_timeout"
+      ],
+      [
+       "check_frob_ink_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_art_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_gem_underflow",
+       "unproved"
+      ],
+      [
+       "check_fork_moves",
+       "wall_timeout"
+      ],
+      [
+       "check_fork_unsafe_src",
+       "unproved"
+      ],
+      [
+       "check_fork_unsafe_dst",
+       "unproved"
+      ],
+      [
+       "check_fork_dust",
+       "unproved"
+      ],
+      [
+       "check_grab_effects",
+       "wall_timeout"
+      ],
+      [
+       "check_grab_dst_effects",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_up",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_down",
+       "unproved"
+      ],
+      [
+       "check_heal_sin_underflow",
+       "unproved"
+      ],
+      [
+       "check_heal_dai_underflow",
+       "unproved"
+      ],
+      [
+       "check_heal_vice_underflow",
+       "unproved"
+      ],
+      [
+       "check_heal_debt_underflow",
+       "unproved"
+      ],
+      [
+       "check_suck_debt_overflow",
+       "unproved"
+      ],
+      [
+       "check_suck_vice_overflow",
+       "unproved"
+      ],
+      [
+       "check_suck_sin_overflow",
+       "unproved"
+      ],
+      [
+       "check_suck_dai_overflow",
+       "unproved"
+      ],
+      [
+       "check_fold_effects",
+       "unproved"
+      ],
+      [
+       "check_fold_link",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 31345,
+     "path": "runs/v3/vat/fM/seed_0_aborted_stack_too_deep/round_1/cand_1",
+     "round": 1,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 18848
+    }
+   ],
+   "cost_usd_received": 0.3309,
+   "path": "runs/v3/vat/fM/seed_0_aborted_stack_too_deep",
+   "tokens_received": {
+    "input": 8745,
+    "output": 31345
+   },
+   "wall_s": 2011.12
+  }
+ ],
+ "format_failures": {
+  "by_kind": {
+   "compile_error: Stack too deep": 5,
+   "lint S9": 4,
+   "runnable": 27
+  },
+  "list": [
+   {
+    "cand": 1,
+    "failure": "lint S9",
+    "first_error": "S9 line 257: check_flux_moves: require only in the leading block (Pre)",
+    "n_errors": 11,
+    "round": 1,
+    "stop_reason": "end_turn",
+    "trajectory": "fM/seed_0"
+   },
+   {
+    "cand": 1,
+    "failure": "compile_error: Stack too deep",
+    "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+    "n_errors": 1,
+    "round": 1,
+    "stop_reason": "end_turn",
+    "trajectory": "f0/seed_0"
+   },
+   {
+    "cand": 2,
+    "failure": "compile_error: Stack too deep",
+    "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+    "n_errors": 1,
+    "round": 1,
+    "stop_reason": "end_turn",
+    "trajectory": "f0/seed_1"
+   },
+   {
+    "cand": 1,
+    "failure": "lint S9",
+    "first_error": "S9 line 204: check_file_ilk_unknown: require only in the leading block (Pre)",
+    "n_errors": 3,
+    "round": 1,
+    "stop_reason": "end_turn",
+    "trajectory": "fMplus/seed_0"
+   },
+   {
+    "cand": 2,
+    "failure": "lint S9",
+    "first_error": "S9 line 292: check_frob_urn_effect: require only in the leading block (Pre)",
+    "n_errors": 11,
+    "round": 1,
+    "stop_reason": "end_turn",
+    "trajectory": "fMplus/seed_0"
+   },
+   {
+    "cand": 1,
+    "failure": "compile_error: Stack too deep",
+    "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+    "n_errors": 1,
+    "round": 2,
+    "stop_reason": "end_turn",
+    "trajectory": "fMplus/seed_0"
+   },
+   {
+    "cand": 2,
+    "failure": "compile_error: Stack too deep",
+    "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+    "n_errors": 1,
+    "round": 2,
+    "stop_reason": "end_turn",
+    "trajectory": "fMplus/seed_0"
+   },
+   {
+    "cand": 2,
+    "failure": "compile_error: Stack too deep",
+    "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+    "n_errors": 1,
+    "round": 1,
+    "stop_reason": "end_turn",
+    "trajectory": "fMplus/seed_1"
+   },
+   {
+    "cand": 2,
+    "failure": "lint S9",
+    "first_error": "S9 line 291: check_move_other_unchanged: require only in the leading block (Pre)",
+    "n_errors": 1,
+    "round": 1,
+    "stop_reason": "end_turn",
+    "trajectory": "fM/seed_1"
+   }
+  ],
+  "n_candidates": 36
+ },
+ "prices_usd_per_mtok": {
+  "input": 2.0,
+  "output": 10.0
+ },
+ "script": "runs/v3/vat/rescoring/collect.py",
+ "totals": {
+  "aborted_cost_usd_received": 1.0123,
+  "aborted_wall_s_logged": 4569.58,
+  "cost_usd": 8.4956,
+  "tokens": {
+   "input": 1108450,
+   "output": 627872,
+   "thinking": 294823
+  },
+  "wall_s": 70255.97
+ },
+ "trajectories": [
+  {
+   "W_star_size": 25,
+   "candidates": [
+    {
+     "acc": "lint_rejected",
+     "adversary_s": null,
+     "api_wall_s": 222.68,
+     "cand": 1,
+     "check_reason": null,
+     "check_s": null,
+     "failure": "lint S9",
+     "first_error": "S9 line 257: check_flux_moves: require only in the leading block (Pre)",
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 11,
+     "output_tokens": 33033,
+     "path": "runs/v3/vat/fM/seed_0/round_1/cand_1",
+     "round": 1,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 21643
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 640.854,
+     "api_wall_s": 116.615,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 35,
+      "Unknown/unproved": 25
+     },
+     "check_reason": "unproved",
+     "check_s": 1343.714,
+     "check_wall_s": 1343.714,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 8745,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 60,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_hope_effect",
+       "unproved"
+      ],
+      [
+       "check_nope_effect",
+       "unproved"
+      ],
+      [
+       "check_file_ilk_unknown",
+       "unproved"
+      ],
+      [
+       "check_live_flag",
+       "unproved"
+      ],
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_move_underflow",
+       "unproved"
+      ],
+      [
+       "check_move_overflow",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_flux_underflow",
+       "unproved"
+      ],
+      [
+       "check_flux_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_ink_gem",
+       "unproved"
+      ],
+      [
+       "check_frob_art",
+       "unproved"
+      ],
+      [
+       "check_frob_dai_debt",
+       "unproved"
+      ],
+      [
+       "check_frob_guards",
+       "unproved"
+      ],
+      [
+       "check_frob_distinct_pos",
+       "unproved"
+      ],
+      [
+       "check_frob_distinct_neg",
+       "unproved"
+      ],
+      [
+       "check_fork_effect",
+       "unproved"
+      ],
+      [
+       "check_fork_safe",
+       "unproved"
+      ],
+      [
+       "check_fork_self",
+       "unproved"
+      ],
+      [
+       "check_grab_neg",
+       "unproved"
+      ],
+      [
+       "check_grab_pos",
+       "unproved"
+      ],
+      [
+       "check_heal_underflow",
+       "unproved"
+      ],
+      [
+       "check_heal_underflow_sin",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow",
+       "unproved"
+      ],
+      [
+       "check_fold_effect",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 18901,
+     "path": "runs/v3/vat/fM/seed_0/round_1/cand_2",
+     "round": 1,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 10146
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 1513.865,
+     "api_wall_s": 105.822,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 49,
+      "Unknown/unproved": 3
+     },
+     "check_reason": "unproved",
+     "check_s": 248.613,
+     "check_wall_s": 248.612,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 31424,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "ms_cert": "4/8",
+     "n_checks": 52,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_grab_ink",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 15208,
+     "path": "runs/v3/vat/fM/seed_0/round_2/cand_1",
+     "round": 2,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 9150
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 666.025,
+     "api_wall_s": 96.803,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 53,
+      "Unknown/unproved": 13
+     },
+     "check_reason": "unproved",
+     "check_s": 468.882,
+     "check_wall_s": 468.882,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 31424,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 66,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_frob_dai_down",
+       "unproved"
+      ],
+      [
+       "check_fork_ink",
+       "unproved"
+      ],
+      [
+       "check_fork_art",
+       "unproved"
+      ],
+      [
+       "check_fork_safe_src",
+       "unproved"
+      ],
+      [
+       "check_fork_dust_src",
+       "unproved"
+      ],
+      [
+       "check_grab_ink_gem",
+       "unproved"
+      ],
+      [
+       "check_grab_art",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_up",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_down",
+       "unproved"
+      ],
+      [
+       "check_fold_up",
+       "unproved"
+      ],
+      [
+       "check_fold_down",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 15172,
+     "path": "runs/v3/vat/fM/seed_0/round_2/cand_2",
+     "round": 2,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 7404
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 647.135,
+     "api_wall_s": 53.488,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 59,
+      "Unknown/unproved": 6
+     },
+     "check_reason": "unproved",
+     "check_s": 194.732,
+     "check_wall_s": 194.731,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 47827,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 65,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_move_src_exact",
+       "unproved"
+      ],
+      [
+       "check_flux_src_exact",
+       "unproved"
+      ],
+      [
+       "check_frob_dai_down_alt",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_after",
+       "unproved"
+      ],
+      [
+       "check_fold_down_alt",
+       "unproved"
+      ],
+      [
+       "check_fold_rate_up",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 9260,
+     "path": "runs/v3/vat/fM/seed_0/round_3/cand_1",
+     "round": 3,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 2382
+    },
+    {
+     "acc": "Accept",
+     "adversary_s": 957.889,
+     "api_wall_s": 36.366,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 59
+     },
+     "check_reason": "all_checks_safe",
+     "check_s": 11.425,
+     "check_wall_s": 11.425,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 47827,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit"
+     ],
+     "ms_cert": "6/8",
+     "n_checks": 59,
+     "n_errors": 0,
+     "non_accept": [],
+     "output_tokens": 7207,
+     "path": "runs/v3/vat/fM/seed_0/round_3/cand_2",
+     "round": 3,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 856
+    }
+   ],
+   "condition": "fM",
+   "cost_usd": 1.3398,
+   "events": [
+    {
+     "gained": [],
+     "kind": "unchanged",
+     "lost": [],
+     "t": 1
+    },
+    {
+     "gained": [],
+     "kind": "weakening",
+     "lost": [
+      "m08_grab_no_vice"
+     ],
+     "t": 2
+    }
+   ],
+   "final": {
+    "acc": "Accept",
+    "cand": 2,
+    "round": 3
+   },
+   "kappa": {
+    "asserts": 84,
+    "determined": true,
+    "kappa": 84,
+    "over_H_counts": {
+     "Refute/violation_without_counterexample": 1,
+     "Unknown/unproved": 58
+    },
+    "unproved_over_H": 83,
+    "wall_s": 1394.697
+   },
+   "path": "runs/v3/vat/fM/seed_0",
+   "rounds": [
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 7,
+     "t": 1
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 7,
+     "t": 2
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit"
+     ],
+     "acc": "Accept",
+     "size": 6,
+     "t": 3
+    }
+   ],
+   "seed": 0,
+   "status": "bundle_holds",
+   "tokens": {
+    "input": 175992,
+    "output": 98781,
+    "thinking": 51581,
+    "total": 274773
+   },
+   "trajectory": "fM/seed_0",
+   "vacuity_a": {
+    "flagged": [],
+    "n": 59,
+    "probe_status": {
+     "unproved": 59
+    },
+    "unknown": 59,
+    "wall_s": 1010.078
+   },
+   "verify": {
+    "exit": 0,
+    "failing_steps": [],
+    "ms_cert": {
+     "killed": 6,
+     "total": 8
+    },
+    "verdict": "HOLDS"
+   },
+   "wall_s": 9864.53
+  },
+  {
+   "W_star_size": 17,
+   "candidates": [
+    {
+     "acc": "Unknown",
+     "adversary_s": null,
+     "api_wall_s": 158.87,
+     "cand": 1,
+     "check_reason": "compile_error",
+     "check_s": null,
+     "failure": "compile_error: Stack too deep",
+     "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 1,
+     "output_tokens": 25985,
+     "path": "runs/v3/vat/f0/seed_0/round_1/cand_1",
+     "round": 1,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 14089
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 1804.865,
+     "api_wall_s": 127.135,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 39,
+      "Unknown/unproved": 15
+     },
+     "check_reason": "unproved",
+     "check_s": 591.885,
+     "check_wall_s": 591.885,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 8745,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m04_frob_no_safety",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "4/8",
+     "n_checks": 54,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unrecognized",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_frob_vault",
+       "unproved"
+      ],
+      [
+       "check_frob_dai",
+       "unproved"
+      ],
+      [
+       "check_frob_unsafe",
+       "unproved"
+      ],
+      [
+       "check_frob_dust",
+       "unproved"
+      ],
+      [
+       "check_fork_effect",
+       "unproved"
+      ],
+      [
+       "check_fork_src_unsafe",
+       "unproved"
+      ],
+      [
+       "check_fork_dst_unsafe",
+       "unproved"
+      ],
+      [
+       "check_fork_src_dust",
+       "unproved"
+      ],
+      [
+       "check_fork_dst_dust",
+       "unproved"
+      ],
+      [
+       "check_grab_vault",
+       "unproved"
+      ],
+      [
+       "check_grab_sin",
+       "unproved"
+      ],
+      [
+       "check_fold_effect",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 20383,
+     "path": "runs/v3/vat/f0/seed_0/round_1/cand_2",
+     "round": 1,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 11750
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 1999.832,
+     "api_wall_s": 120.927,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 41,
+      "Unknown/unproved": 16
+     },
+     "check_reason": "unproved",
+     "check_s": 511.467,
+     "check_wall_s": 511.467,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 30577,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m04_frob_no_safety",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "4/8",
+     "n_checks": 57,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unrecognized",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_frob_vault_down",
+       "unproved"
+      ],
+      [
+       "check_frob_dai_down",
+       "unproved"
+      ],
+      [
+       "check_frob_unsafe",
+       "unproved"
+      ],
+      [
+       "check_frob_dust",
+       "unproved"
+      ],
+      [
+       "check_fork_effect",
+       "unproved"
+      ],
+      [
+       "check_fork_src_unsafe",
+       "unproved"
+      ],
+      [
+       "check_fork_dst_unsafe",
+       "unproved"
+      ],
+      [
+       "check_fork_src_dust",
+       "unproved"
+      ],
+      [
+       "check_fork_dst_dust",
+       "unproved"
+      ],
+      [
+       "check_grab_vault",
+       "unproved"
+      ],
+      [
+       "check_grab_sin",
+       "unproved"
+      ],
+      [
+       "check_fold_rate",
+       "unproved"
+      ],
+      [
+       "check_fold_credit",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 19005,
+     "path": "runs/v3/vat/f0/seed_0/round_2/cand_1",
+     "round": 2,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 9797
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 2331.116,
+     "api_wall_s": 111.905,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 42,
+      "Unknown/unproved": 16
+     },
+     "check_reason": "unproved",
+     "check_s": 565.42,
+     "check_wall_s": 565.42,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 30577,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m07_move_no_debit"
+     ],
+     "ms_cert": "3/8",
+     "n_checks": 58,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unrecognized",
+       "unproved"
+      ],
+      [
+       "check_flux_src",
+       "unproved"
+      ],
+      [
+       "check_move_src",
+       "unproved"
+      ],
+      [
+       "check_frob_collateral",
+       "unproved"
+      ],
+      [
+       "check_frob_debt",
+       "unproved"
+      ],
+      [
+       "check_frob_unsafe",
+       "unproved"
+      ],
+      [
+       "check_frob_dust",
+       "unproved"
+      ],
+      [
+       "check_fork_ink",
+       "unproved"
+      ],
+      [
+       "check_fork_art",
+       "unproved"
+      ],
+      [
+       "check_fork_src_unsafe",
+       "unproved"
+      ],
+      [
+       "check_fork_dst_unsafe",
+       "unproved"
+      ],
+      [
+       "check_fork_src_dust",
+       "unproved"
+      ],
+      [
+       "check_fork_dst_dust",
+       "unproved"
+      ],
+      [
+       "check_grab_vault",
+       "unproved"
+      ],
+      [
+       "check_grab_sin",
+       "unproved"
+      ],
+      [
+       "check_fold_effect",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 17711,
+     "path": "runs/v3/vat/f0/seed_0/round_2/cand_2",
+     "round": 2,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 8679
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 2015.595,
+     "api_wall_s": 77.483,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 49,
+      "Unknown/unproved": 4
+     },
+     "check_reason": "unproved",
+     "check_s": 202.932,
+     "check_wall_s": 202.931,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 51045,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m04_frob_no_safety"
+     ],
+     "ms_cert": "3/8",
+     "n_checks": 53,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_frob_repay",
+       "unproved"
+      ],
+      [
+       "check_grab_vault_up",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_up",
+       "unproved"
+      ],
+      [
+       "check_fold_rate_up",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 12885,
+     "path": "runs/v3/vat/f0/seed_0/round_3/cand_1",
+     "round": 3,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 5345
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 1893.98,
+     "api_wall_s": 65.441,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 47,
+      "Unknown/unproved": 3
+     },
+     "check_reason": "unproved",
+     "check_s": 9.018,
+     "check_wall_s": 9.017,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 51045,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m04_frob_no_safety"
+     ],
+     "ms_cert": "3/8",
+     "n_checks": 50,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_grab_vault_up",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_up",
+       "unproved"
+      ],
+      [
+       "check_fold_rate_up",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 10744,
+     "path": "runs/v3/vat/f0/seed_0/round_3/cand_2",
+     "round": 3,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 3550
+    }
+   ],
+   "condition": "f0",
+   "cost_usd": 1.4286,
+   "events": [
+    {
+     "gained": [],
+     "kind": "unchanged",
+     "lost": [],
+     "t": 1
+    },
+    {
+     "gained": [],
+     "kind": "weakening",
+     "lost": [
+      "m08_grab_no_vice"
+     ],
+     "t": 2
+    }
+   ],
+   "final": {
+    "acc": "Unknown",
+    "cand": 1,
+    "round": 3
+   },
+   "kappa": {
+    "asserts": 96,
+    "determined": true,
+    "kappa": 96,
+    "over_H_counts": {
+     "Unknown/unproved": 53
+    },
+    "unproved_over_H": 96,
+    "wall_s": 1343.489
+   },
+   "path": "runs/v3/vat/f0/seed_0",
+   "rounds": [
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m04_frob_no_safety",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 4,
+     "t": 1
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m04_frob_no_safety",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 4,
+     "t": 2
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m04_frob_no_safety"
+     ],
+     "acc": "Unknown",
+     "size": 3,
+     "t": 3
+    }
+   ],
+   "seed": 0,
+   "status": "bundle_not_certified",
+   "tokens": {
+    "input": 180734,
+    "output": 106713,
+    "thinking": 53210,
+    "total": 287447
+   },
+   "trajectory": "f0/seed_0",
+   "vacuity_a": {
+    "flagged": [],
+    "n": 53,
+    "probe_status": {
+     "unproved": 53
+    },
+    "unknown": 53,
+    "wall_s": 920.418
+   },
+   "verify": {
+    "exit": 2,
+    "failing_steps": [
+     2
+    ],
+    "ms_cert": {
+     "killed": 3,
+     "total": 8
+    },
+    "verdict": "NOT_CERTIFIED"
+   },
+   "wall_s": 15161.9
+  },
+  {
+   "W_star_size": 19,
+   "candidates": [
+    {
+     "acc": "Unknown",
+     "adversary_s": 727.637,
+     "api_wall_s": 166.196,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 50,
+      "Unknown/unproved": 21
+     },
+     "check_reason": "unproved",
+     "check_s": 804.334,
+     "check_wall_s": 804.334,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 8745,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 71,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_move_underflow",
+       "unproved"
+      ],
+      [
+       "check_move_overflow",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_flux_underflow",
+       "unproved"
+      ],
+      [
+       "check_flux_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_ink_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_wipe_urn",
+       "unproved"
+      ],
+      [
+       "check_fork_conserves_ink",
+       "unproved"
+      ],
+      [
+       "check_fork_conserves_art",
+       "unproved"
+      ],
+      [
+       "check_fork_safe",
+       "unproved"
+      ],
+      [
+       "check_fork_dust",
+       "unproved"
+      ],
+      [
+       "check_grab_up_urn",
+       "unproved"
+      ],
+      [
+       "check_grab_up_debt",
+       "unproved"
+      ],
+      [
+       "check_grab_down_urn",
+       "unproved"
+      ],
+      [
+       "check_grab_down_debt",
+       "unproved"
+      ],
+      [
+       "check_heal_underflow_dai",
+       "unproved"
+      ],
+      [
+       "check_heal_underflow_sin",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow",
+       "unproved"
+      ],
+      [
+       "check_fold_up",
+       "unproved"
+      ],
+      [
+       "check_fold_down",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 26040,
+     "path": "runs/v3/vat/f0/seed_1/round_1/cand_1",
+     "round": 1,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 17078
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": null,
+     "api_wall_s": 165.711,
+     "cand": 2,
+     "check_reason": "compile_error",
+     "check_s": null,
+     "failure": "compile_error: Stack too deep",
+     "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 1,
+     "output_tokens": 26438,
+     "path": "runs/v3/vat/f0/seed_1/round_1/cand_2",
+     "round": 1,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 16368
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 673.25,
+     "api_wall_s": 100.5,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 52,
+      "Unknown/unproved": 10
+     },
+     "check_reason": "unproved",
+     "check_s": 513.87,
+     "check_wall_s": 513.869,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 36793,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 62,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_frob_wipe_urn",
+       "unproved"
+      ],
+      [
+       "check_fork_conserves",
+       "unproved"
+      ],
+      [
+       "check_fork_safe",
+       "unproved"
+      ],
+      [
+       "check_fork_dust",
+       "unproved"
+      ],
+      [
+       "check_grab_up_urn",
+       "unproved"
+      ],
+      [
+       "check_grab_up_debt",
+       "unproved"
+      ],
+      [
+       "check_grab_down_urn",
+       "unproved"
+      ],
+      [
+       "check_grab_down_debt",
+       "unproved"
+      ],
+      [
+       "check_fold_up",
+       "unproved"
+      ],
+      [
+       "check_fold_down",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 16808,
+     "path": "runs/v3/vat/f0/seed_1/round_2/cand_1",
+     "round": 2,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 6756
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 1332.617,
+     "api_wall_s": 61.268,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 56,
+      "Unknown/unproved": 1
+     },
+     "check_reason": "unproved",
+     "check_s": 78.19,
+     "check_wall_s": 78.189,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 36793,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "ms_cert": "5/8",
+     "n_checks": 57,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_fold_up_weak",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 10081,
+     "path": "runs/v3/vat/f0/seed_1/round_2/cand_2",
+     "round": 2,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 3350
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 661.848,
+     "api_wall_s": 71.916,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 52,
+      "Unknown/unproved": 10
+     },
+     "check_reason": "unproved",
+     "check_s": 503.658,
+     "check_wall_s": 503.657,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 55222,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 62,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_frob_wipe_urn",
+       "unproved"
+      ],
+      [
+       "check_fork_conserves",
+       "unproved"
+      ],
+      [
+       "check_fork_safe",
+       "unproved"
+      ],
+      [
+       "check_fork_dust",
+       "unproved"
+      ],
+      [
+       "check_grab_up_urn",
+       "unproved"
+      ],
+      [
+       "check_grab_up_debt",
+       "unproved"
+      ],
+      [
+       "check_grab_down_urn",
+       "unproved"
+      ],
+      [
+       "check_grab_down_debt",
+       "unproved"
+      ],
+      [
+       "check_fold_up",
+       "unproved"
+      ],
+      [
+       "check_fold_down",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 13051,
+     "path": "runs/v3/vat/f0/seed_1/round_3/cand_1",
+     "round": 3,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 3284
+    },
+    {
+     "acc": "Accept",
+     "adversary_s": 1278.862,
+     "api_wall_s": 46.721,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 54
+     },
+     "check_reason": "all_checks_safe",
+     "check_s": 9.952,
+     "check_wall_s": 9.951,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 55222,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "ms_cert": "5/8",
+     "n_checks": 54,
+     "n_errors": 0,
+     "non_accept": [],
+     "output_tokens": 8552,
+     "path": "runs/v3/vat/f0/seed_1/round_3/cand_2",
+     "round": 3,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 1644
+    }
+   ],
+   "condition": "f0",
+   "cost_usd": 1.4127,
+   "events": [
+    {
+     "gained": [],
+     "kind": "unchanged",
+     "lost": [],
+     "t": 1
+    },
+    {
+     "gained": [],
+     "kind": "weakening",
+     "lost": [
+      "m06_fold_no_debt",
+      "m08_grab_no_vice"
+     ],
+     "t": 2
+    }
+   ],
+   "final": {
+    "acc": "Accept",
+    "cand": 2,
+    "round": 3
+   },
+   "kappa": {
+    "asserts": 92,
+    "determined": true,
+    "kappa": 92,
+    "over_H_counts": {
+     "Refute/violation_without_counterexample": 1,
+     "Unknown/unproved": 53
+    },
+    "unproved_over_H": 91,
+    "wall_s": 1281.296
+   },
+   "path": "runs/v3/vat/f0/seed_1",
+   "rounds": [
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 7,
+     "t": 1
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 7,
+     "t": 2
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "acc": "Accept",
+     "size": 5,
+     "t": 3
+    }
+   ],
+   "seed": 1,
+   "status": "bundle_holds",
+   "tokens": {
+    "input": 201520,
+    "output": 100970,
+    "thinking": 48480,
+    "total": 302490
+   },
+   "trajectory": "f0/seed_1",
+   "vacuity_a": {
+    "flagged": [],
+    "n": 54,
+    "probe_status": {
+     "unproved": 54
+    },
+    "unknown": 54,
+    "wall_s": 878.216
+   },
+   "verify": {
+    "exit": 0,
+    "failing_steps": [],
+    "ms_cert": {
+     "killed": 5,
+     "total": 8
+    },
+    "verdict": "HOLDS"
+   },
+   "wall_s": 9503.39
+  },
+  {
+   "W_star_size": 18,
+   "candidates": [
+    {
+     "acc": "lint_rejected",
+     "adversary_s": null,
+     "api_wall_s": 95.197,
+     "cand": 1,
+     "check_reason": null,
+     "check_s": null,
+     "failure": "lint S9",
+     "first_error": "S9 line 204: check_file_ilk_unknown: require only in the leading block (Pre)",
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 3,
+     "output_tokens": 16061,
+     "path": "runs/v3/vat/fMplus/seed_0/round_1/cand_1",
+     "round": 1,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 6898
+    },
+    {
+     "acc": "lint_rejected",
+     "adversary_s": null,
+     "api_wall_s": 133.241,
+     "cand": 2,
+     "check_reason": null,
+     "check_s": null,
+     "failure": "lint S9",
+     "first_error": "S9 line 292: check_frob_urn_effect: require only in the leading block (Pre)",
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 11,
+     "output_tokens": 21736,
+     "path": "runs/v3/vat/fMplus/seed_0/round_1/cand_2",
+     "round": 1,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 11363
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": null,
+     "api_wall_s": 48.57,
+     "cand": 1,
+     "check_reason": "compile_error",
+     "check_s": null,
+     "failure": "compile_error: Stack too deep",
+     "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+     "input_tokens": 25194,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 1,
+     "output_tokens": 10678,
+     "path": "runs/v3/vat/fMplus/seed_0/round_2/cand_1",
+     "round": 2,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 614
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": null,
+     "api_wall_s": 42.798,
+     "cand": 2,
+     "check_reason": "compile_error",
+     "check_s": null,
+     "failure": "compile_error: Stack too deep",
+     "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+     "input_tokens": 25194,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 1,
+     "output_tokens": 9387,
+     "path": "runs/v3/vat/fMplus/seed_0/round_2/cand_2",
+     "round": 2,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 351
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 901.12,
+     "api_wall_s": 53.803,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 55,
+      "Unknown/unproved": 25
+     },
+     "check_reason": "unproved",
+     "check_s": 920.202,
+     "check_wall_s": 920.201,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 36259,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 80,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unknown",
+       "unproved"
+      ],
+      [
+       "check_flux_underflow",
+       "unproved"
+      ],
+      [
+       "check_flux_overflow",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_move_underflow",
+       "unproved"
+      ],
+      [
+       "check_move_overflow",
+       "unproved"
+      ],
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_slip_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_collateral_down",
+       "unproved"
+      ],
+      [
+       "check_frob_debt_up_balances",
+       "unproved"
+      ],
+      [
+       "check_frob_full_dai",
+       "unproved"
+      ],
+      [
+       "check_frob_close_vault",
+       "unproved"
+      ],
+      [
+       "check_frob_close_dai",
+       "unproved"
+      ],
+      [
+       "check_fork_safe_dust",
+       "unproved"
+      ],
+      [
+       "check_fork_effect_ink",
+       "unproved"
+      ],
+      [
+       "check_fork_effect_art",
+       "unproved"
+      ],
+      [
+       "check_grab_effect_vault",
+       "unproved"
+      ],
+      [
+       "check_grab_effect_debt",
+       "unproved"
+      ],
+      [
+       "check_heal_needs_dai",
+       "unproved"
+      ],
+      [
+       "check_heal_needs_sin",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow_dai",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow_debt",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow_vice",
+       "unproved"
+      ],
+      [
+       "check_fold_up",
+       "unproved"
+      ],
+      [
+       "check_fold_down",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 11828,
+     "path": "runs/v3/vat/fMplus/seed_0/round_3/cand_1",
+     "round": 3,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 977
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 936.769,
+     "api_wall_s": 58.202,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 57,
+      "Unknown/unproved": 26
+     },
+     "check_reason": "unproved",
+     "check_s": 515.062,
+     "check_wall_s": 515.061,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 36259,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 83,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unknown",
+       "unproved"
+      ],
+      [
+       "check_flux_underflow",
+       "unproved"
+      ],
+      [
+       "check_flux_overflow",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_move_underflow",
+       "unproved"
+      ],
+      [
+       "check_move_overflow",
+       "unproved"
+      ],
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_slip_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_collateral_down_vault",
+       "unproved"
+      ],
+      [
+       "check_frob_debt_up_balances",
+       "unproved"
+      ],
+      [
+       "check_frob_full_dai",
+       "unproved"
+      ],
+      [
+       "check_frob_close_vault",
+       "unproved"
+      ],
+      [
+       "check_frob_close_dai",
+       "unproved"
+      ],
+      [
+       "check_fork_safe",
+       "unproved"
+      ],
+      [
+       "check_fork_dust",
+       "unproved"
+      ],
+      [
+       "check_fork_effect_ink",
+       "unproved"
+      ],
+      [
+       "check_fork_effect_art",
+       "unproved"
+      ],
+      [
+       "check_grab_effect_vault",
+       "unproved"
+      ],
+      [
+       "check_grab_effect_sin",
+       "unproved"
+      ],
+      [
+       "check_heal_needs_dai",
+       "unproved"
+      ],
+      [
+       "check_heal_needs_sin",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow_dai",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow_debt",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow_vice",
+       "unproved"
+      ],
+      [
+       "check_fold_up",
+       "unproved"
+      ],
+      [
+       "check_fold_down",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 12352,
+     "path": "runs/v3/vat/fMplus/seed_0/round_3/cand_2",
+     "round": 3,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 1290
+    }
+   ],
+   "condition": "fMplus",
+   "cost_usd": 1.1012,
+   "events": [
+    {
+     "gained": [],
+     "kind": "unchanged",
+     "lost": [],
+     "t": 1
+    },
+    {
+     "gained": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "kind": "strengthening",
+     "lost": [],
+     "t": 2
+    }
+   ],
+   "final": {
+    "acc": "Unknown",
+    "cand": 1,
+    "round": 3
+   },
+   "kappa": {
+    "asserts": 160,
+    "determined": true,
+    "kappa": 160,
+    "over_H_counts": {
+     "Refute/violation_without_counterexample": 1,
+     "Unknown/unproved": 79
+    },
+    "unproved_over_H": 159,
+    "wall_s": 2372.97
+   },
+   "path": "runs/v3/vat/fMplus/seed_0",
+   "rounds": [
+    {
+     "K_on_W_star": [],
+     "acc": "lint_rejected",
+     "size": 0,
+     "t": 1
+    },
+    {
+     "K_on_W_star": [],
+     "acc": "Unknown",
+     "size": 0,
+     "t": 2
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 7,
+     "t": 3
+    }
+   ],
+   "seed": 0,
+   "status": "bundle_not_certified",
+   "tokens": {
+    "input": 140396,
+    "output": 82042,
+    "thinking": 21493,
+    "total": 222438
+   },
+   "trajectory": "fMplus/seed_0",
+   "vacuity_a": {
+    "flagged": [],
+    "n": 80,
+    "probe_status": {
+     "unproved": 80
+    },
+    "unknown": 80,
+    "wall_s": 2074.77
+   },
+   "verify": {
+    "exit": 2,
+    "failing_steps": [
+     2
+    ],
+    "ms_cert": {
+     "killed": 7,
+     "total": 8
+    },
+    "verdict": "NOT_CERTIFIED"
+   },
+   "wall_s": 9112.74
+  },
+  {
+   "W_star_size": 21,
+   "candidates": [
+    {
+     "acc": "Unknown",
+     "adversary_s": 1245.142,
+     "api_wall_s": 143.964,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 53,
+      "Unknown/unproved": 14,
+      "Unknown/wall_timeout": 1
+     },
+     "check_reason": "budget",
+     "check_s": 772.168,
+     "check_wall_s": 772.168,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 8745,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "6/8",
+     "n_checks": 68,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unknown",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_flux_insufficient",
+       "unproved"
+      ],
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_move_insufficient",
+       "unproved"
+      ],
+      [
+       "check_move_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_collateral",
+       "unproved"
+      ],
+      [
+       "check_frob_debt",
+       "unproved"
+      ],
+      [
+       "check_fork_effect",
+       "unproved"
+      ],
+      [
+       "check_grab_effect",
+       "wall_timeout"
+      ],
+      [
+       "check_heal_no_dai",
+       "unproved"
+      ],
+      [
+       "check_heal_no_sin",
+       "unproved"
+      ],
+      [
+       "check_suck_debt_overflow",
+       "unproved"
+      ],
+      [
+       "check_suck_vice_overflow",
+       "unproved"
+      ],
+      [
+       "check_fold_effect",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 23182,
+     "path": "runs/v3/vat/fMplus/seed_1/round_1/cand_1",
+     "round": 1,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 13318
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": null,
+     "api_wall_s": 141.512,
+     "cand": 2,
+     "check_reason": "compile_error",
+     "check_s": null,
+     "failure": "compile_error: Stack too deep",
+     "first_error": "Compiler error (/solidity/libsolidity/codegen/LValue.cpp:50): Stack too deep. Try compiling with `--via-ir` (cli) or the equivalent `viaIR: true` (standard JSON",
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 1,
+     "output_tokens": 23102,
+     "path": "runs/v3/vat/fMplus/seed_1/round_1/cand_2",
+     "round": 1,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 13325
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 1328.735,
+     "api_wall_s": 164.204,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 56,
+      "Unknown/unproved": 12
+     },
+     "check_reason": "unproved",
+     "check_s": 686.346,
+     "check_wall_s": 686.345,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 33558,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "6/8",
+     "n_checks": 68,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unknown",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_frob_collateral_neg",
+       "unproved"
+      ],
+      [
+       "check_frob_debt_neg",
+       "unproved"
+      ],
+      [
+       "check_fork_effect",
+       "unproved"
+      ],
+      [
+       "check_fork_unsafe_dst",
+       "unproved"
+      ],
+      [
+       "check_fork_unsafe_src",
+       "unproved"
+      ],
+      [
+       "check_grab_collateral",
+       "unproved"
+      ],
+      [
+       "check_grab_debt",
+       "unproved"
+      ],
+      [
+       "check_fold_pos",
+       "unproved"
+      ],
+      [
+       "check_fold_neg",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 25302,
+     "path": "runs/v3/vat/fMplus/seed_1/round_2/cand_1",
+     "round": 2,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 14013
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 1399.757,
+     "api_wall_s": 198.363,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 63,
+      "Unknown/unproved": 13
+     },
+     "check_reason": "unproved",
+     "check_s": 454.188,
+     "check_wall_s": 454.187,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 33558,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "6/8",
+     "n_checks": 76,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_flux_monotone",
+       "unproved"
+      ],
+      [
+       "check_move_monotone",
+       "unproved"
+      ],
+      [
+       "check_frob_collateral_neg",
+       "unproved"
+      ],
+      [
+       "check_frob_debt_neg_art",
+       "unproved"
+      ],
+      [
+       "check_frob_debt_neg_dai",
+       "unproved"
+      ],
+      [
+       "check_fork_dst_add",
+       "unproved"
+      ],
+      [
+       "check_fork_src_sub",
+       "unproved"
+      ],
+      [
+       "check_fork_src_safe",
+       "unproved"
+      ],
+      [
+       "check_fork_dst_safe",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_vice",
+       "unproved"
+      ],
+      [
+       "check_grab_ink_art",
+       "unproved"
+      ],
+      [
+       "check_fold_rate",
+       "unproved"
+      ],
+      [
+       "check_fold_art_frame",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 29021,
+     "path": "runs/v3/vat/fMplus/seed_1/round_2/cand_2",
+     "round": 2,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 17566
+    },
+    {
+     "acc": "Accept",
+     "adversary_s": 2104.629,
+     "api_wall_s": 111.036,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 66
+     },
+     "check_reason": "all_checks_safe",
+     "check_s": 38.716,
+     "check_wall_s": 38.716,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 60772,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "ms_cert": "4/8",
+     "n_checks": 66,
+     "n_errors": 0,
+     "non_accept": [],
+     "output_tokens": 18196,
+     "path": "runs/v3/vat/fMplus/seed_1/round_3/cand_1",
+     "round": 3,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 8366
+    },
+    {
+     "acc": "Accept",
+     "adversary_s": 2147.331,
+     "api_wall_s": 97.425,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 68
+     },
+     "check_reason": "all_checks_safe",
+     "check_s": 24.966,
+     "check_wall_s": 24.966,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 60772,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "ms_cert": "4/8",
+     "n_checks": 68,
+     "n_errors": 0,
+     "non_accept": [],
+     "output_tokens": 16416,
+     "path": "runs/v3/vat/fMplus/seed_1/round_3/cand_2",
+     "round": 3,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 6658
+    }
+   ],
+   "condition": "fMplus",
+   "cost_usd": 1.7645,
+   "events": [
+    {
+     "gained": [],
+     "kind": "unchanged",
+     "lost": [],
+     "t": 1
+    },
+    {
+     "gained": [],
+     "kind": "weakening",
+     "lost": [
+      "m06_fold_no_debt",
+      "m08_grab_no_vice"
+     ],
+     "t": 2
+    }
+   ],
+   "final": {
+    "acc": "Accept",
+    "cand": 1,
+    "round": 3
+   },
+   "kappa": {
+    "asserts": 139,
+    "determined": false,
+    "kappa": null,
+    "over_H_counts": {
+     "Refute/violation_without_counterexample": 1,
+     "Unknown/unproved": 64,
+     "Unknown/wall_timeout": 1
+    },
+    "unproved_over_H": 138,
+    "wall_s": 2375.75
+   },
+   "path": "runs/v3/vat/fMplus/seed_1",
+   "rounds": [
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 6,
+     "t": 1
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 6,
+     "t": 2
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "acc": "Accept",
+     "size": 4,
+     "t": 3
+    }
+   ],
+   "seed": 1,
+   "status": "bundle_holds",
+   "tokens": {
+    "input": 206150,
+    "output": 135219,
+    "thinking": 73246,
+    "total": 341369
+   },
+   "trajectory": "fMplus/seed_1",
+   "vacuity_a": {
+    "flagged": [],
+    "n": 66,
+    "probe_status": {
+     "unproved": 66
+    },
+    "unknown": 66,
+    "wall_s": 1081.46
+   },
+   "verify": {
+    "exit": 0,
+    "failing_steps": [],
+    "ms_cert": {
+     "killed": 4,
+     "total": 8
+    },
+    "verdict": "HOLDS"
+   },
+   "wall_s": 14727.78
+  },
+  {
+   "W_star_size": 21,
+   "candidates": [
+    {
+     "acc": "Unknown",
+     "adversary_s": 934.544,
+     "api_wall_s": 149.892,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 53,
+      "Unknown/unproved": 28
+     },
+     "check_reason": "unproved",
+     "check_s": 957.36,
+     "check_wall_s": 957.359,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 8745,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 81,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unknown",
+       "unproved"
+      ],
+      [
+       "check_slip_overflow",
+       "unproved"
+      ],
+      [
+       "check_flux_effect",
+       "unproved"
+      ],
+      [
+       "check_flux_ilk",
+       "unproved"
+      ],
+      [
+       "check_flux_underflow",
+       "unproved"
+      ],
+      [
+       "check_move_effect",
+       "unproved"
+      ],
+      [
+       "check_move_underflow",
+       "unproved"
+      ],
+      [
+       "check_move_overflow",
+       "unproved"
+      ],
+      [
+       "check_frob_collateral",
+       "unproved"
+      ],
+      [
+       "check_frob_debt_units",
+       "unproved"
+      ],
+      [
+       "check_frob_dai",
+       "unproved"
+      ],
+      [
+       "check_frob_roles_up",
+       "unproved"
+      ],
+      [
+       "check_frob_roles_down",
+       "unproved"
+      ],
+      [
+       "check_frob_global_ceiling",
+       "unproved"
+      ],
+      [
+       "check_fork_effect",
+       "unproved"
+      ],
+      [
+       "check_fork_effect_neg",
+       "unproved"
+      ],
+      [
+       "check_fork_safe_after",
+       "unproved"
+      ],
+      [
+       "check_fork_dust_after",
+       "unproved"
+      ],
+      [
+       "check_grab_units",
+       "unproved"
+      ],
+      [
+       "check_grab_sin",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_positive",
+       "unproved"
+      ],
+      [
+       "check_grab_roles",
+       "unproved"
+      ],
+      [
+       "check_heal_needs_dai",
+       "unproved"
+      ],
+      [
+       "check_heal_needs_sin",
+       "unproved"
+      ],
+      [
+       "check_suck_overflow",
+       "unproved"
+      ],
+      [
+       "check_fold_rate",
+       "unproved"
+      ],
+      [
+       "check_fold_dai",
+       "unproved"
+      ],
+      [
+       "check_fold_frame",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 24548,
+     "path": "runs/v3/vat/fM/seed_1/round_1/cand_1",
+     "round": 1,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 13431
+    },
+    {
+     "acc": "lint_rejected",
+     "adversary_s": null,
+     "api_wall_s": 129.867,
+     "cand": 2,
+     "check_reason": null,
+     "check_s": null,
+     "failure": "lint S9",
+     "first_error": "S9 line 291: check_move_other_unchanged: require only in the leading block (Pre)",
+     "input_tokens": 8745,
+     "kill_set": [],
+     "ms_cert": "0/8",
+     "n_errors": 1,
+     "output_tokens": 21335,
+     "path": "runs/v3/vat/fM/seed_1/round_1/cand_2",
+     "round": 1,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 11174
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 1711.394,
+     "api_wall_s": 128.371,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 64,
+      "Unknown/unproved": 6
+     },
+     "check_reason": "unproved",
+     "check_s": 214.567,
+     "check_wall_s": 214.567,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 36103,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "6/8",
+     "n_checks": 70,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unknown",
+       "unproved"
+      ],
+      [
+       "check_slip_overflow",
+       "unproved"
+      ],
+      [
+       "check_grab_units",
+       "unproved"
+      ],
+      [
+       "check_grab_frame",
+       "unproved"
+      ],
+      [
+       "check_grab_sin_unit_rate",
+       "unproved"
+      ],
+      [
+       "check_fold_unit_art",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 19718,
+     "path": "runs/v3/vat/fM/seed_1/round_2/cand_1",
+     "round": 2,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 10578
+    },
+    {
+     "acc": "Unknown",
+     "adversary_s": 1204.135,
+     "api_wall_s": 134.383,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 68,
+      "Unknown/unproved": 3
+     },
+     "check_reason": "unproved",
+     "check_s": 188.015,
+     "check_wall_s": 188.014,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 36103,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "ms_cert": "7/8",
+     "n_checks": 71,
+     "n_errors": 0,
+     "non_accept": [
+      [
+       "check_file_ilk_unknown",
+       "unproved"
+      ],
+      [
+       "check_grab_frame",
+       "unproved"
+      ],
+      [
+       "check_fold_credit_matches_debt",
+       "unproved"
+      ]
+     ],
+     "output_tokens": 20551,
+     "path": "runs/v3/vat/fM/seed_1/round_2/cand_2",
+     "round": 2,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 11225
+    },
+    {
+     "acc": "Accept",
+     "adversary_s": 1724.359,
+     "api_wall_s": 41.897,
+     "cand": 1,
+     "check_counts": {
+      "Accept/all_targets_safe": 69
+     },
+     "check_reason": "all_checks_safe",
+     "check_s": 10.495,
+     "check_wall_s": 10.495,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 56981,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "ms_cert": "5/8",
+     "n_checks": 69,
+     "n_errors": 0,
+     "non_accept": [],
+     "output_tokens": 9003,
+     "path": "runs/v3/vat/fM/seed_1/round_3/cand_1",
+     "round": 3,
+     "selected": true,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 198
+    },
+    {
+     "acc": "Accept",
+     "adversary_s": 1719.366,
+     "api_wall_s": 41.508,
+     "cand": 2,
+     "check_counts": {
+      "Accept/all_targets_safe": 69
+     },
+     "check_reason": "all_checks_safe",
+     "check_s": 6.03,
+     "check_wall_s": 6.03,
+     "failure": null,
+     "first_error": null,
+     "input_tokens": 56981,
+     "kill_set": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "ms_cert": "5/8",
+     "n_checks": 69,
+     "n_errors": 0,
+     "non_accept": [],
+     "output_tokens": 8992,
+     "path": "runs/v3/vat/fM/seed_1/round_3/cand_2",
+     "round": 3,
+     "selected": false,
+     "stop_reason": "end_turn",
+     "thinking_tokens": 207
+    }
+   ],
+   "condition": "fM",
+   "cost_usd": 1.4488,
+   "events": [
+    {
+     "gained": [],
+     "kind": "unchanged",
+     "lost": [],
+     "t": 1
+    },
+    {
+     "gained": [],
+     "kind": "weakening",
+     "lost": [
+      "m06_fold_no_debt",
+      "m08_grab_no_vice"
+     ],
+     "t": 2
+    }
+   ],
+   "final": {
+    "acc": "Accept",
+    "cand": 1,
+    "round": 3
+   },
+   "kappa": {
+    "asserts": 134,
+    "determined": true,
+    "kappa": 134,
+    "over_H_counts": {
+     "Unknown/unproved": 69
+    },
+    "unproved_over_H": 134,
+    "wall_s": 1590.099
+   },
+   "path": "runs/v3/vat/fM/seed_1",
+   "rounds": [
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 7,
+     "t": 1
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m06_fold_no_debt",
+      "m07_move_no_debit",
+      "m08_grab_no_vice"
+     ],
+     "acc": "Unknown",
+     "size": 7,
+     "t": 2
+    },
+    {
+     "K_on_W_star": [
+      "m01_slip_no_auth",
+      "m02_frob_no_consent_v",
+      "m03_frob_no_ceiling",
+      "m04_frob_no_safety",
+      "m07_move_no_debit"
+     ],
+     "acc": "Accept",
+     "size": 5,
+     "t": 3
+    }
+   ],
+   "seed": 1,
+   "status": "bundle_holds",
+   "tokens": {
+    "input": 203658,
+    "output": 104147,
+    "thinking": 46813,
+    "total": 307805
+   },
+   "trajectory": "fM/seed_1",
+   "vacuity_a": {
+    "flagged": [],
+    "n": 69,
+    "probe_status": {
+     "unproved": 69
+    },
+    "unknown": 69,
+    "wall_s": 800.284
+   },
+   "verify": {
+    "exit": 0,
+    "failing_steps": [],
+    "ms_cert": {
+     "killed": 5,
+     "total": 8
+    },
+    "verdict": "HOLDS"
+   },
+   "wall_s": 11885.63
+  }
+ ],
+ "unknown_reasons": {
+  "check_runs": 27,
+  "per_check_totals": {
+   "Accept/all_targets_safe": 1478,
+   "Unknown/unproved": 270,
+   "Unknown/wall_timeout": 1
+  },
+  "spec_level_unknown_reasons": {
+   "budget": 1,
+   "compile_error": 5,
+   "unproved": 20
+  }
+ },
+ "version": 1
+}

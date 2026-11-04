@@ -1,0 +1,180 @@
+{
+ "protocol_version": 3,
+ "$comment": "Machine-readable frozen protocol values (authoritative). protocol.md is the narrative and cites this file. Only values that affect a verdict or reproduction live here; tools/specgame_core.py reads its constants from it.",
+ "version": 1,
+ "frozen": "2026-11-02",
+ "compiler": {
+  "solc_version": "0.8.35+commit.47b9dedd",
+  "solc_sha256": "fa8ac9a32d301ad023a36ee5a29f8e291fe3200c60244e43c142539e82a617f4",
+  "z3_version": "4.16.0",
+  "z3_sha256": "e583c4186a45e72411fa2cb2048401eed03f0f8e5f24694676a8f6271a50b765",
+  "settings": {
+   "evmVersion": "cancun",
+   "optimizer": {
+    "enabled": false,
+    "runs": 200
+   },
+   "metadata": {
+    "bytecodeHash": "none"
+   }
+  },
+  "units": {
+   "spec": "Spec.sol"
+  }
+ },
+ "executor": {
+  "pyrevm_version": "0.3.7",
+  "spec_id": "CANCUN",
+  "tx_gas": 10000000,
+  "deploy_gas": 30000000,
+  "contract_code_size_limit": 1048576,
+  "initcode_size_limit": 2097152,
+  "subject_runtime_limit": 24576,
+  "limits_note": "core v2: the Spec (phi over b or over a mutant) is a measurement harness, never deployed, so EIP-170 does not apply to it: runtime limit 1 MiB (pyrevm CfgEnv.limit_contract_code_size), initcode limit derived by revm as twice that (EIP-3860's 49152 lifted), deploy gas = the block gas limit (about 145 KB of runtime at 200 gas per byte). b and every mutant must still be deployable: runtime <= subject_runtime_limit (EIP-170), enforced by the core. Calls keep tx_gas.",
+  "block_env": {
+   "number": 1,
+   "timestamp": 1,
+   "gas_limit": 30000000,
+   "basefee": 0,
+   "coinbase": "0x0000000000000000000000000000000000000000",
+   "prevrandao": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "chain_id": 1
+ },
+ "outcome_rule": {
+  "version": 1,
+  "violation": "revert data exactly Panic(0x01) (36 bytes)",
+  "pre_unmet": [
+   "Error(string), strict ABI encoding",
+   "empty revert data"
+  ],
+  "other": "any other panic code, custom error, malformed revert data, or a halt",
+  "success": "normal return"
+ },
+ "check": {
+  "engine": "chc",
+  "solvers": [
+   "z3"
+  ],
+  "targets": [
+   "assert"
+  ],
+  "contracts": {
+   "Spec.sol": [
+    "Spec"
+   ]
+  },
+  "show_proved_safe": true,
+  "show_unproved": true,
+  "timeout_ms": 60000,
+  "wall_timeout_s": 600.0,
+  "unknown_counts_as": "non-Accept",
+  "mode": "isolated",
+  "workers": 4
+ },
+ "default_subject": "capped_token",
+ "subjects": {
+  "capped_token": {
+   "profile": "subjects/capped_token/profile.json",
+   "profile_sha256": "04b386f2213754b73654f6c543183f276addcad9d63bae796aa500988ba49a84",
+   "adversary": {
+    "B_A": 2000,
+    "seed_A": 0,
+    "max_txs": 6,
+    "per_mutant": 1,
+    "id": "229abfec314c99ad0a5b8b509264fb68864ebff33855b5d019eaaf32ddeb936b",
+    "id_v2": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+    "note": "id changed from id_v2 only because adversary.py and seqgen.py became profile-driven (the id hashes their sources); the capped-token sigma stream is byte-identical (tests/test_subjects.py)"
+   },
+   "generator": {
+    "rounds": 3,
+    "k": 2,
+    "seeds": [
+     0,
+     1
+    ],
+    "conditions": [
+     "f0",
+     "fM",
+     "fMplus"
+    ],
+    "model": "claude-sonnet-5-5",
+    "max_tokens": 16000,
+    "output_config": {
+     "effort": "high"
+    },
+    "temperature_policy": "not sent; API default; non-default values rejected by this model (recorded as 1.0)",
+    "thinking": "model default (adaptive, always on); not sent",
+    "fallbacks": "none; a refusal is a failed candidate",
+    "seed_param": "not supported by the Messages API; trajectory seed recorded only",
+    "sdk": {
+     "anthropic": "2.3.0",
+     "anthropic_version_header": "2026-10-21"
+    },
+    "prompts": {
+     "system.md": "e10abee05c69410a9bc538ad0c8d2f4acda224e054ff66b6aa5f13ba61596cdf",
+     "round_1.md": "0d5460ff48fbe85a60d454d3369e42e594f15de4ad9195c66fb589a342eea65c",
+     "feedback_f0.md": "0044d327cc58966ada3797c50835ad058cec94540f164e15dd9297a13e542700",
+     "feedback_fM.md": "3e22dc0e896d07e8d89f272fddfe8e96e2c5f2236ca1beaf0cadb16dd4d468dd",
+     "feedback_fMplus.md": "21b6574b733ebbf918384b0a7f0e398806ac198fad8563f90a584a401b820dde"
+    },
+    "prompts_sha256": "ef5622219a5de745cdec1d0dea26b19f34b3a099d7309b0aff04a21ed4e73f32"
+   }
+  },
+  "vat": {
+   "profile": "subjects/vat/profile.json",
+   "profile_sha256": "66e8b6203a073d7e9baf93353460e2a1461e3960f0d894607cd4e85357efeb0c",
+   "adversary": {
+    "B_A": 2000,
+    "seed_A": 0,
+    "max_txs": 6,
+    "per_mutant": 1,
+    "id": "da221ec5557e073f4a51a96eed7d44c758c8cbcf05e7d8f8517f13c20b010047",
+    "distribution_sha256": "c7813478e227f635aca7fddde8f0e7456baa6d9e30e0988c16c3f8cfce6e5492"
+   },
+   "generator": {
+    "rounds": 3,
+    "k": 2,
+    "seeds": [
+     0,
+     1
+    ],
+    "conditions": [
+     "f0",
+     "fM",
+     "fMplus"
+    ],
+    "model": "claude-sonnet-5-5",
+    "max_tokens": 64000,
+    "max_tokens_reason": "raised from 16000 for vat only: in the first fM seed 0 attempt (runs/v3/vat/fM/seed_0_aborted_max_tokens) both round-1 replies spent all 16000 output tokens on thinking on an 8745-token prompt and wrote no text; effort stays high (a budget change, not a behaviour change); requests are streamed (messages.stream(...).get_final_message(), same body)",
+    "output_config": {
+     "effort": "high"
+    },
+    "temperature_policy": "not sent; API default; non-default values rejected by this model (recorded as 1.0)",
+    "thinking": "model default (adaptive, always on); not sent",
+    "fallbacks": "none; a refusal is a failed candidate",
+    "seed_param": "not supported by the Messages API; trajectory seed recorded only",
+    "sdk": {
+     "anthropic": "2.3.0",
+     "anthropic_version_header": "2026-10-21"
+    },
+    "prompts": {
+     "system.md": "8afcd74c44fcc2558575f072dc385146ad1a6e358ffe9ba3c81943be0d4b17ac",
+     "round_1.md": "4a875318c1a8d8a4ac88ab58be1c419798b62a2819336daf6bfc7ad62d691f3b",
+     "feedback_f0.md": "0044d327cc58966ada3797c50835ad058cec94540f164e15dd9297a13e542700",
+     "feedback_fM.md": "3e22dc0e896d07e8d89f272fddfe8e96e2c5f2236ca1beaf0cadb16dd4d468dd",
+     "feedback_fMplus.md": "21b6574b733ebbf918384b0a7f0e398806ac198fad8563f90a584a401b820dde"
+    },
+    "prompts_sha256": "fbd52777f1a512821d7964339f9b931c42c62b92c48b4739df0995e3c6adc74c",
+    "prompt_files": {
+     "system.md": "subjects/vat/prompts/system.md",
+     "round_1.md": "subjects/vat/prompts/round_1.md",
+     "feedback_f0.md": "generator/prompts/feedback_f0.md",
+     "feedback_fM.md": "generator/prompts/feedback_fM.md",
+     "feedback_fMplus.md": "generator/prompts/feedback_fMplus.md"
+    },
+    "ladder_bundles": "bundles/vat/phi_*/manifest.json"
+   }
+  }
+ }
+}

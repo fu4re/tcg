@@ -1,0 +1,1186 @@
+{
+ "claimed": {
+  "kill_set": [
+   "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+   "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+   "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+   "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+   "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+   "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+   "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+  ],
+  "ms_cert": {
+   "killed": 7,
+   "total": 8
+  }
+ },
+ "evidence": {
+  "M": [
+   {
+    "id": "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "path": "mutants/21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+      },
+      "deployer": "bob",
+      "txs": [
+       {
+        "args": [
+         "carol",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "alice",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "zero",
+         "17634409464569403140"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "zero",
+         "1"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "path": "mutants/2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "2"
+      },
+      "deployer": "alice",
+      "txs": [
+       {
+        "args": [
+         "alice",
+         "1"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob",
+         "0"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "carol"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "path": "mutants/36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "0"
+      },
+      "deployer": "bob",
+      "txs": [
+       {
+        "args": [
+         "zero",
+         "1"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "carol",
+         "0"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "alice",
+         "0"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob",
+         "1"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "bob",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "carol"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "path": "mutants/8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "2"
+      },
+      "deployer": "bob",
+      "txs": [
+       {
+        "args": [
+         "carol",
+         "1"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "zero",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "zero",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob",
+         "1"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "alice"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df",
+    "path": "mutants/93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "2"
+      },
+      "deployer": "bob",
+      "txs": [
+       {
+        "args": [
+         "carol",
+         "1"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "zero",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "zero",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob",
+         "1"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "alice"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "path": "mutants/94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "19137836724265411837952017012686703343092653888296060871270564154334751961753"
+      },
+      "deployer": "bob",
+      "txs": [
+       {
+        "args": [
+         "zero",
+         "0"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "zero",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "zero",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob",
+         "2"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob",
+         "2"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "carol",
+         "9568918362132705918976008506343351671546326944148030435635282077167375980876"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "path": "mutants/cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "0"
+      },
+      "deployer": "bob",
+      "txs": [
+       {
+        "args": [
+         "zero",
+         "1"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "carol",
+         "0"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "alice",
+         "0"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob",
+         "1"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "alice"
+       },
+       {
+        "args": [
+         "bob",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "carol"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   },
+   {
+    "id": "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+    "path": "mutants/e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500.sol",
+    "properness_sigma": [
+     {
+      "ctor": {
+       "cap": "19137836724265411837952017012686703343092653888296060871270564154334751961753"
+      },
+      "deployer": "bob",
+      "txs": [
+       {
+        "args": [
+         "zero",
+         "0"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "zero",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "carol"
+       },
+       {
+        "args": [
+         "zero",
+         "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob",
+         "2"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "bob",
+         "2"
+        ],
+        "fn": "transfer(address,uint256)",
+        "sender": "bob"
+       },
+       {
+        "args": [
+         "carol",
+         "9568918362132705918976008506343351671546326944148030435635282077167375980876"
+        ],
+        "fn": "mint(address,uint256)",
+        "sender": "bob"
+       }
+      ],
+      "version": 1
+     }
+    ]
+   }
+  ],
+  "W": [
+   {
+    "mutant": "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "observed": {
+     "check": "check_transfer_exact",
+     "outcome": "violation",
+     "pair_runtime_sha256": "f1481d40113864d31e1d424d5f716bfd328a470c39a28bf32f8f2b9090598b00",
+     "spec_source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4"
+    },
+    "sigma": {
+     "ctor": {
+      "cap": "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+     },
+     "deployer": "bob",
+     "probe": {
+      "a": "carol",
+      "b": "bob",
+      "check": "check_transfer_exact",
+      "sender": "alice",
+      "x": "998925628131591855",
+      "y": "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     },
+     "txs": [
+      {
+       "args": [
+        "alice",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "zero",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "carol",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "carol",
+        "5442324770048225742"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "alice",
+        "1"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "bob",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "observed": {
+     "check": "check_only_owner_mints",
+     "outcome": "violation",
+     "pair_runtime_sha256": "fe5d955e53654b03d7fec22a36576d4de19b974ca6adbd6543b5941930a5924b",
+     "spec_source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4"
+    },
+    "sigma": {
+     "ctor": {
+      "cap": "42372389024961475244423108693441457323373937829021418614692490586246964534332"
+     },
+     "deployer": "bob",
+     "probe": {
+      "a": "alice",
+      "b": "alice",
+      "check": "check_only_owner_mints",
+      "sender": "carol",
+      "x": "2",
+      "y": "42372389024961475244423108693441457323373937829021418614692490586246964534333"
+     },
+     "txs": [
+      {
+       "args": [
+        "alice",
+        "42372389024961475244423108693441457323373937829021418614692490586246964534332"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "carol",
+        "42372389024961475244423108693441457323373937829021418614692490586246964534331"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "bob",
+        "2"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "alice",
+        "42372389024961475244423108693441457323373937829021418614692490586246964534333"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "carol"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "observed": {
+     "check": "check_cap_after_transfer",
+     "outcome": "violation",
+     "pair_runtime_sha256": "96359548af436545b89b82214fe995971f88aef6883c4b4dd2fcc72129c0aa45",
+     "spec_source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4"
+    },
+    "sigma": {
+     "ctor": {
+      "cap": "0"
+     },
+     "deployer": "bob",
+     "probe": {
+      "a": "carol",
+      "b": "bob",
+      "check": "check_cap_after_transfer",
+      "sender": "alice",
+      "x": "0",
+      "y": "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     },
+     "txs": [
+      {
+       "args": [
+        "zero",
+        "1"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "carol",
+        "0"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "alice",
+        "0"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "bob",
+        "1"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "alice"
+      },
+      {
+       "args": [
+        "bob",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "carol"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "observed": {
+     "check": "check_mint_exact",
+     "outcome": "violation",
+     "pair_runtime_sha256": "6e1ee5630faa8f1b7b1335564182e9811fd90e60e20065f5a6bc78b6cb34e3df",
+     "spec_source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4"
+    },
+    "sigma": {
+     "ctor": {
+      "cap": "2"
+     },
+     "deployer": "alice",
+     "probe": {
+      "a": "zero",
+      "b": "alice",
+      "check": "check_mint_exact",
+      "sender": "alice",
+      "x": "1",
+      "y": "2"
+     },
+     "txs": [
+      {
+       "args": [
+        "alice",
+        "1"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "bob",
+        "0"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "observed": {
+     "check": "check_transfer_exact",
+     "outcome": "violation",
+     "pair_runtime_sha256": "f67e6416825fc496704a10761c54528390ba4a57d2ae3b03b38a1c0b26418ee9",
+     "spec_source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4"
+    },
+    "sigma": {
+     "ctor": {
+      "cap": "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+     },
+     "deployer": "bob",
+     "probe": {
+      "a": "carol",
+      "b": "bob",
+      "check": "check_transfer_exact",
+      "sender": "alice",
+      "x": "998925628131591855",
+      "y": "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     },
+     "txs": [
+      {
+       "args": [
+        "alice",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "zero",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "carol",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "carol",
+        "5442324770048225742"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "alice",
+        "1"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "bob",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "observed": {
+     "check": "check_cap_after_mint",
+     "outcome": "violation",
+     "pair_runtime_sha256": "30b46d9ec95602c564e2d98e844d8984196c8ae4786f54cdf54d6ad744bff8c2",
+     "spec_source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4"
+    },
+    "sigma": {
+     "ctor": {
+      "cap": "0"
+     },
+     "deployer": "bob",
+     "probe": {
+      "a": "alice",
+      "b": "carol",
+      "check": "check_cap_after_mint",
+      "sender": "bob",
+      "x": "99764528317747437028581436711983132691959940744377622942459626499715613689979",
+      "y": "2"
+     },
+     "txs": [
+      {
+       "args": [
+        "zero",
+        "1"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "alice",
+        "115038922775861315503782491605108490703178803905912683428075562000911446074503"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "bob",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "carol"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   },
+   {
+    "mutant": "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+    "observed": {
+     "check": "check_transfer_exact",
+     "outcome": "violation",
+     "pair_runtime_sha256": "4fb0147975bc869012d9d9ad4642142969bd7997c56bb7a7938ffbbe976868e3",
+     "spec_source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4"
+    },
+    "sigma": {
+     "ctor": {
+      "cap": "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+     },
+     "deployer": "bob",
+     "probe": {
+      "a": "carol",
+      "b": "bob",
+      "check": "check_transfer_exact",
+      "sender": "alice",
+      "x": "998925628131591855",
+      "y": "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+     },
+     "txs": [
+      {
+       "args": [
+        "alice",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "zero",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "carol",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639934"
+       ],
+       "fn": "transfer(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "carol",
+        "5442324770048225742"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      },
+      {
+       "args": [
+        "alice",
+        "1"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "bob"
+      },
+      {
+       "args": [
+        "bob",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+       ],
+       "fn": "mint(address,uint256)",
+       "sender": "carol"
+      }
+     ],
+     "version": 1
+    },
+    "version": 1
+   }
+  ],
+  "adversary": {
+   "B_A": 2000,
+   "id": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+   "seed": 0,
+   "source_sha256": "b105a00768af4210c83e76bd70cdcd9829a3b4cfa0c4fa39380ca06b9f444346"
+  },
+  "discarded": []
+ },
+ "files": {
+  "b/CappedToken.sol": "ab46a89ab2a456a18ca11a59de2bad0e3f6ee006a006720752759db4c9637bfb",
+  "c/check_cap_after_mint/solc_input.json": "2c4b1b97f0081ae1913e7d92155ca5f374a318eba50cfe51f45898483b2e4df9",
+  "c/check_cap_after_mint/solc_output.json": "7f77d5fa23ed693d194b23b33e795ec84eef6d1f1ba8a1316d7f086feeb1b11e",
+  "c/check_cap_after_transfer/solc_input.json": "def079c3a82c3a3107f7fc2ecba664e5307917936f895e4789c359f667e70578",
+  "c/check_cap_after_transfer/solc_output.json": "df1e9f8171dd5f5fd2338214821110755f9718aa7eb511c7fa4f6d6bae8ee9ec",
+  "c/check_cap_invariant/solc_input.json": "22238ff30169f768873f70ac95cd19c0a81b9a9e091eced0ecee36311aeacae6",
+  "c/check_cap_invariant/solc_output.json": "b2ae0ecd8cb3cdcb8e6688bbd84d2328de2a48662b5a2cca0471d9f8c7b73acb",
+  "c/check_mint_exact/solc_input.json": "e329f97802c12b853c6a96e4987497e542385321c6d733cbfa083c02501570ce",
+  "c/check_mint_exact/solc_output.json": "1374de8850c4ed9844572014dae821003eb6d909023b8acb550b7d38f3f7416d",
+  "c/check_mint_keeps_owner_cap/solc_input.json": "bfb0084a62dc235ca21b5c70f04e90b4e1229e9de0f866a9c1ab4806eaa00d7b",
+  "c/check_mint_keeps_owner_cap/solc_output.json": "5bae585a71240f933b0c990d20810aaef0b971f7c7ebd2cd59c63399fa6d634a",
+  "c/check_mint_over_cap_reverts/solc_input.json": "c27932cf019f588f4f1f6be98d592e96542ef8e335badf88ec281b86ac423d33",
+  "c/check_mint_over_cap_reverts/solc_output.json": "f118567478cca935685cd6e9c9001fdb9c917482476d8c555bb00e88be0f5382",
+  "c/check_mint_to_caller/solc_input.json": "9d0b95091027ba3235c45e326d3b5035e80b7e9c1c37ca2d006ca758baa32f39",
+  "c/check_mint_to_caller/solc_output.json": "f56678ae34840a4e4efbf1a279ec717e30c74acb2cac88072cf03ed541d53005",
+  "c/check_no_overdraft/solc_input.json": "33bc0fb7b6dd1a19426fbc828597eb8b0ecf4569e5029c1297ca6fdf6e48f086",
+  "c/check_no_overdraft/solc_output.json": "7f5a1af35a73972e12c05d23b531bd994c255b268ccd3bd13821712bea2ace6d",
+  "c/check_no_overdraft_by_one/solc_input.json": "743ded956bd9368dd8563e9f03051c65618e9915d3811d489a9c9a50aa42cb33",
+  "c/check_no_overdraft_by_one/solc_output.json": "6d32af182a41061c7d459cd6efbcb632169f082b69fdbeda87e0f68483cc6708",
+  "c/check_only_owner_mints/solc_input.json": "9e7a1b5777c8f86c2afd467e7bfc5f32055c477fd6f0f8a74e7e492ed9dc81ba",
+  "c/check_only_owner_mints/solc_output.json": "bb70f9eff72bae65a9876f9d2b04b60e62b6389d3acdcf81ba130b89fee4cbe1",
+  "c/check_only_owner_mints_small/solc_input.json": "61327c4963a07d34dd73e5745d2bfb3664a1aa36653b63530849c261890b4c8e",
+  "c/check_only_owner_mints_small/solc_output.json": "f161497fd98f008da9047abbf5217a98bb299aa4b7f6bc0da4f173bd53520414",
+  "c/check_transfer_exact/solc_input.json": "01e683f2033e3a6c206183d222b4bed5209c10620c17ff66b81892470da2bc65",
+  "c/check_transfer_exact/solc_output.json": "638ea757b01dcdd261b1a1a48482957d74bac5c2296563c9a6e54a65fa56d94a",
+  "c/check_transfer_keeps_owner_cap/solc_input.json": "bdd6b1851c32a441c9c015f9ac4d3a38355e22f1c079e614820b3f05317a03f0",
+  "c/check_transfer_keeps_owner_cap/solc_output.json": "1fd8bdb0619ebd66fc9af7882d1903fd8bd4f69406d2c886bec636a1bca1fa6c",
+  "c/check_transfer_other_is_owner/solc_input.json": "33ad7d4fd0c1829bcf9614a571429a2cd9a010c961834b96904e40294257dcb7",
+  "c/check_transfer_other_is_owner/solc_output.json": "c1352a056a50742377d7e9b13f100fb7fb5706e2340b306e58c5550a55ad6d31",
+  "c/check_transfer_self/solc_input.json": "20e0d770aa18fc805f6c7f8f8502d91cddfc1c1f1e79163d54e8867744db287c",
+  "c/check_transfer_self/solc_output.json": "de58c36829440be705b01267236e519732f738600711a21cb6477299062dda9e",
+  "core/specgame_core.py": "25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f",
+  "mutants/21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a.sol": "fec39ccfffa15543130364b24b425eb0273968ec5d430cd8cd860741b2bf3b87",
+  "mutants/2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3.sol": "d6a00dcbecbcf2e5a3f0b6c1aa6e51314efb0f4821d48c8cb8f92a3795d703b3",
+  "mutants/36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8.sol": "18eb0ce753458dd845445d4ef55781986b36263d25cdbba285b13ca80b0189cb",
+  "mutants/8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9.sol": "7b8f85fd3041760e7d2d2b7cf460dc569474797ebb0f6851272fd38dc3f4599c",
+  "mutants/93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df.sol": "a008f221093916cc523f595d7c600d204ba8ec34dfb511a83e396d72c2915667",
+  "mutants/94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3.sol": "10035ddd948dd0ca9c82abdd4588ec05ff056fc930139d7dfa550730f3755b5d",
+  "mutants/cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed.sol": "341027308129b6d3759a1ae6ddb36baaf588b71c433dff5c78f1ece4e3dc2774",
+  "mutants/e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500.sol": "b968a3d9d31ae67b370ed5ebe73032512baf9541143521e0002917a626c287a6",
+  "phi/Spec.sol": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4",
+  "subject/profile.json": "04b386f2213754b73654f6c543183f276addcad9d63bae796aa500988ba49a84"
+ },
+ "hard": {
+  "b": {
+   "path": "b/CappedToken.sol",
+   "runtime_sha256": "c7761d01ada538f5a478bce8861f9812b5c29a81de9c80cbbcce91f42abc063c",
+   "source_sha256": "ab46a89ab2a456a18ca11a59de2bad0e3f6ee006a006720752759db4c9637bfb"
+  },
+  "c": {
+   "checks": [
+    {
+     "check": "check_cap_invariant",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_cap_invariant/solc_input.json",
+     "solc_input_sha256": "22238ff30169f768873f70ac95cd19c0a81b9a9e091eced0ecee36311aeacae6",
+     "solc_output_path": "c/check_cap_invariant/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_only_owner_mints",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_only_owner_mints/solc_input.json",
+     "solc_input_sha256": "9e7a1b5777c8f86c2afd467e7bfc5f32055c477fd6f0f8a74e7e492ed9dc81ba",
+     "solc_output_path": "c/check_only_owner_mints/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_only_owner_mints_small",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_only_owner_mints_small/solc_input.json",
+     "solc_input_sha256": "61327c4963a07d34dd73e5745d2bfb3664a1aa36653b63530849c261890b4c8e",
+     "solc_output_path": "c/check_only_owner_mints_small/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_mint_over_cap_reverts",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_mint_over_cap_reverts/solc_input.json",
+     "solc_input_sha256": "c27932cf019f588f4f1f6be98d592e96542ef8e335badf88ec281b86ac423d33",
+     "solc_output_path": "c/check_mint_over_cap_reverts/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_cap_after_mint",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_cap_after_mint/solc_input.json",
+     "solc_input_sha256": "2c4b1b97f0081ae1913e7d92155ca5f374a318eba50cfe51f45898483b2e4df9",
+     "solc_output_path": "c/check_cap_after_mint/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_cap_after_transfer",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_cap_after_transfer/solc_input.json",
+     "solc_input_sha256": "def079c3a82c3a3107f7fc2ecba664e5307917936f895e4789c359f667e70578",
+     "solc_output_path": "c/check_cap_after_transfer/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_mint_exact",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_mint_exact/solc_input.json",
+     "solc_input_sha256": "e329f97802c12b853c6a96e4987497e542385321c6d733cbfa083c02501570ce",
+     "solc_output_path": "c/check_mint_exact/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_mint_to_caller",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_mint_to_caller/solc_input.json",
+     "solc_input_sha256": "9d0b95091027ba3235c45e326d3b5035e80b7e9c1c37ca2d006ca758baa32f39",
+     "solc_output_path": "c/check_mint_to_caller/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_mint_keeps_owner_cap",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_mint_keeps_owner_cap/solc_input.json",
+     "solc_input_sha256": "bfb0084a62dc235ca21b5c70f04e90b4e1229e9de0f866a9c1ab4806eaa00d7b",
+     "solc_output_path": "c/check_mint_keeps_owner_cap/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_transfer_exact",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_transfer_exact/solc_input.json",
+     "solc_input_sha256": "01e683f2033e3a6c206183d222b4bed5209c10620c17ff66b81892470da2bc65",
+     "solc_output_path": "c/check_transfer_exact/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_transfer_self",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_transfer_self/solc_input.json",
+     "solc_input_sha256": "20e0d770aa18fc805f6c7f8f8502d91cddfc1c1f1e79163d54e8867744db287c",
+     "solc_output_path": "c/check_transfer_self/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_transfer_other_is_owner",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_transfer_other_is_owner/solc_input.json",
+     "solc_input_sha256": "33ad7d4fd0c1829bcf9614a571429a2cd9a010c961834b96904e40294257dcb7",
+     "solc_output_path": "c/check_transfer_other_is_owner/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_no_overdraft",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_no_overdraft/solc_input.json",
+     "solc_input_sha256": "33bc0fb7b6dd1a19426fbc828597eb8b0ecf4569e5029c1297ca6fdf6e48f086",
+     "solc_output_path": "c/check_no_overdraft/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_no_overdraft_by_one",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_no_overdraft_by_one/solc_input.json",
+     "solc_input_sha256": "743ded956bd9368dd8563e9f03051c65618e9915d3811d489a9c9a50aa42cb33",
+     "solc_output_path": "c/check_no_overdraft_by_one/solc_output.json",
+     "verdict": "Accept"
+    },
+    {
+     "check": "check_transfer_keeps_owner_cap",
+     "reason": "all_targets_safe",
+     "solc_input_path": "c/check_transfer_keeps_owner_cap/solc_input.json",
+     "solc_input_sha256": "bdd6b1851c32a441c9c015f9ac4d3a38355e22f1c079e614820b3f05317a03f0",
+     "solc_output_path": "c/check_transfer_keeps_owner_cap/solc_output.json",
+     "verdict": "Accept"
+    }
+   ],
+   "command": [
+    "solc",
+    "--standard-json"
+   ],
+   "mode": "isolated",
+   "reason": "all_checks_safe",
+   "timeout_ms": 60000,
+   "verdict": "Accept",
+   "wall_timeout_s": 600.0
+  },
+  "phi": {
+   "checks": [
+    "check_cap_after_mint",
+    "check_cap_after_transfer",
+    "check_cap_invariant",
+    "check_mint_exact",
+    "check_mint_keeps_owner_cap",
+    "check_mint_over_cap_reverts",
+    "check_mint_to_caller",
+    "check_no_overdraft",
+    "check_no_overdraft_by_one",
+    "check_only_owner_mints",
+    "check_only_owner_mints_small",
+    "check_transfer_exact",
+    "check_transfer_keeps_owner_cap",
+    "check_transfer_other_is_owner",
+    "check_transfer_self"
+   ],
+   "pair_runtime_sha256": "f1ef784c7b344da33a80a51a6b5e397e93c1b171e0e40e687ed08c45baf12feb",
+   "path": "phi/Spec.sol",
+   "source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4"
+  }
+ },
+ "metadata": {
+  "mutants": [
+   {
+    "fault_class": "wrong-recipient",
+    "id": "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "operator": "replace-variable"
+   },
+   {
+    "fault_class": "access-control",
+    "id": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "operator": "remove-modifier"
+   },
+   {
+    "fault_class": "off-by-one",
+    "id": "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "operator": "shift-bound-by-one"
+   },
+   {
+    "fault_class": "accounting",
+    "id": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "operator": "remove-statement"
+   },
+   {
+    "fault_class": "liveness",
+    "id": "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df",
+    "operator": "insert-revert"
+   },
+   {
+    "fault_class": "accounting",
+    "id": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "operator": "remove-statement"
+   },
+   {
+    "fault_class": "missing-bound-check",
+    "id": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "operator": "remove-require"
+   },
+   {
+    "fault_class": "accounting",
+    "id": "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+    "operator": "remove-statement"
+   }
+  ]
+ },
+ "not_claimed": [
+  "V-completeness"
+ ],
+ "provenance": {
+  "core_path": "core/specgame_core.py",
+  "core_sha256": "25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f",
+  "feedback": {
+   "condition": "fM",
+   "model": "claude-sonnet-5-5",
+   "prompts_sha256": "ef5622219a5de745cdec1d0dea26b19f34b3a099d7309b0aff04a21ed4e73f32",
+   "round": 3,
+   "seed": 0,
+   "temperature": 1.0
+  },
+  "protocol_json_sha256": "42efecba54d47bc27bbb5b7c9da369819a67f6758a8b54f019c6d8f8a4e2ada7",
+  "protocol_md_sha256": "32fae875bb501cc2deeb1f67bb01780f553adbb7238b108bb18f9dce865176f7",
+  "subject": "capped_token",
+  "subject_profile_path": "subject/profile.json",
+  "toolchain": {
+   "block_env": {
+    "basefee": 0,
+    "coinbase": "0x0000000000000000000000000000000000000000",
+    "gas_limit": 30000000,
+    "number": 1,
+    "prevrandao": "0000000000000000000000000000000000000000000000000000000000000000",
+    "timestamp": 1
+   },
+   "chain_id": 1,
+   "core_sha256": "25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f",
+   "core_version": 2,
+   "evm_version": "cancun",
+   "executor_limits": {
+    "contract_code_size_limit": 1048576,
+    "deploy_gas": 30000000,
+    "initcode_size_limit": 2097152,
+    "subject_runtime_limit": 24576
+   },
+   "pyrevm": "0.3.7",
+   "python": "3.12.3",
+   "solc": {
+    "sha256": "fa8ac9a32d301ad023a36ee5a29f8e291fe3200c60244e43c142539e82a617f4",
+    "version": "0.8.35+commit.47b9dedd.Linux.g++"
+   },
+   "spec_id": "CANCUN",
+   "tx_gas": 10000000,
+   "z3": {
+    "sha256": "e583c4186a45e72411fa2cb2048401eed03f0f8e5f24694676a8f6271a50b765",
+    "version": "Z3 version 4.16.0 - 64 bit"
+   }
+  },
+  "verifier_sha256": "dea0af01cf27221bba31a15d59a735c789d520750e5a22baa7bed7bb18e1e489"
+ },
+ "version": 1
+}

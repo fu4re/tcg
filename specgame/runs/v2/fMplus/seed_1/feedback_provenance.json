@@ -1,0 +1,8 @@
+{
+ "condition": "fMplus",
+ "model": "claude-sonnet-5-5",
+ "prompts_sha256": "ef5622219a5de745cdec1d0dea26b19f34b3a099d7309b0aff04a21ed4e73f32",
+ "round": 3,
+ "seed": 1,
+ "temperature": 1.0
+}

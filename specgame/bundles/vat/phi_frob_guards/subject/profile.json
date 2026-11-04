@@ -1,0 +1,789 @@
+{
+ "version": 1,
+ "name": "vat",
+ "contract": {
+  "file": "Vat.sol",
+  "name": "Vat"
+ },
+ "constructor": {
+  "params": []
+ },
+ "spec": {
+  "constructor": "constructor() {}",
+  "probes": [
+   [
+    {
+     "name": "a",
+     "type": "address"
+    },
+    {
+     "name": "b",
+     "type": "address"
+    },
+    {
+     "name": "x",
+     "type": "uint256"
+    },
+    {
+     "name": "y",
+     "type": "uint256"
+    }
+   ],
+   [
+    {
+     "name": "i",
+     "type": "bytes32"
+    },
+    {
+     "name": "u",
+     "type": "address"
+    },
+    {
+     "name": "dx",
+     "type": "int256"
+    },
+    {
+     "name": "dy",
+     "type": "int256"
+    }
+   ]
+  ]
+ },
+ "senders": [
+  "alice",
+  "bob",
+  "carol"
+ ],
+ "pools": {
+  "address": {
+   "alice": "0x1111111111111111111111111111111111111111",
+   "bob": "0x2222222222222222222222222222222222222222",
+   "carol": "0x3333333333333333333333333333333333333333",
+   "zero": "0x0000000000000000000000000000000000000000"
+  },
+  "bytes32": {
+   "GOLD": "0x474f4c4400000000000000000000000000000000000000000000000000000000",
+   "SILVER": "0x53494c5645520000000000000000000000000000000000000000000000000000",
+   "Line": "0x4c696e6500000000000000000000000000000000000000000000000000000000",
+   "spot": "0x73706f7400000000000000000000000000000000000000000000000000000000",
+   "line": "0x6c696e6500000000000000000000000000000000000000000000000000000000",
+   "dust": "0x6475737400000000000000000000000000000000000000000000000000000000",
+   "bogus": "0x626f677573000000000000000000000000000000000000000000000000000000"
+  }
+ },
+ "generator": {
+  "kind": "typed-v2",
+  "uint256": [
+   "0",
+   "1",
+   "small",
+   "wad",
+   "ray",
+   "rad",
+   "random",
+   "repeat",
+   "negate"
+  ],
+  "int256": [
+   "0",
+   "1",
+   "-1",
+   "small",
+   "wad",
+   "ray",
+   "rad",
+   "random",
+   "repeat",
+   "negate"
+  ],
+  "address": [
+   "any"
+  ],
+  "bytes32": [
+   "any"
+  ],
+  "calls": {
+   "frob(bytes32,address,address,address,int256,int256)": {
+    "args": [
+     [
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "bogus"
+     ],
+     [
+      "self",
+      "self",
+      "self",
+      "hoped",
+      "any"
+     ],
+     [
+      "self",
+      "self",
+      "self",
+      "hoped",
+      "any"
+     ],
+     [
+      "self",
+      "self",
+      "self",
+      "hoped",
+      "any"
+     ],
+     [
+      "+wad_le_500",
+      "+wad_le_500",
+      "+wad_le_500",
+      "-wad_le_50",
+      "repeat",
+      "negate",
+      "0"
+     ],
+     [
+      "frac_prev",
+      "frac_prev",
+      "frac_prev",
+      "-wad_le_50",
+      "repeat",
+      "negate",
+      "0"
+     ]
+    ]
+   },
+   "fork(bytes32,address,address,int256,int256)": {
+    "args": [
+     [
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "bogus"
+     ],
+     [
+      "self",
+      "self",
+      "self",
+      "hoped",
+      "any"
+     ],
+     [
+      "self",
+      "hoped",
+      "hoped",
+      "any"
+     ],
+     [
+      "+wad_le_50",
+      "+wad_le_50",
+      "+wad_le_50",
+      "negate",
+      "repeat"
+     ],
+     [
+      "frac_prev",
+      "frac_prev",
+      "frac_prev",
+      "0"
+     ]
+    ]
+   },
+   "grab(bytes32,address,address,address,int256,int256)": {
+    "sender": [
+     "deployer",
+     "deployer",
+     "deployer",
+     "any"
+    ],
+    "args": [
+     [
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "bogus"
+     ],
+     [
+      "alice",
+      "bob",
+      "carol"
+     ],
+     [
+      "any"
+     ],
+     [
+      "any"
+     ],
+     [
+      "-wad_le_100",
+      "-wad_le_100",
+      "-wad_le_100",
+      "+wad_le_100",
+      "negate"
+     ],
+     [
+      "-wad_le_50",
+      "-wad_le_50",
+      "-wad_le_50",
+      "frac_prev",
+      "+wad_le_50"
+     ]
+    ]
+   },
+   "move(address,address,uint256)": {
+    "args": [
+     [
+      "self",
+      "self",
+      "self",
+      "hoped",
+      "any"
+     ],
+     [
+      "any"
+     ],
+     [
+      "rad_le_50",
+      "rad_le_50",
+      "rad_le_50",
+      "repeat",
+      "small"
+     ]
+    ]
+   },
+   "flux(bytes32,address,address,uint256)": {
+    "args": [
+     [
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "bogus"
+     ],
+     [
+      "self",
+      "self",
+      "self",
+      "hoped",
+      "any"
+     ],
+     [
+      "any"
+     ],
+     [
+      "wad_le_900",
+      "wad_le_900",
+      "wad_le_900",
+      "repeat",
+      "small"
+     ]
+    ]
+   },
+   "fold(bytes32,address,int256)": {
+    "sender": [
+     "deployer",
+     "deployer",
+     "deployer",
+     "any"
+    ],
+    "args": [
+     [
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "bogus"
+     ],
+     [
+      "any"
+     ],
+     [
+      "+mray_le_100",
+      "+mray_le_100",
+      "+mray_le_100",
+      "+mray_le_100",
+      "-mray_le_10",
+      "negate"
+     ]
+    ]
+   },
+   "slip(bytes32,address,int256)": {
+    "sender": [
+     "deployer",
+     "deployer",
+     "deployer",
+     "any"
+    ],
+    "args": [
+     [
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "GOLD",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "SILVER",
+      "bogus"
+     ],
+     [
+      "any"
+     ],
+     [
+      "+wad_le_1000",
+      "+wad_le_1000",
+      "+wad_le_1000",
+      "-wad_le_100",
+      "negate"
+     ]
+    ]
+   },
+   "suck(address,address,uint256)": {
+    "sender": [
+     "deployer",
+     "deployer",
+     "deployer",
+     "any"
+    ],
+    "args": [
+     [
+      "any"
+     ],
+     [
+      "any"
+     ],
+     [
+      "rad_le_1000",
+      "rad_le_1000",
+      "repeat"
+     ]
+    ]
+   },
+   "heal(uint256)": {
+    "args": [
+     [
+      "rad_le_50",
+      "rad_le_50",
+      "repeat",
+      "small"
+     ]
+    ]
+   },
+   "init(bytes32)": {
+    "sender": [
+     "deployer",
+     "deployer",
+     "any"
+    ],
+    "args": [
+     [
+      "GOLD",
+      "SILVER",
+      "bogus",
+      "any"
+     ]
+    ]
+   },
+   "file(bytes32,uint256)": {
+    "sender": [
+     "deployer",
+     "deployer",
+     "any"
+    ],
+    "args": [
+     [
+      "Line",
+      "Line",
+      "Line",
+      "any"
+     ],
+     [
+      "rad_le_1000000",
+      "rad_le_1000",
+      "repeat",
+      "0"
+     ]
+    ]
+   },
+   "file(bytes32,bytes32,uint256)": {
+    "sender": [
+     "deployer",
+     "deployer",
+     "any"
+    ],
+    "args": [
+     [
+      "GOLD",
+      "SILVER",
+      "any"
+     ],
+     [
+      "spot",
+      "line",
+      "dust",
+      "any"
+     ],
+     [
+      "ray_le_2",
+      "rad_le_1000000",
+      "rad_le_10",
+      "repeat",
+      "0"
+     ]
+    ]
+   },
+   "cage()": {
+    "sender": [
+     "any"
+    ]
+   },
+   "rely(address)": {
+    "sender": [
+     "deployer",
+     "any"
+    ]
+   },
+   "deny(address)": {
+    "sender": [
+     "deployer",
+     "any"
+    ]
+   }
+  }
+ },
+ "functions": [
+  "cage()",
+  "deny(address)",
+  "file(bytes32,bytes32,uint256)",
+  "file(bytes32,uint256)",
+  "flux(bytes32,address,address,uint256)",
+  "fold(bytes32,address,int256)",
+  "fork(bytes32,address,address,int256,int256)",
+  "frob(bytes32,address,address,address,int256,int256)",
+  "grab(bytes32,address,address,address,int256,int256)",
+  "heal(uint256)",
+  "hope(address)",
+  "init(bytes32)",
+  "move(address,address,uint256)",
+  "nope(address)",
+  "rely(address)",
+  "slip(bytes32,address,int256)",
+  "suck(address,address,uint256)"
+ ],
+ "setup": [
+  {
+   "fn": "init(bytes32)",
+   "args": [
+    "GOLD"
+   ]
+  },
+  {
+   "fn": "init(bytes32)",
+   "args": [
+    "SILVER"
+   ]
+  },
+  {
+   "fn": "file(bytes32,uint256)",
+   "args": [
+    "Line",
+    "1000000000000000000000000000000000000000000000000000"
+   ]
+  },
+  {
+   "fn": "file(bytes32,bytes32,uint256)",
+   "args": [
+    "GOLD",
+    "spot",
+    "1000000000000000000000000000"
+   ]
+  },
+  {
+   "fn": "file(bytes32,bytes32,uint256)",
+   "args": [
+    "GOLD",
+    "line",
+    "1000000000000000000000000000000000000000000000000000"
+   ]
+  },
+  {
+   "fn": "file(bytes32,bytes32,uint256)",
+   "args": [
+    "SILVER",
+    "spot",
+    "2000000000000000000000000000"
+   ]
+  },
+  {
+   "fn": "file(bytes32,bytes32,uint256)",
+   "args": [
+    "SILVER",
+    "line",
+    "1000000000000000000000000000000000000000000000000000"
+   ]
+  },
+  {
+   "fn": "slip(bytes32,address,int256)",
+   "args": [
+    "GOLD",
+    "alice",
+    "1000000000000000000000"
+   ]
+  },
+  {
+   "fn": "slip(bytes32,address,int256)",
+   "args": [
+    "GOLD",
+    "bob",
+    "1000000000000000000000"
+   ]
+  },
+  {
+   "fn": "slip(bytes32,address,int256)",
+   "args": [
+    "GOLD",
+    "carol",
+    "1000000000000000000000"
+   ]
+  },
+  {
+   "fn": "slip(bytes32,address,int256)",
+   "args": [
+    "SILVER",
+    "alice",
+    "1000000000000000000000"
+   ]
+  },
+  {
+   "fn": "slip(bytes32,address,int256)",
+   "args": [
+    "SILVER",
+    "bob",
+    "1000000000000000000000"
+   ]
+  },
+  {
+   "fn": "slip(bytes32,address,int256)",
+   "args": [
+    "SILVER",
+    "carol",
+    "1000000000000000000000"
+   ]
+  },
+  {
+   "sender": "alice",
+   "fn": "hope(address)",
+   "args": [
+    "bob"
+   ]
+  },
+  {
+   "sender": "bob",
+   "fn": "hope(address)",
+   "args": [
+    "carol"
+   ]
+  },
+  {
+   "sender": "alice",
+   "fn": "frob(bytes32,address,address,address,int256,int256)",
+   "args": [
+    "GOLD",
+    "alice",
+    "alice",
+    "alice",
+    "100000000000000000000",
+    "50000000000000000000"
+   ]
+  },
+  {
+   "sender": "bob",
+   "fn": "frob(bytes32,address,address,address,int256,int256)",
+   "args": [
+    "GOLD",
+    "bob",
+    "bob",
+    "bob",
+    "100000000000000000000",
+    "50000000000000000000"
+   ]
+  },
+  {
+   "sender": "carol",
+   "fn": "frob(bytes32,address,address,address,int256,int256)",
+   "args": [
+    "GOLD",
+    "carol",
+    "carol",
+    "carol",
+    "100000000000000000000",
+    "50000000000000000000"
+   ]
+  },
+  {
+   "sender": "alice",
+   "fn": "frob(bytes32,address,address,address,int256,int256)",
+   "args": [
+    "SILVER",
+    "alice",
+    "alice",
+    "alice",
+    "100000000000000000000",
+    "50000000000000000000"
+   ]
+  },
+  {
+   "sender": "bob",
+   "fn": "frob(bytes32,address,address,address,int256,int256)",
+   "args": [
+    "SILVER",
+    "bob",
+    "bob",
+    "bob",
+    "100000000000000000000",
+    "50000000000000000000"
+   ]
+  },
+  {
+   "sender": "carol",
+   "fn": "frob(bytes32,address,address,address,int256,int256)",
+   "args": [
+    "SILVER",
+    "carol",
+    "carol",
+    "carol",
+    "100000000000000000000",
+    "50000000000000000000"
+   ]
+  }
+ ],
+ "observation": [
+  {
+   "getter": "debt()",
+   "keys": []
+  },
+  {
+   "getter": "vice()",
+   "keys": []
+  },
+  {
+   "getter": "Line()",
+   "keys": []
+  },
+  {
+   "getter": "live()",
+   "keys": []
+  },
+  {
+   "getter": "ilks(bytes32)",
+   "keys": [
+    [
+     "GOLD",
+     "SILVER"
+    ]
+   ]
+  },
+  {
+   "getter": "urns(bytes32,address)",
+   "keys": [
+    [
+     "GOLD",
+     "SILVER"
+    ],
+    [
+     "alice",
+     "bob",
+     "carol",
+     "zero"
+    ]
+   ]
+  },
+  {
+   "getter": "gem(bytes32,address)",
+   "keys": [
+    [
+     "GOLD",
+     "SILVER"
+    ],
+    [
+     "alice",
+     "bob",
+     "carol",
+     "zero"
+    ]
+   ]
+  },
+  {
+   "getter": "dai(address)",
+   "keys": [
+    [
+     "alice",
+     "bob",
+     "carol",
+     "zero"
+    ]
+   ]
+  },
+  {
+   "getter": "sin(address)",
+   "keys": [
+    [
+     "alice",
+     "bob",
+     "carol",
+     "zero"
+    ]
+   ]
+  },
+  {
+   "getter": "wards(address)",
+   "keys": [
+    [
+     "alice",
+     "bob",
+     "carol",
+     "zero"
+    ]
+   ]
+  },
+  {
+   "getter": "can(address,address)",
+   "keys": [
+    [
+     "alice",
+     "bob",
+     "carol",
+     "zero"
+    ],
+    [
+     "alice",
+     "bob",
+     "carol",
+     "zero"
+    ]
+   ]
+  }
+ ]
+}

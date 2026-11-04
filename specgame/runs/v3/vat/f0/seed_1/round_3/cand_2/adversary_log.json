@@ -1,0 +1,1270 @@
+{
+ "adversary_id": "da221ec5557e073f4a51a96eed7d44c758c8cbcf05e7d8f8517f13c20b010047",
+ "adversary_source_sha256": "629e48f09a4e8508d93dfb7221769cbf82278c33fee23642967624b1ef6fdc1c",
+ "discarded": [],
+ "kill_set": [
+  "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+  "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+  "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+  "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+  "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b"
+ ],
+ "ms_cert_on_own_W": {
+  "killed": 5,
+  "total": 8
+ },
+ "mutants": [
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 46,
+    "success": 7,
+    "violation": 1
+   },
+   "checks": [
+    "check_cage_effect",
+    "check_cage_needs_ward",
+    "check_deny_effect",
+    "check_deny_needs_ward",
+    "check_file_dust",
+    "check_file_ilk_needs_ward",
+    "check_file_ilk_unknown",
+    "check_file_line",
+    "check_file_line_ilk",
+    "check_file_needs_ward",
+    "check_file_spot",
+    "check_file_unknown",
+    "check_flux_effect",
+    "check_flux_needs_consent",
+    "check_fold_needs_ward",
+    "check_fork_needs_consent_dst",
+    "check_fork_needs_consent_src",
+    "check_fork_totals",
+    "check_frob_ceiling",
+    "check_frob_draw_balances",
+    "check_frob_draw_urn",
+    "check_frob_dust",
+    "check_frob_needs_consent_u_collateral",
+    "check_frob_needs_consent_u_debt",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_frob_no_consent_at_all",
+    "check_frob_not_init",
+    "check_frob_safe",
+    "check_frob_wipe_balances",
+    "check_grab_down",
+    "check_grab_needs_ward",
+    "check_grab_up",
+    "check_heal_effect",
+    "check_hope_effect",
+    "check_init_effect",
+    "check_init_needs_ward",
+    "check_init_twice",
+    "check_move_effect",
+    "check_move_needs_consent",
+    "check_move_others",
+    "check_nope_effect",
+    "check_not_live_deny",
+    "check_not_live_file",
+    "check_not_live_file_ilk",
+    "check_not_live_fold",
+    "check_not_live_frob",
+    "check_not_live_rely",
+    "check_rely_effect",
+    "check_rely_needs_ward",
+    "check_slip_effect",
+    "check_slip_needs_ward",
+    "check_suck_effect",
+    "check_suck_needs_ward"
+   ],
+   "killed": true,
+   "mutant": "4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04",
+   "name": "m01_slip_no_auth",
+   "pair_runtime_sha256": "d24410ba06727e5a010f03e4cf3180026ad764980974fe182ff08fa98f79a4db",
+   "sigmas_tried": 1,
+   "wall_s": 0.927,
+   "witness_sigma_indices": [
+    0
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 141,
+    "success": 20,
+    "violation": 1
+   },
+   "checks": [
+    "check_cage_effect",
+    "check_cage_needs_ward",
+    "check_deny_effect",
+    "check_deny_needs_ward",
+    "check_file_dust",
+    "check_file_ilk_needs_ward",
+    "check_file_ilk_unknown",
+    "check_file_line",
+    "check_file_line_ilk",
+    "check_file_needs_ward",
+    "check_file_spot",
+    "check_file_unknown",
+    "check_flux_effect",
+    "check_flux_needs_consent",
+    "check_fold_needs_ward",
+    "check_fork_needs_consent_dst",
+    "check_fork_needs_consent_src",
+    "check_fork_totals",
+    "check_frob_ceiling",
+    "check_frob_draw_balances",
+    "check_frob_draw_urn",
+    "check_frob_dust",
+    "check_frob_needs_consent_u_collateral",
+    "check_frob_needs_consent_u_debt",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_frob_no_consent_at_all",
+    "check_frob_not_init",
+    "check_frob_safe",
+    "check_frob_wipe_balances",
+    "check_grab_down",
+    "check_grab_needs_ward",
+    "check_grab_up",
+    "check_heal_effect",
+    "check_hope_effect",
+    "check_init_effect",
+    "check_init_needs_ward",
+    "check_init_twice",
+    "check_move_effect",
+    "check_move_needs_consent",
+    "check_move_others",
+    "check_nope_effect",
+    "check_not_live_deny",
+    "check_not_live_file",
+    "check_not_live_file_ilk",
+    "check_not_live_fold",
+    "check_not_live_frob",
+    "check_not_live_rely",
+    "check_rely_effect",
+    "check_rely_needs_ward",
+    "check_slip_effect",
+    "check_slip_needs_ward",
+    "check_suck_effect",
+    "check_suck_needs_ward"
+   ],
+   "killed": true,
+   "mutant": "652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df",
+   "name": "m02_frob_no_consent_v",
+   "pair_runtime_sha256": "ca9ea651a9a45d3a40ec113f3a1b48d711be0cbace2b178c48e3e56ff2ec5d51",
+   "sigmas_tried": 3,
+   "wall_s": 1.308,
+   "witness_sigma_indices": [
+    2
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 25813,
+    "success": 2860,
+    "violation": 1
+   },
+   "checks": [
+    "check_cage_effect",
+    "check_cage_needs_ward",
+    "check_deny_effect",
+    "check_deny_needs_ward",
+    "check_file_dust",
+    "check_file_ilk_needs_ward",
+    "check_file_ilk_unknown",
+    "check_file_line",
+    "check_file_line_ilk",
+    "check_file_needs_ward",
+    "check_file_spot",
+    "check_file_unknown",
+    "check_flux_effect",
+    "check_flux_needs_consent",
+    "check_fold_needs_ward",
+    "check_fork_needs_consent_dst",
+    "check_fork_needs_consent_src",
+    "check_fork_totals",
+    "check_frob_ceiling",
+    "check_frob_draw_balances",
+    "check_frob_draw_urn",
+    "check_frob_dust",
+    "check_frob_needs_consent_u_collateral",
+    "check_frob_needs_consent_u_debt",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_frob_no_consent_at_all",
+    "check_frob_not_init",
+    "check_frob_safe",
+    "check_frob_wipe_balances",
+    "check_grab_down",
+    "check_grab_needs_ward",
+    "check_grab_up",
+    "check_heal_effect",
+    "check_hope_effect",
+    "check_init_effect",
+    "check_init_needs_ward",
+    "check_init_twice",
+    "check_move_effect",
+    "check_move_needs_consent",
+    "check_move_others",
+    "check_nope_effect",
+    "check_not_live_deny",
+    "check_not_live_file",
+    "check_not_live_file_ilk",
+    "check_not_live_fold",
+    "check_not_live_frob",
+    "check_not_live_rely",
+    "check_rely_effect",
+    "check_rely_needs_ward",
+    "check_slip_effect",
+    "check_slip_needs_ward",
+    "check_suck_effect",
+    "check_suck_needs_ward"
+   ],
+   "killed": true,
+   "mutant": "0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5",
+   "name": "m03_frob_no_ceiling",
+   "pair_runtime_sha256": "ec895b72f4d531ae51ad508816055672abe1cdb1a3516136af1c8cd8fcf9f8cb",
+   "sigmas_tried": 531,
+   "wall_s": 102.194,
+   "witness_sigma_indices": [
+    530
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 6276,
+    "success": 743,
+    "violation": 1
+   },
+   "checks": [
+    "check_cage_effect",
+    "check_cage_needs_ward",
+    "check_deny_effect",
+    "check_deny_needs_ward",
+    "check_file_dust",
+    "check_file_ilk_needs_ward",
+    "check_file_ilk_unknown",
+    "check_file_line",
+    "check_file_line_ilk",
+    "check_file_needs_ward",
+    "check_file_spot",
+    "check_file_unknown",
+    "check_flux_effect",
+    "check_flux_needs_consent",
+    "check_fold_needs_ward",
+    "check_fork_needs_consent_dst",
+    "check_fork_needs_consent_src",
+    "check_fork_totals",
+    "check_frob_ceiling",
+    "check_frob_draw_balances",
+    "check_frob_draw_urn",
+    "check_frob_dust",
+    "check_frob_needs_consent_u_collateral",
+    "check_frob_needs_consent_u_debt",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_frob_no_consent_at_all",
+    "check_frob_not_init",
+    "check_frob_safe",
+    "check_frob_wipe_balances",
+    "check_grab_down",
+    "check_grab_needs_ward",
+    "check_grab_up",
+    "check_heal_effect",
+    "check_hope_effect",
+    "check_init_effect",
+    "check_init_needs_ward",
+    "check_init_twice",
+    "check_move_effect",
+    "check_move_needs_consent",
+    "check_move_others",
+    "check_nope_effect",
+    "check_not_live_deny",
+    "check_not_live_file",
+    "check_not_live_file_ilk",
+    "check_not_live_fold",
+    "check_not_live_frob",
+    "check_not_live_rely",
+    "check_rely_effect",
+    "check_rely_needs_ward",
+    "check_slip_effect",
+    "check_slip_needs_ward",
+    "check_suck_effect",
+    "check_suck_needs_ward"
+   ],
+   "killed": true,
+   "mutant": "7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b",
+   "name": "m04_frob_no_safety",
+   "pair_runtime_sha256": "ce0d5de7cc80a00f5d69ddf717de1cba22c53263bc0ce5d0cd6035b377b22e38",
+   "sigmas_tried": 130,
+   "wall_s": 25.774,
+   "witness_sigma_indices": [
+    129
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 97575,
+    "success": 10425
+   },
+   "checks": [
+    "check_cage_effect",
+    "check_cage_needs_ward",
+    "check_deny_effect",
+    "check_deny_needs_ward",
+    "check_file_dust",
+    "check_file_ilk_needs_ward",
+    "check_file_ilk_unknown",
+    "check_file_line",
+    "check_file_line_ilk",
+    "check_file_needs_ward",
+    "check_file_spot",
+    "check_file_unknown",
+    "check_flux_effect",
+    "check_flux_needs_consent",
+    "check_fold_needs_ward",
+    "check_fork_needs_consent_dst",
+    "check_fork_needs_consent_src",
+    "check_fork_totals",
+    "check_frob_ceiling",
+    "check_frob_draw_balances",
+    "check_frob_draw_urn",
+    "check_frob_dust",
+    "check_frob_needs_consent_u_collateral",
+    "check_frob_needs_consent_u_debt",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_frob_no_consent_at_all",
+    "check_frob_not_init",
+    "check_frob_safe",
+    "check_frob_wipe_balances",
+    "check_grab_down",
+    "check_grab_needs_ward",
+    "check_grab_up",
+    "check_heal_effect",
+    "check_hope_effect",
+    "check_init_effect",
+    "check_init_needs_ward",
+    "check_init_twice",
+    "check_move_effect",
+    "check_move_needs_consent",
+    "check_move_others",
+    "check_nope_effect",
+    "check_not_live_deny",
+    "check_not_live_file",
+    "check_not_live_file_ilk",
+    "check_not_live_fold",
+    "check_not_live_frob",
+    "check_not_live_rely",
+    "check_rely_effect",
+    "check_rely_needs_ward",
+    "check_slip_effect",
+    "check_slip_needs_ward",
+    "check_suck_effect",
+    "check_suck_needs_ward"
+   ],
+   "killed": false,
+   "mutant": "0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884",
+   "name": "m05_frob_no_dust",
+   "pair_runtime_sha256": "9d2185cfe04175454ccecabad29ba8aebff6f5451b38e9be50d7b7e7fc499aa0",
+   "sigmas_tried": 2000,
+   "wall_s": 382.539,
+   "witness_sigma_indices": []
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 97575,
+    "success": 10425
+   },
+   "checks": [
+    "check_cage_effect",
+    "check_cage_needs_ward",
+    "check_deny_effect",
+    "check_deny_needs_ward",
+    "check_file_dust",
+    "check_file_ilk_needs_ward",
+    "check_file_ilk_unknown",
+    "check_file_line",
+    "check_file_line_ilk",
+    "check_file_needs_ward",
+    "check_file_spot",
+    "check_file_unknown",
+    "check_flux_effect",
+    "check_flux_needs_consent",
+    "check_fold_needs_ward",
+    "check_fork_needs_consent_dst",
+    "check_fork_needs_consent_src",
+    "check_fork_totals",
+    "check_frob_ceiling",
+    "check_frob_draw_balances",
+    "check_frob_draw_urn",
+    "check_frob_dust",
+    "check_frob_needs_consent_u_collateral",
+    "check_frob_needs_consent_u_debt",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_frob_no_consent_at_all",
+    "check_frob_not_init",
+    "check_frob_safe",
+    "check_frob_wipe_balances",
+    "check_grab_down",
+    "check_grab_needs_ward",
+    "check_grab_up",
+    "check_heal_effect",
+    "check_hope_effect",
+    "check_init_effect",
+    "check_init_needs_ward",
+    "check_init_twice",
+    "check_move_effect",
+    "check_move_needs_consent",
+    "check_move_others",
+    "check_nope_effect",
+    "check_not_live_deny",
+    "check_not_live_file",
+    "check_not_live_file_ilk",
+    "check_not_live_fold",
+    "check_not_live_frob",
+    "check_not_live_rely",
+    "check_rely_effect",
+    "check_rely_needs_ward",
+    "check_slip_effect",
+    "check_slip_needs_ward",
+    "check_suck_effect",
+    "check_suck_needs_ward"
+   ],
+   "killed": false,
+   "mutant": "3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb",
+   "name": "m06_fold_no_debt",
+   "pair_runtime_sha256": "9dd2ae092c0973055bec6f9d504bfa61aa88a00975b528528c990461d587f137",
+   "sigmas_tried": 2000,
+   "wall_s": 382.187,
+   "witness_sigma_indices": []
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 48,
+    "success": 5,
+    "violation": 1
+   },
+   "checks": [
+    "check_cage_effect",
+    "check_cage_needs_ward",
+    "check_deny_effect",
+    "check_deny_needs_ward",
+    "check_file_dust",
+    "check_file_ilk_needs_ward",
+    "check_file_ilk_unknown",
+    "check_file_line",
+    "check_file_line_ilk",
+    "check_file_needs_ward",
+    "check_file_spot",
+    "check_file_unknown",
+    "check_flux_effect",
+    "check_flux_needs_consent",
+    "check_fold_needs_ward",
+    "check_fork_needs_consent_dst",
+    "check_fork_needs_consent_src",
+    "check_fork_totals",
+    "check_frob_ceiling",
+    "check_frob_draw_balances",
+    "check_frob_draw_urn",
+    "check_frob_dust",
+    "check_frob_needs_consent_u_collateral",
+    "check_frob_needs_consent_u_debt",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_frob_no_consent_at_all",
+    "check_frob_not_init",
+    "check_frob_safe",
+    "check_frob_wipe_balances",
+    "check_grab_down",
+    "check_grab_needs_ward",
+    "check_grab_up",
+    "check_heal_effect",
+    "check_hope_effect",
+    "check_init_effect",
+    "check_init_needs_ward",
+    "check_init_twice",
+    "check_move_effect",
+    "check_move_needs_consent",
+    "check_move_others",
+    "check_nope_effect",
+    "check_not_live_deny",
+    "check_not_live_file",
+    "check_not_live_file_ilk",
+    "check_not_live_fold",
+    "check_not_live_frob",
+    "check_not_live_rely",
+    "check_rely_effect",
+    "check_rely_needs_ward",
+    "check_slip_effect",
+    "check_slip_needs_ward",
+    "check_suck_effect",
+    "check_suck_needs_ward"
+   ],
+   "killed": true,
+   "mutant": "1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d",
+   "name": "m07_move_no_debit",
+   "pair_runtime_sha256": "5b32a196898d1fd3c7b38d1327ca5f070150dc2dd9ed357ad7599a5e8ee80560",
+   "sigmas_tried": 1,
+   "wall_s": 0.99,
+   "witness_sigma_indices": [
+    0
+   ]
+  },
+  {
+   "check_outcome_counts": {
+    "pre_unmet": 97591,
+    "success": 10409
+   },
+   "checks": [
+    "check_cage_effect",
+    "check_cage_needs_ward",
+    "check_deny_effect",
+    "check_deny_needs_ward",
+    "check_file_dust",
+    "check_file_ilk_needs_ward",
+    "check_file_ilk_unknown",
+    "check_file_line",
+    "check_file_line_ilk",
+    "check_file_needs_ward",
+    "check_file_spot",
+    "check_file_unknown",
+    "check_flux_effect",
+    "check_flux_needs_consent",
+    "check_fold_needs_ward",
+    "check_fork_needs_consent_dst",
+    "check_fork_needs_consent_src",
+    "check_fork_totals",
+    "check_frob_ceiling",
+    "check_frob_draw_balances",
+    "check_frob_draw_urn",
+    "check_frob_dust",
+    "check_frob_needs_consent_u_collateral",
+    "check_frob_needs_consent_u_debt",
+    "check_frob_needs_consent_v",
+    "check_frob_needs_consent_w",
+    "check_frob_no_consent_at_all",
+    "check_frob_not_init",
+    "check_frob_safe",
+    "check_frob_wipe_balances",
+    "check_grab_down",
+    "check_grab_needs_ward",
+    "check_grab_up",
+    "check_heal_effect",
+    "check_hope_effect",
+    "check_init_effect",
+    "check_init_needs_ward",
+    "check_init_twice",
+    "check_move_effect",
+    "check_move_needs_consent",
+    "check_move_others",
+    "check_nope_effect",
+    "check_not_live_deny",
+    "check_not_live_file",
+    "check_not_live_file_ilk",
+    "check_not_live_fold",
+    "check_not_live_frob",
+    "check_not_live_rely",
+    "check_rely_effect",
+    "check_rely_needs_ward",
+    "check_slip_effect",
+    "check_slip_needs_ward",
+    "check_suck_effect",
+    "check_suck_needs_ward"
+   ],
+   "killed": false,
+   "mutant": "f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762",
+   "name": "m08_grab_no_vice",
+   "pair_runtime_sha256": "a92c3a32e3cabdcc789fa0a3432398035895aa676176a10a92ccfe1089c25b5c",
+   "sigmas_tried": 2000,
+   "wall_s": 382.841,
+   "witness_sigma_indices": []
+  }
+ ],
+ "params": {
+  "B_A": 2000,
+  "distribution": {
+   "fns": [
+    "cage()",
+    "deny(address)",
+    "file(bytes32,bytes32,uint256)",
+    "file(bytes32,uint256)",
+    "flux(bytes32,address,address,uint256)",
+    "fold(bytes32,address,int256)",
+    "fork(bytes32,address,address,int256,int256)",
+    "frob(bytes32,address,address,address,int256,int256)",
+    "grab(bytes32,address,address,address,int256,int256)",
+    "heal(uint256)",
+    "hope(address)",
+    "init(bytes32)",
+    "move(address,address,uint256)",
+    "nope(address)",
+    "rely(address)",
+    "slip(bytes32,address,int256)",
+    "suck(address,address,uint256)"
+   ],
+   "generator": {
+    "address": [
+     "any"
+    ],
+    "bytes32": [
+     "any"
+    ],
+    "calls": {
+     "cage()": {
+      "sender": [
+       "any"
+      ]
+     },
+     "deny(address)": {
+      "sender": [
+       "deployer",
+       "any"
+      ]
+     },
+     "file(bytes32,bytes32,uint256)": {
+      "args": [
+       [
+        "GOLD",
+        "SILVER",
+        "any"
+       ],
+       [
+        "spot",
+        "line",
+        "dust",
+        "any"
+       ],
+       [
+        "ray_le_2",
+        "rad_le_1000000",
+        "rad_le_10",
+        "repeat",
+        "0"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "file(bytes32,uint256)": {
+      "args": [
+       [
+        "Line",
+        "Line",
+        "Line",
+        "any"
+       ],
+       [
+        "rad_le_1000000",
+        "rad_le_1000",
+        "repeat",
+        "0"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "flux(bytes32,address,address,uint256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "any"
+       ],
+       [
+        "wad_le_900",
+        "wad_le_900",
+        "wad_le_900",
+        "repeat",
+        "small"
+       ]
+      ]
+     },
+     "fold(bytes32,address,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "any"
+       ],
+       [
+        "+mray_le_100",
+        "+mray_le_100",
+        "+mray_le_100",
+        "+mray_le_100",
+        "-mray_le_10",
+        "negate"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "fork(bytes32,address,address,int256,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "self",
+        "hoped",
+        "hoped",
+        "any"
+       ],
+       [
+        "+wad_le_50",
+        "+wad_le_50",
+        "+wad_le_50",
+        "negate",
+        "repeat"
+       ],
+       [
+        "frac_prev",
+        "frac_prev",
+        "frac_prev",
+        "0"
+       ]
+      ]
+     },
+     "frob(bytes32,address,address,address,int256,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "+wad_le_500",
+        "+wad_le_500",
+        "+wad_le_500",
+        "-wad_le_50",
+        "repeat",
+        "negate",
+        "0"
+       ],
+       [
+        "frac_prev",
+        "frac_prev",
+        "frac_prev",
+        "-wad_le_50",
+        "repeat",
+        "negate",
+        "0"
+       ]
+      ]
+     },
+     "grab(bytes32,address,address,address,int256,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "alice",
+        "bob",
+        "carol"
+       ],
+       [
+        "any"
+       ],
+       [
+        "any"
+       ],
+       [
+        "-wad_le_100",
+        "-wad_le_100",
+        "-wad_le_100",
+        "+wad_le_100",
+        "negate"
+       ],
+       [
+        "-wad_le_50",
+        "-wad_le_50",
+        "-wad_le_50",
+        "frac_prev",
+        "+wad_le_50"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "heal(uint256)": {
+      "args": [
+       [
+        "rad_le_50",
+        "rad_le_50",
+        "repeat",
+        "small"
+       ]
+      ]
+     },
+     "init(bytes32)": {
+      "args": [
+       [
+        "GOLD",
+        "SILVER",
+        "bogus",
+        "any"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "move(address,address,uint256)": {
+      "args": [
+       [
+        "self",
+        "self",
+        "self",
+        "hoped",
+        "any"
+       ],
+       [
+        "any"
+       ],
+       [
+        "rad_le_50",
+        "rad_le_50",
+        "rad_le_50",
+        "repeat",
+        "small"
+       ]
+      ]
+     },
+     "rely(address)": {
+      "sender": [
+       "deployer",
+       "any"
+      ]
+     },
+     "slip(bytes32,address,int256)": {
+      "args": [
+       [
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "GOLD",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "SILVER",
+        "bogus"
+       ],
+       [
+        "any"
+       ],
+       [
+        "+wad_le_1000",
+        "+wad_le_1000",
+        "+wad_le_1000",
+        "-wad_le_100",
+        "negate"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     },
+     "suck(address,address,uint256)": {
+      "args": [
+       [
+        "any"
+       ],
+       [
+        "any"
+       ],
+       [
+        "rad_le_1000",
+        "rad_le_1000",
+        "repeat"
+       ]
+      ],
+      "sender": [
+       "deployer",
+       "deployer",
+       "deployer",
+       "any"
+      ]
+     }
+    },
+    "int256": [
+     "0",
+     "1",
+     "-1",
+     "small",
+     "wad",
+     "ray",
+     "rad",
+     "random",
+     "repeat",
+     "negate"
+    ],
+    "kind": "typed-v2",
+    "uint256": [
+     "0",
+     "1",
+     "small",
+     "wad",
+     "ray",
+     "rad",
+     "random",
+     "repeat",
+     "negate"
+    ]
+   },
+   "kind": "typed-v2",
+   "max_txs": 6,
+   "name": "specgame-seqgen",
+   "pools": {
+    "address": {
+     "alice": "0x1111111111111111111111111111111111111111",
+     "bob": "0x2222222222222222222222222222222222222222",
+     "carol": "0x3333333333333333333333333333333333333333",
+     "zero": "0x0000000000000000000000000000000000000000"
+    },
+    "bytes32": {
+     "GOLD": "0x474f4c4400000000000000000000000000000000000000000000000000000000",
+     "Line": "0x4c696e6500000000000000000000000000000000000000000000000000000000",
+     "SILVER": "0x53494c5645520000000000000000000000000000000000000000000000000000",
+     "bogus": "0x626f677573000000000000000000000000000000000000000000000000000000",
+     "dust": "0x6475737400000000000000000000000000000000000000000000000000000000",
+     "line": "0x6c696e6500000000000000000000000000000000000000000000000000000000",
+     "spot": "0x73706f7400000000000000000000000000000000000000000000000000000000"
+    }
+   },
+   "probes": [
+    [
+     {
+      "name": "a",
+      "type": "address"
+     },
+     {
+      "name": "b",
+      "type": "address"
+     },
+     {
+      "name": "x",
+      "type": "uint256"
+     },
+     {
+      "name": "y",
+      "type": "uint256"
+     }
+    ],
+    [
+     {
+      "name": "i",
+      "type": "bytes32"
+     },
+     {
+      "name": "u",
+      "type": "address"
+     },
+     {
+      "name": "dx",
+      "type": "int256"
+     },
+     {
+      "name": "dy",
+      "type": "int256"
+     }
+    ]
+   ],
+   "senders": [
+    "alice",
+    "bob",
+    "carol"
+   ],
+   "setup": [
+    {
+     "args": [
+      "GOLD"
+     ],
+     "fn": "init(bytes32)"
+    },
+    {
+     "args": [
+      "SILVER"
+     ],
+     "fn": "init(bytes32)"
+    },
+    {
+     "args": [
+      "Line",
+      "1000000000000000000000000000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,uint256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "spot",
+      "1000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,bytes32,uint256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "line",
+      "1000000000000000000000000000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,bytes32,uint256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "spot",
+      "2000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,bytes32,uint256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "line",
+      "1000000000000000000000000000000000000000000000000000"
+     ],
+     "fn": "file(bytes32,bytes32,uint256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "alice",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "bob",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "GOLD",
+      "carol",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "alice",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "bob",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "SILVER",
+      "carol",
+      "1000000000000000000000"
+     ],
+     "fn": "slip(bytes32,address,int256)"
+    },
+    {
+     "args": [
+      "bob"
+     ],
+     "fn": "hope(address)",
+     "sender": "alice"
+    },
+    {
+     "args": [
+      "carol"
+     ],
+     "fn": "hope(address)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "GOLD",
+      "alice",
+      "alice",
+      "alice",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "alice"
+    },
+    {
+     "args": [
+      "GOLD",
+      "bob",
+      "bob",
+      "bob",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "GOLD",
+      "carol",
+      "carol",
+      "carol",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "carol"
+    },
+    {
+     "args": [
+      "SILVER",
+      "alice",
+      "alice",
+      "alice",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "alice"
+    },
+    {
+     "args": [
+      "SILVER",
+      "bob",
+      "bob",
+      "bob",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "bob"
+    },
+    {
+     "args": [
+      "SILVER",
+      "carol",
+      "carol",
+      "carol",
+      "100000000000000000000",
+      "50000000000000000000"
+     ],
+     "fn": "frob(bytes32,address,address,address,int256,int256)",
+     "sender": "carol"
+    }
+   ],
+   "source_sha256": "abefef123036f5779c667d5ee9fc4e5269c2ceae77ed0b0952df39ec205af5a7",
+   "subject": "vat"
+  },
+  "max_txs": 6,
+  "per_mutant": 1,
+  "seed": 0
+ },
+ "spec": "runs/v3/vat/f0/seed_1/round_3/cand_2/Spec.sol",
+ "spec_source_sha256": "67bd70d0a4cf9a23cfea01e0f988963024ba8205a3790e079c55477fd5e07938",
+ "version": 1,
+ "wall_s": 1278.761
+}

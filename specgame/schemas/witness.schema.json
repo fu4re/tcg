@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "specgame/schemas/witness.schema.json",
+  "title": "Witness (mutant, sigma) against a spec (protocol.md section 8)",
+  "description": "A presented pair. The verifier re-evaluates it with specgame_core.evaluate_witness on Spec compiled over the mutant; `observed` is what the adversary saw and is never trusted.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "mutant", "sigma", "observed"],
+  "properties": {
+    "version": {"const": 1},
+    "mutant": {"$ref": "#/$defs/sha256", "description": "Artifact identity: sha256 of the runtime bytecode of bare CappedToken compiled from the mutant."},
+    "sigma": {"allOf": [{"$ref": "sigma.schema.json"}, {"required": ["probe"]}]},
+    "observed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spec_source_sha256", "pair_runtime_sha256", "check", "outcome"],
+      "properties": {
+        "spec_source_sha256": {"$ref": "#/$defs/sha256"},
+        "pair_runtime_sha256": {"$ref": "#/$defs/sha256", "description": "sha256 of the runtime bytecode of Spec compiled over the mutant."},
+        "check": {"type": "string", "pattern": "^check_[A-Za-z0-9_]+$"},
+        "outcome": {"const": "violation"}
+      }
+    }
+  },
+  "$defs": {"sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}

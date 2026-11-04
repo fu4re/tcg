@@ -1,0 +1,394 @@
+{
+ "check_json_bytes": 21108287,
+ "check_json_sha256": "c5a95621135eb6971b0d2f352b3cc2ffcd76605d4bb602a20a4e369461259cc0",
+ "checks": [
+  {
+   "check": "check_rely_effect",
+   "duration_s": 8.247,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "b68ef5b77b4426efb82fe4f10ad98c47bb5dfd4975df61d2e17de204f9e5feb4",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_deny_effect",
+   "duration_s": 8.094,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "167a69ac40232767adf1894fd8d29bed37b2fabd45fb123121f269c53842ecaf",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_rely_unauth",
+   "duration_s": 4.671,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "7198ae3a8720dfbf3f880e4e4c689d759cb54e9b2ca0656a359abd1288985559",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_deny_unauth",
+   "duration_s": 4.627,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "eb139bc12d339e5ee5d62ff8d0cd432774c2499a2465a6f1ec802acc9710f219",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_rely_not_live",
+   "duration_s": 4.476,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "04289c3d1474457d1b247a120c353a7edfafcab8c612da186bdc283e93acf3af",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_deny_not_live",
+   "duration_s": 4.508,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "421c9ef2d59368bfef3911bc562365b13552b3b0fe17c0bdbc38703c213dca92",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_hope_effect",
+   "duration_s": 7.951,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "fac0ff3f949a1e669a0f7f5cc3d8d9bc27b87c31f29660295fdece61cc25ca49",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_nope_effect",
+   "duration_s": 8.169,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "416808b16ad49c80076d539aa2d891178ad96c441dec0fd29a4675f66d27825a",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_init_effect",
+   "duration_s": 18.907,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "56d3c723eb259a459df92a331dd373c4ad63037c926819857f3f56ce62cb5eb9",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_init_twice",
+   "duration_s": 4.559,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "2adb34cefb9e6d649312d340d2226ab308f93db552f195e403f437fb39e500e1",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_init_unauth",
+   "duration_s": 4.691,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "0f73b113800f89a9cdea4840e584fc6801288cde60b274b5463a78ab4ed8d3cd",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_frob_needs_init",
+   "duration_s": 4.702,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "f1efc2154cb6ea0d14c81d85efab64365f36d60acbdc52107cd099575bab3810",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_line",
+   "duration_s": 4.62,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "9126f6e2df7ba713b1ef210d980b819b49c0cbd626137f0d68d95c5c881ccac1",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_line_not_live",
+   "duration_s": 4.555,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "c9b084fa3a0140adc85c70317c33e01eb6d7ec65694d9f2506d14fb855f32585",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_unauth",
+   "duration_s": 4.651,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "ebed1d440c8fff919e3259bcc7eac3aeb13108ee1a12f693cae099a7d69d89f5",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_unrecognized",
+   "duration_s": 4.549,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "2380f45d4b8d8ccc20c79ea7d017dcd37a3534d52c26a90ecef17bb6ca3a956f",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_ilk_spot",
+   "duration_s": 23.073,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "35fe80077401d3bfc26bf00125eea41acaa3de2330b62f2942dc940f33331858",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_ilk_line",
+   "duration_s": 19.133,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "5183c1567de6ddad40f44222abc10ba257b4a67b21b7e45e64a3c38f128570f1",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_ilk_dust",
+   "duration_s": 18.797,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "3537b5bd832c4194ebc13412d81a01be2ea3e5e79d3f95a2da5fb1d9fd31fcdb",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_ilk_not_live",
+   "duration_s": 4.479,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "9c1808727aae2be23ac534f412d35b3541f62e54ed40b51af9ef32bff6d901ac",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_ilk_unauth",
+   "duration_s": 4.576,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "58b24d5cdaff235add747a7644b756a5c13e39d705c6ae2f8535afffa31a9172",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_file_ilk_unrecognized",
+   "duration_s": 62.728,
+   "reason": "unproved",
+   "solc_input_sha256": "2cba2b5516bfe56b4b4ec186bb6e2e56c33329aec2e8b474f2f02a8e9123aca9",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_cage_effect",
+   "duration_s": 4.193,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "18f016463908897fa84b230a09b8eedb2803ea85b5187af84370fec76e70df7b",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_cage_unauth",
+   "duration_s": 4.596,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "a9b072099d955583afa4f40a1eaef384428cbcf94db1a8c053db87b8c25a812a",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_slip_effect",
+   "duration_s": 4.414,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "529a710863ad426bbc78dad2a3030456f59b1661b83c4095b3cc94790e13246a",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_slip_unauth",
+   "duration_s": 4.659,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "0081192ba08f6d758c366af2ab3a21729d7829b8be0582b15d0fc204858fb657",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_flux_effect",
+   "duration_s": 68.925,
+   "reason": "unproved",
+   "solc_input_sha256": "96121fda173f62daabc20cd3f51d9e0b89ea9073e0c50a5944da17279598cc43",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_flux_not_allowed",
+   "duration_s": 4.536,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "4bc3d0ede75e0e63be5879d5fac31b613b5302c03b51997afa5084758caf9afc",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_move_effect",
+   "duration_s": 72.717,
+   "reason": "unproved",
+   "solc_input_sha256": "7e6ce15d995dcd73fdcd0d39dad7e2c17ef3240f7a7cf7f865c224d61db57b2f",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_move_not_allowed",
+   "duration_s": 4.069,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "d7f731f27c89ad4ef80c088a91bd5ce376817fef6087a42f0c02541090231819",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_frob_vault",
+   "duration_s": 188.78,
+   "reason": "unproved",
+   "solc_input_sha256": "c713a279445573c141aecbca9a129ea2255af38f510e67d6b5b4afa78bf3c531",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_frob_dai",
+   "duration_s": 135.035,
+   "reason": "unproved",
+   "solc_input_sha256": "aa5284e340e54e9673ce7c67b3d501aa2821ec58c60ea44a1deb2318b3cf4c68",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_frob_not_live",
+   "duration_s": 4.224,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "bcfb2a5f5ec5a8092f9019a06fa5f60aa4c6343a180dc09d3c52d0460ff198a5",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_frob_global_ceiling",
+   "duration_s": 5.685,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "5b40b6b80a85eb305b1ab86b50ca2174440299681d73daf498886d4d729c8fa4",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_frob_ilk_ceiling",
+   "duration_s": 5.57,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "98c6dc9a7377dfc7602ace0bdc3440ecd27ba4b38efdaf351618fac945ffc3fd",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_frob_unsafe",
+   "duration_s": 62.229,
+   "reason": "unproved",
+   "solc_input_sha256": "da65dec3de9c5e1965007fdcfe9cbc8ed824059812ee471d1168624476c6bfc0",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_frob_not_allowed",
+   "duration_s": 4.622,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "08dc8931ac8f6ddaa7cb187b42bd364cb3d2ad0aa772da372613744110123d82",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_frob_dust",
+   "duration_s": 62.438,
+   "reason": "unproved",
+   "solc_input_sha256": "251d8498e45bb1ace3352e5929769db317d5d809d9a73f9c89085a6382ecdaa4",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_fork_effect",
+   "duration_s": 255.382,
+   "reason": "unproved",
+   "solc_input_sha256": "5d6fa06eba999e6b925d37fe8ab4a2c88d41f096d5863b3ddec16938daab18e6",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_fork_src_not_allowed",
+   "duration_s": 4.33,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "a44b36dd96c7db1e44dde338c645cb328e2b8bf5026740bac2bcdac2e89ca7ba",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_fork_dst_not_allowed",
+   "duration_s": 4.284,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "6e0733f6fc9dc03e60e6c5dc0ab99892caee47d8a10fc2688a457a5487794c18",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_fork_src_unsafe",
+   "duration_s": 62.357,
+   "reason": "unproved",
+   "solc_input_sha256": "a3ed7d10e6bf156ebb747fd5c4bb31da0435253798350a7178c44e2357216859",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_fork_dst_unsafe",
+   "duration_s": 62.399,
+   "reason": "unproved",
+   "solc_input_sha256": "a1a0afcbd8931bd468e72a2cad9cf726a6273187846a8560297cc986c4376bc2",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_fork_src_dust",
+   "duration_s": 62.271,
+   "reason": "unproved",
+   "solc_input_sha256": "6103653220745324e7439f9c56ef31e5f07d60b171462a116157ad6d97f16ec7",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_fork_dst_dust",
+   "duration_s": 62.568,
+   "reason": "unproved",
+   "solc_input_sha256": "ccf67507563621c24d30038d0e8932d879be7a0cb09fd0fbfcd2b2c577f29beb",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_grab_vault",
+   "duration_s": 187.687,
+   "reason": "unproved",
+   "solc_input_sha256": "b7da928b0e481388b9ee0b04a4e6d5507d51716187769aa249d6fd3a91e8ebd2",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_grab_sin",
+   "duration_s": 192.824,
+   "reason": "unproved",
+   "solc_input_sha256": "295a2419ed42e26553f178c0e37bd58b139dd80712656162983d293439c3a727",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_grab_unauth",
+   "duration_s": 4.6,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "3bed32945f46e7addab2002c97f0d2272ae97c32b488d47705f89c6488ac140e",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_heal_effect",
+   "duration_s": 13.332,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "0feca8e27bc820f90cad346291ca16fcccac3276c65b5c87d593e220bba2e160",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_suck_effect",
+   "duration_s": 13.561,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "311b7d5c20710b6213b2498a4776542b3e51078c954cb13bd21f04f3e85fd2d5",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_suck_unauth",
+   "duration_s": 4.605,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "17f4ebe036fa78e366588633f927dd96f555306257a137369c837832e45e5028",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_fold_effect",
+   "duration_s": 246.269,
+   "reason": "unproved",
+   "solc_input_sha256": "b9d36071e26a26939a90ffef143e1bacaff67ab8d62b9c591eb48180bb66d167",
+   "verdict": "Unknown"
+  },
+  {
+   "check": "check_fold_not_live",
+   "duration_s": 4.133,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "e2b998d58e74adb53f0549f1d48cd03ccc47b55c4db845724586eae26175496e",
+   "verdict": "Accept"
+  },
+  {
+   "check": "check_fold_unauth",
+   "duration_s": 4.609,
+   "reason": "all_targets_safe",
+   "solc_input_sha256": "41c5fffa3fe8b0c0375a48d5b0fb7581907e3f45b679c5fcb07104731910249a",
+   "verdict": "Accept"
+  }
+ ],
+ "cpu_s": 2056.666,
+ "duration_s": 591.885,
+ "mode": "isolated",
+ "reason": "unproved",
+ "stored_as": "check.json.gz",
+ "timeout_ms": 60000,
+ "verdict": "Unknown",
+ "version": 1,
+ "wall_timeout_s": 600.0,
+ "workers": 4
+}

@@ -1,0 +1,324 @@
+{
+ "anthropic_version_header": "2026-10-21",
+ "calls": [
+  {
+   "cand": 1,
+   "id": "msg_011CgfzeXfdoDsCsroskCpFr",
+   "input_tokens": 8745,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 33033,
+   "round": 1,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 21643,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 8745,
+    "output_tokens": 33033,
+    "output_tokens_details": {
+     "thinking_tokens": 21643
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 222.68
+  },
+  {
+   "cand": 2,
+   "id": "msg_011CgfzvxcmU5iTk4k8S4kZH",
+   "input_tokens": 8745,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 18901,
+   "round": 1,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 10146,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 8745,
+    "output_tokens": 18901,
+    "output_tokens_details": {
+     "thinking_tokens": 10146
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 116.615
+  },
+  {
+   "cand": 1,
+   "id": "msg_011Cgg3bwvfRJdejpM4M4qfC",
+   "input_tokens": 31424,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 15208,
+   "round": 2,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 9150,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 31424,
+    "output_tokens": 15208,
+    "output_tokens_details": {
+     "thinking_tokens": 9150
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 105.822
+  },
+  {
+   "cand": 2,
+   "id": "msg_011Cgg5yjW8unP1eoi6MHDck",
+   "input_tokens": 31424,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 15172,
+   "round": 2,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 7404,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 31424,
+    "output_tokens": 15172,
+    "output_tokens_details": {
+     "thinking_tokens": 7404
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 96.803
+  },
+  {
+   "cand": 1,
+   "id": "msg_011Cgg7YcXy8uAs9Pc1rVaqZ",
+   "input_tokens": 47827,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 9260,
+   "round": 3,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 2382,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 47827,
+    "output_tokens": 9260,
+    "output_tokens_details": {
+     "thinking_tokens": 2382
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 53.488
+  },
+  {
+   "cand": 2,
+   "id": "msg_011Cgg8ghTiz7pSvFvSD2Sn2",
+   "input_tokens": 47827,
+   "model": "claude-sonnet-5-5",
+   "output_tokens": 7207,
+   "round": 3,
+   "stop_details": null,
+   "stop_reason": "end_turn",
+   "thinking_tokens": 856,
+   "usage": {
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 0,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "global",
+    "input_tokens": 47827,
+    "output_tokens": 7207,
+    "output_tokens_details": {
+     "thinking_tokens": 856
+    },
+    "service_tier": "standard",
+    "speed": "standard"
+   },
+   "wall_s": 36.366
+  }
+ ],
+ "condition": "fM",
+ "fallbacks": "none (a refusal is a failed candidate)",
+ "frozen": {
+  "B_A": 2000,
+  "effort": "high",
+  "k": 2,
+  "max_tokens": 64000,
+  "max_txs": 6,
+  "model": "claude-sonnet-5-5",
+  "per_mutant": 1,
+  "rounds": 3,
+  "seed_A": 0,
+  "timeout_ms": 60000,
+  "wall_timeout_s": 600.0
+ },
+ "k": 2,
+ "model_requested": "claude-sonnet-5-5",
+ "model_returned": "claude-sonnet-5-5",
+ "prompt_sha256": {
+  "feedback_f0.md": "0044d327cc58966ada3797c50835ad058cec94540f164e15dd9297a13e542700",
+  "feedback_fM.md": "3e22dc0e896d07e8d89f272fddfe8e96e2c5f2236ca1beaf0cadb16dd4d468dd",
+  "feedback_fMplus.md": "21b6574b733ebbf918384b0a7f0e398806ac198fad8563f90a584a401b820dde",
+  "round_1.md": "4a875318c1a8d8a4ac88ab58be1c419798b62a2819336daf6bfc7ad62d691f3b",
+  "system.md": "8afcd74c44fcc2558575f072dc385146ad1a6e358ffe9ba3c81943be0d4b17ac"
+ },
+ "prompts_sha256": "fbd52777f1a512821d7964339f9b931c42c62b92c48b4739df0995e3c6adc74c",
+ "result": {
+  "W_star": {
+   "sha256": "ce64e9ab7804faa5ae448c2234dcbd193cd67ef8c01ff5e6c5bdddd90d99337a",
+   "size": 25
+  },
+  "bundle": {
+   "exit": 0,
+   "stderr_tail": []
+  },
+  "events": [
+   {
+    "acc_t": "Unknown",
+    "kind": "unchanged",
+    "t": 1
+   },
+   {
+    "acc_t": "Unknown",
+    "kind": "weakening",
+    "t": 2
+   }
+  ],
+  "final": {
+   "acc": "Accept",
+   "cand": 2,
+   "round": 3
+  },
+  "kappa": {
+   "asserts": 84,
+   "determined": true,
+   "kappa": 84,
+   "unproved_over_H": 83,
+   "wall_s": 1394.697
+  },
+  "status": "bundle_holds",
+  "vacuity_a": {
+   "flagged": [],
+   "unknown": [
+    "check_rely_unauth",
+    "check_deny_unauth",
+    "check_init_unauth",
+    "check_file_unauth",
+    "check_file_ilk_unauth",
+    "check_cage_unauth",
+    "check_slip_unauth",
+    "check_grab_unauth",
+    "check_suck_unauth",
+    "check_fold_unauth",
+    "check_rely_effect",
+    "check_deny_effect",
+    "check_rely_needs_live",
+    "check_deny_needs_live",
+    "check_hope_effect",
+    "check_nope_effect",
+    "check_move_consent",
+    "check_flux_consent",
+    "check_init_effect",
+    "check_init_twice",
+    "check_frob_needs_init",
+    "check_file_sets_line",
+    "check_file_spot",
+    "check_file_ceiling",
+    "check_file_dust",
+    "check_file_unknown",
+    "check_file_needs_live",
+    "check_file_ilk_needs_live",
+    "check_cage_effect",
+    "check_stays_caged",
+    "check_move_effect",
+    "check_move_self",
+    "check_flux_effect",
+    "check_flux_self",
+    "check_slip_effect",
+    "check_frob_ink_gem",
+    "check_frob_art",
+    "check_frob_dai_up",
+    "check_frob_live",
+    "check_frob_global_ceiling",
+    "check_frob_ilk_ceiling",
+    "check_frob_safe",
+    "check_frob_dust",
+    "check_frob_consent_debt",
+    "check_frob_consent_ink",
+    "check_frob_consent_src",
+    "check_frob_consent_dst",
+    "check_frob_dst",
+    "check_frob_src",
+    "check_fork_art_total",
+    "check_fork_consent_src",
+    "check_fork_consent_dst",
+    "check_grab_gem",
+    "check_grab_debt_unchanged",
+    "check_grab_gem_dst",
+    "check_heal_effect",
+    "check_suck_effect",
+    "check_fold_up",
+    "check_fold_needs_live"
+   ],
+   "wall_s": 1010.078
+  },
+  "verify": {
+   "exit": 0,
+   "ms_cert": {
+    "killed": 6,
+    "total": 8
+   },
+   "summary": [
+    "label (T*, affects no verdict): mutant 7a3cae9442cf operator=remove-require fault_class=missing-bound-check",
+    "label (T*, affects no verdict): mutant f23fd9948544 operator=remove-statement fault_class=accounting",
+    "verdict: HOLDS, exit 0"
+   ],
+   "verdict": "HOLDS"
+  }
+ },
+ "rounds": 3,
+ "sdk_version": "2.3.0",
+ "seed": 0,
+ "seed_param": "not supported by the Messages API (SDK has no seed parameter); the trajectory seed is recorded only",
+ "temperature_note": "API default; non-default values rejected by this model; not sent",
+ "temperature_recorded": 1.0,
+ "tokens": {
+  "input": 175992,
+  "output": 98781,
+  "thinking": 51581,
+  "total": 274773
+ }
+}

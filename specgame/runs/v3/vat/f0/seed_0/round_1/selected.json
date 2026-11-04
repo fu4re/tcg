@@ -1,0 +1,25 @@
+{
+ "condition": "f0",
+ "selected": 2,
+ "rule": "protocol.md 16.3",
+ "candidates": [
+  {
+   "cand": 1,
+   "acc": "Unknown",
+   "errors": 1,
+   "ms_cert": {
+    "killed": 0,
+    "total": 8
+   }
+  },
+  {
+   "cand": 2,
+   "acc": "Unknown",
+   "errors": 0,
+   "ms_cert": {
+    "killed": 4,
+    "total": 8
+   }
+  }
+ ]
+}

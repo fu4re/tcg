@@ -1,0 +1,26 @@
+{
+ "acc": "lint_rejected",
+ "check_reason": null,
+ "durations_s": {},
+ "errors": [
+  "S9 line 39: check_second_mint_over_cap_reverts: require only in the leading block (Pre)"
+ ],
+ "kill_set": [],
+ "ms_cert": {
+  "killed": 0,
+  "total": 8
+ },
+ "not_proved": [],
+ "spec_source_sha256": "442913628fad8e8abf18d37f2084f874e173e6c65332c48b8950917a7852949d",
+ "stop_reason": "end_turn",
+ "survivors": [
+  "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+  "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+  "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+  "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+  "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+  "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+  "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+  "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df"
+ ]
+}

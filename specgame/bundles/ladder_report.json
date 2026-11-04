@@ -1,0 +1,1416 @@
+{
+ "adversary_id": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+ "adversary_params": {
+  "B_A": 2000,
+  "distribution": {
+   "cap_kinds": [
+    "0",
+    "1",
+    "2",
+    "small",
+    "half",
+    "max-1",
+    "max",
+    "random"
+   ],
+   "dist_version": 1,
+   "fns": [
+    "mint(address,uint256)",
+    "transfer(address,uint256)"
+   ],
+   "max_txs": 6,
+   "name": "specgame-seqgen",
+   "pool": [
+    "alice",
+    "bob",
+    "carol",
+    "zero"
+   ],
+   "senders": [
+    "alice",
+    "bob",
+    "carol"
+   ],
+   "source_sha256": "bb9308fedaf10076679092f055da0c2b9cd7a58d674acc6c89bb9d5a0d1d9100",
+   "uint_kinds": [
+    "0",
+    "1",
+    "2",
+    "cap-1",
+    "cap",
+    "cap+1",
+    "half_cap",
+    "small",
+    "max-1",
+    "max",
+    "random"
+   ]
+  },
+  "max_txs": 6,
+  "per_mutant": 1,
+  "seed": 0
+ },
+ "ladder": {
+  "W_sizes": {
+   "phi_both": 4,
+   "phi_cap": 2,
+   "phi_full": 7,
+   "phi_owner": 2,
+   "phi_top": 0,
+   "phi_transfer": 3
+  },
+  "W_star": {
+   "sha256": "307ab17aa230e96e378d99ceab77c7a678918d52b5dda7cb4a5fdaff05ea814a",
+   "size": 7
+  },
+  "asserted_ok": true,
+  "events": {
+   "M": [
+    "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df",
+    "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+   ],
+   "condition": "ladder",
+   "events": [
+    {
+     "acc_t": "Accept",
+     "gained": [
+      "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+      "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9"
+     ],
+     "kind": "strengthening",
+     "lost": [],
+     "t": 0
+    },
+    {
+     "acc_t": "Accept",
+     "gained": [
+      "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+      "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+     ],
+     "kind": "shift",
+     "lost": [
+      "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+      "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9"
+     ],
+     "t": 1
+    },
+    {
+     "acc_t": "Accept",
+     "gained": [
+      "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+      "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9"
+     ],
+     "kind": "strengthening",
+     "lost": [],
+     "t": 2
+    },
+    {
+     "acc_t": "Accept",
+     "gained": [
+      "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+      "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+      "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+     ],
+     "kind": "shift",
+     "lost": [
+      "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+      "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+      "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+      "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+     ],
+     "t": 3
+    },
+    {
+     "acc_t": "Accept",
+     "gained": [
+      "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+      "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+      "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+      "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+     ],
+     "kind": "strengthening",
+     "lost": [],
+     "t": 4
+    }
+   ],
+   "pool": {
+    "sha256": "307ab17aa230e96e378d99ceab77c7a678918d52b5dda7cb4a5fdaff05ea814a",
+    "size": 7
+   },
+   "rounds": [
+    {
+     "acc": "Accept",
+     "kill_set": [],
+     "ms_cert": {
+      "killed": 0,
+      "total": 8
+     },
+     "phi_source_sha256": "bf2bad7584d9464fda5865e6afe2dba629ad0ef4ee5586b094045612cbb018d0",
+     "t": 0
+    },
+    {
+     "acc": "Accept",
+     "kill_set": [
+      "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+      "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9"
+     ],
+     "ms_cert": {
+      "killed": 2,
+      "total": 8
+     },
+     "phi_source_sha256": "8802adfd64edc5fa3ea3b6f0c7eae0f4b7a504ecc4818fec6b7dc79031ea64ec",
+     "t": 1
+    },
+    {
+     "acc": "Accept",
+     "kill_set": [
+      "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+      "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+     ],
+     "ms_cert": {
+      "killed": 2,
+      "total": 8
+     },
+     "phi_source_sha256": "6d6c7bfdcc9a9db6a80395bab9d933332d96bb8a9f76574bbc1bebd3ea5901f7",
+     "t": 2
+    },
+    {
+     "acc": "Accept",
+     "kill_set": [
+      "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+      "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+      "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+      "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+     ],
+     "ms_cert": {
+      "killed": 4,
+      "total": 8
+     },
+     "phi_source_sha256": "413e25cee2cf986c1dd0c4fecd00c72083efec79c666b65a898670aca855e6a4",
+     "t": 3
+    },
+    {
+     "acc": "Accept",
+     "kill_set": [
+      "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+      "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+      "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+     ],
+     "ms_cert": {
+      "killed": 3,
+      "total": 8
+     },
+     "phi_source_sha256": "10031f1872c0dea80e31134dc9b1085c1b77ca9f22fee24632453e3a7d44bb35",
+     "t": 4
+    },
+    {
+     "acc": "Accept",
+     "kill_set": [
+      "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+      "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+      "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+      "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+      "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+      "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+      "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+     ],
+     "ms_cert": {
+      "killed": 7,
+      "total": 8
+     },
+     "phi_source_sha256": "a7aa0697a5a4362ff7b911c77d6213941a7238e6fd08275e401bc74fe0874f67",
+     "t": 5
+    }
+   ],
+   "seed": 0,
+   "version": 1
+  },
+  "kill_W_star": {
+   "phi_both": [
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+   ],
+   "phi_cap": [
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+   ],
+   "phi_full": [
+    "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+   ],
+   "phi_owner": [
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9"
+   ],
+   "phi_top": [],
+   "phi_transfer": [
+    "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+   ]
+  },
+  "kill_own_W": {
+   "phi_both": [
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+   ],
+   "phi_cap": [
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+   ],
+   "phi_full": [
+    "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+   ],
+   "phi_owner": [
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9"
+   ],
+   "phi_top": [],
+   "phi_transfer": [
+    "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+   ]
+  },
+  "mutants": [
+   {
+    "id": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "name": "m01_mint_no_owner"
+   },
+   {
+    "id": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "name": "m02_mint_no_cap"
+   },
+   {
+    "id": "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "name": "m03_mint_cap_off_by_one"
+   },
+   {
+    "id": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "name": "m04_mint_no_supply"
+   },
+   {
+    "id": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "name": "m05_transfer_no_debit"
+   },
+   {
+    "id": "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "name": "m06_transfer_credits_sender"
+   },
+   {
+    "id": "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+    "name": "m07_transfer_no_credit"
+   },
+   {
+    "id": "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df",
+    "name": "m08_mint_always_reverts"
+   }
+  ],
+  "nesting": [
+   {
+    "holds": true,
+    "lower": "phi_top",
+    "missing": [],
+    "pool": "own W",
+    "upper": "phi_owner"
+   },
+   {
+    "holds": true,
+    "lower": "phi_cap",
+    "missing": [],
+    "pool": "own W",
+    "upper": "phi_both"
+   },
+   {
+    "holds": true,
+    "lower": "phi_owner",
+    "missing": [],
+    "pool": "own W",
+    "upper": "phi_both"
+   },
+   {
+    "holds": true,
+    "lower": "phi_both",
+    "missing": [],
+    "pool": "own W",
+    "upper": "phi_full"
+   },
+   {
+    "holds": true,
+    "lower": "phi_transfer",
+    "missing": [],
+    "pool": "own W",
+    "upper": "phi_full"
+   },
+   {
+    "holds": true,
+    "lower": "phi_top",
+    "missing": [],
+    "pool": "W*",
+    "upper": "phi_owner"
+   },
+   {
+    "holds": true,
+    "lower": "phi_cap",
+    "missing": [],
+    "pool": "W*",
+    "upper": "phi_both"
+   },
+   {
+    "holds": true,
+    "lower": "phi_owner",
+    "missing": [],
+    "pool": "W*",
+    "upper": "phi_both"
+   },
+   {
+    "holds": true,
+    "lower": "phi_both",
+    "missing": [],
+    "pool": "W*",
+    "upper": "phi_full"
+   },
+   {
+    "holds": true,
+    "lower": "phi_transfer",
+    "missing": [],
+    "pool": "W*",
+    "upper": "phi_full"
+   }
+  ],
+  "prop62": {
+   "K_cap": [],
+   "K_owner": [
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3"
+   ],
+   "M_prime": [
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3"
+   ],
+   "M_prime_names": [
+    "m01_mint_no_owner"
+   ],
+   "equal": false,
+   "measured": "not equal: K(phi_owner) = ['m01_mint_no_owner'], K(phi_cap) = [] on M'",
+   "note_claim": "phi_owner ≡_M' phi_cap (both kill m1)",
+   "phi_cap_on_m01_pairs": [
+    {
+     "mutant": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+     "outcomes": {
+      "check_cap_after_mint": "success",
+      "check_cap_invariant": "success"
+     },
+     "sigma_sha256": "86a394d86cbc6e698262bc0bf143a6a392ba7fc271831267ab1e0d5afaa50d86",
+     "violated": false
+    }
+   ],
+   "pool": "W*"
+  },
+  "prop63": {
+   "K_both": [
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+   ],
+   "K_cap": [
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+   ],
+   "K_owner": [
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9"
+   ],
+   "K_owner_union_K_cap": [
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+   ],
+   "holds": true,
+   "pool": "W(phi_owner) ∪ W(phi_cap) ∪ W(phi_both)",
+   "pool_sha256": "3740690686ee25d0b0048ae6b0f13f1d9219f5ffc529b47aa4fc9af423e81815",
+   "pool_size": 4
+  },
+  "specs": [
+   "phi_top",
+   "phi_owner",
+   "phi_cap",
+   "phi_both",
+   "phi_transfer",
+   "phi_full"
+  ],
+  "table": [
+   {
+    "W_star": {
+     "phi_both": true,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": true,
+     "phi_top": false,
+     "phi_transfer": false
+    },
+    "mutant": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "name": "m01_mint_no_owner",
+    "own_W": {
+     "phi_both": true,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": true,
+     "phi_top": false,
+     "phi_transfer": false
+    }
+   },
+   {
+    "W_star": {
+     "phi_both": true,
+     "phi_cap": true,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": false
+    },
+    "mutant": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "name": "m02_mint_no_cap",
+    "own_W": {
+     "phi_both": true,
+     "phi_cap": true,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": false
+    }
+   },
+   {
+    "W_star": {
+     "phi_both": true,
+     "phi_cap": true,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": false
+    },
+    "mutant": "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "name": "m03_mint_cap_off_by_one",
+    "own_W": {
+     "phi_both": true,
+     "phi_cap": true,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": false
+    }
+   },
+   {
+    "W_star": {
+     "phi_both": true,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": true,
+     "phi_top": false,
+     "phi_transfer": false
+    },
+    "mutant": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "name": "m04_mint_no_supply",
+    "own_W": {
+     "phi_both": true,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": true,
+     "phi_top": false,
+     "phi_transfer": false
+    }
+   },
+   {
+    "W_star": {
+     "phi_both": false,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": true
+    },
+    "mutant": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "name": "m05_transfer_no_debit",
+    "own_W": {
+     "phi_both": false,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": true
+    }
+   },
+   {
+    "W_star": {
+     "phi_both": false,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": true
+    },
+    "mutant": "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "name": "m06_transfer_credits_sender",
+    "own_W": {
+     "phi_both": false,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": true
+    }
+   },
+   {
+    "W_star": {
+     "phi_both": false,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": true
+    },
+    "mutant": "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+    "name": "m07_transfer_no_credit",
+    "own_W": {
+     "phi_both": false,
+     "phi_cap": false,
+     "phi_full": true,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": true
+    }
+   },
+   {
+    "W_star": {
+     "phi_both": false,
+     "phi_cap": false,
+     "phi_full": false,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": false
+    },
+    "mutant": "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df",
+    "name": "m08_mint_always_reverts",
+    "own_W": {
+     "phi_both": false,
+     "phi_cap": false,
+     "phi_full": false,
+     "phi_owner": false,
+     "phi_top": false,
+     "phi_transfer": false
+    }
+   }
+  ],
+  "version": 1
+ },
+ "ok": true,
+ "specs": {
+  "phi_both": {
+   "adversary": {
+    "W": 4,
+    "discarded": 0,
+    "id": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+    "kill_set": [
+     "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+     "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+     "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+     "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+    ],
+    "tries": {
+     "m01_mint_no_owner": 2,
+     "m02_mint_no_cap": 4,
+     "m03_mint_cap_off_by_one": 7,
+     "m04_mint_no_supply": 1,
+     "m05_transfer_no_debit": 2000,
+     "m06_transfer_credits_sender": 2000,
+     "m07_transfer_no_credit": 2000,
+     "m08_mint_always_reverts": 2000
+    },
+    "wall_s": 21.932
+   },
+   "bundle": {
+    "exit": 0,
+    "line": "bundle: wrote /home/vladimir/sheaf/tcg-specgames/specgame/bundles/phi_both (22 files): Check Accept, |M| = 8, |W| = 4, discarded 0, ms_cert = 4/8",
+    "wall_s": 0.799
+   },
+   "check": {
+    "cache_hits": 5,
+    "checks": [
+     {
+      "cached": true,
+      "check": "check_mint_nonowner_no_supply_change",
+      "duration_s": 0.251,
+      "solc_input_sha256": "c7f895bfab1bc3bc5f9486152e798468849b3a3e8f72636ce7d1f0406dd6aa4a",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_mint_owner_adds_amount",
+      "duration_s": 0.251,
+      "solc_input_sha256": "b02f85cbafd5320a6e73d11667c496876736617d49ac35b950d4b315b7b97572",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_transfer_keeps_supply",
+      "duration_s": 0.235,
+      "solc_input_sha256": "bf26cb4eb4f0801165df015c08b7a68d25b60dd6d58153145c1e87719c3d165f",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_cap_invariant",
+      "duration_s": 0.254,
+      "solc_input_sha256": "22238ff30169f768873f70ac95cd19c0a81b9a9e091eced0ecee36311aeacae6",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_cap_after_mint",
+      "duration_s": 0.14,
+      "solc_input_sha256": "2c4b1b97f0081ae1913e7d92155ca5f374a318eba50cfe51f45898483b2e4df9",
+      "verdict": "Accept"
+     }
+    ],
+    "cpu_s": 1.131,
+    "duration_s": 0.553,
+    "mode": "isolated",
+    "reason": "all_checks_safe",
+    "timeout_ms": 60000,
+    "verdict": "Accept",
+    "wall_timeout_s": 600.0
+   },
+   "spec": "specs/phi_both.sol",
+   "spec_source_sha256": "413e25cee2cf986c1dd0c4fecd00c72083efec79c666b65a898670aca855e6a4",
+   "specreport": {
+    "asserts": 5,
+    "available": true,
+    "kappa": 5,
+    "kappa_unproved": 0,
+    "source": "/home/vladimir/sheaf/tcg-specgames/specgame/build/specs/phi_both.json",
+    "vacuity_a": "ok",
+    "vacuity_a_flagged": [],
+    "vacuity_s": 3.14
+   },
+   "survivor_checks": [
+    {
+     "duration_s": 0.54,
+     "mutant": "m05_transfer_no_debit",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.552,
+     "mutant": "m06_transfer_credits_sender",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.568,
+     "mutant": "m07_transfer_no_credit",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.551,
+     "mutant": "m08_mint_always_reverts",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    }
+   ],
+   "verify": {
+    "exit": 0,
+    "kill_set": [
+     "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+     "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+     "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+     "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+    ],
+    "ms_cert": {
+     "killed": 4,
+     "total": 8
+    },
+    "summary": [
+     "label (T*, affects no verdict): mutant cc76b36aebea operator=remove-require fault_class=missing-bound-check",
+     "label (T*, affects no verdict): mutant e630674a3ded operator=remove-statement fault_class=accounting",
+     "verdict: HOLDS, exit 0"
+    ],
+    "verdict": "HOLDS",
+    "wall_s": 1.229
+   },
+   "wall_s": 27.556
+  },
+  "phi_cap": {
+   "adversary": {
+    "W": 2,
+    "discarded": 0,
+    "id": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+    "kill_set": [
+     "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+     "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+    ],
+    "tries": {
+     "m01_mint_no_owner": 2000,
+     "m02_mint_no_cap": 4,
+     "m03_mint_cap_off_by_one": 7,
+     "m04_mint_no_supply": 2000,
+     "m05_transfer_no_debit": 2000,
+     "m06_transfer_credits_sender": 2000,
+     "m07_transfer_no_credit": 2000,
+     "m08_mint_always_reverts": 2000
+    },
+    "wall_s": 13.724
+   },
+   "bundle": {
+    "exit": 0,
+    "line": "bundle: wrote /home/vladimir/sheaf/tcg-specgames/specgame/bundles/phi_cap (16 files): Check Accept, |M| = 8, |W| = 2, discarded 0, ms_cert = 2/8",
+    "wall_s": 0.704
+   },
+   "check": {
+    "cache_hits": 2,
+    "checks": [
+     {
+      "cached": true,
+      "check": "check_cap_invariant",
+      "duration_s": 0.254,
+      "solc_input_sha256": "22238ff30169f768873f70ac95cd19c0a81b9a9e091eced0ecee36311aeacae6",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_cap_after_mint",
+      "duration_s": 0.14,
+      "solc_input_sha256": "2c4b1b97f0081ae1913e7d92155ca5f374a318eba50cfe51f45898483b2e4df9",
+      "verdict": "Accept"
+     }
+    ],
+    "cpu_s": 0.394,
+    "duration_s": 0.21,
+    "mode": "isolated",
+    "reason": "all_checks_safe",
+    "timeout_ms": 60000,
+    "verdict": "Accept",
+    "wall_timeout_s": 600.0
+   },
+   "spec": "specs/phi_cap.sol",
+   "spec_source_sha256": "6d6c7bfdcc9a9db6a80395bab9d933332d96bb8a9f76574bbc1bebd3ea5901f7",
+   "specreport": {
+    "asserts": 2,
+    "available": true,
+    "kappa": 2,
+    "kappa_unproved": 0,
+    "source": "/home/vladimir/sheaf/tcg-specgames/specgame/build/specs/phi_cap.json",
+    "vacuity_a": "ok",
+    "vacuity_a_flagged": [],
+    "vacuity_s": 0.197
+   },
+   "survivor_checks": [
+    {
+     "duration_s": 0.372,
+     "mutant": "m01_mint_no_owner",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.37,
+     "mutant": "m04_mint_no_supply",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.386,
+     "mutant": "m05_transfer_no_debit",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.368,
+     "mutant": "m06_transfer_credits_sender",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.398,
+     "mutant": "m07_transfer_no_credit",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.356,
+     "mutant": "m08_mint_always_reverts",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    }
+   ],
+   "verify": {
+    "exit": 0,
+    "kill_set": [
+     "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+     "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed"
+    ],
+    "ms_cert": {
+     "killed": 2,
+     "total": 8
+    },
+    "summary": [
+     "label (T*, affects no verdict): mutant cc76b36aebea operator=remove-require fault_class=missing-bound-check",
+     "label (T*, affects no verdict): mutant e630674a3ded operator=remove-statement fault_class=accounting",
+     "verdict: HOLDS, exit 0"
+    ],
+    "verdict": "HOLDS",
+    "wall_s": 0.875
+   },
+   "wall_s": 18.851
+  },
+  "phi_full": {
+   "adversary": {
+    "W": 7,
+    "discarded": 0,
+    "id": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+    "kill_set": [
+     "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+     "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+     "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+     "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+     "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+     "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+     "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+    ],
+    "tries": {
+     "m01_mint_no_owner": 2,
+     "m02_mint_no_cap": 4,
+     "m03_mint_cap_off_by_one": 7,
+     "m04_mint_no_supply": 1,
+     "m05_transfer_no_debit": 19,
+     "m06_transfer_credits_sender": 19,
+     "m07_transfer_no_credit": 19,
+     "m08_mint_always_reverts": 2000
+    },
+    "wall_s": 10.389
+   },
+   "bundle": {
+    "exit": 0,
+    "line": "bundle: wrote /home/vladimir/sheaf/tcg-specgames/specgame/bundles/phi_full (28 files): Check Accept, |M| = 8, |W| = 7, discarded 0, ms_cert = 7/8",
+    "wall_s": 1.043
+   },
+   "check": {
+    "cache_hits": 8,
+    "checks": [
+     {
+      "cached": true,
+      "check": "check_mint_nonowner_no_supply_change",
+      "duration_s": 0.251,
+      "solc_input_sha256": "c7f895bfab1bc3bc5f9486152e798468849b3a3e8f72636ce7d1f0406dd6aa4a",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_mint_owner_adds_amount",
+      "duration_s": 0.251,
+      "solc_input_sha256": "b02f85cbafd5320a6e73d11667c496876736617d49ac35b950d4b315b7b97572",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_transfer_keeps_supply",
+      "duration_s": 0.235,
+      "solc_input_sha256": "bf26cb4eb4f0801165df015c08b7a68d25b60dd6d58153145c1e87719c3d165f",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_cap_invariant",
+      "duration_s": 0.254,
+      "solc_input_sha256": "22238ff30169f768873f70ac95cd19c0a81b9a9e091eced0ecee36311aeacae6",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_cap_after_mint",
+      "duration_s": 0.14,
+      "solc_input_sha256": "2c4b1b97f0081ae1913e7d92155ca5f374a318eba50cfe51f45898483b2e4df9",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_transfer_moves_amount",
+      "duration_s": 0.504,
+      "solc_input_sha256": "c225447e348cafa8dc5374277af29f884d0d21bda3184d7d10a0147f708c1a8b",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_transfer_self_unchanged",
+      "duration_s": 0.354,
+      "solc_input_sha256": "a19bd4497442fdc4dd5f6241dbb89fe978ef3e2bb17831a79bfb97b015f63118",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_transfer_others_untouched",
+      "duration_s": 0.248,
+      "solc_input_sha256": "fd982cf77648248173b007becfefe0d4b8b39feff982ed310970510ae8934ed8",
+      "verdict": "Accept"
+     }
+    ],
+    "cpu_s": 2.237,
+    "duration_s": 0.743,
+    "mode": "isolated",
+    "reason": "all_checks_safe",
+    "timeout_ms": 60000,
+    "verdict": "Accept",
+    "wall_timeout_s": 600.0
+   },
+   "spec": "specs/phi_full.sol",
+   "spec_source_sha256": "a7aa0697a5a4362ff7b911c77d6213941a7238e6fd08275e401bc74fe0874f67",
+   "specreport": {
+    "asserts": 11,
+    "available": true,
+    "kappa": 11,
+    "kappa_unproved": 4,
+    "source": "/home/vladimir/sheaf/tcg-specgames/specgame/build/specs/phi_full.json",
+    "vacuity_a": "ok",
+    "vacuity_a_flagged": [],
+    "vacuity_s": 2.606
+   },
+   "survivor_checks": [
+    {
+     "duration_s": 0.747,
+     "mutant": "m08_mint_always_reverts",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    }
+   ],
+   "verify": {
+    "exit": 0,
+    "kill_set": [
+     "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+     "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+     "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+     "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+     "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+     "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+     "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+    ],
+    "ms_cert": {
+     "killed": 7,
+     "total": 8
+    },
+    "summary": [
+     "label (T*, affects no verdict): mutant cc76b36aebea operator=remove-require fault_class=missing-bound-check",
+     "label (T*, affects no verdict): mutant e630674a3ded operator=remove-statement fault_class=accounting",
+     "verdict: HOLDS, exit 0"
+    ],
+    "verdict": "HOLDS",
+    "wall_s": 1.9
+   },
+   "wall_s": 15.212
+  },
+  "phi_owner": {
+   "adversary": {
+    "W": 2,
+    "discarded": 0,
+    "id": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+    "kill_set": [
+     "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+     "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9"
+    ],
+    "tries": {
+     "m01_mint_no_owner": 2,
+     "m02_mint_no_cap": 2000,
+     "m03_mint_cap_off_by_one": 2000,
+     "m04_mint_no_supply": 1,
+     "m05_transfer_no_debit": 2000,
+     "m06_transfer_credits_sender": 2000,
+     "m07_transfer_no_credit": 2000,
+     "m08_mint_always_reverts": 2000
+    },
+    "wall_s": 19.817
+   },
+   "bundle": {
+    "exit": 0,
+    "line": "bundle: wrote /home/vladimir/sheaf/tcg-specgames/specgame/bundles/phi_owner (18 files): Check Accept, |M| = 8, |W| = 2, discarded 0, ms_cert = 2/8",
+    "wall_s": 0.723
+   },
+   "check": {
+    "cache_hits": 3,
+    "checks": [
+     {
+      "cached": true,
+      "check": "check_mint_nonowner_no_supply_change",
+      "duration_s": 0.251,
+      "solc_input_sha256": "c7f895bfab1bc3bc5f9486152e798468849b3a3e8f72636ce7d1f0406dd6aa4a",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_mint_owner_adds_amount",
+      "duration_s": 0.251,
+      "solc_input_sha256": "b02f85cbafd5320a6e73d11667c496876736617d49ac35b950d4b315b7b97572",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_transfer_keeps_supply",
+      "duration_s": 0.235,
+      "solc_input_sha256": "bf26cb4eb4f0801165df015c08b7a68d25b60dd6d58153145c1e87719c3d165f",
+      "verdict": "Accept"
+     }
+    ],
+    "cpu_s": 0.737,
+    "duration_s": 0.302,
+    "mode": "isolated",
+    "reason": "all_checks_safe",
+    "timeout_ms": 60000,
+    "verdict": "Accept",
+    "wall_timeout_s": 600.0
+   },
+   "spec": "specs/phi_owner.sol",
+   "spec_source_sha256": "8802adfd64edc5fa3ea3b6f0c7eae0f4b7a504ecc4818fec6b7dc79031ea64ec",
+   "specreport": {
+    "asserts": 3,
+    "available": true,
+    "kappa": 3,
+    "kappa_unproved": 0,
+    "source": "/home/vladimir/sheaf/tcg-specgames/specgame/build/specs/phi_owner.json",
+    "vacuity_a": "ok",
+    "vacuity_a_flagged": [],
+    "vacuity_s": 0.281
+   },
+   "survivor_checks": [
+    {
+     "duration_s": 0.522,
+     "mutant": "m02_mint_no_cap",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.527,
+     "mutant": "m03_mint_cap_off_by_one",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.507,
+     "mutant": "m05_transfer_no_debit",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.511,
+     "mutant": "m06_transfer_credits_sender",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.499,
+     "mutant": "m07_transfer_no_credit",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.487,
+     "mutant": "m08_mint_always_reverts",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    }
+   ],
+   "verify": {
+    "exit": 0,
+    "kill_set": [
+     "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+     "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9"
+    ],
+    "ms_cert": {
+     "killed": 2,
+     "total": 8
+    },
+    "summary": [
+     "label (T*, affects no verdict): mutant cc76b36aebea operator=remove-require fault_class=missing-bound-check",
+     "label (T*, affects no verdict): mutant e630674a3ded operator=remove-statement fault_class=accounting",
+     "verdict: HOLDS, exit 0"
+    ],
+    "verdict": "HOLDS",
+    "wall_s": 0.943
+   },
+   "wall_s": 25.913
+  },
+  "phi_top": {
+   "adversary": {
+    "W": 0,
+    "discarded": 0,
+    "id": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+    "kill_set": [],
+    "tries": {
+     "m01_mint_no_owner": 2000,
+     "m02_mint_no_cap": 2000,
+     "m03_mint_cap_off_by_one": 2000,
+     "m04_mint_no_supply": 2000,
+     "m05_transfer_no_debit": 2000,
+     "m06_transfer_credits_sender": 2000,
+     "m07_transfer_no_credit": 2000,
+     "m08_mint_always_reverts": 2000
+    },
+    "wall_s": 9.994
+   },
+   "bundle": {
+    "exit": 0,
+    "line": "bundle: wrote /home/vladimir/sheaf/tcg-specgames/specgame/bundles/phi_top (14 files): Check Accept, |M| = 8, |W| = 0, discarded 0, ms_cert = 0/8",
+    "wall_s": 0.613
+   },
+   "check": {
+    "cache_hits": 1,
+    "checks": [
+     {
+      "cached": true,
+      "check": "check_top",
+      "duration_s": 0.117,
+      "solc_input_sha256": "3f5391c35dcdc6b503d061e45bf41d89098a3735bf63d6b22dc954404c274e4a",
+      "verdict": "Accept"
+     }
+    ],
+    "cpu_s": 0.117,
+    "duration_s": 0.222,
+    "mode": "isolated",
+    "reason": "all_checks_safe",
+    "timeout_ms": 60000,
+    "verdict": "Accept",
+    "wall_timeout_s": 600.0
+   },
+   "spec": "specs/phi_top.sol",
+   "spec_source_sha256": "bf2bad7584d9464fda5865e6afe2dba629ad0ef4ee5586b094045612cbb018d0",
+   "specreport": {
+    "asserts": 1,
+    "available": true,
+    "kappa": 0,
+    "kappa_unproved": 0,
+    "source": "/home/vladimir/sheaf/tcg-specgames/specgame/build/specs/phi_top.json",
+    "vacuity_a": "ok",
+    "vacuity_a_flagged": [],
+    "vacuity_s": 1.13
+   },
+   "survivor_checks": [
+    {
+     "duration_s": 0.319,
+     "mutant": "m01_mint_no_owner",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.318,
+     "mutant": "m02_mint_no_cap",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.327,
+     "mutant": "m03_mint_cap_off_by_one",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.332,
+     "mutant": "m04_mint_no_supply",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.321,
+     "mutant": "m05_transfer_no_debit",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.333,
+     "mutant": "m06_transfer_credits_sender",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.317,
+     "mutant": "m07_transfer_no_credit",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.312,
+     "mutant": "m08_mint_always_reverts",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    }
+   ],
+   "verify": {
+    "exit": 0,
+    "kill_set": [],
+    "ms_cert": {
+     "killed": 0,
+     "total": 8
+    },
+    "summary": [
+     "label (T*, affects no verdict): mutant cc76b36aebea operator=remove-require fault_class=missing-bound-check",
+     "label (T*, affects no verdict): mutant e630674a3ded operator=remove-statement fault_class=accounting",
+     "verdict: HOLDS, exit 0"
+    ],
+    "verdict": "HOLDS",
+    "wall_s": 0.75
+   },
+   "wall_s": 15.513
+  },
+  "phi_transfer": {
+   "adversary": {
+    "W": 3,
+    "discarded": 0,
+    "id": "c16d1dd5a4a4718c90323d6c3984908be203e22d606c23c9104bfe1f55864102",
+    "kill_set": [
+     "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+     "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+     "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+    ],
+    "tries": {
+     "m01_mint_no_owner": 2000,
+     "m02_mint_no_cap": 2000,
+     "m03_mint_cap_off_by_one": 2000,
+     "m04_mint_no_supply": 2000,
+     "m05_transfer_no_debit": 19,
+     "m06_transfer_credits_sender": 19,
+     "m07_transfer_no_credit": 19,
+     "m08_mint_always_reverts": 2000
+    },
+    "wall_s": 23.533
+   },
+   "bundle": {
+    "exit": 0,
+    "line": "bundle: wrote /home/vladimir/sheaf/tcg-specgames/specgame/bundles/phi_transfer (20 files): Check Accept, |M| = 8, |W| = 3, discarded 0, ms_cert = 3/8",
+    "wall_s": 0.801
+   },
+   "check": {
+    "cache_hits": 4,
+    "checks": [
+     {
+      "cached": true,
+      "check": "check_transfer_keeps_supply",
+      "duration_s": 0.235,
+      "solc_input_sha256": "bf26cb4eb4f0801165df015c08b7a68d25b60dd6d58153145c1e87719c3d165f",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_transfer_moves_amount",
+      "duration_s": 0.504,
+      "solc_input_sha256": "c225447e348cafa8dc5374277af29f884d0d21bda3184d7d10a0147f708c1a8b",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_transfer_self_unchanged",
+      "duration_s": 0.354,
+      "solc_input_sha256": "a19bd4497442fdc4dd5f6241dbb89fe978ef3e2bb17831a79bfb97b015f63118",
+      "verdict": "Accept"
+     },
+     {
+      "cached": true,
+      "check": "check_transfer_others_untouched",
+      "duration_s": 0.248,
+      "solc_input_sha256": "fd982cf77648248173b007becfefe0d4b8b39feff982ed310970510ae8934ed8",
+      "verdict": "Accept"
+     }
+    ],
+    "cpu_s": 1.341,
+    "duration_s": 0.364,
+    "mode": "isolated",
+    "reason": "all_checks_safe",
+    "timeout_ms": 60000,
+    "verdict": "Accept",
+    "wall_timeout_s": 600.0
+   },
+   "spec": "specs/phi_transfer.sol",
+   "spec_source_sha256": "10031f1872c0dea80e31134dc9b1085c1b77ca9f22fee24632453e3a7d44bb35",
+   "specreport": {
+    "asserts": 7,
+    "available": true,
+    "kappa": 7,
+    "kappa_unproved": 4,
+    "source": "/home/vladimir/sheaf/tcg-specgames/specgame/build/specs/phi_transfer.json",
+    "vacuity_a": "ok",
+    "vacuity_a_flagged": [],
+    "vacuity_s": 0.347
+   },
+   "survivor_checks": [
+    {
+     "duration_s": 0.918,
+     "mutant": "m01_mint_no_owner",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.928,
+     "mutant": "m02_mint_no_cap",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.926,
+     "mutant": "m03_mint_cap_off_by_one",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.91,
+     "mutant": "m04_mint_no_supply",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    },
+    {
+     "duration_s": 0.867,
+     "mutant": "m08_mint_always_reverts",
+     "reason": "all_checks_safe",
+     "verdict": "Accept"
+    }
+   ],
+   "verify": {
+    "exit": 0,
+    "kill_set": [
+     "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+     "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+     "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+    ],
+    "ms_cert": {
+     "killed": 3,
+     "total": 8
+    },
+    "summary": [
+     "label (T*, affects no verdict): mutant cc76b36aebea operator=remove-require fault_class=missing-bound-check",
+     "label (T*, affects no verdict): mutant e630674a3ded operator=remove-statement fault_class=accounting",
+     "verdict: HOLDS, exit 0"
+    ],
+    "verdict": "HOLDS",
+    "wall_s": 1.42
+   },
+   "wall_s": 31.633
+  }
+ },
+ "timeout_ms": 60000,
+ "version": 1,
+ "wall_timeout_s": 600.0
+}

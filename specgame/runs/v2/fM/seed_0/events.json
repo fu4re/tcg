@@ -1,0 +1,91 @@
+{
+ "M": [
+  "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+  "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+  "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+  "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+  "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df",
+  "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+  "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+  "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+ ],
+ "condition": "fM",
+ "events": [
+  {
+   "acc_t": "Accept",
+   "gained": [],
+   "kind": "unchanged",
+   "lost": [],
+   "t": 1
+  },
+  {
+   "acc_t": "Accept",
+   "gained": [],
+   "kind": "unchanged",
+   "lost": [],
+   "t": 2
+  }
+ ],
+ "pool": {
+  "sha256": "c5d7025d31d8723bdfc0720fa653f6486e4335baf2219adfc7675f93d53ecdb5",
+  "size": 15
+ },
+ "rounds": [
+  {
+   "acc": "Accept",
+   "kill_set": [
+    "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+   ],
+   "ms_cert": {
+    "killed": 7,
+    "total": 8
+   },
+   "phi_source_sha256": "ccdca34e3767775de38b75635b8e8b4b96d66753033f90845ef86c71c7aec03d",
+   "t": 1
+  },
+  {
+   "acc": "Accept",
+   "kill_set": [
+    "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+   ],
+   "ms_cert": {
+    "killed": 7,
+    "total": 8
+   },
+   "phi_source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4",
+   "t": 2
+  },
+  {
+   "acc": "Accept",
+   "kill_set": [
+    "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+    "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+    "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+    "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+    "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+    "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+    "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+   ],
+   "ms_cert": {
+    "killed": 7,
+    "total": 8
+   },
+   "phi_source_sha256": "49e7b54e14262153a144f4f20a5b922de7416701b416a886a0fb60d2035895b4",
+   "t": 3
+  }
+ ],
+ "seed": 0,
+ "version": 1
+}

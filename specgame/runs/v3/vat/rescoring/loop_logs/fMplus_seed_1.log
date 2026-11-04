@@ -1,0 +1,8 @@
+round 1 cand 1: Unknown (budget), own ms_cert 6/8
+round 1 cand 2: Unknown (compile_error), own ms_cert 0/8
+round 2 cand 1: Unknown (unproved), own ms_cert 6/8
+round 2 cand 2: Unknown (unproved), own ms_cert 6/8
+round 3 cand 1: Accept (all_checks_safe), own ms_cert 4/8
+round 3 cand 2: Accept (all_checks_safe), own ms_cert 4/8
+WALL 14727.78 s
+LOOP_EXIT 0

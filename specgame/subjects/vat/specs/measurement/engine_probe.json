@@ -1,0 +1,67 @@
+[
+ {
+  "check": "check_frob_conserves_collateral",
+  "engine": "bmc",
+  "timeout_ms": 60000,
+  "duration_s": 2.3,
+  "messages": [
+   "info Spec.sol:16 BMC: Assertion violation check is safe!",
+   "info Spec.sol:17 BMC: Assertion violation check is safe!"
+  ],
+  "solc_input_sha256": "3325df1f49227115adb40fe841aaf78c305dc838530015ac29ecab2eb75d24b7"
+ },
+ {
+  "check": "check_frob_conserves_collateral",
+  "engine": "all",
+  "timeout_ms": 60000,
+  "duration_s": 124.9,
+  "messages": [
+   "warning Spec.sol:16 CHC: Assertion violation might happen here.",
+   "warning Spec.sol:17 CHC: Assertion violation might happen here.",
+   "info Spec.sol:16 BMC: Assertion violation check is safe!",
+   "info Spec.sol:17 BMC: Assertion violation check is safe!"
+  ],
+  "solc_input_sha256": "ed9d7b22730761c69a53c8f7a3ef32d098324964f1632f2d91fd634fa1773a34"
+ },
+ {
+  "check": "check_two_dai_balances_within_debt",
+  "engine": "bmc",
+  "timeout_ms": 60000,
+  "duration_s": 1.1,
+  "messages": [
+   "warning Spec.sol:11 BMC: Assertion violation happens here."
+  ],
+  "solc_input_sha256": "9782389c8f37cba6c9931d4b355756c846ad46e324211ce9dc9e34286dc33bbe"
+ },
+ {
+  "check": "check_two_dai_balances_within_debt",
+  "engine": "all",
+  "timeout_ms": 60000,
+  "duration_s": 62.7,
+  "messages": [
+   "warning Spec.sol:11 CHC: Assertion violation might happen here.",
+   "warning Spec.sol:11 BMC: Assertion violation happens here."
+  ],
+  "solc_input_sha256": "bdff172691d751d796be0b0f38a9ec4c86db46bd5364ee760cc02dfd7f70f935"
+ },
+ {
+  "check": "check_suck_needs_auth",
+  "engine": "bmc",
+  "timeout_ms": 60000,
+  "duration_s": 1.2,
+  "messages": [
+   "info Spec.sol:12 BMC: Assertion violation check is safe!"
+  ],
+  "solc_input_sha256": "a32b4e4fb8e2564f652adf0ab005e6188c3a092b2d71c52403089329cc77debf"
+ },
+ {
+  "check": "check_suck_needs_auth",
+  "engine": "all",
+  "timeout_ms": 60000,
+  "duration_s": 3.9,
+  "messages": [
+   "info Spec.sol:12 CHC: Assertion violation check is safe!"
+  ],
+  "solc_input_sha256": "c33a37507a7e930984956f3a8ca51c2805a0be20d79b18a162088716c5c688f4"
+ }
+]

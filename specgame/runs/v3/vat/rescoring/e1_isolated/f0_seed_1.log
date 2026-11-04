@@ -1,0 +1,113 @@
+run_isolated: build context ./Dockerfile ./protocol.json ./requirements.lock ./schemas/events.schema.json ./schemas/manifest.schema.json ./schemas/mutants.schema.json ./schemas/profile.schema.json ./schemas/sigma.schema.json ./schemas/witness.schema.json ./setup.sh ./subjects/capped_token/profile.json ./subjects/vat/profile.json ./tools/specgame_core.py ./tools/verify.py 
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+sha256:65d3230f92c5ee57993ae32b620a5d9b496b5310ac35f380e99edcb9f16e8b81
+run_isolated: docker run specgame-verifier:bc130efb2ba1 (network none, read-only rootfs, bundle /home/vladimir/sheaf/tcg-specgames/specgame/runs/v3/vat/f0/seed_1/bundle -> /bundle:ro)
+verify /bundle
+[PASS            ] (0) manifest
+       manifest.json validates against schemas/manifest.schema.json (+ validate_sigma against subject vat on every sigma)
+[PASS            ] (1) hashes
+       120 files, every sha256 matches, no unlisted file
+       core sha256 25f234228510ddaa9d2e21829e337706954aa3c807aed4ec6d6629d9b853d91f (running = bundled copy = provenance)
+       verifier sha256 dea0af01cf27221bba31a15d59a735c789d520750e5a22baa7bed7bb18e1e489
+       protocol.json sha256 42efecba54d47bc27bbb5b7c9da369819a67f6758a8b54f019c6d8f8a4e2ada7
+       protocol.md sha256 4b0316a2f3b52f1cb2787a8c9c7a2f9d39177d78d13eb689f360021b8ec44b80 (recorded, not compared)
+       subject vat: bundled profile subject/profile.json = protocol.json pin (66e8b6203a073d7e…)
+       semantics version matches: solc 0.8.35+commit.47b9dedd.Linux.g++, Z3 version 4.16.0 - 64 bit, python 3.12.3, pyrevm 0.3.7, CANCUN
+[PASS            ] (2) check
+       54 isolated-harness solc inputs re-derived from b + phi + timeout_ms=60000 (= bundled)
+       b runtime sha256 cf975b5a6b4f6d6781cb7d7ac369110b740db17bef918bc97c86188cf985deba
+       Spec over b runtime sha256 54e7954ce87829b13bbec36ca26708f544d9f6a797df51eb793da1ff6a9728ef, checks ['check_cage_effect', 'check_cage_needs_ward', 'check_deny_effect', 'check_deny_needs_ward', 'check_file_dust', 'check_file_ilk_needs_ward', 'check_file_ilk_unknown', 'check_file_line', 'check_file_line_ilk', 'check_file_needs_ward', 'check_file_spot', 'check_file_unknown', 'check_flux_effect', 'check_flux_needs_consent', 'check_fold_needs_ward', 'check_fork_needs_consent_dst', 'check_fork_needs_consent_src', 'check_fork_totals', 'check_frob_ceiling', 'check_frob_draw_balances', 'check_frob_draw_urn', 'check_frob_dust', 'check_frob_needs_consent_u_collateral', 'check_frob_needs_consent_u_debt', 'check_frob_needs_consent_v', 'check_frob_needs_consent_w', 'check_frob_no_consent_at_all', 'check_frob_not_init', 'check_frob_safe', 'check_frob_wipe_balances', 'check_grab_down', 'check_grab_needs_ward', 'check_grab_up', 'check_heal_effect', 'check_hope_effect', 'check_init_effect', 'check_init_needs_ward', 'check_init_twice', 'check_move_effect', 'check_move_needs_consent', 'check_move_others', 'check_nope_effect', 'check_not_live_deny', 'check_not_live_file', 'check_not_live_file_ilk', 'check_not_live_fold', 'check_not_live_frob', 'check_not_live_rely', 'check_rely_effect', 'check_rely_needs_ward', 'check_slip_effect', 'check_slip_needs_ward', 'check_suck_effect', 'check_suck_needs_ward']
+       54 checks re-run in 4 workers (171.385 s wall, 664.64 s solc): Accept (all_checks_safe)
+         check_rely_needs_ward: Accept (all_targets_safe, 8.788 s); raw output identical to the bundled one
+         check_deny_needs_ward: Accept (all_targets_safe, 8.71 s); raw output identical to the bundled one
+         check_init_needs_ward: Accept (all_targets_safe, 8.729 s); raw output identical to the bundled one
+         check_file_needs_ward: Accept (all_targets_safe, 7.868 s); raw output identical to the bundled one
+         check_file_ilk_needs_ward: Accept (all_targets_safe, 7.51 s); raw output identical to the bundled one
+         check_cage_needs_ward: Accept (all_targets_safe, 8.174 s); raw output identical to the bundled one
+         check_slip_needs_ward: Accept (all_targets_safe, 8.505 s); raw output identical to the bundled one
+         check_grab_needs_ward: Accept (all_targets_safe, 8.524 s); raw output identical to the bundled one
+         check_suck_needs_ward: Accept (all_targets_safe, 9.725 s); raw output identical to the bundled one
+         check_fold_needs_ward: Accept (all_targets_safe, 9.348 s); raw output identical to the bundled one
+         check_rely_effect: Accept (all_targets_safe, 15.656 s); raw output identical to the bundled one
+         check_deny_effect: Accept (all_targets_safe, 14.885 s); raw output identical to the bundled one
+         check_hope_effect: Accept (all_targets_safe, 14.011 s); raw output identical to the bundled one
+         check_nope_effect: Accept (all_targets_safe, 15.105 s); raw output identical to the bundled one
+         check_cage_effect: Accept (all_targets_safe, 8.255 s); raw output identical to the bundled one
+         check_not_live_rely: Accept (all_targets_safe, 9.361 s); raw output identical to the bundled one
+         check_not_live_deny: Accept (all_targets_safe, 9.489 s); raw output identical to the bundled one
+         check_not_live_file: Accept (all_targets_safe, 8.375 s); raw output identical to the bundled one
+         check_not_live_file_ilk: Accept (all_targets_safe, 8.909 s); raw output identical to the bundled one
+         check_not_live_fold: Accept (all_targets_safe, 8.913 s); raw output identical to the bundled one
+         check_not_live_frob: Accept (all_targets_safe, 9.568 s); raw output identical to the bundled one
+         check_init_effect: Accept (all_targets_safe, 24.703 s); raw output identical to the bundled one
+         check_init_twice: Accept (all_targets_safe, 9.733 s); raw output identical to the bundled one
+         check_frob_not_init: Accept (all_targets_safe, 10.022 s); raw output identical to the bundled one
+         check_file_line: Accept (all_targets_safe, 9.365 s); raw output identical to the bundled one
+         check_file_unknown: Accept (all_targets_safe, 9.629 s); raw output identical to the bundled one
+         check_file_spot: Accept (all_targets_safe, 28.358 s); raw output identical to the bundled one
+         check_file_line_ilk: Accept (all_targets_safe, 32.237 s); raw output identical to the bundled one
+         check_file_dust: Accept (all_targets_safe, 28.666 s); raw output identical to the bundled one
+         check_file_ilk_unknown: Accept (all_targets_safe, 9.179 s); raw output identical to the bundled one
+         check_move_effect: Accept (all_targets_safe, 21.735 s); raw output identical to the bundled one
+         check_move_others: Accept (all_targets_safe, 20.012 s); raw output identical to the bundled one
+         check_move_needs_consent: Accept (all_targets_safe, 8.612 s); raw output identical to the bundled one
+         check_flux_effect: Accept (all_targets_safe, 23.293 s); raw output identical to the bundled one
+         check_flux_needs_consent: Accept (all_targets_safe, 9.381 s); raw output identical to the bundled one
+         check_slip_effect: Accept (all_targets_safe, 14.772 s); raw output identical to the bundled one
+         check_frob_ceiling: Accept (all_targets_safe, 14.735 s); raw output identical to the bundled one
+         check_frob_safe: Accept (all_targets_safe, 9.768 s); raw output identical to the bundled one
+         check_frob_dust: Accept (all_targets_safe, 8.529 s); raw output identical to the bundled one
+         check_frob_no_consent_at_all: Accept (all_targets_safe, 7.588 s); raw output identical to the bundled one
+         check_frob_needs_consent_v: Accept (all_targets_safe, 5.433 s); raw output identical to the bundled one
+         check_frob_needs_consent_w: Accept (all_targets_safe, 7.052 s); raw output identical to the bundled one
+         check_frob_needs_consent_u_debt: Accept (all_targets_safe, 6.287 s); raw output identical to the bundled one
+         check_frob_needs_consent_u_collateral: Accept (all_targets_safe, 7.211 s); raw output identical to the bundled one
+         check_frob_draw_urn: Accept (all_targets_safe, 20.267 s); raw output identical to the bundled one
+         check_frob_draw_balances: Accept (all_targets_safe, 12.711 s); raw output identical to the bundled one
+         check_frob_wipe_balances: Accept (all_targets_safe, 15.938 s); raw output identical to the bundled one
+         check_fork_needs_consent_src: Accept (all_targets_safe, 7.081 s); raw output identical to the bundled one
+         check_fork_needs_consent_dst: Accept (all_targets_safe, 7.274 s); raw output identical to the bundled one
+         check_fork_totals: Accept (all_targets_safe, 12.179 s); raw output identical to the bundled one
+         check_grab_up: Accept (all_targets_safe, 13.218 s); raw output identical to the bundled one
+         check_grab_down: Accept (all_targets_safe, 12.984 s); raw output identical to the bundled one
+         check_heal_effect: Accept (all_targets_safe, 14.196 s); raw output identical to the bundled one
+         check_suck_effect: Accept (all_targets_safe, 14.084 s); raw output identical to the bundled one
+[PASS            ] (3) M
+       mutant 0b16a3ae4f99: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 0d256aef3845: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 1a63e0033ca6: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 3d19cd9060a9: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 4f38b3220282: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 652a40501289: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant 7a3cae9442cf: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+       mutant f23fd9948544: id recomputed = listed; properness sigma[0] gives run(b) != run(m)
+[PASS            ] (4) W
+       5 of 5 witnesses replay to a violation; 0 discarded (discarding is not a refusal)
+       W[0] mutant 0d256aef3845: violation in ['check_frob_ceiling']
+       W[1] mutant 1a63e0033ca6: violation in ['check_move_effect']
+       W[2] mutant 4f38b3220282: violation in ['check_slip_needs_ward']
+       W[3] mutant 652a40501289: violation in ['check_frob_needs_consent_v']
+       W[4] mutant 7a3cae9442cf: violation in ['check_frob_safe']
+[PASS            ] (5) score
+       recomputed ms_cert = 5/8, kill set ['0d256aef3845', '1a63e0033ca6', '4f38b3220282', '652a40501289', '7a3cae9442cf']
+[PASS            ] (6) V-completeness
+       no V-completeness claim; named in not_claimed
+ms_cert = 5/8  kill set ['0d256aef3845464a58faf6c6355a375f8ee8b5572e6033459686bd1799dd19d5', '1a63e0033ca653c002adcdb4755a746f689e58f85805000b98fa016cfb75061d', '4f38b3220282e5e401b8f7d6622312c466af2c390cf2ceb78af26c6fd08d8f04', '652a4050128999756d0aef2e10a32cf7709fe880a26e208a3766496e441b81df', '7a3cae9442cffab8857b65e98f0f2aea11175de273be1c178fd000f67bdaa93b']
+mutants without a valid witness: ['0b16a3ae4f9917f0c3b9a635e3c7900b721878100da5b8c160d173443ca5c884', '3d19cd9060a90c1c265aeff276e4538e15d99bd989ec14cb4a8d948132e2c6fb', 'f23fd99485441f540fd57b165a66fbc08193c1934f15071d7b87196e2acba762']
+label (T*, affects no verdict): mutant 0b16a3ae4f99 operator=remove-require fault_class=missing-bound-check
+label (T*, affects no verdict): mutant 0d256aef3845 operator=remove-require fault_class=missing-bound-check
+label (T*, affects no verdict): mutant 1a63e0033ca6 operator=remove-statement fault_class=accounting
+label (T*, affects no verdict): mutant 3d19cd9060a9 operator=remove-statement fault_class=accounting
+label (T*, affects no verdict): mutant 4f38b3220282 operator=remove-modifier fault_class=access-control
+label (T*, affects no verdict): mutant 652a40501289 operator=remove-require fault_class=consent
+label (T*, affects no verdict): mutant 7a3cae9442cf operator=remove-require fault_class=missing-bound-check
+label (T*, affects no verdict): mutant f23fd9948544 operator=remove-statement fault_class=accounting
+verdict: HOLDS, exit 0
+
+real	2m57.479s
+user	0m0.103s
+sys	0m0.086s
+exit=0

@@ -1,0 +1,8 @@
+{
+ "extracted": true,
+ "problems": [
+  "S9 line 204: check_file_ilk_unknown: require only in the leading block (Pre)",
+  "S9 line 205: check_file_ilk_unknown: require only in the leading block (Pre)",
+  "S9 line 206: check_file_ilk_unknown: require only in the leading block (Pre)"
+ ]
+}

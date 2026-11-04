@@ -1,0 +1,570 @@
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.35;
+
+import "./Vat.sol";
+
+contract Spec is Vat {
+    constructor() {}
+
+    // ---------- Authority ----------
+
+    function check_rely_effect(address a, address b, uint256 x, uint256 y) external {
+        require(wards[msg.sender] == 1);
+        uint256 wb = wards[b];
+        rely(a);
+        assert(wards[a] == 1);
+        if (b != a) {
+            assert(wards[b] == wb);
+        }
+    }
+
+    function check_deny_effect(address a, address b, uint256 x, uint256 y) external {
+        require(wards[msg.sender] == 1);
+        uint256 wb = wards[b];
+        deny(a);
+        assert(wards[a] == 0);
+        if (b != a) {
+            assert(wards[b] == wb);
+        }
+    }
+
+    function check_rely_unauth(address a, address b, uint256 x, uint256 y) external {
+        require(wards[msg.sender] != 1);
+        rely(a);
+        assert(false);
+    }
+
+    function check_deny_unauth(address a, address b, uint256 x, uint256 y) external {
+        require(wards[msg.sender] != 1);
+        deny(a);
+        assert(false);
+    }
+
+    function check_rely_not_live(address a, address b, uint256 x, uint256 y) external {
+        require(live == 0);
+        rely(a);
+        assert(false);
+    }
+
+    function check_deny_not_live(address a, address b, uint256 x, uint256 y) external {
+        require(live == 0);
+        deny(a);
+        assert(false);
+    }
+
+    // ---------- Consent ----------
+
+    function check_hope_effect(address a, address b, uint256 x, uint256 y) external {
+        uint256 c0 = can[b][a];
+        hope(a);
+        assert(can[msg.sender][a] == 1);
+        if (b != msg.sender) {
+            assert(can[b][a] == c0);
+        }
+    }
+
+    function check_nope_effect(address a, address b, uint256 x, uint256 y) external {
+        uint256 c0 = can[b][a];
+        nope(a);
+        assert(can[msg.sender][a] == 0);
+        if (b != msg.sender) {
+            assert(can[b][a] == c0);
+        }
+    }
+
+    // ---------- Collateral types ----------
+
+    function check_init_effect(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(ilks[i].rate == 0);
+        uint256 s0 = ilks[i].spot;
+        uint256 l0 = ilks[i].line;
+        uint256 d0 = ilks[i].dust;
+        uint256 art0 = ilks[i].Art;
+        init(i);
+        assert(ilks[i].rate == 10**27);
+        assert(ilks[i].spot == s0);
+        assert(ilks[i].line == l0);
+        assert(ilks[i].dust == d0);
+        assert(ilks[i].Art == art0);
+    }
+
+    function check_init_twice(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(ilks[i].rate != 0);
+        init(i);
+        assert(false);
+    }
+
+    function check_init_unauth(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(wards[msg.sender] != 1);
+        init(i);
+        assert(false);
+    }
+
+    function check_frob_needs_init(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(ilks[i].rate == 0);
+        frob(i, u, u, u, dx, dy);
+        assert(false);
+    }
+
+    // ---------- Parameters ----------
+
+    function check_file_line(address a, address b, uint256 x, uint256 y) external {
+        require(live == 1);
+        file("Line", x);
+        assert(Line == x);
+    }
+
+    function check_file_line_not_live(address a, address b, uint256 x, uint256 y) external {
+        require(live == 0);
+        file("Line", x);
+        assert(false);
+    }
+
+    function check_file_unauth(address a, address b, uint256 x, uint256 y) external {
+        require(wards[msg.sender] != 1);
+        file("Line", x);
+        assert(false);
+    }
+
+    function check_file_unrecognized(address a, address b, uint256 x, uint256 y) external {
+        require(bytes32(x) != "Line");
+        file(bytes32(x), y);
+        assert(false);
+    }
+
+    function check_file_ilk_spot(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(live == 1);
+        uint256 l0 = ilks[i].line;
+        uint256 d0 = ilks[i].dust;
+        uint256 r0 = ilks[i].rate;
+        uint256 art0 = ilks[i].Art;
+        uint256 g0 = Line;
+        file(i, "spot", uint256(dx));
+        assert(ilks[i].spot == uint256(dx));
+        assert(ilks[i].line == l0);
+        assert(ilks[i].dust == d0);
+        assert(ilks[i].rate == r0);
+        assert(ilks[i].Art == art0);
+        assert(Line == g0);
+    }
+
+    function check_file_ilk_line(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(live == 1);
+        uint256 s0 = ilks[i].spot;
+        uint256 d0 = ilks[i].dust;
+        uint256 r0 = ilks[i].rate;
+        uint256 art0 = ilks[i].Art;
+        file(i, "line", uint256(dx));
+        assert(ilks[i].line == uint256(dx));
+        assert(ilks[i].spot == s0);
+        assert(ilks[i].dust == d0);
+        assert(ilks[i].rate == r0);
+        assert(ilks[i].Art == art0);
+    }
+
+    function check_file_ilk_dust(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(live == 1);
+        uint256 s0 = ilks[i].spot;
+        uint256 l0 = ilks[i].line;
+        uint256 r0 = ilks[i].rate;
+        uint256 art0 = ilks[i].Art;
+        file(i, "dust", uint256(dx));
+        assert(ilks[i].dust == uint256(dx));
+        assert(ilks[i].spot == s0);
+        assert(ilks[i].line == l0);
+        assert(ilks[i].rate == r0);
+        assert(ilks[i].Art == art0);
+    }
+
+    function check_file_ilk_not_live(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(live == 0);
+        file(i, "spot", uint256(dx));
+        assert(false);
+    }
+
+    function check_file_ilk_unauth(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(wards[msg.sender] != 1);
+        file(i, "line", uint256(dx));
+        assert(false);
+    }
+
+    function check_file_ilk_unrecognized(address a, address b, uint256 x, uint256 y) external {
+        require(bytes32(x) != "spot" && bytes32(x) != "line" && bytes32(x) != "dust");
+        file(bytes32(y), bytes32(x), y);
+        assert(false);
+    }
+
+    // ---------- Shutdown ----------
+
+    function check_cage_effect(address a, address b, uint256 x, uint256 y) external {
+        cage();
+        assert(live == 0);
+    }
+
+    function check_cage_unauth(address a, address b, uint256 x, uint256 y) external {
+        require(wards[msg.sender] != 1);
+        cage();
+        assert(false);
+    }
+
+    // ---------- Free collateral ----------
+
+    function check_slip_effect(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(dx > -(2**100) && dx < 2**100);
+        require(gem[i][u] < 2**100);
+        uint256 g0 = gem[i][u];
+        slip(i, u, dx);
+        assert(int256(gem[i][u]) == int256(g0) + dx);
+    }
+
+    function check_slip_unauth(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(wards[msg.sender] != 1);
+        slip(i, u, dx);
+        assert(false);
+    }
+
+    function check_flux_effect(address a, address b, uint256 x, uint256 y) external {
+        require(a != b);
+        require(x < 2**128);
+        require(gem["GOLD"][a] < 2**128);
+        require(gem["GOLD"][b] < 2**128);
+        uint256 ga = gem["GOLD"][a];
+        uint256 gb = gem["GOLD"][b];
+        uint256 dd = dai[a];
+        flux("GOLD", a, b, x);
+        assert(gem["GOLD"][a] + x == ga);
+        assert(gem["GOLD"][b] == gb + x);
+        assert(dai[a] == dd);
+    }
+
+    function check_flux_not_allowed(address a, address b, uint256 x, uint256 y) external {
+        require(a != msg.sender);
+        require(can[a][msg.sender] != 1);
+        flux("GOLD", a, b, x);
+        assert(false);
+    }
+
+    function check_move_effect(address a, address b, uint256 x, uint256 y) external {
+        require(a != b);
+        require(x < 2**128);
+        require(dai[a] < 2**128);
+        require(dai[b] < 2**128);
+        uint256 da = dai[a];
+        uint256 db = dai[b];
+        uint256 t0 = debt;
+        uint256 v0 = vice;
+        move(a, b, x);
+        assert(dai[a] + x == da);
+        assert(dai[b] == db + x);
+        assert(debt == t0);
+        assert(vice == v0);
+    }
+
+    function check_move_not_allowed(address a, address b, uint256 x, uint256 y) external {
+        require(a != msg.sender);
+        require(can[a][msg.sender] != 1);
+        move(a, b, x);
+        assert(false);
+    }
+
+    // ---------- Vault operations ----------
+
+    function check_frob_vault(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(dx > -(2**100) && dx < 2**100);
+        require(dy > -(2**100) && dy < 2**100);
+        require(urns[i][u].ink < 2**100);
+        require(urns[i][u].art < 2**100);
+        require(ilks[i].Art < 2**100);
+        require(gem[i][u] < 2**100);
+        uint256 ink0 = urns[i][u].ink;
+        uint256 art0 = urns[i][u].art;
+        uint256 tot0 = ilks[i].Art;
+        uint256 g0 = gem[i][u];
+        frob(i, u, u, u, dx, dy);
+        assert(int256(urns[i][u].ink) == int256(ink0) + dx);
+        assert(int256(urns[i][u].art) == int256(art0) + dy);
+        assert(int256(ilks[i].Art) == int256(tot0) + dy);
+        assert(int256(gem[i][u]) == int256(g0) - dx);
+    }
+
+    function check_frob_dai(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(dx > -(2**100) && dx < 2**100);
+        require(dy > -(2**100) && dy < 2**100);
+        require(ilks[i].rate < 2**100);
+        require(dai[u] < 2**128);
+        require(debt < 2**128);
+        uint256 r0 = ilks[i].rate;
+        uint256 d0 = dai[u];
+        uint256 t0 = debt;
+        uint256 v0 = vice;
+        uint256 s0 = ilks[i].spot;
+        frob(i, u, u, u, dx, dy);
+        assert(int256(dai[u]) == int256(d0) + dy * int256(r0));
+        assert(int256(debt) == int256(t0) + dy * int256(r0));
+        assert(ilks[i].rate == r0);
+        assert(ilks[i].spot == s0);
+        assert(vice == v0);
+    }
+
+    function check_frob_not_live(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(live == 0);
+        frob(i, u, u, u, dx, dy);
+        assert(false);
+    }
+
+    function check_frob_global_ceiling(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(dy > 0 && dy < 2**100);
+        require(ilks[i].rate < 2**100);
+        require(debt < 2**128);
+        require(debt + uint256(dy) * ilks[i].rate > Line);
+        frob(i, u, u, u, dx, dy);
+        assert(false);
+    }
+
+    function check_frob_ilk_ceiling(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(dy > 0 && dy < 2**100);
+        require(ilks[i].rate < 2**100);
+        require(ilks[i].Art < 2**100);
+        require((ilks[i].Art + uint256(dy)) * ilks[i].rate > ilks[i].line);
+        frob(i, u, u, u, dx, dy);
+        assert(false);
+    }
+
+    function check_frob_unsafe(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(dy > -(2**100) && dy < 2**100);
+        require(dx > -(2**100) && dx < 2**100);
+        require(dy > 0 || dx < 0);
+        require(urns[i][u].ink < 2**100);
+        require(urns[i][u].art < 2**100);
+        require(ilks[i].rate < 2**100);
+        require(ilks[i].spot < 2**100);
+        require((int256(urns[i][u].art) + dy) * int256(ilks[i].rate) > (int256(urns[i][u].ink) + dx) * int256(ilks[i].spot));
+        frob(i, u, u, u, dx, dy);
+        assert(false);
+    }
+
+    function check_frob_not_allowed(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(u != msg.sender);
+        require(can[u][msg.sender] != 1);
+        require(dx != 0 || dy != 0);
+        frob(i, u, u, u, dx, dy);
+        assert(false);
+    }
+
+    function check_frob_dust(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(dy > -(2**100) && dy < 2**100);
+        require(urns[i][u].art < 2**100);
+        require(ilks[i].rate < 2**100);
+        require(ilks[i].dust < 2**200);
+        require(int256(urns[i][u].art) + dy > 0);
+        require((int256(urns[i][u].art) + dy) * int256(ilks[i].rate) < int256(ilks[i].dust));
+        frob(i, u, u, u, dx, dy);
+        assert(false);
+    }
+
+    // ---------- Fork ----------
+
+    function check_fork_effect(address a, address b, uint256 x, uint256 y) external {
+        require(a != b);
+        require(x < 2**100 && y < 2**100);
+        require(urns["GOLD"][a].ink < 2**100);
+        require(urns["GOLD"][a].art < 2**100);
+        require(urns["GOLD"][b].ink < 2**100);
+        require(urns["GOLD"][b].art < 2**100);
+        uint256 ia = urns["GOLD"][a].ink;
+        uint256 ib = urns["GOLD"][b].ink;
+        uint256 ra = urns["GOLD"][a].art;
+        uint256 rb = urns["GOLD"][b].art;
+        uint256 tot0 = ilks["GOLD"].Art;
+        uint256 t0 = debt;
+        fork("GOLD", a, b, int256(x), int256(y));
+        assert(urns["GOLD"][a].ink + x == ia);
+        assert(urns["GOLD"][b].ink == ib + x);
+        assert(urns["GOLD"][a].art + y == ra);
+        assert(urns["GOLD"][b].art == rb + y);
+        assert(ilks["GOLD"].Art == tot0);
+        assert(debt == t0);
+    }
+
+    function check_fork_src_not_allowed(address a, address b, uint256 x, uint256 y) external {
+        require(a != msg.sender);
+        require(can[a][msg.sender] != 1);
+        fork("GOLD", a, b, int256(x), int256(y));
+        assert(false);
+    }
+
+    function check_fork_dst_not_allowed(address a, address b, uint256 x, uint256 y) external {
+        require(b != msg.sender);
+        require(can[b][msg.sender] != 1);
+        fork("GOLD", a, b, int256(x), int256(y));
+        assert(false);
+    }
+
+    function check_fork_src_unsafe(address a, address b, uint256 x, uint256 y) external {
+        require(a != b);
+        require(x < 2**100 && y < 2**100);
+        require(urns["GOLD"][a].ink < 2**100);
+        require(urns["GOLD"][a].art < 2**100);
+        require(ilks["GOLD"].rate < 2**100);
+        require(ilks["GOLD"].spot < 2**100);
+        require((int256(urns["GOLD"][a].art) - int256(y)) * int256(ilks["GOLD"].rate) > (int256(urns["GOLD"][a].ink) - int256(x)) * int256(ilks["GOLD"].spot));
+        fork("GOLD", a, b, int256(x), int256(y));
+        assert(false);
+    }
+
+    function check_fork_dst_unsafe(address a, address b, uint256 x, uint256 y) external {
+        require(a != b);
+        require(x < 2**100 && y < 2**100);
+        require(urns["GOLD"][b].ink < 2**100);
+        require(urns["GOLD"][b].art < 2**100);
+        require(ilks["GOLD"].rate < 2**100);
+        require(ilks["GOLD"].spot < 2**100);
+        require((int256(urns["GOLD"][b].art) + int256(y)) * int256(ilks["GOLD"].rate) > (int256(urns["GOLD"][b].ink) + int256(x)) * int256(ilks["GOLD"].spot));
+        fork("GOLD", a, b, int256(x), int256(y));
+        assert(false);
+    }
+
+    function check_fork_src_dust(address a, address b, uint256 x, uint256 y) external {
+        require(a != b);
+        require(x < 2**100 && y < 2**100);
+        require(urns["GOLD"][a].art < 2**100);
+        require(ilks["GOLD"].rate < 2**100);
+        require(ilks["GOLD"].dust < 2**200);
+        require(int256(urns["GOLD"][a].art) - int256(y) > 0);
+        require((int256(urns["GOLD"][a].art) - int256(y)) * int256(ilks["GOLD"].rate) < int256(ilks["GOLD"].dust));
+        fork("GOLD", a, b, int256(x), int256(y));
+        assert(false);
+    }
+
+    function check_fork_dst_dust(address a, address b, uint256 x, uint256 y) external {
+        require(a != b);
+        require(x < 2**100 && y < 2**100);
+        require(urns["GOLD"][b].art < 2**100);
+        require(ilks["GOLD"].rate < 2**100);
+        require(ilks["GOLD"].dust < 2**200);
+        require(int256(urns["GOLD"][b].art) + int256(y) > 0);
+        require((int256(urns["GOLD"][b].art) + int256(y)) * int256(ilks["GOLD"].rate) < int256(ilks["GOLD"].dust));
+        fork("GOLD", a, b, int256(x), int256(y));
+        assert(false);
+    }
+
+    // ---------- Confiscation ----------
+
+    function check_grab_vault(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(wards[msg.sender] == 1);
+        require(dx > -(2**100) && dx < 2**100);
+        require(dy > -(2**100) && dy < 2**100);
+        require(urns[i][u].ink < 2**100);
+        require(urns[i][u].art < 2**100);
+        require(ilks[i].Art < 2**100);
+        require(gem[i][u] < 2**100);
+        uint256 ink0 = urns[i][u].ink;
+        uint256 art0 = urns[i][u].art;
+        uint256 tot0 = ilks[i].Art;
+        uint256 g0 = gem[i][u];
+        grab(i, u, u, u, dx, dy);
+        assert(int256(urns[i][u].ink) == int256(ink0) + dx);
+        assert(int256(urns[i][u].art) == int256(art0) + dy);
+        assert(int256(ilks[i].Art) == int256(tot0) + dy);
+        assert(int256(gem[i][u]) == int256(g0) - dx);
+    }
+
+    function check_grab_sin(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(wards[msg.sender] == 1);
+        require(dx > -(2**100) && dx < 2**100);
+        require(dy > -(2**100) && dy < 2**100);
+        require(ilks[i].rate < 2**100);
+        require(sin[u] < 2**128);
+        require(vice < 2**128);
+        uint256 r0 = ilks[i].rate;
+        uint256 s0 = sin[u];
+        uint256 v0 = vice;
+        uint256 t0 = debt;
+        uint256 d0 = dai[u];
+        grab(i, u, u, u, dx, dy);
+        assert(int256(sin[u]) == int256(s0) - dy * int256(r0));
+        assert(int256(vice) == int256(v0) - dy * int256(r0));
+        assert(debt == t0);
+        assert(dai[u] == d0);
+        assert(ilks[i].rate == r0);
+    }
+
+    function check_grab_unauth(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(wards[msg.sender] != 1);
+        grab(i, u, u, u, dx, dy);
+        assert(false);
+    }
+
+    // ---------- Settlement ----------
+
+    function check_heal_effect(address a, address b, uint256 x, uint256 y) external {
+        require(x < 2**128);
+        require(sin[msg.sender] < 2**128);
+        require(dai[msg.sender] < 2**128);
+        require(vice < 2**128);
+        require(debt < 2**128);
+        uint256 s0 = sin[msg.sender];
+        uint256 d0 = dai[msg.sender];
+        uint256 v0 = vice;
+        uint256 t0 = debt;
+        heal(x);
+        assert(sin[msg.sender] + x == s0);
+        assert(dai[msg.sender] + x == d0);
+        assert(vice + x == v0);
+        assert(debt + x == t0);
+    }
+
+    function check_suck_effect(address a, address b, uint256 x, uint256 y) external {
+        require(x < 2**128);
+        require(sin[a] < 2**128);
+        require(dai[b] < 2**128);
+        require(vice < 2**128);
+        require(debt < 2**128);
+        uint256 s0 = sin[a];
+        uint256 d0 = dai[b];
+        uint256 v0 = vice;
+        uint256 t0 = debt;
+        suck(a, b, x);
+        assert(sin[a] == s0 + x);
+        assert(dai[b] == d0 + x);
+        assert(vice == v0 + x);
+        assert(debt == t0 + x);
+    }
+
+    function check_suck_unauth(address a, address b, uint256 x, uint256 y) external {
+        require(wards[msg.sender] != 1);
+        suck(a, b, x);
+        assert(false);
+    }
+
+    // ---------- Rates ----------
+
+    function check_fold_effect(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(dx > -(2**100) && dx < 2**100);
+        require(ilks[i].rate < 2**100);
+        require(ilks[i].Art < 2**100);
+        require(dai[u] < 2**128);
+        require(debt < 2**128);
+        uint256 r0 = ilks[i].rate;
+        uint256 art0 = ilks[i].Art;
+        uint256 d0 = dai[u];
+        uint256 t0 = debt;
+        fold(i, u, dx);
+        assert(int256(ilks[i].rate) == int256(r0) + dx);
+        assert(int256(dai[u]) == int256(d0) + int256(art0) * dx);
+        assert(int256(debt) == int256(t0) + int256(art0) * dx);
+        assert(ilks[i].Art == art0);
+    }
+
+    function check_fold_not_live(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(live == 0);
+        fold(i, u, dx);
+        assert(false);
+    }
+
+    function check_fold_unauth(bytes32 i, address u, int256 dx, int256 dy) external {
+        require(wards[msg.sender] != 1);
+        fold(i, u, dx);
+        assert(false);
+    }
+}

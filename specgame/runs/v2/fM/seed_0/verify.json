@@ -1,0 +1,268 @@
+{
+ "bundle": "/home/vladimir/sheaf/tcg-specgames/specgame/runs/v2/fM/seed_0/bundle",
+ "discarded": [],
+ "exit_code": 0,
+ "failing_steps": [],
+ "first_failing_step": null,
+ "kill_set": [
+  "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+  "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+  "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+  "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+  "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+  "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+  "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500"
+ ],
+ "labels": [
+  {
+   "fault_class": "wrong-recipient",
+   "id": "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+   "operator": "replace-variable"
+  },
+  {
+   "fault_class": "access-control",
+   "id": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+   "operator": "remove-modifier"
+  },
+  {
+   "fault_class": "off-by-one",
+   "id": "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+   "operator": "shift-bound-by-one"
+  },
+  {
+   "fault_class": "accounting",
+   "id": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+   "operator": "remove-statement"
+  },
+  {
+   "fault_class": "liveness",
+   "id": "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df",
+   "operator": "insert-revert"
+  },
+  {
+   "fault_class": "accounting",
+   "id": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+   "operator": "remove-statement"
+  },
+  {
+   "fault_class": "missing-bound-check",
+   "id": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+   "operator": "remove-require"
+  },
+  {
+   "fault_class": "accounting",
+   "id": "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+   "operator": "remove-statement"
+  }
+ ],
+ "ms_cert": {
+  "killed": 7,
+  "total": 8
+ },
+ "mutants_without_valid_witness": [
+  "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df"
+ ],
+ "steps": [
+  {
+   "details": [
+    "manifest.json validates against schemas/manifest.schema.json (+ validate_sigma on every sigma)"
+   ],
+   "name": "manifest",
+   "status": "pass",
+   "step": 0
+  },
+  {
+   "details": [
+    "41 files, every sha256 matches, no unlisted file",
+    "core sha256 cefc21e5069951d19a864f9d577918c17527ae64db7a17ef243092a764389f9f (running = bundled copy = provenance)",
+    "verifier sha256 4a259f7ca3915ef6c3b3bc2e98cbfac2ec222b296d8ebbe59730e88e2bf794a4",
+    "protocol.json sha256 cfd49f9328827a644d5c750f21c17aa9416f54f6c776b516e4101eb601eb72e9",
+    "protocol.md sha256 f990a5c6c130f6ac8c6d07991bc7b9aa16c6fc8dd9f415659719c8fa92b43b41 (recorded, not compared)",
+    "semantics version matches: solc 0.8.35+commit.47b9dedd.Linux.g++, Z3 version 4.16.0 - 64 bit, python 3.12.3, pyrevm 0.3.7, CANCUN"
+   ],
+   "name": "hashes",
+   "status": "pass",
+   "step": 1
+  },
+  {
+   "details": [
+    "15 isolated-harness solc inputs re-derived from b + phi + timeout_ms=60000 (= bundled)",
+    "b runtime sha256 c7761d01ada538f5a478bce8861f9812b5c29a81de9c80cbbcce91f42abc063c",
+    "Spec over b runtime sha256 f1ef784c7b344da33a80a51a6b5e397e93c1b171e0e40e687ed08c45baf12feb, checks ['check_cap_after_mint', 'check_cap_after_transfer', 'check_cap_invariant', 'check_mint_exact', 'check_mint_keeps_owner_cap', 'check_mint_over_cap_reverts', 'check_mint_to_caller', 'check_no_overdraft', 'check_no_overdraft_by_one', 'check_only_owner_mints', 'check_only_owner_mints_small', 'check_transfer_exact', 'check_transfer_keeps_owner_cap', 'check_transfer_other_is_owner', 'check_transfer_self']",
+    "15 checks re-run in 4 workers (1.934 s wall, 7.258 s solc): Accept (all_checks_safe)",
+    "  check_cap_invariant: Accept (all_targets_safe, 0.268 s); raw output identical to the bundled one",
+    "  check_only_owner_mints: Accept (all_targets_safe, 0.247 s); raw output identical to the bundled one",
+    "  check_only_owner_mints_small: Accept (all_targets_safe, 0.259 s); raw output identical to the bundled one",
+    "  check_mint_over_cap_reverts: Accept (all_targets_safe, 0.244 s); raw output identical to the bundled one",
+    "  check_cap_after_mint: Accept (all_targets_safe, 0.246 s); raw output identical to the bundled one",
+    "  check_cap_after_transfer: Accept (all_targets_safe, 0.302 s); raw output identical to the bundled one",
+    "  check_mint_exact: Accept (all_targets_safe, 0.806 s); raw output identical to the bundled one",
+    "  check_mint_to_caller: Accept (all_targets_safe, 0.842 s); raw output identical to the bundled one",
+    "  check_mint_keeps_owner_cap: Accept (all_targets_safe, 0.406 s); raw output identical to the bundled one",
+    "  check_transfer_exact: Accept (all_targets_safe, 1.309 s); raw output identical to the bundled one",
+    "  check_transfer_self: Accept (all_targets_safe, 1.014 s); raw output identical to the bundled one",
+    "  check_transfer_other_is_owner: Accept (all_targets_safe, 0.46 s); raw output identical to the bundled one",
+    "  check_no_overdraft: Accept (all_targets_safe, 0.24 s); raw output identical to the bundled one",
+    "  check_no_overdraft_by_one: Accept (all_targets_safe, 0.24 s); raw output identical to the bundled one",
+    "  check_transfer_keeps_owner_cap: Accept (all_targets_safe, 0.375 s); raw output identical to the bundled one"
+   ],
+   "name": "check",
+   "status": "pass",
+   "step": 2
+  },
+  {
+   "details": [
+    "mutant 21fa69f552f8: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 2cd96bb67b48: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 36e91070549f: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 8e1a17895ccc: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 93a8864f3102: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant 94eaa220eb26: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant cc76b36aebea: id recomputed = listed; properness sigma[0] gives run(b) != run(m)",
+    "mutant e630674a3ded: id recomputed = listed; properness sigma[0] gives run(b) != run(m)"
+   ],
+   "mutants": [
+    {
+     "id": "21fa69f552f810f3ba1dac607425582471f38306f0de55c986abd27902841b5a",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "27b00785fb8c6b0d8ba7e9ebdf8d44d3783b362687174315ada6de17c71e886f",
+       "obs_m_sha256": "aa95045a21831aa819b3c4de3c37557d2cd5a8a92d68f13701dc47c3a682efd4"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "2cd96bb67b489f3b89f46ac68faa03b748d00b0a8222c8e5b29a9f694da34ae3",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "36d67e00468ac7479cd1ea831f78cb6b9659cd8381a2cef9a26bdd9252ca7f36",
+       "obs_m_sha256": "e89892e230a3cc4b8de50d79dad0c8a2c711b73c5a9e4f4a133dcf9f7b2d9318"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "36e91070549fb5de8e59441769c19934b181f6faa73fa2ede07c16784bf51cd8",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "8767e60686d59f2b4baaf7398e96f72734c554162baa7ea9307165aff068c33c",
+       "obs_m_sha256": "bb9adb97d39fd6f698b16c38cb1045069b660891d4fd07892c7e5942137d6e35"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "8e1a17895ccca5a512af32eaabe4cad06782b5897cd712f7400d57767f5ac2d9",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "faec028aeaa4c52600141c4109d5750077a659855f829b2a2da4c75b1dd08169",
+       "obs_m_sha256": "883743f193ef818fb53617c214357b2295af66d6299b4442562a18f9505a9152"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "93a8864f31023e6168f75e1e444c99c7cb035717cddb988053b0c570742795df",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "faec028aeaa4c52600141c4109d5750077a659855f829b2a2da4c75b1dd08169",
+       "obs_m_sha256": "d8c8797327701b1db0366555ab0c0865ca0f103b4825a52ff7eafcb86d80cb26"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "94eaa220eb26e0bbef5623ce4e29e203e2e641943ab0b805178acbea8225dad3",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "0e6929fdab8e6b550e25e91704c47c399f2f0cc49e17cd8b0affc1ac05fb54b3",
+       "obs_m_sha256": "8d082524e01b0cd0065d2eb56d8057b9c1cbbffe9312b145a178ec3c9cea5044"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "cc76b36aebea6c116e21f74e5599f20ac476ef19c4b4d88109baad39eee66fed",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "8767e60686d59f2b4baaf7398e96f72734c554162baa7ea9307165aff068c33c",
+       "obs_m_sha256": "bb9adb97d39fd6f698b16c38cb1045069b660891d4fd07892c7e5942137d6e35"
+      }
+     ],
+     "properness": true
+    },
+    {
+     "id": "e630674a3ded962f5d411f29a12f07a73a68ee18022b108bed884c281c2b9500",
+     "id_matches_source": true,
+     "pairs": [
+      {
+       "differs": true,
+       "index": 0,
+       "obs_b_sha256": "0e6929fdab8e6b550e25e91704c47c399f2f0cc49e17cd8b0affc1ac05fb54b3",
+       "obs_m_sha256": "483d9cdad2335bb9ef9f521e4e7e911d3befb3eee2cf3fe87cbfe54a49a94e3b"
+      }
+     ],
+     "properness": true
+    }
+   ],
+   "name": "M",
+   "status": "pass",
+   "step": 3
+  },
+  {
+   "details": [
+    "7 of 7 witnesses replay to a violation; 0 discarded (discarding is not a refusal)",
+    "W[0] mutant 21fa69f552f8: violation in ['check_transfer_exact']",
+    "W[1] mutant 2cd96bb67b48: violation in ['check_only_owner_mints', 'check_only_owner_mints_small']",
+    "W[2] mutant 36e91070549f: violation in ['check_cap_after_transfer', 'check_cap_invariant']",
+    "W[3] mutant 8e1a17895ccc: violation in ['check_mint_exact']",
+    "W[4] mutant 94eaa220eb26: violation in ['check_transfer_exact']",
+    "W[5] mutant cc76b36aebea: violation in ['check_cap_after_mint', 'check_mint_over_cap_reverts']",
+    "W[6] mutant e630674a3ded: violation in ['check_transfer_exact']"
+   ],
+   "name": "W",
+   "status": "pass",
+   "step": 4
+  },
+  {
+   "details": [
+    "recomputed ms_cert = 7/8, kill set ['21fa69f552f8', '2cd96bb67b48', '36e91070549f', '8e1a17895ccc', '94eaa220eb26', 'cc76b36aebea', 'e630674a3ded']"
+   ],
+   "name": "score",
+   "status": "pass",
+   "step": 5
+  },
+  {
+   "details": [
+    "no V-completeness claim; named in not_claimed"
+   ],
+   "name": "V-completeness",
+   "status": "pass",
+   "step": 6
+  }
+ ],
+ "verdict": "HOLDS",
+ "version": 1
+}

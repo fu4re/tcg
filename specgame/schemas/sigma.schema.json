@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "specgame/schemas/sigma.schema.json",
+  "title": "Configuration sigma (protocol.md section 4; subject-neutral since protocol v3)",
+  "description": "Constructor-reachable configuration: deploy the subject's contract (or Spec over it) with ctor from deployer, run setup (the subject's profile setup, sent by the deployer, verbatim; present iff the subject has a setup), run txs in order, then optionally the probe. Names are pool names, values decimal strings. Not expressible here and enforced by specgame_core.validate_sigma against the subject's profile: the pools (deployer and senders in profile.senders, address/bytes32 names in the pools), the argument types of each fn (address/bytes32 -> pool name, uint256 -> unsigned decimal <= 2^256-1, int256 -> signed decimal in range), the ctor keys = profile.constructor.params, the probe keys = sender + every probe signature's parameter names, setup = profile.setup with sender = deployer, fn in the artifact ABI.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "deployer", "ctor", "txs"],
+  "properties": {
+    "version": {"const": 1},
+    "deployer": {"$ref": "#/$defs/name"},
+    "ctor": {"type": "object", "additionalProperties": {"$ref": "#/$defs/value"}},
+    "setup": {"type": "array", "items": {"$ref": "#/$defs/tx"}, "description": "The subject's setup, verbatim: part of the canonical form and hash, replayed by the verifier."},
+    "txs": {"type": "array", "items": {"$ref": "#/$defs/tx"}},
+    "probe": {
+      "type": "object",
+      "required": ["sender"],
+      "properties": {
+        "sender": {"$ref": "#/$defs/name"},
+        "check": {"type": "string", "pattern": "^check_[A-Za-z0-9_]+$", "description": "Provenance only: the check the adversary targeted. Scoring calls every check_* of the spec."}
+      },
+      "additionalProperties": {"$ref": "#/$defs/value"}
+    }
+  },
+  "$defs": {
+    "name": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"},
+    "int": {"type": "string", "pattern": "^(0|-?[1-9][0-9]{0,77})$"},
+    "value": {"anyOf": [{"$ref": "#/$defs/name"}, {"$ref": "#/$defs/int"}]},
+    "tx": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sender", "fn", "args"],
+      "properties": {
+        "sender": {"$ref": "#/$defs/name"},
+        "fn": {"type": "string", "pattern": "^(?!check_)[A-Za-z_][A-Za-z0-9_]*\\(((address|bytes32|uint256|int256)(,(address|bytes32|uint256|int256))*)?\\)$"},
+        "args": {"type": "array", "items": {"$ref": "#/$defs/value"}}
+      }
+    }
+  },
+  "examples": [{"version": 1, "deployer": "alice", "ctor": {"cap": "100"}, "txs": [{"sender": "alice", "fn": "mint(address,uint256)", "args": ["bob", "60"]}, {"sender": "carol", "fn": "mint(address,uint256)", "args": ["carol", "50"]}], "probe": {"sender": "carol", "a": "carol", "b": "zero", "x": "1", "y": "0", "check": "check_owner_only"}}]
+}
